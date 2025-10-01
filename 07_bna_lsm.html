@@ -1,0 +1,733 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="ME-D1-BAKA">ME-D1-BAKA</option>
+                                
+                                    <option value="ME-D1-TTNA">ME-D1-TTNA</option>
+                                
+                                    <option value="ME-D1-MBOA">ME-D1-MBOA</option>
+                                
+                                    <option value="ME9-D1-LSMA">ME9-D1-LSMA</option>
+                                
+                                    <option value="ME-D1-BPDA">ME-D1-BPDA</option>
+                                
+                                    <option value="ME-D1-BIRA">ME-D1-BIRA</option>
+                                
+                                    <option value="ME-D1-MGLA">ME-D1-MGLA</option>
+                                
+                                    <option value="ME-D1-SGIA">ME-D1-SGIA</option>
+                                
+                                    <option value="ME-D1-SLGA">ME-D1-SLGA</option>
+                                
+                                    <option value="ME-D1-TKNA">ME-D1-TKNA</option>
+                                
+                                    <option value="ME9-D1-BNAC">ME9-D1-BNAC</option>
+                                
+                                    <option value="ME-D1-BNAC">ME-D1-BNAC</option>
+                                
+                                    <option value="ME-D1-KGHA">ME-D1-KGHA</option>
+                                
+                                    <option value="ME-D1-BNNA">ME-D1-BNNA</option>
+                                
+                                    <option value="ME-D1-SMMA">ME-D1-SMMA</option>
+                                
+                                    <option value="ME-D1-DARA">ME-D1-DARA</option>
+                                
+                                    <option value="ME-D1-LSMA">ME-D1-LSMA</option>
+                                
+                                    <option value="ME-D1-LTMA">ME-D1-LTMA</option>
+                                
+                                    <option value="ME-D1-SABA">ME-D1-SABA</option>
+                                
+                                    <option value="ME-D1-CAGA">ME-D1-CAGA</option>
+                                
+                                    <option value="ME-D1-TNMA">ME-D1-TNMA</option>
+                                
+                                    <option value="ME-D1-LNOA">ME-D1-LNOA</option>
+                                
+                                    <option value="ME-D1-LBRA">ME-D1-LBRA</option>
+                                
+                                    <option value="ME-D1-GEUA">ME-D1-GEUA</option>
+                                
+                                    <option value="ME-D1-LSKA">ME-D1-LSKA</option>
+                                
+                                    <option value="ME-D1-PTLA">ME-D1-PTLA</option>
+                                
+                                    <option value="ME-D1-LMIA">ME-D1-LMIA</option>
+                                
+                                    <option value="ME-D1-IDIA">ME-D1-IDIA</option>
+                                
+                                    <option value="ME-D1-PRLA">ME-D1-PRLA</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+              <div id="filter-menu" class="card-header">
+                <div class="row no-gutters">
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'item')"
+                            id="select-item"
+                        >
+                        <option value="">Select a network item</option>
+                        <option value="edge">edge</option>
+                        <option value="node">node</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'property')"
+                            id="select-property"
+                        >
+                        <option value="">Select a property...</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="select-value"
+                        >
+                        <option value="">Select value(s)...</option>
+                    </select>
+                  </div>
+                  <div class="col-1 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="highlightFilter(filter);">Filter</button>
+                  </div>
+                  <div class="col-2 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="clearFilter(true)">Reset Selection</button>
+                  </div>
+                </div>
+              </div>
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+                  // explicitly using onItemAdd and this function as we need to save multiple values
+                  let updateValueFilter = function() {
+                      return function () {
+                      filter['value'].push(arguments[0])
+                      }
+                  }
+
+                  let valueControl = new TomSelect("#select-value",{
+                      maxItems: null,
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: updateValueFilter()
+                  });
+
+                  let addValues = function() {
+                      return function () {
+                          // clear the current value options and add the selected attribute values
+                          // tom-select handles duplicates
+                          let selectedProperty = arguments[0];
+                          valueControl.clear();
+                          valueControl.clearOptions();
+                          filter['value'] = []
+                          if (filter['item'] === 'node') {
+                              for (let each in allNodes) {
+                                  valueControl.addOption({
+                                      id:allNodes[each][selectedProperty],
+                                      title:allNodes[each][selectedProperty]
+                                  })
+                              }
+                          }
+                          else if (filter['item'] === 'edge') {
+                              for (let each in allEdges) {
+                                  valueControl.addOption({
+                                      id:allEdges[each][selectedProperty],
+                                      title:allEdges[each][selectedProperty]
+                                  })
+                              }
+                          }
+                      }
+                  };
+
+                  let propControl = new TomSelect("#select-property",{
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addValues()
+                  });
+
+                  let addProperties = function() {
+                      return function () {
+                          // loops through the selected network item and adds the attributes to dropdown
+                          // tom-select handles duplicates
+                          clearFilter(false)
+                          if (arguments[0] === 'edge') {
+                              for (let each in allEdges) {
+                                  if (allEdges.hasOwnProperty(each)) {
+                                      for (let eachProp in allEdges[each]) {
+                                          if (allEdges[each].hasOwnProperty(eachProp)) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                          else if (arguments[0] === 'node') {
+                              for (let each in allNodes) {
+                                  if (allNodes.hasOwnProperty(each)) {
+                                      for (let eachProp in allNodes[each]) {
+                                          if (allNodes[each].hasOwnProperty(eachProp)
+                                              && (eachProp !== 'hidden' && eachProp !== 'savedLabel'
+                                                  && eachProp !== 'hiddenLabel')) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  };
+
+                  let itemControl = new TomSelect("#select-item",{
+                      create: false,
+                      sortField:{
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addProperties()
+                  });
+
+                  function clearFilter(reset) {
+                      // utility function to clear all the selected filter options
+                      // if reset is set to true, the existing filter will be removed
+                      // else, only the dropdown options are cleared
+                      propControl.clear();
+                      propControl.clearOptions();
+                      valueControl.clear();
+                      valueControl.clearOptions();
+                      filter = {
+                          item : '',
+                          property : '',
+                          value : []
+                      }
+                      if (reset) {
+                          itemControl.clear();
+                          filterHighlight({nodes: []})
+                      }
+                  }
+
+                  function updateFilter(value, key) {
+                      // key could be 'item' or 'property' and value is as selected in dropdown
+                      filter[key] = value
+                  }
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "silver", "id": "ME-D1-BAKA", "label": "ME-D1-BAKA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-TTNA", "label": "ME-D1-TTNA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-MBOA", "label": "ME-D1-MBOA", "shape": "dot", "size": 10}, {"color": "red", "id": "ME9-D1-LSMA", "label": "ME9-D1-LSMA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-BPDA", "label": "ME-D1-BPDA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-BIRA", "label": "ME-D1-BIRA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-MGLA", "label": "ME-D1-MGLA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-SGIA", "label": "ME-D1-SGIA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-SLGA", "label": "ME-D1-SLGA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-TKNA", "label": "ME-D1-TKNA", "shape": "dot", "size": 10}, {"color": "red", "id": "ME9-D1-BNAC", "label": "ME9-D1-BNAC", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-BNAC", "label": "ME-D1-BNAC", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-KGHA", "label": "ME-D1-KGHA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-BNNA", "label": "ME-D1-BNNA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-SMMA", "label": "ME-D1-SMMA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-DARA", "label": "ME-D1-DARA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-LSMA", "label": "ME-D1-LSMA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-LTMA", "label": "ME-D1-LTMA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-SABA", "label": "ME-D1-SABA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-CAGA", "label": "ME-D1-CAGA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-TNMA", "label": "ME-D1-TNMA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-LNOA", "label": "ME-D1-LNOA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-LBRA", "label": "ME-D1-LBRA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-GEUA", "label": "ME-D1-GEUA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-LSKA", "label": "ME-D1-LSKA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-PTLA", "label": "ME-D1-PTLA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-LMIA", "label": "ME-D1-LMIA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-IDIA", "label": "ME-D1-IDIA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-PRLA", "label": "ME-D1-PRLA", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"cap": "20", "color": "GREEN", "from": "ME-D1-BAKA", "hi_port": 0, "id": "ME-D1-BAKA__ME-D1-TTNA__0", "label": "24%", "occ": 23.67, "title": "ME-D1-BAKA_to_ME-D1-TTNA\nKap : 20 - [5 G]", "to": "ME-D1-TTNA", "usg": "5", "width": 0.25}, {"cap": "200", "color": "GREEN", "from": "ME-D1-BAKA", "hi_port": 0, "id": "ME-D1-BAKA__ME-D1-MBOA__1", "label": "5%", "occ": 5.14, "title": "ME-D1-BAKA_to_ME-D1-MBOA\nKap : 200 - [10 G]", "to": "ME-D1-MBOA", "usg": "10", "width": 0.5}, {"cap": "200", "color": "GREEN", "from": "ME-D1-BAKA", "hi_port": 0, "id": "ME-D1-BAKA__ME9-D1-LSMA__2", "label": "3%", "occ": 3.15, "title": "ME-D1-BAKA_to_ME9-D1-LSMA\nKap : 200 - [6 G]", "to": "ME9-D1-LSMA", "usg": "6", "width": 0.3}, {"cap": "40", "color": "DARKORANGE", "from": "ME-D1-TTNA", "hi_port": 0, "id": "ME-D1-TTNA__ME-D1-BPDA__3", "label": "56%", "occ": 56.16, "title": "ME-D1-BPDA_to_ME-D1-TTNA\nKap : 40 - [22 G]", "to": "ME-D1-BPDA", "usg": "22", "width": 1.1}, {"cap": "70", "color": "GREEN", "from": "ME-D1-BIRA", "hi_port": 0, "id": "ME-D1-BIRA__ME-D1-MGLA__4", "label": "39%", "occ": 39.08, "title": "ME-D1-BIRA_to_ME-D1-MGLA\nKap : 70 - [27 G]", "to": "ME-D1-MGLA", "usg": "27", "width": 1.35}, {"cap": "50", "color": "GREEN", "from": "ME-D1-BIRA", "hi_port": 0, "id": "ME-D1-BIRA__ME-D1-SGIA__5", "label": "30%", "occ": 29.93, "title": "ME-D1-BIRA_to_ME-D1-SGIA\nKap : 50 - [15 G]", "to": "ME-D1-SGIA", "usg": "15", "width": 0.75}, {"cap": "70", "color": "DARKORANGE", "from": "ME-D1-BIRA", "hi_port": 0, "id": "ME-D1-BIRA__ME-D1-SLGA__6", "label": "58%", "occ": 58.15, "title": "ME-D1-BIRA_to_ME-D1-SLGA\nKap : 70 - [41 G]", "to": "ME-D1-SLGA", "usg": "41", "width": 2.05}, {"cap": "30", "color": "GREEN", "from": "ME-D1-BIRA", "hi_port": 0, "id": "ME-D1-BIRA__ME-D1-TKNA__7", "label": "0%", "occ": 0.12, "title": "ME-D1-BIRA_to_ME-D1-TKNA\nKap : 30 - [0 G]", "to": "ME-D1-TKNA", "usg": "0", "width": 0.0}, {"cap": "60", "color": "GREEN", "from": "ME-D1-BIRA", "hi_port": 0, "id": "ME-D1-BIRA__ME9-D1-BNAC__8", "label": "6%", "occ": 5.6, "title": "ME-D1-BIRA_to_ME9-D1-BNAC\nKap : 60 - [3 G]", "to": "ME9-D1-BNAC", "usg": "3", "width": 0.15}, {"cap": "100", "color": "DARKRED", "from": "ME-D1-BIRA", "hi_port": 28, "id": "ME-D1-BIRA__ME-D1-BNAC__9", "label": "84%", "occ": 83.72, "title": "ME-D1-BIRA_to_ME-D1-BNAC\nKap : 100 - [84 G]", "to": "ME-D1-BNAC", "usg": "84", "width": 4.2}, {"cap": "250", "color": "GREEN", "from": "ME-D1-BIRA", "hi_port": 0, "id": "ME-D1-BIRA__ME9-D1-LSMA__10", "label": "14%", "occ": 14.44, "title": "ME-D1-BIRA_to_ME9-D1-LSMA\nKap : 250 - [36 G]", "to": "ME9-D1-LSMA", "usg": "36", "width": 1.8}, {"cap": "70", "color": "GREEN", "from": "ME-D1-MGLA", "hi_port": 0, "id": "ME-D1-MGLA__ME-D1-KGHA__11", "label": "14%", "occ": 13.77, "title": "ME-D1-KGHA_to_ME-D1-MGLA\nKap : 70 - [10 G]", "to": "ME-D1-KGHA", "usg": "10", "width": 0.5}, {"cap": "80", "color": "GREEN", "from": "ME-D1-SGIA", "hi_port": 0, "id": "ME-D1-SGIA__ME-D1-BNAC__12", "label": "42%", "occ": 41.58, "title": "ME-D1-BNAC_to_ME-D1-SGIA\nKap : 80 - [33 G]", "to": "ME-D1-BNAC", "usg": "33", "width": 1.65}, {"cap": "60", "color": "GREEN", "from": "ME-D1-SGIA", "hi_port": 0, "id": "ME-D1-SGIA__ME-D1-BNNA__13", "label": "33%", "occ": 33.04, "title": "ME-D1-BNNA_to_ME-D1-SGIA\nKap : 60 - [20 G]", "to": "ME-D1-BNNA", "usg": "20", "width": 1.0}, {"cap": "20", "color": "GREEN", "from": "ME-D1-SGIA", "hi_port": 0, "id": "ME-D1-SGIA__ME-D1-SMMA__14", "label": "11%", "occ": 10.84, "title": "ME-D1-SGIA_to_ME-D1-SMMA\nKap : 20 - [2 G]", "to": "ME-D1-SMMA", "usg": "2", "width": 0.1}, {"cap": "10", "color": "GREEN", "from": "ME-D1-SGIA", "hi_port": 0, "id": "ME-D1-SGIA__ME9-D1-BNAC__15", "label": "0%", "occ": 0.0, "title": "ME-D1-SGIA_to_ME9-D1-BNAC\nKap : 10 - [0 G]", "to": "ME9-D1-BNAC", "usg": "0", "width": 0.0}, {"cap": "60", "color": "GREEN", "from": "ME-D1-SLGA", "hi_port": 0, "id": "ME-D1-SLGA__ME-D1-BNNA__16", "label": "50%", "occ": 49.84, "title": "ME-D1-BNNA_to_ME-D1-SLGA\nKap : 60 - [30 G]", "to": "ME-D1-BNNA", "usg": "30", "width": 1.5}, {"cap": "10", "color": "GREEN", "from": "ME-D1-TKNA", "hi_port": 0, "id": "ME-D1-TKNA__ME-D1-KGHA__17", "label": "0%", "occ": 0.0, "title": "ME-D1-KGHA_to_ME-D1-TKNA\nKap : 10 - [0 G]", "to": "ME-D1-KGHA", "usg": "0", "width": 0.0}, {"cap": "200", "color": "GREEN", "from": "ME-D1-TKNA", "hi_port": 0, "id": "ME-D1-TKNA__ME9-D1-BNAC__18", "label": "25%", "occ": 25.24, "title": "ME-D1-TKNA_to_ME9-D1-BNAC\nKap : 200 - [50 G]", "to": "ME9-D1-BNAC", "usg": "50", "width": 2.5}, {"cap": "140", "color": "GREEN", "from": "ME-D1-TKNA", "hi_port": 0, "id": "ME-D1-TKNA__ME9-D1-LSMA__19", "label": "27%", "occ": 27.02, "title": "ME-D1-TKNA_to_ME9-D1-LSMA\nKap : 140 - [38 G]", "to": "ME9-D1-LSMA", "usg": "38", "width": 1.9}, {"cap": "310", "color": "DARKORANGE", "from": "ME9-D1-BNAC", "hi_port": 0, "id": "ME9-D1-BNAC__ME-D1-BNAC__20", "label": "59%", "occ": 58.93, "title": "ME-D1-BNAC_to_ME9-D1-BNAC\nKap : 310 - [183 G]", "to": "ME-D1-BNAC", "usg": "183", "width": 9.15}, {"cap": "150", "color": "GREEN", "from": "ME9-D1-BNAC", "hi_port": 0, "id": "ME9-D1-BNAC__ME-D1-DARA__21", "label": "39%", "occ": 39.22, "title": "ME-D1-DARA_to_ME9-D1-BNAC\nKap : 150 - [59 G]", "to": "ME-D1-DARA", "usg": "59", "width": 2.95}, {"cap": "50", "color": "GREEN", "from": "ME9-D1-BNAC", "hi_port": 0, "id": "ME9-D1-BNAC__ME-D1-LSMA__22", "label": "16%", "occ": 15.88, "title": "ME-D1-LSMA_to_ME9-D1-BNAC\nKap : 50 - [8 G]", "to": "ME-D1-LSMA", "usg": "8", "width": 0.4}, {"cap": "270", "color": "GREEN", "from": "ME9-D1-BNAC", "hi_port": 0, "id": "ME9-D1-BNAC__ME-D1-LTMA__23", "label": "35%", "occ": 34.61, "title": "ME-D1-LTMA_to_ME9-D1-BNAC\nKap : 270 - [93 G]", "to": "ME-D1-LTMA", "usg": "93", "width": 4.65}, {"cap": "320", "color": "GREEN", "from": "ME9-D1-BNAC", "hi_port": 0, "id": "ME9-D1-BNAC__ME-D1-MBOA__24", "label": "24%", "occ": 23.72, "title": "ME-D1-MBOA_to_ME9-D1-BNAC\nKap : 320 - [76 G]", "to": "ME-D1-MBOA", "usg": "76", "width": 3.8}, {"cap": "50", "color": "GREEN", "from": "ME9-D1-BNAC", "hi_port": 0, "id": "ME9-D1-BNAC__ME-D1-SABA__25", "label": "19%", "occ": 18.72, "title": "ME-D1-SABA_to_ME9-D1-BNAC\nKap : 50 - [9 G]", "to": "ME-D1-SABA", "usg": "9", "width": 0.45}, {"cap": "300", "color": "GREEN", "from": "ME9-D1-BNAC", "hi_port": 0, "id": "ME9-D1-BNAC__ME9-D1-LSMA__26", "label": "27%", "occ": 27.32, "title": "ME9-D1-BNAC_to_ME9-D1-LSMA\nKap : 300 - [82 G]", "to": "ME9-D1-LSMA", "usg": "82", "width": 4.1}, {"cap": "2", "color": "GREEN", "from": "ME-D1-BNAC", "hi_port": 0, "id": "ME-D1-BNAC__ME-D1-SABA__27", "label": "0%", "occ": 0.0, "title": "ME-D1-BNAC_to_ME-D1-SABA\nKap : 2 - [0 G]", "to": "ME-D1-SABA", "usg": "0", "width": 0.0}, {"cap": "32", "color": "GREEN", "from": "ME-D1-CAGA", "hi_port": 0, "id": "ME-D1-CAGA__ME-D1-TNMA__28", "label": "19%", "occ": 19.44, "title": "ME-D1-CAGA_to_ME-D1-TNMA\nKap : 32 - [6 G]", "to": "ME-D1-TNMA", "usg": "6", "width": 0.3}, {"cap": "31", "color": "GREEN", "from": "ME-D1-CAGA", "hi_port": 0, "id": "ME-D1-CAGA__ME-D1-LNOA__29", "label": "49%", "occ": 49.05, "title": "ME-D1-CAGA_to_ME-D1-LNOA\nKap : 31 - [15 G]", "to": "ME-D1-LNOA", "usg": "15", "width": 0.75}, {"cap": "22", "color": "GREEN", "from": "ME-D1-TNMA", "hi_port": 0, "id": "ME-D1-TNMA__ME-D1-MBOA__30", "label": "3%", "occ": 3.27, "title": "ME-D1-MBOA_to_ME-D1-TNMA\nKap : 22 - [1 G]", "to": "ME-D1-MBOA", "usg": "1", "width": 0.05}, {"cap": "160", "color": "GREEN", "from": "ME-D1-DARA", "hi_port": 0, "id": "ME-D1-DARA__ME-D1-LBRA__31", "label": "8%", "occ": 7.62, "title": "ME-D1-DARA_to_ME-D1-LBRA\nKap : 160 - [12 G]", "to": "ME-D1-LBRA", "usg": "12", "width": 0.6}, {"cap": "40", "color": "GREEN", "from": "ME-D1-LBRA", "hi_port": 0, "id": "ME-D1-LBRA__ME-D1-SMMA__32", "label": "17%", "occ": 16.68, "title": "ME-D1-LBRA_to_ME-D1-SMMA\nKap : 40 - [7 G]", "to": "ME-D1-SMMA", "usg": "7", "width": 0.35}, {"cap": "130", "color": "GREEN", "from": "ME-D1-LBRA", "hi_port": 0, "id": "ME-D1-LBRA__ME-D1-LTMA__33", "label": "6%", "occ": 6.49, "title": "ME-D1-LBRA_to_ME-D1-LTMA\nKap : 130 - [8 G]", "to": "ME-D1-LTMA", "usg": "8", "width": 0.4}, {"cap": "100", "color": "GREEN", "from": "ME-D1-LBRA", "hi_port": 0, "id": "ME-D1-LBRA__ME9-D1-LSMA__34", "label": "18%", "occ": 17.76, "title": "ME-D1-LBRA_to_ME9-D1-LSMA\nKap : 100 - [18 G]", "to": "ME9-D1-LSMA", "usg": "18", "width": 0.9}, {"cap": "60", "color": "DARKRED", "from": "ME-D1-GEUA", "hi_port": 29, "id": "ME-D1-GEUA__ME-D1-LSKA__35", "label": "89%", "occ": 88.84, "title": "ME-D1-GEUA_to_ME-D1-LSKA\nKap : 60 - [53 G]", "to": "ME-D1-LSKA", "usg": "53", "width": 2.65}, {"cap": "160", "color": "GREEN", "from": "ME-D1-GEUA", "hi_port": 0, "id": "ME-D1-GEUA__ME9-D1-LSMA__36", "label": "46%", "occ": 46.35, "title": "ME-D1-GEUA_to_ME9-D1-LSMA\nKap : 160 - [74 G]", "to": "ME9-D1-LSMA", "usg": "74", "width": 3.7}, {"cap": "40", "color": "DARKORANGE", "from": "ME-D1-LSKA", "hi_port": 0, "id": "ME-D1-LSKA__ME-D1-PTLA__37", "label": "66%", "occ": 65.79, "title": "ME-D1-LSKA_to_ME-D1-PTLA\nKap : 40 - [26 G]", "to": "ME-D1-PTLA", "usg": "26", "width": 1.3}, {"cap": "80", "color": "GREEN", "from": "ME-D1-KGHA", "hi_port": 0, "id": "ME-D1-KGHA__ME9-D1-LSMA__38", "label": "47%", "occ": 47.12, "title": "ME-D1-KGHA_to_ME9-D1-LSMA\nKap : 80 - [38 G]", "to": "ME9-D1-LSMA", "usg": "38", "width": 1.9}, {"cap": "30", "color": "GREEN", "from": "ME-D1-BPDA", "hi_port": 0, "id": "ME-D1-BPDA__ME-D1-LMIA__39", "label": "50%", "occ": 49.69, "title": "ME-D1-BPDA_to_ME-D1-LMIA\nKap : 30 - [15 G]", "to": "ME-D1-LMIA", "usg": "15", "width": 0.75}, {"cap": "60", "color": "GREEN", "from": "ME-D1-BPDA", "hi_port": 0, "id": "ME-D1-BPDA__ME-D1-MBOA__40", "label": "34%", "occ": 34.31, "title": "ME-D1-BPDA_to_ME-D1-MBOA\nKap : 60 - [21 G]", "to": "ME-D1-MBOA", "usg": "21", "width": 1.05}, {"cap": "30", "color": "DARKRED", "from": "ME-D1-LMIA", "hi_port": 28, "id": "ME-D1-LMIA__ME-D1-MBOA__41", "label": "79%", "occ": 79.28, "title": "ME-D1-LMIA_to_ME-D1-MBOA\nKap : 30 - [24 G]", "to": "ME-D1-MBOA", "usg": "24", "width": 1.2}, {"cap": "31", "color": "DARKORANGE", "from": "ME-D1-LNOA", "hi_port": 0, "id": "ME-D1-LNOA__ME-D1-LTMA__42", "label": "63%", "occ": 62.65, "title": "ME-D1-LNOA_to_ME-D1-LTMA\nKap : 31 - [19 G]", "to": "ME-D1-LTMA", "usg": "19", "width": 0.95}, {"cap": "30", "color": "GREEN", "from": "ME-D1-PTLA", "hi_port": 0, "id": "ME-D1-PTLA__ME-D1-IDIA__43", "label": "7%", "occ": 6.93, "title": "ME-D1-IDIA_to_ME-D1-PTLA\nKap : 30 - [2 G]", "to": "ME-D1-IDIA", "usg": "2", "width": 0.1}, {"cap": "30", "color": "DARKORANGE", "from": "ME-D1-LTMA", "hi_port": 0, "id": "ME-D1-LTMA__ME-D1-MBOA__44", "label": "51%", "occ": 51.13, "title": "ME-D1-LTMA_to_ME-D1-MBOA\nKap : 30 - [15 G]", "to": "ME-D1-MBOA", "usg": "15", "width": 0.75}, {"cap": "40", "color": "DARKORANGE", "from": "ME-D1-IDIA", "hi_port": 1, "id": "ME-D1-IDIA__ME-D1-PRLA__45", "label": "70%", "occ": 70.06, "title": "ME-D1-IDIA_to_ME-D1-PRLA\nKap : 40 - [28 G]", "to": "ME-D1-PRLA", "usg": "28", "width": 1.4}, {"cap": "40", "color": "GREEN", "from": "ME-D1-SABA", "hi_port": 0, "id": "ME-D1-SABA__ME9-D1-LSMA__46", "label": "4%", "occ": 3.95, "title": "ME-D1-SABA_to_ME9-D1-LSMA\nKap : 40 - [2 G]", "to": "ME9-D1-LSMA", "usg": "2", "width": 0.1}, {"cap": "60", "color": "DARKORANGE", "from": "ME-D1-LSMA", "hi_port": 0, "id": "ME-D1-LSMA__ME9-D1-LSMA__47", "label": "65%", "occ": 64.6, "title": "ME-D1-LSMA_to_ME9-D1-LSMA\nKap : 60 - [39 G]", "to": "ME9-D1-LSMA", "usg": "39", "width": 1.95}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"layout": {"hierarchical": {"enabled": false, "direction": "UD", "sortMethod": "hubsize"}}, "edges": {"smooth": true, "color": {"inherit": false}}, "physics": {"enabled": false}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
+<style>
+  :root{--accent:#2563eb;--bg:#0f172a;--card:#111827;--text:#e5e7eb;}
+  body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  .container{max-width:1280px;margin:18px auto 48px;padding:0 16px;}
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+  .card select,.card input[type="text"]{font-size:12px!important;padding:4px 6px!important;height:28px!important;border-radius:8px!important;border:1px solid rgba(255,255,255,.12)!important;background:#0b1220!important;color:var(--text)!important;}
+  .card button{font-size:12px!important;padding:6px 10px!important;height:30px!important;border-radius:10px!important;border:1px solid rgba(37,99,235,.6)!important;background:rgba(37,99,235,.1)!important;color:#cbd5e1!important;cursor:pointer;}
+  #mynetwork{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.06);height:600px!important;}
+  table.dataTable thead th{background:#0b1220;color:#cbd5e1;border-bottom:1px solid rgba(255,255,255,.06);}
+  table.dataTable{border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;background:#0b1220;}
+  table.dataTable tbody tr.highlight{background:rgba(37,99,235,.25)!important;}
+  .dataTables_wrapper .dataTables_filter input,.dataTables_wrapper .dataTables_length select{background:#0b1220;color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:6px 8px;}
+</style>
+
+<div class="container">
+  <div class="card">
+    <table id="edgeTable" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>NEAREND</th><th>FAREND</th><th>KAP</th><th>USG</th><th>OCC</th><th>HI PORT</th>
+          <th>COLOR</th><th>TITLE</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id='row_ME-D1-BAKA__ME-D1-TTNA__0' data-eid='ME-D1-BAKA__ME-D1-TTNA__0' data-src='ME-D1-BAKA' data-dst='ME-D1-TTNA'><td>ME-D1-BAKA</td><td>ME-D1-TTNA</td><td>20</td><td>5</td><td>23.67</td><td>0</td><td>GREEN</td><td>ME-D1-BAKA_to_ME-D1-TTNA
+Kap : 20 - [5 G]</td></tr><tr id='row_ME-D1-BAKA__ME-D1-MBOA__1' data-eid='ME-D1-BAKA__ME-D1-MBOA__1' data-src='ME-D1-BAKA' data-dst='ME-D1-MBOA'><td>ME-D1-BAKA</td><td>ME-D1-MBOA</td><td>200</td><td>10</td><td>5.14</td><td>0</td><td>GREEN</td><td>ME-D1-BAKA_to_ME-D1-MBOA
+Kap : 200 - [10 G]</td></tr><tr id='row_ME-D1-BAKA__ME9-D1-LSMA__2' data-eid='ME-D1-BAKA__ME9-D1-LSMA__2' data-src='ME-D1-BAKA' data-dst='ME9-D1-LSMA'><td>ME-D1-BAKA</td><td>ME9-D1-LSMA</td><td>200</td><td>6</td><td>3.15</td><td>0</td><td>GREEN</td><td>ME-D1-BAKA_to_ME9-D1-LSMA
+Kap : 200 - [6 G]</td></tr><tr id='row_ME-D1-TTNA__ME-D1-BPDA__3' data-eid='ME-D1-TTNA__ME-D1-BPDA__3' data-src='ME-D1-TTNA' data-dst='ME-D1-BPDA'><td>ME-D1-TTNA</td><td>ME-D1-BPDA</td><td>40</td><td>22</td><td>56.16</td><td>0</td><td>DARKORANGE</td><td>ME-D1-BPDA_to_ME-D1-TTNA
+Kap : 40 - [22 G]</td></tr><tr id='row_ME-D1-BIRA__ME-D1-MGLA__4' data-eid='ME-D1-BIRA__ME-D1-MGLA__4' data-src='ME-D1-BIRA' data-dst='ME-D1-MGLA'><td>ME-D1-BIRA</td><td>ME-D1-MGLA</td><td>70</td><td>27</td><td>39.08</td><td>0</td><td>GREEN</td><td>ME-D1-BIRA_to_ME-D1-MGLA
+Kap : 70 - [27 G]</td></tr><tr id='row_ME-D1-BIRA__ME-D1-SGIA__5' data-eid='ME-D1-BIRA__ME-D1-SGIA__5' data-src='ME-D1-BIRA' data-dst='ME-D1-SGIA'><td>ME-D1-BIRA</td><td>ME-D1-SGIA</td><td>50</td><td>15</td><td>29.93</td><td>0</td><td>GREEN</td><td>ME-D1-BIRA_to_ME-D1-SGIA
+Kap : 50 - [15 G]</td></tr><tr id='row_ME-D1-BIRA__ME-D1-SLGA__6' data-eid='ME-D1-BIRA__ME-D1-SLGA__6' data-src='ME-D1-BIRA' data-dst='ME-D1-SLGA'><td>ME-D1-BIRA</td><td>ME-D1-SLGA</td><td>70</td><td>41</td><td>58.15</td><td>0</td><td>DARKORANGE</td><td>ME-D1-BIRA_to_ME-D1-SLGA
+Kap : 70 - [41 G]</td></tr><tr id='row_ME-D1-BIRA__ME-D1-TKNA__7' data-eid='ME-D1-BIRA__ME-D1-TKNA__7' data-src='ME-D1-BIRA' data-dst='ME-D1-TKNA'><td>ME-D1-BIRA</td><td>ME-D1-TKNA</td><td>30</td><td>0</td><td>0.12</td><td>0</td><td>GREEN</td><td>ME-D1-BIRA_to_ME-D1-TKNA
+Kap : 30 - [0 G]</td></tr><tr id='row_ME-D1-BIRA__ME9-D1-BNAC__8' data-eid='ME-D1-BIRA__ME9-D1-BNAC__8' data-src='ME-D1-BIRA' data-dst='ME9-D1-BNAC'><td>ME-D1-BIRA</td><td>ME9-D1-BNAC</td><td>60</td><td>3</td><td>5.6</td><td>0</td><td>GREEN</td><td>ME-D1-BIRA_to_ME9-D1-BNAC
+Kap : 60 - [3 G]</td></tr><tr id='row_ME-D1-BIRA__ME-D1-BNAC__9' data-eid='ME-D1-BIRA__ME-D1-BNAC__9' data-src='ME-D1-BIRA' data-dst='ME-D1-BNAC'><td>ME-D1-BIRA</td><td>ME-D1-BNAC</td><td>100</td><td>84</td><td>83.72</td><td>28</td><td>DARKRED</td><td>ME-D1-BIRA_to_ME-D1-BNAC
+Kap : 100 - [84 G]</td></tr><tr id='row_ME-D1-BIRA__ME9-D1-LSMA__10' data-eid='ME-D1-BIRA__ME9-D1-LSMA__10' data-src='ME-D1-BIRA' data-dst='ME9-D1-LSMA'><td>ME-D1-BIRA</td><td>ME9-D1-LSMA</td><td>250</td><td>36</td><td>14.44</td><td>0</td><td>GREEN</td><td>ME-D1-BIRA_to_ME9-D1-LSMA
+Kap : 250 - [36 G]</td></tr><tr id='row_ME-D1-MGLA__ME-D1-KGHA__11' data-eid='ME-D1-MGLA__ME-D1-KGHA__11' data-src='ME-D1-MGLA' data-dst='ME-D1-KGHA'><td>ME-D1-MGLA</td><td>ME-D1-KGHA</td><td>70</td><td>10</td><td>13.77</td><td>0</td><td>GREEN</td><td>ME-D1-KGHA_to_ME-D1-MGLA
+Kap : 70 - [10 G]</td></tr><tr id='row_ME-D1-SGIA__ME-D1-BNAC__12' data-eid='ME-D1-SGIA__ME-D1-BNAC__12' data-src='ME-D1-SGIA' data-dst='ME-D1-BNAC'><td>ME-D1-SGIA</td><td>ME-D1-BNAC</td><td>80</td><td>33</td><td>41.58</td><td>0</td><td>GREEN</td><td>ME-D1-BNAC_to_ME-D1-SGIA
+Kap : 80 - [33 G]</td></tr><tr id='row_ME-D1-SGIA__ME-D1-BNNA__13' data-eid='ME-D1-SGIA__ME-D1-BNNA__13' data-src='ME-D1-SGIA' data-dst='ME-D1-BNNA'><td>ME-D1-SGIA</td><td>ME-D1-BNNA</td><td>60</td><td>20</td><td>33.04</td><td>0</td><td>GREEN</td><td>ME-D1-BNNA_to_ME-D1-SGIA
+Kap : 60 - [20 G]</td></tr><tr id='row_ME-D1-SGIA__ME-D1-SMMA__14' data-eid='ME-D1-SGIA__ME-D1-SMMA__14' data-src='ME-D1-SGIA' data-dst='ME-D1-SMMA'><td>ME-D1-SGIA</td><td>ME-D1-SMMA</td><td>20</td><td>2</td><td>10.84</td><td>0</td><td>GREEN</td><td>ME-D1-SGIA_to_ME-D1-SMMA
+Kap : 20 - [2 G]</td></tr><tr id='row_ME-D1-SGIA__ME9-D1-BNAC__15' data-eid='ME-D1-SGIA__ME9-D1-BNAC__15' data-src='ME-D1-SGIA' data-dst='ME9-D1-BNAC'><td>ME-D1-SGIA</td><td>ME9-D1-BNAC</td><td>10</td><td>0</td><td>0.0</td><td>0</td><td>GREEN</td><td>ME-D1-SGIA_to_ME9-D1-BNAC
+Kap : 10 - [0 G]</td></tr><tr id='row_ME-D1-SLGA__ME-D1-BNNA__16' data-eid='ME-D1-SLGA__ME-D1-BNNA__16' data-src='ME-D1-SLGA' data-dst='ME-D1-BNNA'><td>ME-D1-SLGA</td><td>ME-D1-BNNA</td><td>60</td><td>30</td><td>49.84</td><td>0</td><td>GREEN</td><td>ME-D1-BNNA_to_ME-D1-SLGA
+Kap : 60 - [30 G]</td></tr><tr id='row_ME-D1-TKNA__ME-D1-KGHA__17' data-eid='ME-D1-TKNA__ME-D1-KGHA__17' data-src='ME-D1-TKNA' data-dst='ME-D1-KGHA'><td>ME-D1-TKNA</td><td>ME-D1-KGHA</td><td>10</td><td>0</td><td>0.0</td><td>0</td><td>GREEN</td><td>ME-D1-KGHA_to_ME-D1-TKNA
+Kap : 10 - [0 G]</td></tr><tr id='row_ME-D1-TKNA__ME9-D1-BNAC__18' data-eid='ME-D1-TKNA__ME9-D1-BNAC__18' data-src='ME-D1-TKNA' data-dst='ME9-D1-BNAC'><td>ME-D1-TKNA</td><td>ME9-D1-BNAC</td><td>200</td><td>50</td><td>25.24</td><td>0</td><td>GREEN</td><td>ME-D1-TKNA_to_ME9-D1-BNAC
+Kap : 200 - [50 G]</td></tr><tr id='row_ME-D1-TKNA__ME9-D1-LSMA__19' data-eid='ME-D1-TKNA__ME9-D1-LSMA__19' data-src='ME-D1-TKNA' data-dst='ME9-D1-LSMA'><td>ME-D1-TKNA</td><td>ME9-D1-LSMA</td><td>140</td><td>38</td><td>27.02</td><td>0</td><td>GREEN</td><td>ME-D1-TKNA_to_ME9-D1-LSMA
+Kap : 140 - [38 G]</td></tr><tr id='row_ME9-D1-BNAC__ME-D1-BNAC__20' data-eid='ME9-D1-BNAC__ME-D1-BNAC__20' data-src='ME9-D1-BNAC' data-dst='ME-D1-BNAC'><td>ME9-D1-BNAC</td><td>ME-D1-BNAC</td><td>310</td><td>183</td><td>58.93</td><td>0</td><td>DARKORANGE</td><td>ME-D1-BNAC_to_ME9-D1-BNAC
+Kap : 310 - [183 G]</td></tr><tr id='row_ME9-D1-BNAC__ME-D1-DARA__21' data-eid='ME9-D1-BNAC__ME-D1-DARA__21' data-src='ME9-D1-BNAC' data-dst='ME-D1-DARA'><td>ME9-D1-BNAC</td><td>ME-D1-DARA</td><td>150</td><td>59</td><td>39.22</td><td>0</td><td>GREEN</td><td>ME-D1-DARA_to_ME9-D1-BNAC
+Kap : 150 - [59 G]</td></tr><tr id='row_ME9-D1-BNAC__ME-D1-LSMA__22' data-eid='ME9-D1-BNAC__ME-D1-LSMA__22' data-src='ME9-D1-BNAC' data-dst='ME-D1-LSMA'><td>ME9-D1-BNAC</td><td>ME-D1-LSMA</td><td>50</td><td>8</td><td>15.88</td><td>0</td><td>GREEN</td><td>ME-D1-LSMA_to_ME9-D1-BNAC
+Kap : 50 - [8 G]</td></tr><tr id='row_ME9-D1-BNAC__ME-D1-LTMA__23' data-eid='ME9-D1-BNAC__ME-D1-LTMA__23' data-src='ME9-D1-BNAC' data-dst='ME-D1-LTMA'><td>ME9-D1-BNAC</td><td>ME-D1-LTMA</td><td>270</td><td>93</td><td>34.61</td><td>0</td><td>GREEN</td><td>ME-D1-LTMA_to_ME9-D1-BNAC
+Kap : 270 - [93 G]</td></tr><tr id='row_ME9-D1-BNAC__ME-D1-MBOA__24' data-eid='ME9-D1-BNAC__ME-D1-MBOA__24' data-src='ME9-D1-BNAC' data-dst='ME-D1-MBOA'><td>ME9-D1-BNAC</td><td>ME-D1-MBOA</td><td>320</td><td>76</td><td>23.72</td><td>0</td><td>GREEN</td><td>ME-D1-MBOA_to_ME9-D1-BNAC
+Kap : 320 - [76 G]</td></tr><tr id='row_ME9-D1-BNAC__ME-D1-SABA__25' data-eid='ME9-D1-BNAC__ME-D1-SABA__25' data-src='ME9-D1-BNAC' data-dst='ME-D1-SABA'><td>ME9-D1-BNAC</td><td>ME-D1-SABA</td><td>50</td><td>9</td><td>18.72</td><td>0</td><td>GREEN</td><td>ME-D1-SABA_to_ME9-D1-BNAC
+Kap : 50 - [9 G]</td></tr><tr id='row_ME9-D1-BNAC__ME9-D1-LSMA__26' data-eid='ME9-D1-BNAC__ME9-D1-LSMA__26' data-src='ME9-D1-BNAC' data-dst='ME9-D1-LSMA'><td>ME9-D1-BNAC</td><td>ME9-D1-LSMA</td><td>300</td><td>82</td><td>27.32</td><td>0</td><td>GREEN</td><td>ME9-D1-BNAC_to_ME9-D1-LSMA
+Kap : 300 - [82 G]</td></tr><tr id='row_ME-D1-BNAC__ME-D1-SABA__27' data-eid='ME-D1-BNAC__ME-D1-SABA__27' data-src='ME-D1-BNAC' data-dst='ME-D1-SABA'><td>ME-D1-BNAC</td><td>ME-D1-SABA</td><td>2</td><td>0</td><td>0.0</td><td>0</td><td>GREEN</td><td>ME-D1-BNAC_to_ME-D1-SABA
+Kap : 2 - [0 G]</td></tr><tr id='row_ME-D1-CAGA__ME-D1-TNMA__28' data-eid='ME-D1-CAGA__ME-D1-TNMA__28' data-src='ME-D1-CAGA' data-dst='ME-D1-TNMA'><td>ME-D1-CAGA</td><td>ME-D1-TNMA</td><td>32</td><td>6</td><td>19.44</td><td>0</td><td>GREEN</td><td>ME-D1-CAGA_to_ME-D1-TNMA
+Kap : 32 - [6 G]</td></tr><tr id='row_ME-D1-CAGA__ME-D1-LNOA__29' data-eid='ME-D1-CAGA__ME-D1-LNOA__29' data-src='ME-D1-CAGA' data-dst='ME-D1-LNOA'><td>ME-D1-CAGA</td><td>ME-D1-LNOA</td><td>31</td><td>15</td><td>49.05</td><td>0</td><td>GREEN</td><td>ME-D1-CAGA_to_ME-D1-LNOA
+Kap : 31 - [15 G]</td></tr><tr id='row_ME-D1-TNMA__ME-D1-MBOA__30' data-eid='ME-D1-TNMA__ME-D1-MBOA__30' data-src='ME-D1-TNMA' data-dst='ME-D1-MBOA'><td>ME-D1-TNMA</td><td>ME-D1-MBOA</td><td>22</td><td>1</td><td>3.27</td><td>0</td><td>GREEN</td><td>ME-D1-MBOA_to_ME-D1-TNMA
+Kap : 22 - [1 G]</td></tr><tr id='row_ME-D1-DARA__ME-D1-LBRA__31' data-eid='ME-D1-DARA__ME-D1-LBRA__31' data-src='ME-D1-DARA' data-dst='ME-D1-LBRA'><td>ME-D1-DARA</td><td>ME-D1-LBRA</td><td>160</td><td>12</td><td>7.62</td><td>0</td><td>GREEN</td><td>ME-D1-DARA_to_ME-D1-LBRA
+Kap : 160 - [12 G]</td></tr><tr id='row_ME-D1-LBRA__ME-D1-SMMA__32' data-eid='ME-D1-LBRA__ME-D1-SMMA__32' data-src='ME-D1-LBRA' data-dst='ME-D1-SMMA'><td>ME-D1-LBRA</td><td>ME-D1-SMMA</td><td>40</td><td>7</td><td>16.68</td><td>0</td><td>GREEN</td><td>ME-D1-LBRA_to_ME-D1-SMMA
+Kap : 40 - [7 G]</td></tr><tr id='row_ME-D1-LBRA__ME-D1-LTMA__33' data-eid='ME-D1-LBRA__ME-D1-LTMA__33' data-src='ME-D1-LBRA' data-dst='ME-D1-LTMA'><td>ME-D1-LBRA</td><td>ME-D1-LTMA</td><td>130</td><td>8</td><td>6.49</td><td>0</td><td>GREEN</td><td>ME-D1-LBRA_to_ME-D1-LTMA
+Kap : 130 - [8 G]</td></tr><tr id='row_ME-D1-LBRA__ME9-D1-LSMA__34' data-eid='ME-D1-LBRA__ME9-D1-LSMA__34' data-src='ME-D1-LBRA' data-dst='ME9-D1-LSMA'><td>ME-D1-LBRA</td><td>ME9-D1-LSMA</td><td>100</td><td>18</td><td>17.76</td><td>0</td><td>GREEN</td><td>ME-D1-LBRA_to_ME9-D1-LSMA
+Kap : 100 - [18 G]</td></tr><tr id='row_ME-D1-GEUA__ME-D1-LSKA__35' data-eid='ME-D1-GEUA__ME-D1-LSKA__35' data-src='ME-D1-GEUA' data-dst='ME-D1-LSKA'><td>ME-D1-GEUA</td><td>ME-D1-LSKA</td><td>60</td><td>53</td><td>88.84</td><td>29</td><td>DARKRED</td><td>ME-D1-GEUA_to_ME-D1-LSKA
+Kap : 60 - [53 G]</td></tr><tr id='row_ME-D1-GEUA__ME9-D1-LSMA__36' data-eid='ME-D1-GEUA__ME9-D1-LSMA__36' data-src='ME-D1-GEUA' data-dst='ME9-D1-LSMA'><td>ME-D1-GEUA</td><td>ME9-D1-LSMA</td><td>160</td><td>74</td><td>46.35</td><td>0</td><td>GREEN</td><td>ME-D1-GEUA_to_ME9-D1-LSMA
+Kap : 160 - [74 G]</td></tr><tr id='row_ME-D1-LSKA__ME-D1-PTLA__37' data-eid='ME-D1-LSKA__ME-D1-PTLA__37' data-src='ME-D1-LSKA' data-dst='ME-D1-PTLA'><td>ME-D1-LSKA</td><td>ME-D1-PTLA</td><td>40</td><td>26</td><td>65.79</td><td>0</td><td>DARKORANGE</td><td>ME-D1-LSKA_to_ME-D1-PTLA
+Kap : 40 - [26 G]</td></tr><tr id='row_ME-D1-KGHA__ME9-D1-LSMA__38' data-eid='ME-D1-KGHA__ME9-D1-LSMA__38' data-src='ME-D1-KGHA' data-dst='ME9-D1-LSMA'><td>ME-D1-KGHA</td><td>ME9-D1-LSMA</td><td>80</td><td>38</td><td>47.12</td><td>0</td><td>GREEN</td><td>ME-D1-KGHA_to_ME9-D1-LSMA
+Kap : 80 - [38 G]</td></tr><tr id='row_ME-D1-BPDA__ME-D1-LMIA__39' data-eid='ME-D1-BPDA__ME-D1-LMIA__39' data-src='ME-D1-BPDA' data-dst='ME-D1-LMIA'><td>ME-D1-BPDA</td><td>ME-D1-LMIA</td><td>30</td><td>15</td><td>49.69</td><td>0</td><td>GREEN</td><td>ME-D1-BPDA_to_ME-D1-LMIA
+Kap : 30 - [15 G]</td></tr><tr id='row_ME-D1-BPDA__ME-D1-MBOA__40' data-eid='ME-D1-BPDA__ME-D1-MBOA__40' data-src='ME-D1-BPDA' data-dst='ME-D1-MBOA'><td>ME-D1-BPDA</td><td>ME-D1-MBOA</td><td>60</td><td>21</td><td>34.31</td><td>0</td><td>GREEN</td><td>ME-D1-BPDA_to_ME-D1-MBOA
+Kap : 60 - [21 G]</td></tr><tr id='row_ME-D1-LMIA__ME-D1-MBOA__41' data-eid='ME-D1-LMIA__ME-D1-MBOA__41' data-src='ME-D1-LMIA' data-dst='ME-D1-MBOA'><td>ME-D1-LMIA</td><td>ME-D1-MBOA</td><td>30</td><td>24</td><td>79.28</td><td>28</td><td>DARKRED</td><td>ME-D1-LMIA_to_ME-D1-MBOA
+Kap : 30 - [24 G]</td></tr><tr id='row_ME-D1-LNOA__ME-D1-LTMA__42' data-eid='ME-D1-LNOA__ME-D1-LTMA__42' data-src='ME-D1-LNOA' data-dst='ME-D1-LTMA'><td>ME-D1-LNOA</td><td>ME-D1-LTMA</td><td>31</td><td>19</td><td>62.65</td><td>0</td><td>DARKORANGE</td><td>ME-D1-LNOA_to_ME-D1-LTMA
+Kap : 31 - [19 G]</td></tr><tr id='row_ME-D1-PTLA__ME-D1-IDIA__43' data-eid='ME-D1-PTLA__ME-D1-IDIA__43' data-src='ME-D1-PTLA' data-dst='ME-D1-IDIA'><td>ME-D1-PTLA</td><td>ME-D1-IDIA</td><td>30</td><td>2</td><td>6.93</td><td>0</td><td>GREEN</td><td>ME-D1-IDIA_to_ME-D1-PTLA
+Kap : 30 - [2 G]</td></tr><tr id='row_ME-D1-LTMA__ME-D1-MBOA__44' data-eid='ME-D1-LTMA__ME-D1-MBOA__44' data-src='ME-D1-LTMA' data-dst='ME-D1-MBOA'><td>ME-D1-LTMA</td><td>ME-D1-MBOA</td><td>30</td><td>15</td><td>51.13</td><td>0</td><td>DARKORANGE</td><td>ME-D1-LTMA_to_ME-D1-MBOA
+Kap : 30 - [15 G]</td></tr><tr id='row_ME-D1-IDIA__ME-D1-PRLA__45' data-eid='ME-D1-IDIA__ME-D1-PRLA__45' data-src='ME-D1-IDIA' data-dst='ME-D1-PRLA'><td>ME-D1-IDIA</td><td>ME-D1-PRLA</td><td>40</td><td>28</td><td>70.06</td><td>1</td><td>DARKORANGE</td><td>ME-D1-IDIA_to_ME-D1-PRLA
+Kap : 40 - [28 G]</td></tr><tr id='row_ME-D1-SABA__ME9-D1-LSMA__46' data-eid='ME-D1-SABA__ME9-D1-LSMA__46' data-src='ME-D1-SABA' data-dst='ME9-D1-LSMA'><td>ME-D1-SABA</td><td>ME9-D1-LSMA</td><td>40</td><td>2</td><td>3.95</td><td>0</td><td>GREEN</td><td>ME-D1-SABA_to_ME9-D1-LSMA
+Kap : 40 - [2 G]</td></tr><tr id='row_ME-D1-LSMA__ME9-D1-LSMA__47' data-eid='ME-D1-LSMA__ME9-D1-LSMA__47' data-src='ME-D1-LSMA' data-dst='ME9-D1-LSMA'><td>ME-D1-LSMA</td><td>ME9-D1-LSMA</td><td>60</td><td>39</td><td>64.6</td><td>0</td><td>DARKORANGE</td><td>ME-D1-LSMA_to_ME9-D1-LSMA
+Kap : 60 - [39 G]</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  var edgeTable;
+  $(document).ready(function(){
+     edgeTable = $('#edgeTable').DataTable({
+        "pageLength": 10,
+        "lengthMenu": [10,25,50,100],
+        "dom": 'lBfrtip',
+        buttons: [{extend:'csv', title:'metro_edges'}, {extend:'excel', title:'metro_edges'}]
+     });
+     $('#edgeTable tbody').on('click','tr',function(){
+        $('#edgeTable tbody tr').removeClass('highlight');
+        $(this).addClass('highlight');
+     });
+  });
+
+  function focusRowByDom(rowEl){
+     var row = $(rowEl);
+     var idx = edgeTable.row(row).index();
+     if (idx == null) return;
+     var pageLen = edgeTable.page.info().length;
+     var page = Math.floor(idx / pageLen);
+     edgeTable.page(page).draw(false);
+     $('#edgeTable tbody tr').removeClass('highlight');
+     row.addClass('highlight');
+     setTimeout(function(){ window.scrollTo({top: row.offset().top - 120, behavior:'smooth'}); }, 60);
+  }
+
+  // sinkron edge → baris tabel (matching by from/to + label/title)
+  (function wireAfterNetworkReady(){
+     if (typeof network === 'undefined' || !network?.body?.data?.edges) { setTimeout(wireAfterNetworkReady, 120); return; }
+     const dsEdges = network.body.data.edges.get();
+     const rows = Array.from(document.querySelectorAll('#edgeTable tbody tr'));
+     const rowMap = new Map();
+
+     function rowMatches(r, e){
+       const src = r.getAttribute('data-src');
+       const dst = r.getAttribute('data-dst');
+       const tds = r.querySelectorAll('td');
+       const cap   = (tds[2]?.textContent||'').trim();
+       const usg   = (tds[3]?.textContent||'').trim();
+       const occ   = (tds[4]?.textContent||'').trim();
+       const label = (tds[7]?.textContent||'').trim();
+       const title = (tds[8]?.textContent||'').trim();
+       const s = x => (x==null?'':String(x)).trim();
+       // cukup ketat tapi toleran: from/to cocok, lalu salah satu di antara label/title cocok
+       return s(src)===s(e.from) && s(dst)===s(e.to) && (s(label)===s(e.label) || s(title)===s(e.title));
+     }
+
+     dsEdges.forEach(e=>{
+       const r = rows.find(tr => !tr.dataset.bound && rowMatches(tr, e));
+       if (r){ r.dataset.bound = "1"; r.dataset.eid = e.id; rowMap.set(e.id, r); }
+     });
+
+     network.on('selectEdge', function(params){
+       if (!params?.edges?.length) return;
+       const eid = params.edges[0];
+       let r = rowMap.get(eid);
+       if (!r){
+         try { const e = network.body.data.edges.get(eid); r = rows.find(tr => rowMatches(tr, e)); if (r) rowMap.set(eid, r); } catch(_){}
+       }
+       if (r) focusRowByDom(r);
+     });
+  })();
+</script>
