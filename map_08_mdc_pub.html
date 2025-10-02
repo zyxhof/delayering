@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_15cdfece84b94c4b325f6bce00e13637 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+    position: fixed; 
+    bottom: 20px; left: 20px; z-index: 9999;
+    background: white; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-family: Arial; ">
+  <div style="font-weight:600; margin-bottom:6px; font-size:13px;">Node Status</div>
+  <div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:orange;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">INSTALL - POWER ON</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:blue;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">POWER ON - INT</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:red;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">NY MOS</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:green;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">DONE INT</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:purple;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">OPTICAL JUNCTION</span></div>
+</div>
+    
+            <div class="folium-map" id="map_15cdfece84b94c4b325f6bce00e13637" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_15cdfece84b94c4b325f6bce00e13637 = L.map(
+                "map_15cdfece84b94c4b325f6bce00e13637",
+                {
+                    center: [3.8612682110120455, 98.34552797538942],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 9,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0098ae5fb0d9d02d8c9ceb7e9b563c9d = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 20, "maxZoom": 20, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abcd", "tms": false}
+            );
+        
+    
+            tile_layer_0098ae5fb0d9d02d8c9ceb7e9b563c9d.addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            var circle_marker_c287113eb3e59cc84eff3d05539d2962 = L.circleMarker(
+                [3.5481794039274, 98.6915494509531],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_c287113eb3e59cc84eff3d05539d2962.bindTooltip(
+                `<div>
+                     SIMPANG LIMUN T2<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_2b54e28c502cfa5a416c7e96f524b761 = L.circleMarker(
+                [3.56840962376272, 98.7016013668564],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_2b54e28c502cfa5a416c7e96f524b761.bindTooltip(
+                `<div>
+                     SUKARAMAI T2<br>POWER ON - INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_dd86bd5be0833d7057187dff4391d726 = L.circleMarker(
+                [3.62718691781876, 98.6811158940287],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_dd86bd5be0833d7057187dff4391d726.bindTooltip(
+                `<div>
+                     PULO BRAYAN T1<br>DONE INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d526640c39dbf46a8edcf98b3c0fa0e7 = L.circleMarker(
+                [3.58808586430573, 98.6866455064764],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_d526640c39dbf46a8edcf98b3c0fa0e7.bindTooltip(
+                `<div>
+                     MEDAN CENTRUM T1<br>POWER ON - INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4d1b9254b6264c85ded354321c09c2e6 = L.circleMarker(
+                [3.52180065939911, 98.6218596410516],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_4d1b9254b6264c85ded354321c09c2e6.bindTooltip(
+                `<div>
+                     TUNTUNGAN T3<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_ecda6b3a81503ea57efe99e3b52c872a = L.circleMarker(
+                [3.264448, 98.5407217],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_ecda6b3a81503ea57efe99e3b52c872a.bindTooltip(
+                `<div>
+                     BANDAR BARU T3<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_656c757e9de6a2e3fac1060f90f027f9 = L.circleMarker(
+                [3.19453471524183, 98.508462270101],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_656c757e9de6a2e3fac1060f90f027f9.bindTooltip(
+                `<div>
+                     BERASTAGI T2<br>POWER ON - INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_15eb0bf0be9b055becc5e6b56b34b323 = L.circleMarker(
+                [3.63106113946009, 99.0189085066404],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_15eb0bf0be9b055becc5e6b56b34b323.bindTooltip(
+                `<div>
+                     KUALA PUTRI-SCN T3<br>OPTICAL JUNCTION
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_029e602bd351044726337a01cfd6471c = L.circleMarker(
+                [5.17995281124451, 97.1459441177873],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_029e602bd351044726337a01cfd6471c.bindTooltip(
+                `<div>
+                     LHOKSEUMAWE T1<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_732687e77761f4f3e6130dbabac1bbaa = L.circleMarker(
+                [5.11732536065462, 97.2021264103702],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_732687e77761f4f3e6130dbabac1bbaa.bindTooltip(
+                `<div>
+                     GEUDONG T2<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_81ea8ad175b8edca16e8570a77cd407a = L.circleMarker(
+                [5.04034915222156, 97.3214813647008],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_81ea8ad175b8edca16e8570a77cd407a.bindTooltip(
+                `<div>
+                     LHOKSUKON T2<br>POWER ON - INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_8228018bca597383dd2aacc6f4dd5a6d = L.circleMarker(
+                [5.11411821888269, 97.4600529220946],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_8228018bca597383dd2aacc6f4dd5a6d.bindTooltip(
+                `<div>
+                     PANTON LABU T3<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d837798151af298194fbc436f695f5fe = L.circleMarker(
+                [5.09698361825202, 97.5378415238631],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_d837798151af298194fbc436f695f5fe.bindTooltip(
+                `<div>
+                     SIMPANG ULIM T3<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_22d484d8636b99ab2412ce8c321442f7 = L.circleMarker(
+                [4.94992799330698, 97.77377860852],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_22d484d8636b99ab2412ce8c321442f7.bindTooltip(
+                `<div>
+                     IDI RAYEUK T2<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_7d6cc36de9807129730e6d7f9a0d34d8 = L.circleMarker(
+                [4.80902697003507, 97.8945745688469],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_7d6cc36de9807129730e6d7f9a0d34d8.bindTooltip(
+                `<div>
+                     PEUREULAK T2<br>POWER ON - INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_97bd1a593f66f89472d9f8dd1cdc4c48 = L.circleMarker(
+                [4.47358443910094, 97.9659336936624],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_97bd1a593f66f89472d9f8dd1cdc4c48.bindTooltip(
+                `<div>
+                     LANGSA T2<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_44da524dca0055bb5c0a9486a1af25cb = L.circleMarker(
+                [4.28349148373182, 98.0580347649346],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_44da524dca0055bb5c0a9486a1af25cb.bindTooltip(
+                `<div>
+                     KUALA SIMPANG T2<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_02575cb08bb0a17ffd8f51f8d1f3375a = L.circleMarker(
+                [3.74301838875764, 98.4443354758737],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_02575cb08bb0a17ffd8f51f8d1f3375a.bindTooltip(
+                `<div>
+                     STABAT T2<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_0bcef530613c950ce251be17dbcb0830 = L.circleMarker(
+                [3.61038211707344, 98.4952150257092],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_0bcef530613c950ce251be17dbcb0830.bindTooltip(
+                `<div>
+                     BINJAI T2<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_607871f40f8e5e0bc4440e15b4ab5c33 = L.circleMarker(
+                [3.59283683513857, 98.6265795257092],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_607871f40f8e5e0bc4440e15b4ab5c33.bindTooltip(
+                `<div>
+                     CINTA DAMAI T2<br>DONE INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e57cce70e233583cb7a5749972e04de0 = L.circleMarker(
+                [3.55585547615154, 98.6329403747135],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_e57cce70e233583cb7a5749972e04de0.bindTooltip(
+                `<div>
+                     PADANG BULAN T2<br>DONE INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_703188a39e9618f8bd7b72bae706ebd2 = L.circleMarker(
+                [5.23644912851165, 97.026006777491],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_703188a39e9618f8bd7b72bae706ebd2.bindTooltip(
+                `<div>
+                     KRUENG GEKEUH T2<br>POWER ON - INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4f2b13ff3fcca43a7962c771c38291e7 = L.circleMarker(
+                [4.62167564106958, 96.8477783528796],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_4f2b13ff3fcca43a7962c771c38291e7.bindTooltip(
+                `<div>
+                     TAKENGON T2<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_94c6967ff4880386d1bf7fa109d45a70 = L.circleMarker(
+                [3.99024590165042, 97.3432343220109],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_94c6967ff4880386d1bf7fa109d45a70.bindTooltip(
+                `<div>
+                     BLANGKAJEREN T3<br>POWER ON - INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_ce448451c4be13170c7bce6a328c4043 = L.circleMarker(
+                [3.8100756942276, 97.5409440657413],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_ce448451c4be13170c7bce6a328c4043.bindTooltip(
+                `<div>
+                     TSEL GUMPANG<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_45a316e11fd91c1a87ba78450c406612 = L.circleMarker(
+                [3.4874277008874, 97.8111745730378],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_45a316e11fd91c1a87ba78450c406612.bindTooltip(
+                `<div>
+                     KUTACANE T3<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e630d7c524d6535a2bf354d954ee6346 = L.circleMarker(
+                [3.52247585643169, 98.7811197661884],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_e630d7c524d6535a2bf354d954ee6346.bindTooltip(
+                `<div>
+                     TANJUNG MORAWA T3<br>INSTALL - POWER ON
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_11d1814d06b1d3b14b80d930139f1c19 = L.circleMarker(
+                [3.56106021963445, 98.8785630025428],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            circle_marker_11d1814d06b1d3b14b80d930139f1c19.bindTooltip(
+                `<div>
+                     LUBUK PAKAM T2<br>POWER ON - INT
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_9a4f2e52c994bb7dc901513a211e9deb = L.polyline(
+                [[3.5481794039274, 98.6915494509531], [3.56840962376272, 98.7016013668564]],
+                {"bubblingMouseEvents": true, "color": "#000000ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#000000ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.8}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_9a4f2e52c994bb7dc901513a211e9deb.bindTooltip(
+                `<div>
+                     SIMPANG LIMUN T2 ⇄ SUKARAMAI T2<br>Jumlah Service: 4<br>- SIMPANG LIMUN-PULO BRAYAN<br>- MEDAN CENTRUM-BRASTAGI<br>- BRASTAGI-PULO BRAYAN<br>- MEDAN CENTRUM-SIMPANG LIMUN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_3f95b1ca0cc8f8d294058201995eab52 = L.polyline(
+                [[3.62718691781876, 98.6811158940287], [3.56840962376272, 98.7016013668564]],
+                {"bubblingMouseEvents": true, "color": "#7f7f7fff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7f7f7fff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_3f95b1ca0cc8f8d294058201995eab52.bindTooltip(
+                `<div>
+                     PULO BRAYAN T1 ⇄ SUKARAMAI T2<br>Jumlah Service: 2<br>- SIMPANG LIMUN-PULO BRAYAN<br>- MEDAN CENTRUM-SIMPANG LIMUN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_f50c7b62379b76e7cd6060b166e144ca = L.polyline(
+                [[3.58808586430573, 98.6866455064764], [3.56840962376272, 98.7016013668564]],
+                {"bubblingMouseEvents": true, "color": "#434343ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#434343ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_f50c7b62379b76e7cd6060b166e144ca.bindTooltip(
+                `<div>
+                     MEDAN CENTRUM T1 ⇄ SUKARAMAI T2<br>Jumlah Service: 3<br>- MEDAN CENTRUM-BRASTAGI<br>- BRASTAGI-PULO BRAYAN<br>- MEDAN CENTRUM-LUBUK PAKAM
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_c7d02045a21ef48b960fba0c5ba0ccec = L.polyline(
+                [[3.5481794039274, 98.6915494509531], [3.52180065939911, 98.6218596410516]],
+                {"bubblingMouseEvents": true, "color": "#7f7f7fff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7f7f7fff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_c7d02045a21ef48b960fba0c5ba0ccec.bindTooltip(
+                `<div>
+                     SIMPANG LIMUN T2 ⇄ TUNTUNGAN T3<br>Jumlah Service: 2<br>- MEDAN CENTRUM-BRASTAGI<br>- BRASTAGI-PULO BRAYAN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_7ff5c79f2dc857a4b7dedb56eb5548f4 = L.polyline(
+                [[3.264448, 98.5407217], [3.52180065939911, 98.6218596410516]],
+                {"bubblingMouseEvents": true, "color": "#7f7f7fff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7f7f7fff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_7ff5c79f2dc857a4b7dedb56eb5548f4.bindTooltip(
+                `<div>
+                     BANDAR BARU T3 ⇄ TUNTUNGAN T3<br>Jumlah Service: 2<br>- MEDAN CENTRUM-BRASTAGI<br>- BRASTAGI-PULO BRAYAN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_076bf76575c22647d1d65db08739ea00 = L.polyline(
+                [[3.264448, 98.5407217], [3.19453471524183, 98.508462270101]],
+                {"bubblingMouseEvents": true, "color": "#7f7f7fff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7f7f7fff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_076bf76575c22647d1d65db08739ea00.bindTooltip(
+                `<div>
+                     BANDAR BARU T3 ⇄ BERASTAGI T2<br>Jumlah Service: 2<br>- MEDAN CENTRUM-BRASTAGI<br>- BRASTAGI-PULO BRAYAN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_cc12df595aabb8bfaa316c778334d8a5 = L.polyline(
+                [[3.63106113946009, 99.0189085066404], [3.58808586430573, 98.6866455064764]],
+                {"bubblingMouseEvents": true, "color": "#7f7f7fff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7f7f7fff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_cc12df595aabb8bfaa316c778334d8a5.bindTooltip(
+                `<div>
+                     KUALA PUTRI-SCN T3 ⇄ MEDAN CENTRUM T1<br>Jumlah Service: 2<br>- MEDAN CENTRUM-KUALA SIMPANG<br>- MEDAN CENTRUM-KUTACANE
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_6cbf574b16df551eb42a56390e10950e = L.polyline(
+                [[3.63106113946009, 99.0189085066404], [5.17995281124451, 97.1459441177873]],
+                {"bubblingMouseEvents": true, "color": "#7f7f7fff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7f7f7fff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_6cbf574b16df551eb42a56390e10950e.bindTooltip(
+                `<div>
+                     KUALA PUTRI-SCN T3 ⇄ LHOKSEUMAWE T1<br>Jumlah Service: 2<br>- MEDAN CENTRUM-KUALA SIMPANG<br>- MEDAN CENTRUM-KUTACANE
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_85ee1bc47fe5ab292332791ad1c59f74 = L.polyline(
+                [[5.11732536065462, 97.2021264103702], [5.17995281124451, 97.1459441177873]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_85ee1bc47fe5ab292332791ad1c59f74.bindTooltip(
+                `<div>
+                     GEUDONG T2 ⇄ LHOKSEUMAWE T1<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUALA SIMPANG
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_faa1783f2025b2212060c31ea2c41b57 = L.polyline(
+                [[5.11732536065462, 97.2021264103702], [5.04034915222156, 97.3214813647008]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_faa1783f2025b2212060c31ea2c41b57.bindTooltip(
+                `<div>
+                     GEUDONG T2 ⇄ LHOKSUKON T2<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUALA SIMPANG
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_dde1b78f803e507fb56a6138ac454b5a = L.polyline(
+                [[5.04034915222156, 97.3214813647008], [5.11411821888269, 97.4600529220946]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_dde1b78f803e507fb56a6138ac454b5a.bindTooltip(
+                `<div>
+                     LHOKSUKON T2 ⇄ PANTON LABU T3<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUALA SIMPANG
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_3beaabf5c0c7d2bd8829b920785ebb1f = L.polyline(
+                [[5.11411821888269, 97.4600529220946], [5.09698361825202, 97.5378415238631]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_3beaabf5c0c7d2bd8829b920785ebb1f.bindTooltip(
+                `<div>
+                     PANTON LABU T3 ⇄ SIMPANG ULIM T3<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUALA SIMPANG
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_806f2f951495db60efd09e88043ae401 = L.polyline(
+                [[4.94992799330698, 97.77377860852], [5.09698361825202, 97.5378415238631]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_806f2f951495db60efd09e88043ae401.bindTooltip(
+                `<div>
+                     IDI RAYEUK T2 ⇄ SIMPANG ULIM T3<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUALA SIMPANG
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_a3b832d14296f09c68c985f8368aa351 = L.polyline(
+                [[4.94992799330698, 97.77377860852], [4.80902697003507, 97.8945745688469]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_a3b832d14296f09c68c985f8368aa351.bindTooltip(
+                `<div>
+                     IDI RAYEUK T2 ⇄ PEUREULAK T2<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUALA SIMPANG
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_7717534d54d2ca151ef9f1ec35600aab = L.polyline(
+                [[4.47358443910094, 97.9659336936624], [4.80902697003507, 97.8945745688469]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_7717534d54d2ca151ef9f1ec35600aab.bindTooltip(
+                `<div>
+                     LANGSA T2 ⇄ PEUREULAK T2<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUALA SIMPANG
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_8a3f540582e7066e38cc4d10bdda5f05 = L.polyline(
+                [[4.28349148373182, 98.0580347649346], [4.47358443910094, 97.9659336936624]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_8a3f540582e7066e38cc4d10bdda5f05.bindTooltip(
+                `<div>
+                     KUALA SIMPANG T2 ⇄ LANGSA T2<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUALA SIMPANG
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_66ba36ca0d54b18ca4e42fb2827cfa7e = L.polyline(
+                [[3.61038211707344, 98.4952150257092], [3.74301838875764, 98.4443354758737]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_66ba36ca0d54b18ca4e42fb2827cfa7e.bindTooltip(
+                `<div>
+                     BINJAI T2 ⇄ STABAT T2<br>Jumlah Service: 1<br>- STABAT-PULO BRAYAN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_36fcf9fe7e0ad5a9ee4fcf6ffbb45b06 = L.polyline(
+                [[3.61038211707344, 98.4952150257092], [3.59283683513857, 98.6265795257092]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_36fcf9fe7e0ad5a9ee4fcf6ffbb45b06.bindTooltip(
+                `<div>
+                     BINJAI T2 ⇄ CINTA DAMAI T2<br>Jumlah Service: 1<br>- STABAT-PULO BRAYAN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_f26ae768a231f937ed2caceffe1154cc = L.polyline(
+                [[3.59283683513857, 98.6265795257092], [3.62718691781876, 98.6811158940287]],
+                {"bubblingMouseEvents": true, "color": "#434343ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#434343ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_f26ae768a231f937ed2caceffe1154cc.bindTooltip(
+                `<div>
+                     CINTA DAMAI T2 ⇄ PULO BRAYAN T1<br>Jumlah Service: 3<br>- STABAT-PULO BRAYAN<br>- CINTA DAMAI-PULO BRAYAN<br>- PADANG BULAN-PULO BRAYAN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_ff8af7b1d3e9822ef8180402967f9041 = L.polyline(
+                [[3.59283683513857, 98.6265795257092], [3.55585547615154, 98.6329403747135]],
+                {"bubblingMouseEvents": true, "color": "#7f7f7fff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7f7f7fff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_ff8af7b1d3e9822ef8180402967f9041.bindTooltip(
+                `<div>
+                     CINTA DAMAI T2 ⇄ PADANG BULAN T2<br>Jumlah Service: 2<br>- PADANG BULAN-PULO BRAYAN<br>- MEDAN CENTRUM-PADANG BULAN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_0623d814b9950e760ade873d3b994210 = L.polyline(
+                [[5.23644912851165, 97.026006777491], [5.17995281124451, 97.1459441177873]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_0623d814b9950e760ade873d3b994210.bindTooltip(
+                `<div>
+                     KRUENG GEKEUH T2 ⇄ LHOKSEUMAWE T1<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUTACANE
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_1e6ba66aa4cb2f4b60619a3719d06a19 = L.polyline(
+                [[5.23644912851165, 97.026006777491], [4.62167564106958, 96.8477783528796]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_1e6ba66aa4cb2f4b60619a3719d06a19.bindTooltip(
+                `<div>
+                     KRUENG GEKEUH T2 ⇄ TAKENGON T2<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUTACANE
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_8183a26c9e6348efe97902c3da48d7ea = L.polyline(
+                [[3.99024590165042, 97.3432343220109], [4.62167564106958, 96.8477783528796]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_8183a26c9e6348efe97902c3da48d7ea.bindTooltip(
+                `<div>
+                     BLANGKAJEREN T3 ⇄ TAKENGON T2<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUTACANE
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_643eee8bf2881f6209b8403ee3a6a7d3 = L.polyline(
+                [[3.99024590165042, 97.3432343220109], [3.8100756942276, 97.5409440657413]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_643eee8bf2881f6209b8403ee3a6a7d3.bindTooltip(
+                `<div>
+                     BLANGKAJEREN T3 ⇄ TSEL GUMPANG<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUTACANE
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_76035c7460f9988c758f4abe3dfbd677 = L.polyline(
+                [[3.4874277008874, 97.8111745730378], [3.8100756942276, 97.5409440657413]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_76035c7460f9988c758f4abe3dfbd677.bindTooltip(
+                `<div>
+                     KUTACANE T3 ⇄ TSEL GUMPANG<br>Jumlah Service: 1<br>- MEDAN CENTRUM-KUTACANE
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_bf96a1a2896935bce7faa3002498a606 = L.polyline(
+                [[3.5481794039274, 98.6915494509531], [3.52247585643169, 98.7811197661884]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_bf96a1a2896935bce7faa3002498a606.bindTooltip(
+                `<div>
+                     SIMPANG LIMUN T2 ⇄ TANJUNG MORAWA T3<br>Jumlah Service: 1<br>- TANJUNG MORAWA-SIMPANG LIMUN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_4ca17cf6d6c69a310ad8b1e4d8f0552a = L.polyline(
+                [[3.59283683513857, 98.6265795257092], [3.58808586430573, 98.6866455064764]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_4ca17cf6d6c69a310ad8b1e4d8f0552a.bindTooltip(
+                `<div>
+                     CINTA DAMAI T2 ⇄ MEDAN CENTRUM T1<br>Jumlah Service: 1<br>- MEDAN CENTRUM-PADANG BULAN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_d5503c72af6860c64051d867ec8a5f34 = L.polyline(
+                [[3.58808586430573, 98.6866455064764], [3.62718691781876, 98.6811158940287]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_d5503c72af6860c64051d867ec8a5f34.bindTooltip(
+                `<div>
+                     MEDAN CENTRUM T1 ⇄ PULO BRAYAN T1<br>Jumlah Service: 1<br>- MEDAN CENTRUM-SIMPANG LIMUN
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_ba758bf781fd9b2eedc2041d1240d99a = L.polyline(
+                [[3.56106021963445, 98.8785630025428], [3.56840962376272, 98.7016013668564]],
+                {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+        
+    
+            poly_line_ba758bf781fd9b2eedc2041d1240d99a.bindTooltip(
+                `<div>
+                     LUBUK PAKAM T2 ⇄ SUKARAMAI T2<br>Jumlah Service: 1<br>- MEDAN CENTRUM-LUBUK PAKAM
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var layer_control_a0d34dcbef4a799f738593daa3d409bb_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_0098ae5fb0d9d02d8c9ceb7e9b563c9d,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_a0d34dcbef4a799f738593daa3d409bb = L.control.layers(
+                layer_control_a0d34dcbef4a799f738593daa3d409bb_layers.base_layers,
+                layer_control_a0d34dcbef4a799f738593daa3d409bb_layers.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_15cdfece84b94c4b325f6bce00e13637);
+
+        
+</script>
+</html>
