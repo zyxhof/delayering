@@ -1,0 +1,697 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="ME-D6-SBR">ME-D6-SBR</option>
+                                
+                                    <option value="ME-D6-LBK">ME-D6-LBK</option>
+                                
+                                    <option value="ME9-D6-SBB">ME9-D6-SBB</option>
+                                
+                                    <option value="ME9-D6-SMD">ME9-D6-SMD</option>
+                                
+                                    <option value="ME-D6-MLK">ME-D6-MLK</option>
+                                
+                                    <option value="ME9-D6-SSB">ME9-D6-SSB</option>
+                                
+                                    <option value="ME-D6-LPK">ME-D6-LPK</option>
+                                
+                                    <option value="ME-D6-SGT">ME-D6-SGT</option>
+                                
+                                    <option value="ME-D6-SBR-4">ME-D6-SBR-4</option>
+                                
+                                    <option value="ME-D6-SBB">ME-D6-SBB</option>
+                                
+                                    <option value="ME-D6-SMD">ME-D6-SMD</option>
+                                
+                                    <option value="ME-D6-TGG">ME-D6-TGG</option>
+                                
+                                    <option value="ME-D6-PLR">ME-D6-PLR</option>
+                                
+                                    <option value="ME-D6-SPJ">ME-D6-SPJ</option>
+                                
+                                    <option value="ME-D6-SKP">ME-D6-SKP</option>
+                                
+                                    <option value="ME-D6-KBG">ME-D6-KBG</option>
+                                
+                                    <option value="ME-D6-BTON">ME-D6-BTON</option>
+                                
+                                    <option value="ME-D6-MBD">ME-D6-MBD</option>
+                                
+                                    <option value="ME-D6-BOG">ME-D6-BOG</option>
+                                
+                                    <option value="ME-D6-MBU">ME-D6-MBU</option>
+                                
+                                    <option value="ME-D6-BGL">ME-D6-BGL</option>
+                                
+                                    <option value="SME-D6-SGT-TSEL">SME-D6-SGT-TSEL</option>
+                                
+                                    <option value="ME-D6-SBL">ME-D6-SBL</option>
+                                
+                                    <option value="ME-D6-SEP">ME-D6-SEP</option>
+                                
+                                    <option value="ME-D6-SAS">ME-D6-SAS</option>
+                                
+                                    <option value="ME-D6-PLM">ME-D6-PLM</option>
+                                
+                                    <option value="ME-D6-TSN">ME-D6-TSN</option>
+                                
+                                    <option value="ME-D6-GSK">ME-D6-GSK</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+              <div id="filter-menu" class="card-header">
+                <div class="row no-gutters">
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'item')"
+                            id="select-item"
+                        >
+                        <option value="">Select a network item</option>
+                        <option value="edge">edge</option>
+                        <option value="node">node</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'property')"
+                            id="select-property"
+                        >
+                        <option value="">Select a property...</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="select-value"
+                        >
+                        <option value="">Select value(s)...</option>
+                    </select>
+                  </div>
+                  <div class="col-1 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="highlightFilter(filter);">Filter</button>
+                  </div>
+                  <div class="col-2 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="clearFilter(true)">Reset Selection</button>
+                  </div>
+                </div>
+              </div>
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+                  // explicitly using onItemAdd and this function as we need to save multiple values
+                  let updateValueFilter = function() {
+                      return function () {
+                      filter['value'].push(arguments[0])
+                      }
+                  }
+
+                  let valueControl = new TomSelect("#select-value",{
+                      maxItems: null,
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: updateValueFilter()
+                  });
+
+                  let addValues = function() {
+                      return function () {
+                          // clear the current value options and add the selected attribute values
+                          // tom-select handles duplicates
+                          let selectedProperty = arguments[0];
+                          valueControl.clear();
+                          valueControl.clearOptions();
+                          filter['value'] = []
+                          if (filter['item'] === 'node') {
+                              for (let each in allNodes) {
+                                  valueControl.addOption({
+                                      id:allNodes[each][selectedProperty],
+                                      title:allNodes[each][selectedProperty]
+                                  })
+                              }
+                          }
+                          else if (filter['item'] === 'edge') {
+                              for (let each in allEdges) {
+                                  valueControl.addOption({
+                                      id:allEdges[each][selectedProperty],
+                                      title:allEdges[each][selectedProperty]
+                                  })
+                              }
+                          }
+                      }
+                  };
+
+                  let propControl = new TomSelect("#select-property",{
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addValues()
+                  });
+
+                  let addProperties = function() {
+                      return function () {
+                          // loops through the selected network item and adds the attributes to dropdown
+                          // tom-select handles duplicates
+                          clearFilter(false)
+                          if (arguments[0] === 'edge') {
+                              for (let each in allEdges) {
+                                  if (allEdges.hasOwnProperty(each)) {
+                                      for (let eachProp in allEdges[each]) {
+                                          if (allEdges[each].hasOwnProperty(eachProp)) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                          else if (arguments[0] === 'node') {
+                              for (let each in allNodes) {
+                                  if (allNodes.hasOwnProperty(each)) {
+                                      for (let eachProp in allNodes[each]) {
+                                          if (allNodes[each].hasOwnProperty(eachProp)
+                                              && (eachProp !== 'hidden' && eachProp !== 'savedLabel'
+                                                  && eachProp !== 'hiddenLabel')) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  };
+
+                  let itemControl = new TomSelect("#select-item",{
+                      create: false,
+                      sortField:{
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addProperties()
+                  });
+
+                  function clearFilter(reset) {
+                      // utility function to clear all the selected filter options
+                      // if reset is set to true, the existing filter will be removed
+                      // else, only the dropdown options are cleared
+                      propControl.clear();
+                      propControl.clearOptions();
+                      valueControl.clear();
+                      valueControl.clearOptions();
+                      filter = {
+                          item : '',
+                          property : '',
+                          value : []
+                      }
+                      if (reset) {
+                          itemControl.clear();
+                          filterHighlight({nodes: []})
+                      }
+                  }
+
+                  function updateFilter(value, key) {
+                      // key could be 'item' or 'property' and value is as selected in dropdown
+                      filter[key] = value
+                  }
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "silver", "id": "ME-D6-SBR", "label": "ME-D6-SBR", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-LBK", "label": "ME-D6-LBK", "shape": "dot", "size": 10}, {"color": "red", "id": "ME9-D6-SBB", "label": "ME9-D6-SBB", "level": 0, "shape": "dot", "size": 10}, {"color": "red", "id": "ME9-D6-SMD", "label": "ME9-D6-SMD", "level": 0, "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-MLK", "label": "ME-D6-MLK", "shape": "dot", "size": 10}, {"color": "red", "id": "ME9-D6-SSB", "label": "ME9-D6-SSB", "level": 0, "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-LPK", "label": "ME-D6-LPK", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-SGT", "label": "ME-D6-SGT", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-SBR-4", "label": "ME-D6-SBR-4", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-SBB", "label": "ME-D6-SBB", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-SMD", "label": "ME-D6-SMD", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-TGG", "label": "ME-D6-TGG", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-PLR", "label": "ME-D6-PLR", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-SPJ", "label": "ME-D6-SPJ", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-SKP", "label": "ME-D6-SKP", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-KBG", "label": "ME-D6-KBG", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-BTON", "label": "ME-D6-BTON", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-MBD", "label": "ME-D6-MBD", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-BOG", "label": "ME-D6-BOG", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-MBU", "label": "ME-D6-MBU", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-BGL", "label": "ME-D6-BGL", "shape": "dot", "size": 10}, {"color": "silver", "id": "SME-D6-SGT-TSEL", "label": "SME-D6-SGT-TSEL", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-SBL", "label": "ME-D6-SBL", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-SEP", "label": "ME-D6-SEP", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-SAS", "label": "ME-D6-SAS", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-PLM", "label": "ME-D6-PLM", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-TSN", "label": "ME-D6-TSN", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D6-GSK", "label": "ME-D6-GSK", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"color": "red", "from": "ME-D6-SBR", "id": "ME-D6-SBR__ME-D6-LBK__0", "label": "6", "link": "EXISTING", "path": "SEBERANG_TO_LOA BAKUNG", "ring": "6", "stat_ring": "NOT DONE", "title": "ME-D6-SBR_to_ME-D6-LBK\nEXISTING -\u003e [NOT DONE]", "to": "ME-D6-LBK", "width": 1}, {"color": "green", "from": "ME-D6-LBK", "id": "ME-D6-LBK__ME9-D6-SBB__1", "label": "6", "link": "NEW LINK", "path": "STASIUN BUMI_TO_LOA BAKUNG", "ring": "6", "stat_ring": "DONE", "title": "ME9-D6-SBB_to_ME-D6-LBK\nNEW LINK -\u003e [DONE]", "to": "ME9-D6-SBB", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-MLK__2", "label": "10", "link": "NEW LINK", "path": "SAMARINDA CENTRUM_TO_MELAK", "ring": "10", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME-D6-MLK\nNEW LINK -\u003e [DONE]", "to": "ME-D6-MLK", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME9-D6-SSB__3", "label": "0", "link": "EKSISTING", "path": "SAMARINDA CENTRUM_TO_STASIUN BUMI ", "ring": "0", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME9-D6-SSB\nEKSISTING -\u003e [DONE]", "to": "ME9-D6-SSB", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-LPK__4", "label": "7", "link": "EKSISTING", "path": "SAMARINDA CENTRUM_TO_LEMPAKE", "ring": "7", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME-D6-LPK\nEKSISTING -\u003e [DONE]", "to": "ME-D6-LPK", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-SGT__5", "label": "8", "link": "EKSISTING", "path": "SAMARINDA CENTRUM_TO_SANGATTA", "ring": "8", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME-D6-SGT\nEKSISTING -\u003e [DONE]", "to": "ME-D6-SGT", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-SBR-4__6", "label": "6", "link": "EKSISTING", "path": "SAMARINDA CENTRUM_TO_SEBERANG", "ring": "6", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME-D6-SBR-4\nEKSISTING -\u003e [DONE]", "to": "ME-D6-SBR-4", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-SBB__7", "label": "2", "link": "EKSISTING", "path": "SAMARINDA CENTRUM_TO_STASIUN BUMI ", "ring": "2", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME-D6-SBB\nEKSISTING -\u003e [DONE]", "to": "ME-D6-SBB", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-SMD__8", "label": "1", "link": "EKSISTING", "path": "SAMARINDA CENTRUM_TO_SAMARINDA CENTRUM", "ring": "1", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME-D6-SMD\nEKSISTING -\u003e [DONE]", "to": "ME-D6-SMD", "width": 1}, {"color": "red", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-TGG__9", "label": "9", "link": "NEW LINK", "path": "SAMARINDA CENTRUM_TO_TENGGARONG", "ring": "9", "stat_ring": "NOT DONE", "title": "ME9-D6-SMD_to_ME-D6-TGG\nNEW LINK -\u003e [NOT DONE]", "to": "ME-D6-TGG", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-PLR__10", "label": "5", "link": "NEW LINK", "path": "SAMARINDA CENTRUM_TO_PALARAN", "ring": "5", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME-D6-PLR\nNEW LINK -\u003e [DONE]", "to": "ME-D6-PLR", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-SPJ__11", "label": "4", "link": "EKSISTING", "path": "SAMARINDA CENTRUM_TO_SEMPAJA", "ring": "4", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME-D6-SPJ\nEKSISTING -\u003e [DONE]", "to": "ME-D6-SPJ", "width": 1}, {"color": "green", "from": "ME9-D6-SMD", "id": "ME9-D6-SMD__ME-D6-SKP__12", "label": "3", "link": "EKSISTING", "path": "SAMARINDA CENTRUM_TO_SEI KAPIH", "ring": "3", "stat_ring": "DONE", "title": "ME9-D6-SMD_to_ME-D6-SKP\nEKSISTING -\u003e [DONE]", "to": "ME-D6-SKP", "width": 1}, {"color": "green", "from": "ME-D6-MLK", "id": "ME-D6-MLK__ME-D6-KBG__13", "label": "10", "link": "EKSISTING", "path": "MELAK_TO_KOTABANGUN", "ring": "10", "stat_ring": "DONE", "title": "ME-D6-MLK_to_ME-D6-KBG\nEKSISTING -\u003e [DONE]", "to": "ME-D6-KBG", "width": 1}, {"color": "green", "from": "ME-D6-MLK", "id": "ME-D6-MLK__ME-D6-BTON__14", "label": "10.1", "link": "EKSISTING", "path": "MELAK_TO_BARONGTONGKOK", "ring": "10.1", "stat_ring": "DONE", "title": "ME-D6-MLK_to_ME-D6-BTON\nEKSISTING -\u003e [DONE]", "to": "ME-D6-BTON", "width": 1}, {"color": "red", "from": "ME-D6-KBG", "id": "ME-D6-KBG__ME-D6-BTON__15", "label": "10.1", "link": "NEW LINK", "path": "KOTABANGUN_TO_BARONGTONGKOK", "ring": "10.1", "stat_ring": "NOT DONE", "title": "ME-D6-KBG_to_ME-D6-BTON\nNEW LINK -\u003e [NOT DONE]", "to": "ME-D6-BTON", "width": 1}, {"color": "red", "from": "ME-D6-KBG", "id": "ME-D6-KBG__ME9-D6-SBB__16", "label": "10", "link": "NEW LINK", "path": "STASIUN BUMI_TO_KOTABANGUN", "ring": "10", "stat_ring": "NOT DONE", "title": "ME9-D6-SBB_to_ME-D6-KBG\nNEW LINK -\u003e [NOT DONE]", "to": "ME9-D6-SBB", "width": 1}, {"color": "green", "from": "ME-D6-LPK", "id": "ME-D6-LPK__ME-D6-MBD__17", "label": "7.1", "link": "EKSISTING", "path": "LEMPAKE_TO_MUARA BADAK", "ring": "7.1", "stat_ring": "DONE", "title": "ME-D6-LPK_to_ME-D6-MBD\nEKSISTING -\u003e [DONE]", "to": "ME-D6-MBD", "width": 1}, {"color": "green", "from": "ME-D6-LPK", "id": "ME-D6-LPK__ME-D6-BOG__18", "label": "7", "link": "NEW LINK", "path": "LEMPAKE_TO_BONTANG", "ring": "7", "stat_ring": "DONE", "title": "ME-D6-LPK_to_ME-D6-BOG\nNEW LINK -\u003e [DONE]", "to": "ME-D6-BOG", "width": 1}, {"color": "green", "from": "ME-D6-SGT", "id": "ME-D6-SGT__ME-D6-MBU__19", "label": "8", "link": "EKSISTING", "path": "MIAU BARU _TO_SANGATTA", "ring": "8", "stat_ring": "DONE", "title": "ME-D6-MBU_to_ME-D6-SGT\nEKSISTING -\u003e [DONE]", "to": "ME-D6-MBU", "width": 1}, {"color": "green", "from": "ME-D6-SGT", "id": "ME-D6-SGT__ME-D6-BGL__20", "label": "8.1", "link": "EKSISTING", "path": "SANGATTA_TO_BENGALON", "ring": "8.1", "stat_ring": "DONE", "title": "ME-D6-SGT_to_ME-D6-BGL\nEKSISTING -\u003e [DONE]", "to": "ME-D6-BGL", "width": 1}, {"color": "green", "from": "ME-D6-SGT", "id": "ME-D6-SGT__SME-D6-SGT-TSEL__21", "label": "8.2", "link": "EKSISTING", "path": "SANGATTA TSEL_TO_SANGATTA", "ring": "8.2", "stat_ring": "DONE", "title": "SME-D6-SGT-TSEL_to_ME-D6-SGT\nEKSISTING -\u003e [DONE]", "to": "SME-D6-SGT-TSEL", "width": 1}, {"color": "green", "from": "ME-D6-SBB", "id": "ME-D6-SBB__ME9-D6-SBB__22", "label": "2", "link": "EKSISTING", "path": "STASIUN BUMI_TO_STASIUN BUMI ", "ring": "2", "stat_ring": "DONE", "title": "ME9-D6-SBB_to_ME-D6-SBB\nEKSISTING -\u003e [DONE]", "to": "ME9-D6-SBB", "width": 1}, {"color": "green", "from": "ME-D6-SMD", "id": "ME-D6-SMD__ME9-D6-SBB__23", "label": "1", "link": "EKSISTING", "path": "STASIUN BUMI_TO_SAMARINDA CENTRUM", "ring": "1", "stat_ring": "DONE", "title": "ME9-D6-SBB_to_ME-D6-SMD\nEKSISTING -\u003e [DONE]", "to": "ME9-D6-SBB", "width": 1}, {"color": "red", "from": "ME-D6-TGG", "id": "ME-D6-TGG__ME-D6-SBL__24", "label": "9.1", "link": "NEW LINK", "path": "TENGGARONG_TO_SEBULU", "ring": "9.1", "stat_ring": "NOT DONE", "title": "ME-D6-TGG_to_ME-D6-SBL\nNEW LINK -\u003e [NOT DONE]", "to": "ME-D6-SBL", "width": 1}, {"color": "green", "from": "ME-D6-TGG", "id": "ME-D6-TGG__ME-D6-SEP__25", "label": "9", "link": "EKSISTING", "path": "TENGGARONG_TO_SEPARI", "ring": "9", "stat_ring": "DONE", "title": "ME-D6-TGG_to_ME-D6-SEP\nEKSISTING -\u003e [DONE]", "to": "ME-D6-SEP", "width": 1}, {"color": "green", "from": "ME-D6-PLR", "id": "ME-D6-PLR__ME-D6-SAS__26", "label": "5.1", "link": "EKSISTING", "path": "PALARAN_TO_SANGA-SANGA", "ring": "5.1", "stat_ring": "DONE", "title": "ME-D6-PLR_to_ME-D6-SAS\nEKSISTING -\u003e [DONE]", "to": "ME-D6-SAS", "width": 1}, {"color": "green", "from": "ME-D6-PLR", "id": "ME-D6-PLR__ME9-D6-SBB__27", "label": "5", "link": "NEW LINK", "path": "STASIUN BUMI_TO_PALARAN", "ring": "5", "stat_ring": "DONE", "title": "ME9-D6-SBB_to_ME-D6-PLR\nNEW LINK -\u003e [DONE]", "to": "ME9-D6-SBB", "width": 1}, {"color": "green", "from": "ME9-D6-SBB", "id": "ME9-D6-SBB__ME-D6-SEP__28", "label": "9", "link": "NEW LINK", "path": "STASIUN BUMI_TO_SEPARI", "ring": "9", "stat_ring": "DONE", "title": "ME9-D6-SBB_to_ME-D6-SEP\nNEW LINK -\u003e [DONE]", "to": "ME-D6-SEP", "width": 1}, {"color": "green", "from": "ME9-D6-SBB", "id": "ME9-D6-SBB__ME-D6-BOG__29", "label": "7", "link": "NEW LINK", "path": "STASIUN BUMI_TO_BONTANG", "ring": "7", "stat_ring": "DONE", "title": "ME9-D6-SBB_to_ME-D6-BOG\nNEW LINK -\u003e [DONE]", "to": "ME-D6-BOG", "width": 1}, {"color": "green", "from": "ME9-D6-SBB", "id": "ME9-D6-SBB__ME-D6-MBU__30", "label": "8", "link": "NEW LINK", "path": "STASIUN BUMI_TO_MIAU BARU", "ring": "8", "stat_ring": "DONE", "title": "ME9-D6-SBB_to_ME-D6-MBU\nNEW LINK -\u003e [DONE]", "to": "ME-D6-MBU", "width": 1}, {"color": "green", "from": "ME9-D6-SBB", "id": "ME9-D6-SBB__ME-D6-SKP__31", "label": "3", "link": "NEW LINK", "path": "STASIUN BUMI_TO_SEI KAPIH", "ring": "3", "stat_ring": "DONE", "title": "ME9-D6-SBB_to_ME-D6-SKP\nNEW LINK -\u003e [DONE]", "to": "ME-D6-SKP", "width": 1}, {"color": "green", "from": "ME9-D6-SBB", "id": "ME9-D6-SBB__ME-D6-PLM__32", "label": "4", "link": "EKSISTING", "path": "PALIMA_TO_STASIUN BUMI ", "ring": "4", "stat_ring": "DONE", "title": "ME-D6-PLM_to_ME9-D6-SBB\nEKSISTING -\u003e [DONE]", "to": "ME-D6-PLM", "width": 1}, {"color": "green", "from": "ME-D6-TSN", "id": "ME-D6-TSN__ME-D6-MBD__33", "label": "7.1", "link": "EKSISTING", "path": "TANJUNG SANTAN_TO_MUARA BADAK", "ring": "7.1", "stat_ring": "DONE", "title": "ME-D6-TSN_to_ME-D6-MBD\nEKSISTING -\u003e [DONE]", "to": "ME-D6-MBD", "width": 1}, {"color": "green", "from": "ME-D6-TSN", "id": "ME-D6-TSN__ME-D6-BOG__34", "label": "7.1", "link": "EKSISTING", "path": "TANJUNG SANTAN_TO_BONTANG", "ring": "7.1", "stat_ring": "DONE", "title": "ME-D6-TSN_to_ME-D6-BOG\nEKSISTING -\u003e [DONE]", "to": "ME-D6-BOG", "width": 1}, {"color": "green", "from": "ME-D6-BGL", "id": "ME-D6-BGL__ME-D6-GSK__35", "label": "8.1", "link": "EKSISTING", "path": "BENGALON_TO_GUNUNG SAKERAT", "ring": "8.1", "stat_ring": "DONE", "title": "ME-D6-BGL_to_ME-D6-GSK\nEKSISTING -\u003e [DONE]", "to": "ME-D6-GSK", "width": 1}, {"color": "green", "from": "ME-D6-GSK", "id": "ME-D6-GSK__ME-D6-MBU__36", "label": "8.1", "link": "NEW LINK", "path": "MIAU BARU _TO_GUNUNG SAKERAT", "ring": "8.1", "stat_ring": "DONE", "title": "ME-D6-MBU_to_ME-D6-GSK\nNEW LINK -\u003e [DONE]", "to": "ME-D6-MBU", "width": 1}, {"color": "green", "from": "ME-D6-SEP", "id": "ME-D6-SEP__ME-D6-SBL__37", "label": "9.1", "link": "EKSISTING", "path": "SEPARI_TO_SEBULU", "ring": "9.1", "stat_ring": "DONE", "title": "ME-D6-SEP_to_ME-D6-SBL\nEKSISTING -\u003e [DONE]", "to": "ME-D6-SBL", "width": 1}, {"color": "green", "from": "ME-D6-SPJ", "id": "ME-D6-SPJ__ME-D6-PLM__38", "label": "4", "link": "EKSISTING", "path": "SEMPAJA_TO_PALIMA", "ring": "4", "stat_ring": "DONE", "title": "ME-D6-SPJ_to_ME-D6-PLM\nEKSISTING -\u003e [DONE]", "to": "ME-D6-PLM", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"layout": {"hierarchical": {"enabled": false, "direction": "UD", "sortMethod": "hubsize"}}, "edges": {"smooth": true, "color": {"inherit": false}}, "physics": {"enabled": false}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
+<style>
+  :root{--accent:#2563eb;--bg:#0f172a;--card:#111827;--text:#e5e7eb;}
+  body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  .container{max-width:1280px;margin:18px auto 48px;padding:0 16px;}
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+  .card select,.card input[type="text"]{font-size:12px!important;padding:4px 6px!important;height:28px!important;border-radius:8px!important;border:1px solid rgba(255,255,255,.12)!important;background:#0b1220!important;color:var(--text)!important;}
+  .card button{font-size:12px!important;padding:6px 10px!important;height:30px!important;border-radius:10px!important;border:1px solid rgba(37,99,235,.6)!important;background:rgba(37,99,235,.1)!important;color:#cbd5e1!important;cursor:pointer;}
+  #mynetwork{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.06);height:600px!important;}
+  table.dataTable thead th{background:#0b1220;color:#cbd5e1;border-bottom:1px solid rgba(255,255,255,.06);}
+  table.dataTable{border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;background:#0b1220;}
+  table.dataTable tbody tr.highlight{background:rgba(37,99,235,.25)!important;}
+  .dataTables_wrapper .dataTables_filter input,.dataTables_wrapper .dataTables_length select{background:#0b1220;color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:6px 8px;}
+</style>
+
+<div class="container">
+  <div class="card">
+    <table id="edgeTable" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>No</th> <!-- kolom nomor urut -->
+          <th>NEAREND</th><th>FAREND</th><th>PATH</th><th>LINK</th><th>STATUS</th><th>RING</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id='row_ME-D6-SBR__ME-D6-LBK__0' data-eid='ME-D6-SBR__ME-D6-LBK__0' data-src='ME-D6-SBR' data-dst='ME-D6-LBK'><td></td><td>ME-D6-SBR</td><td>ME-D6-LBK</td><td>SEBERANG_TO_LOA BAKUNG</td><td>EXISTING</td><td>NOT DONE</td><td>6</td></tr><tr id='row_ME-D6-LBK__ME9-D6-SBB__1' data-eid='ME-D6-LBK__ME9-D6-SBB__1' data-src='ME-D6-LBK' data-dst='ME9-D6-SBB'><td></td><td>ME-D6-LBK</td><td>ME9-D6-SBB</td><td>STASIUN BUMI_TO_LOA BAKUNG</td><td>NEW LINK</td><td>DONE</td><td>6</td></tr><tr id='row_ME9-D6-SMD__ME-D6-MLK__2' data-eid='ME9-D6-SMD__ME-D6-MLK__2' data-src='ME9-D6-SMD' data-dst='ME-D6-MLK'><td></td><td>ME9-D6-SMD</td><td>ME-D6-MLK</td><td>SAMARINDA CENTRUM_TO_MELAK</td><td>NEW LINK</td><td>DONE</td><td>10</td></tr><tr id='row_ME9-D6-SMD__ME9-D6-SSB__3' data-eid='ME9-D6-SMD__ME9-D6-SSB__3' data-src='ME9-D6-SMD' data-dst='ME9-D6-SSB'><td></td><td>ME9-D6-SMD</td><td>ME9-D6-SSB</td><td>SAMARINDA CENTRUM_TO_STASIUN BUMI </td><td>EKSISTING</td><td>DONE</td><td>0</td></tr><tr id='row_ME9-D6-SMD__ME-D6-LPK__4' data-eid='ME9-D6-SMD__ME-D6-LPK__4' data-src='ME9-D6-SMD' data-dst='ME-D6-LPK'><td></td><td>ME9-D6-SMD</td><td>ME-D6-LPK</td><td>SAMARINDA CENTRUM_TO_LEMPAKE</td><td>EKSISTING</td><td>DONE</td><td>7</td></tr><tr id='row_ME9-D6-SMD__ME-D6-SGT__5' data-eid='ME9-D6-SMD__ME-D6-SGT__5' data-src='ME9-D6-SMD' data-dst='ME-D6-SGT'><td></td><td>ME9-D6-SMD</td><td>ME-D6-SGT</td><td>SAMARINDA CENTRUM_TO_SANGATTA</td><td>EKSISTING</td><td>DONE</td><td>8</td></tr><tr id='row_ME9-D6-SMD__ME-D6-SBR-4__6' data-eid='ME9-D6-SMD__ME-D6-SBR-4__6' data-src='ME9-D6-SMD' data-dst='ME-D6-SBR-4'><td></td><td>ME9-D6-SMD</td><td>ME-D6-SBR-4</td><td>SAMARINDA CENTRUM_TO_SEBERANG</td><td>EKSISTING</td><td>DONE</td><td>6</td></tr><tr id='row_ME9-D6-SMD__ME-D6-SBB__7' data-eid='ME9-D6-SMD__ME-D6-SBB__7' data-src='ME9-D6-SMD' data-dst='ME-D6-SBB'><td></td><td>ME9-D6-SMD</td><td>ME-D6-SBB</td><td>SAMARINDA CENTRUM_TO_STASIUN BUMI </td><td>EKSISTING</td><td>DONE</td><td>2</td></tr><tr id='row_ME9-D6-SMD__ME-D6-SMD__8' data-eid='ME9-D6-SMD__ME-D6-SMD__8' data-src='ME9-D6-SMD' data-dst='ME-D6-SMD'><td></td><td>ME9-D6-SMD</td><td>ME-D6-SMD</td><td>SAMARINDA CENTRUM_TO_SAMARINDA CENTRUM</td><td>EKSISTING</td><td>DONE</td><td>1</td></tr><tr id='row_ME9-D6-SMD__ME-D6-TGG__9' data-eid='ME9-D6-SMD__ME-D6-TGG__9' data-src='ME9-D6-SMD' data-dst='ME-D6-TGG'><td></td><td>ME9-D6-SMD</td><td>ME-D6-TGG</td><td>SAMARINDA CENTRUM_TO_TENGGARONG</td><td>NEW LINK</td><td>NOT DONE</td><td>9</td></tr><tr id='row_ME9-D6-SMD__ME-D6-PLR__10' data-eid='ME9-D6-SMD__ME-D6-PLR__10' data-src='ME9-D6-SMD' data-dst='ME-D6-PLR'><td></td><td>ME9-D6-SMD</td><td>ME-D6-PLR</td><td>SAMARINDA CENTRUM_TO_PALARAN</td><td>NEW LINK</td><td>DONE</td><td>5</td></tr><tr id='row_ME9-D6-SMD__ME-D6-SPJ__11' data-eid='ME9-D6-SMD__ME-D6-SPJ__11' data-src='ME9-D6-SMD' data-dst='ME-D6-SPJ'><td></td><td>ME9-D6-SMD</td><td>ME-D6-SPJ</td><td>SAMARINDA CENTRUM_TO_SEMPAJA</td><td>EKSISTING</td><td>DONE</td><td>4</td></tr><tr id='row_ME9-D6-SMD__ME-D6-SKP__12' data-eid='ME9-D6-SMD__ME-D6-SKP__12' data-src='ME9-D6-SMD' data-dst='ME-D6-SKP'><td></td><td>ME9-D6-SMD</td><td>ME-D6-SKP</td><td>SAMARINDA CENTRUM_TO_SEI KAPIH</td><td>EKSISTING</td><td>DONE</td><td>3</td></tr><tr id='row_ME-D6-MLK__ME-D6-KBG__13' data-eid='ME-D6-MLK__ME-D6-KBG__13' data-src='ME-D6-MLK' data-dst='ME-D6-KBG'><td></td><td>ME-D6-MLK</td><td>ME-D6-KBG</td><td>MELAK_TO_KOTABANGUN</td><td>EKSISTING</td><td>DONE</td><td>10</td></tr><tr id='row_ME-D6-MLK__ME-D6-BTON__14' data-eid='ME-D6-MLK__ME-D6-BTON__14' data-src='ME-D6-MLK' data-dst='ME-D6-BTON'><td></td><td>ME-D6-MLK</td><td>ME-D6-BTON</td><td>MELAK_TO_BARONGTONGKOK</td><td>EKSISTING</td><td>DONE</td><td>10.1</td></tr><tr id='row_ME-D6-KBG__ME-D6-BTON__15' data-eid='ME-D6-KBG__ME-D6-BTON__15' data-src='ME-D6-KBG' data-dst='ME-D6-BTON'><td></td><td>ME-D6-KBG</td><td>ME-D6-BTON</td><td>KOTABANGUN_TO_BARONGTONGKOK</td><td>NEW LINK</td><td>NOT DONE</td><td>10.1</td></tr><tr id='row_ME-D6-KBG__ME9-D6-SBB__16' data-eid='ME-D6-KBG__ME9-D6-SBB__16' data-src='ME-D6-KBG' data-dst='ME9-D6-SBB'><td></td><td>ME-D6-KBG</td><td>ME9-D6-SBB</td><td>STASIUN BUMI_TO_KOTABANGUN</td><td>NEW LINK</td><td>NOT DONE</td><td>10</td></tr><tr id='row_ME-D6-LPK__ME-D6-MBD__17' data-eid='ME-D6-LPK__ME-D6-MBD__17' data-src='ME-D6-LPK' data-dst='ME-D6-MBD'><td></td><td>ME-D6-LPK</td><td>ME-D6-MBD</td><td>LEMPAKE_TO_MUARA BADAK</td><td>EKSISTING</td><td>DONE</td><td>7.1</td></tr><tr id='row_ME-D6-LPK__ME-D6-BOG__18' data-eid='ME-D6-LPK__ME-D6-BOG__18' data-src='ME-D6-LPK' data-dst='ME-D6-BOG'><td></td><td>ME-D6-LPK</td><td>ME-D6-BOG</td><td>LEMPAKE_TO_BONTANG</td><td>NEW LINK</td><td>DONE</td><td>7</td></tr><tr id='row_ME-D6-SGT__ME-D6-MBU__19' data-eid='ME-D6-SGT__ME-D6-MBU__19' data-src='ME-D6-SGT' data-dst='ME-D6-MBU'><td></td><td>ME-D6-SGT</td><td>ME-D6-MBU</td><td>MIAU BARU _TO_SANGATTA</td><td>EKSISTING</td><td>DONE</td><td>8</td></tr><tr id='row_ME-D6-SGT__ME-D6-BGL__20' data-eid='ME-D6-SGT__ME-D6-BGL__20' data-src='ME-D6-SGT' data-dst='ME-D6-BGL'><td></td><td>ME-D6-SGT</td><td>ME-D6-BGL</td><td>SANGATTA_TO_BENGALON</td><td>EKSISTING</td><td>DONE</td><td>8.1</td></tr><tr id='row_ME-D6-SGT__SME-D6-SGT-TSEL__21' data-eid='ME-D6-SGT__SME-D6-SGT-TSEL__21' data-src='ME-D6-SGT' data-dst='SME-D6-SGT-TSEL'><td></td><td>ME-D6-SGT</td><td>SME-D6-SGT-TSEL</td><td>SANGATTA TSEL_TO_SANGATTA</td><td>EKSISTING</td><td>DONE</td><td>8.2</td></tr><tr id='row_ME-D6-SBB__ME9-D6-SBB__22' data-eid='ME-D6-SBB__ME9-D6-SBB__22' data-src='ME-D6-SBB' data-dst='ME9-D6-SBB'><td></td><td>ME-D6-SBB</td><td>ME9-D6-SBB</td><td>STASIUN BUMI_TO_STASIUN BUMI </td><td>EKSISTING</td><td>DONE</td><td>2</td></tr><tr id='row_ME-D6-SMD__ME9-D6-SBB__23' data-eid='ME-D6-SMD__ME9-D6-SBB__23' data-src='ME-D6-SMD' data-dst='ME9-D6-SBB'><td></td><td>ME-D6-SMD</td><td>ME9-D6-SBB</td><td>STASIUN BUMI_TO_SAMARINDA CENTRUM</td><td>EKSISTING</td><td>DONE</td><td>1</td></tr><tr id='row_ME-D6-TGG__ME-D6-SBL__24' data-eid='ME-D6-TGG__ME-D6-SBL__24' data-src='ME-D6-TGG' data-dst='ME-D6-SBL'><td></td><td>ME-D6-TGG</td><td>ME-D6-SBL</td><td>TENGGARONG_TO_SEBULU</td><td>NEW LINK</td><td>NOT DONE</td><td>9.1</td></tr><tr id='row_ME-D6-TGG__ME-D6-SEP__25' data-eid='ME-D6-TGG__ME-D6-SEP__25' data-src='ME-D6-TGG' data-dst='ME-D6-SEP'><td></td><td>ME-D6-TGG</td><td>ME-D6-SEP</td><td>TENGGARONG_TO_SEPARI</td><td>EKSISTING</td><td>DONE</td><td>9</td></tr><tr id='row_ME-D6-PLR__ME-D6-SAS__26' data-eid='ME-D6-PLR__ME-D6-SAS__26' data-src='ME-D6-PLR' data-dst='ME-D6-SAS'><td></td><td>ME-D6-PLR</td><td>ME-D6-SAS</td><td>PALARAN_TO_SANGA-SANGA</td><td>EKSISTING</td><td>DONE</td><td>5.1</td></tr><tr id='row_ME-D6-PLR__ME9-D6-SBB__27' data-eid='ME-D6-PLR__ME9-D6-SBB__27' data-src='ME-D6-PLR' data-dst='ME9-D6-SBB'><td></td><td>ME-D6-PLR</td><td>ME9-D6-SBB</td><td>STASIUN BUMI_TO_PALARAN</td><td>NEW LINK</td><td>DONE</td><td>5</td></tr><tr id='row_ME9-D6-SBB__ME-D6-SEP__28' data-eid='ME9-D6-SBB__ME-D6-SEP__28' data-src='ME9-D6-SBB' data-dst='ME-D6-SEP'><td></td><td>ME9-D6-SBB</td><td>ME-D6-SEP</td><td>STASIUN BUMI_TO_SEPARI</td><td>NEW LINK</td><td>DONE</td><td>9</td></tr><tr id='row_ME9-D6-SBB__ME-D6-BOG__29' data-eid='ME9-D6-SBB__ME-D6-BOG__29' data-src='ME9-D6-SBB' data-dst='ME-D6-BOG'><td></td><td>ME9-D6-SBB</td><td>ME-D6-BOG</td><td>STASIUN BUMI_TO_BONTANG</td><td>NEW LINK</td><td>DONE</td><td>7</td></tr><tr id='row_ME9-D6-SBB__ME-D6-MBU__30' data-eid='ME9-D6-SBB__ME-D6-MBU__30' data-src='ME9-D6-SBB' data-dst='ME-D6-MBU'><td></td><td>ME9-D6-SBB</td><td>ME-D6-MBU</td><td>STASIUN BUMI_TO_MIAU BARU</td><td>NEW LINK</td><td>DONE</td><td>8</td></tr><tr id='row_ME9-D6-SBB__ME-D6-SKP__31' data-eid='ME9-D6-SBB__ME-D6-SKP__31' data-src='ME9-D6-SBB' data-dst='ME-D6-SKP'><td></td><td>ME9-D6-SBB</td><td>ME-D6-SKP</td><td>STASIUN BUMI_TO_SEI KAPIH</td><td>NEW LINK</td><td>DONE</td><td>3</td></tr><tr id='row_ME9-D6-SBB__ME-D6-PLM__32' data-eid='ME9-D6-SBB__ME-D6-PLM__32' data-src='ME9-D6-SBB' data-dst='ME-D6-PLM'><td></td><td>ME9-D6-SBB</td><td>ME-D6-PLM</td><td>PALIMA_TO_STASIUN BUMI </td><td>EKSISTING</td><td>DONE</td><td>4</td></tr><tr id='row_ME-D6-TSN__ME-D6-MBD__33' data-eid='ME-D6-TSN__ME-D6-MBD__33' data-src='ME-D6-TSN' data-dst='ME-D6-MBD'><td></td><td>ME-D6-TSN</td><td>ME-D6-MBD</td><td>TANJUNG SANTAN_TO_MUARA BADAK</td><td>EKSISTING</td><td>DONE</td><td>7.1</td></tr><tr id='row_ME-D6-TSN__ME-D6-BOG__34' data-eid='ME-D6-TSN__ME-D6-BOG__34' data-src='ME-D6-TSN' data-dst='ME-D6-BOG'><td></td><td>ME-D6-TSN</td><td>ME-D6-BOG</td><td>TANJUNG SANTAN_TO_BONTANG</td><td>EKSISTING</td><td>DONE</td><td>7.1</td></tr><tr id='row_ME-D6-BGL__ME-D6-GSK__35' data-eid='ME-D6-BGL__ME-D6-GSK__35' data-src='ME-D6-BGL' data-dst='ME-D6-GSK'><td></td><td>ME-D6-BGL</td><td>ME-D6-GSK</td><td>BENGALON_TO_GUNUNG SAKERAT</td><td>EKSISTING</td><td>DONE</td><td>8.1</td></tr><tr id='row_ME-D6-GSK__ME-D6-MBU__36' data-eid='ME-D6-GSK__ME-D6-MBU__36' data-src='ME-D6-GSK' data-dst='ME-D6-MBU'><td></td><td>ME-D6-GSK</td><td>ME-D6-MBU</td><td>MIAU BARU _TO_GUNUNG SAKERAT</td><td>NEW LINK</td><td>DONE</td><td>8.1</td></tr><tr id='row_ME-D6-SEP__ME-D6-SBL__37' data-eid='ME-D6-SEP__ME-D6-SBL__37' data-src='ME-D6-SEP' data-dst='ME-D6-SBL'><td></td><td>ME-D6-SEP</td><td>ME-D6-SBL</td><td>SEPARI_TO_SEBULU</td><td>EKSISTING</td><td>DONE</td><td>9.1</td></tr><tr id='row_ME-D6-SPJ__ME-D6-PLM__38' data-eid='ME-D6-SPJ__ME-D6-PLM__38' data-src='ME-D6-SPJ' data-dst='ME-D6-PLM'><td></td><td>ME-D6-SPJ</td><td>ME-D6-PLM</td><td>SEMPAJA_TO_PALIMA</td><td>EKSISTING</td><td>DONE</td><td>4</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  var edgeTable;
+  $(document).ready(function(){
+     edgeTable = $('#edgeTable').DataTable({
+        pageLength: 10,
+        lengthMenu: [10,25,50,100],
+        dom: 'lBfrtip',
+        buttons: [
+          {extend:'csv', title:'edges', exportOptions:{columns: ':not(:first-child)'}},
+          {extend:'excel', title:'edges', exportOptions:{columns: ':not(:first-child)'}}
+        ],
+        columnDefs: [
+          { targets: 0, orderable: false, searchable: false } // kolom "No"
+        ],
+        order: [[1, 'asc']],
+        // isi nomor urut setiap selesai draw (initial draw, paging, sort, search)
+        fnDrawCallback: function(oSettings){
+          var api = this.api();
+          var info = api.page.info();
+          api.column(0, {page:'current'}).nodes().each(function(cell, i){
+            cell.innerHTML = info.start + i + 1;
+          });
+        }
+     });
+
+     $('#edgeTable tbody').on('click','tr',function(){
+        $('#edgeTable tbody tr').removeClass('highlight');
+        $(this).addClass('highlight');
+     });
+  });
+
+  function focusRowByDom(rowEl){
+     var row = $(rowEl);
+     var idx = edgeTable.row(row).index();
+     if (idx == null) return;
+     var pageLen = edgeTable.page.info().length;
+     var page = Math.floor(idx / pageLen);
+     edgeTable.page(page).draw(false);
+     $('#edgeTable tbody tr').removeClass('highlight');
+     row.addClass('highlight');
+     setTimeout(function(){ window.scrollTo({top: row.offset().top - 120, behavior:'smooth'}); }, 60);
+  }
+
+  // sinkronisasi klik edge → baris tabel (matching by from/to + title/label; indeks kolom disesuaikan karena ada "No")
+  (function wireAfterNetworkReady(){
+     if (typeof network === 'undefined' || !network?.body?.data?.edges) { setTimeout(wireAfterNetworkReady, 120); return; }
+     const dsEdges = network.body.data.edges.get();
+     const rows = Array.from(document.querySelectorAll('#edgeTable tbody tr'));
+     const rowMap = new Map();
+
+     function rowMatches(r, e){
+       const src = r.getAttribute('data-src');
+       const dst = r.getAttribute('data-dst');
+       const tds = r.querySelectorAll('td');
+       // karena ada kolom No, kolom lain bergeser +1:
+       // 0: No, 1: NEAREND, 2: FAREND, 3: PATH, 4: LINK, 5: STATUS, 6: RING
+       const titleTxt = (tds[5]?.textContent||'').trim(); // STATUS
+       const labelTxt = (tds[6]?.textContent||'').trim(); // RING
+       const s = x => (x==null?'':String(x)).trim();
+       return s(src)===s(e.from) && s(dst)===s(e.to) && (s(titleTxt)===s(e.title) || s(labelTxt)===s(e.label));
+     }
+
+     dsEdges.forEach(e=>{
+       const r = rows.find(tr => !tr.dataset.bound && rowMatches(tr, e));
+       if (r){ r.dataset.bound = "1"; r.dataset.eid = e.id; rowMap.set(e.id, r); }
+     });
+
+     network.on('selectEdge', function(params){
+       if (!params?.edges?.length) return;
+       const eid = params.edges[0];
+       let r = rowMap.get(eid);
+       if (!r){
+         try { const e = network.body.data.edges.get(eid); r = rows.find(tr => rowMatches(tr, e)); if (r) rowMap.set(eid, r); } catch(_){}
+       }
+       if (r) focusRowByDom(r);
+     });
+  })();
+</script>

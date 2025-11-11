@@ -1,0 +1,707 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="ME9-D1-MDC-3">ME9-D1-MDC-3</option>
+                                
+                                    <option value="ME-D1-MDC-3">ME-D1-MDC-3</option>
+                                
+                                    <option value="ME-D1-SUS-3">ME-D1-SUS-3</option>
+                                
+                                    <option value="ME-D1-CTD-3">ME-D1-CTD-3</option>
+                                
+                                    <option value="ME3-D1-PUB-3">ME3-D1-PUB-3</option>
+                                
+                                    <option value="ME-D1-BST-3">ME-D1-BST-3</option>
+                                
+                                    <option value="ME-D1-KSG-3">ME-D1-KSG-3</option>
+                                
+                                    <option value="ME-D1-TJM-3">ME-D1-TJM-3</option>
+                                
+                                    <option value="ME-D1-MDN-TSEL-3">ME-D1-MDN-TSEL-3</option>
+                                
+                                    <option value="ME-D1-LGS-3">ME-D1-LGS-3</option>
+                                
+                                    <option value="ME9-D1-PUB-3">ME9-D1-PUB-3</option>
+                                
+                                    <option value="ME-D1-SKI-3">ME-D1-SKI-3</option>
+                                
+                                    <option value="ME9-D1-RAP-3">ME9-D1-RAP-3</option>
+                                
+                                    <option value="ME-D1-KTN-3">ME-D1-KTN-3</option>
+                                
+                                    <option value="ME-D1-PDB-3">ME-D1-PDB-3</option>
+                                
+                                    <option value="ME-D1-SPL-3">ME-D1-SPL-3</option>
+                                
+                                    <option value="ME-D1-LBP-3">ME-D1-LBP-3</option>
+                                
+                                    <option value="ME2-D1-MDC-3">ME2-D1-MDC-3</option>
+                                
+                                    <option value="ME-D1-KUL-3">ME-D1-KUL-3</option>
+                                
+                                    <option value="ME-D1-KBJ-3">ME-D1-KBJ-3</option>
+                                
+                                    <option value="ME-D1-TTG-3">ME-D1-TTG-3</option>
+                                
+                                    <option value="ME-D1-DLT-3">ME-D1-DLT-3</option>
+                                
+                                    <option value="ME-D1-TJR-3">ME-D1-TJR-3</option>
+                                
+                                    <option value="ME-D1-GLG-3">ME-D1-GLG-3</option>
+                                
+                                    <option value="ME-D1-DMLA">ME-D1-DMLA</option>
+                                
+                                    <option value="ME-D1-TMU-SBB-3">ME-D1-TMU-SBB-3</option>
+                                
+                                    <option value="ME-D1-TMU-3">ME-D1-TMU-3</option>
+                                
+                                    <option value="ME-D1-SRA-3">ME-D1-SRA-3</option>
+                                
+                                    <option value="ME-D1-TIB-3">ME-D1-TIB-3</option>
+                                
+                                    <option value="ME-D1-BJI-3">ME-D1-BJI-3</option>
+                                
+                                    <option value="ME9-D1-PMSC-3">ME9-D1-PMSC-3</option>
+                                
+                                    <option value="ME-D1-STB-3">ME-D1-STB-3</option>
+                                
+                                    <option value="ME-D1-PBD-3">ME-D1-PBD-3</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+              <div id="filter-menu" class="card-header">
+                <div class="row no-gutters">
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'item')"
+                            id="select-item"
+                        >
+                        <option value="">Select a network item</option>
+                        <option value="edge">edge</option>
+                        <option value="node">node</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'property')"
+                            id="select-property"
+                        >
+                        <option value="">Select a property...</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="select-value"
+                        >
+                        <option value="">Select value(s)...</option>
+                    </select>
+                  </div>
+                  <div class="col-1 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="highlightFilter(filter);">Filter</button>
+                  </div>
+                  <div class="col-2 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="clearFilter(true)">Reset Selection</button>
+                  </div>
+                </div>
+              </div>
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+                  // explicitly using onItemAdd and this function as we need to save multiple values
+                  let updateValueFilter = function() {
+                      return function () {
+                      filter['value'].push(arguments[0])
+                      }
+                  }
+
+                  let valueControl = new TomSelect("#select-value",{
+                      maxItems: null,
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: updateValueFilter()
+                  });
+
+                  let addValues = function() {
+                      return function () {
+                          // clear the current value options and add the selected attribute values
+                          // tom-select handles duplicates
+                          let selectedProperty = arguments[0];
+                          valueControl.clear();
+                          valueControl.clearOptions();
+                          filter['value'] = []
+                          if (filter['item'] === 'node') {
+                              for (let each in allNodes) {
+                                  valueControl.addOption({
+                                      id:allNodes[each][selectedProperty],
+                                      title:allNodes[each][selectedProperty]
+                                  })
+                              }
+                          }
+                          else if (filter['item'] === 'edge') {
+                              for (let each in allEdges) {
+                                  valueControl.addOption({
+                                      id:allEdges[each][selectedProperty],
+                                      title:allEdges[each][selectedProperty]
+                                  })
+                              }
+                          }
+                      }
+                  };
+
+                  let propControl = new TomSelect("#select-property",{
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addValues()
+                  });
+
+                  let addProperties = function() {
+                      return function () {
+                          // loops through the selected network item and adds the attributes to dropdown
+                          // tom-select handles duplicates
+                          clearFilter(false)
+                          if (arguments[0] === 'edge') {
+                              for (let each in allEdges) {
+                                  if (allEdges.hasOwnProperty(each)) {
+                                      for (let eachProp in allEdges[each]) {
+                                          if (allEdges[each].hasOwnProperty(eachProp)) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                          else if (arguments[0] === 'node') {
+                              for (let each in allNodes) {
+                                  if (allNodes.hasOwnProperty(each)) {
+                                      for (let eachProp in allNodes[each]) {
+                                          if (allNodes[each].hasOwnProperty(eachProp)
+                                              && (eachProp !== 'hidden' && eachProp !== 'savedLabel'
+                                                  && eachProp !== 'hiddenLabel')) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  };
+
+                  let itemControl = new TomSelect("#select-item",{
+                      create: false,
+                      sortField:{
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addProperties()
+                  });
+
+                  function clearFilter(reset) {
+                      // utility function to clear all the selected filter options
+                      // if reset is set to true, the existing filter will be removed
+                      // else, only the dropdown options are cleared
+                      propControl.clear();
+                      propControl.clearOptions();
+                      valueControl.clear();
+                      valueControl.clearOptions();
+                      filter = {
+                          item : '',
+                          property : '',
+                          value : []
+                      }
+                      if (reset) {
+                          itemControl.clear();
+                          filterHighlight({nodes: []})
+                      }
+                  }
+
+                  function updateFilter(value, key) {
+                      // key could be 'item' or 'property' and value is as selected in dropdown
+                      filter[key] = value
+                  }
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "red", "id": "ME9-D1-MDC-3", "label": "ME9-D1-MDC-3", "level": 0, "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-MDC-3", "label": "ME-D1-MDC-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-SUS-3", "label": "ME-D1-SUS-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-CTD-3", "label": "ME-D1-CTD-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME3-D1-PUB-3", "label": "ME3-D1-PUB-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-BST-3", "label": "ME-D1-BST-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-KSG-3", "label": "ME-D1-KSG-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-TJM-3", "label": "ME-D1-TJM-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-MDN-TSEL-3", "label": "ME-D1-MDN-TSEL-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-LGS-3", "label": "ME-D1-LGS-3", "shape": "dot", "size": 10}, {"color": "red", "id": "ME9-D1-PUB-3", "label": "ME9-D1-PUB-3", "level": 0, "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-SKI-3", "label": "ME-D1-SKI-3", "shape": "dot", "size": 10}, {"color": "red", "id": "ME9-D1-RAP-3", "label": "ME9-D1-RAP-3", "level": 0, "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-KTN-3", "label": "ME-D1-KTN-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-PDB-3", "label": "ME-D1-PDB-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-SPL-3", "label": "ME-D1-SPL-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-LBP-3", "label": "ME-D1-LBP-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME2-D1-MDC-3", "label": "ME2-D1-MDC-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-KUL-3", "label": "ME-D1-KUL-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-KBJ-3", "label": "ME-D1-KBJ-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-TTG-3", "label": "ME-D1-TTG-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-DLT-3", "label": "ME-D1-DLT-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-TJR-3", "label": "ME-D1-TJR-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-GLG-3", "label": "ME-D1-GLG-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-DMLA", "label": "ME-D1-DMLA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-TMU-SBB-3", "label": "ME-D1-TMU-SBB-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-TMU-3", "label": "ME-D1-TMU-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-SRA-3", "label": "ME-D1-SRA-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-TIB-3", "label": "ME-D1-TIB-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-BJI-3", "label": "ME-D1-BJI-3", "shape": "dot", "size": 10}, {"color": "red", "id": "ME9-D1-PMSC-3", "label": "ME9-D1-PMSC-3", "level": 0, "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-STB-3", "label": "ME-D1-STB-3", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D1-PBD-3", "label": "ME-D1-PBD-3", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-MDC-3__0", "label": "1", "link": "EXISTING", "path": "MEDAN CENTRUM_TO_MEDAN CENTRUM", "ring": "1", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-MDC-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-MDC-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-SUS-3__1", "label": "11", "link": "EKSISTING", "path": "MEDAN CENTRUM_TO_SUBULUSSALAM", "ring": "11", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-SUS-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-SUS-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-CTD-3__2", "label": "6", "link": "EKSISTING", "path": "MEDAN CENTRUM_TO_CINTA DAMAI", "ring": "6", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-CTD-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-CTD-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME3-D1-PUB-3__3", "label": "4", "link": "EKSISTING", "path": "MEDAN CENTRUM_TO_PULO BRAYAN", "ring": "4", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME3-D1-PUB-3\nEKSISTING -\u003e [DONE]", "to": "ME3-D1-PUB-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-BST-3__4", "label": "5", "link": "NEW", "path": "MEDAN CENTRUM_TO_BRASTAGI", "ring": "5", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-BST-3\nNEW -\u003e [DONE]", "to": "ME-D1-BST-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-KSG-3__5", "label": "13", "link": "NEW", "path": "MEDAN CENTRUM_TO_KUALA SIMPANG", "ring": "13", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-KSG-3\nNEW -\u003e [DONE]", "to": "ME-D1-KSG-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-TJM-3__6", "label": "12", "link": "EXISTING", "path": "MEDAN CENTRUM_TO_TANJUNG MULIA", "ring": "12", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-TJM-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-TJM-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-MDN-TSEL-3__7", "label": "14", "link": "EXISTING", "path": "MEDAN CENTRUM_TO_TTC AMIR HAMZAH", "ring": "14", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-MDN-TSEL-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-MDN-TSEL-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-LGS-3__8", "label": "3", "link": "EXISTING", "path": "MEDAN CENTRUM_TO_LANGSA", "ring": "3", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-LGS-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-LGS-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME9-D1-PUB-3__9", "label": "0", "link": "EXISTING", "path": "MEDAN CENTRUM_TO_PULO BRAYAN", "ring": "0", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME9-D1-PUB-3\nEXISTING -\u003e [DONE]", "to": "ME9-D1-PUB-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-SKI-3__10", "label": "9", "link": "EXISTING", "path": "MEDAN CENTRUM_TO_SUKARAMAI", "ring": "9", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-SKI-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-SKI-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME9-D1-RAP-3__11", "label": "0", "link": "PLAN REMOVE", "path": "MEDAN CENTRUM_TO_RANTAU PRAPAT", "ring": "0", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME9-D1-RAP-3\nPLAN REMOVE -\u003e [DONE]", "to": "ME9-D1-RAP-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-KTN-3__12", "label": "11.1", "link": "NEW", "path": "MEDAN CENTRUM_TO_KUTACANE", "ring": "11.1", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-KTN-3\nNEW -\u003e [DONE]", "to": "ME-D1-KTN-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-PDB-3__13", "label": "7", "link": "NEW", "path": "MEDAN CENTRUM_TO_PADANG BULAN", "ring": "7", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-PDB-3\nNEW -\u003e [DONE]", "to": "ME-D1-PDB-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-SPL-3__14", "label": "8", "link": "NEW", "path": "MEDAN CENTRUM_TO_SIMPANG LIMUN", "ring": "8", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-SPL-3\nNEW -\u003e [DONE]", "to": "ME-D1-SPL-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME-D1-LBP-3__15", "label": "10", "link": "NEW", "path": "MEDAN CENTRUM_TO_LUBUK PAKAM", "ring": "10", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME-D1-LBP-3\nNEW -\u003e [DONE]", "to": "ME-D1-LBP-3", "width": 1}, {"color": "green", "from": "ME9-D1-MDC-3", "id": "ME9-D1-MDC-3__ME2-D1-MDC-3__16", "label": "1", "link": "EKSISTING", "path": "MEDAN CENTRUM_TO_MEDAN CENTRUM", "ring": "1", "stat_ring": "DONE", "title": "ME9-D1-MDC-3_to_ME2-D1-MDC-3\nEKSISTING -\u003e [DONE]", "to": "ME2-D1-MDC-3", "width": 1}, {"color": "green", "from": "ME-D1-MDC-3", "id": "ME-D1-MDC-3__ME9-D1-PUB-3__17", "label": "1", "link": "EXISTING", "path": "MEDAN CENTRUM_TO_PULO BRAYAN", "ring": "1", "stat_ring": "DONE", "title": "ME-D1-MDC-3_to_ME9-D1-PUB-3\nEXISTING -\u003e [DONE]", "to": "ME9-D1-PUB-3", "width": 1}, {"color": "green", "from": "ME-D1-MDC-3", "id": "ME-D1-MDC-3__ME-D1-KUL-3__18", "label": "2", "link": "EKSISTING", "path": "KUALA_TO_MEDAN CENTRUM", "ring": "2", "stat_ring": "DONE", "title": "ME-D1-KUL-3_to_ME-D1-MDC-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-KUL-3", "width": 1}, {"color": "green", "from": "ME-D1-SUS-3", "id": "ME-D1-SUS-3__ME-D1-KBJ-3__19", "label": "11", "link": "EKSISTING", "path": "SUBULUSSALAM_TO_KABANJAHE", "ring": "11", "stat_ring": "DONE", "title": "ME-D1-SUS-3_to_ME-D1-KBJ-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-KBJ-3", "width": 1}, {"color": "green", "from": "ME-D1-KBJ-3", "id": "ME-D1-KBJ-3__ME9-D1-PUB-3__20", "label": "11", "link": "EXISTING", "path": "KABANJAHE_TO_PULO BRAYAN", "ring": "11", "stat_ring": "DONE", "title": "ME-D1-KBJ-3_to_ME9-D1-PUB-3\nEXISTING -\u003e [DONE]", "to": "ME9-D1-PUB-3", "width": 1}, {"color": "green", "from": "ME-D1-CTD-3", "id": "ME-D1-CTD-3__ME9-D1-PUB-3__21", "label": "6", "link": "NEW", "path": "CINTA DAMAI_TO_PULO BRAYAN", "ring": "6", "stat_ring": "DONE", "title": "ME-D1-CTD-3_to_ME9-D1-PUB-3\nNEW -\u003e [DONE]", "to": "ME9-D1-PUB-3", "width": 1}, {"color": "green", "from": "ME-D1-PDB-3", "id": "ME-D1-PDB-3__ME-D1-TTG-3__22", "label": "7.1", "link": "EKSISTING", "path": "PADANG BULAN_TO_TUNTUNGAN", "ring": "7.1", "stat_ring": "DONE", "title": "ME-D1-PDB-3_to_ME-D1-TTG-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-TTG-3", "width": 1}, {"color": "green", "from": "ME-D1-PDB-3", "id": "ME-D1-PDB-3__ME9-D1-PUB-3__23", "label": "7", "link": "NEW", "path": "PADANG BULAN_TO_PULO BRAYAN", "ring": "7", "stat_ring": "DONE", "title": "ME-D1-PDB-3_to_ME9-D1-PUB-3\nNEW -\u003e [DONE]", "to": "ME9-D1-PUB-3", "width": 1}, {"color": "green", "from": "ME-D1-TTG-3", "id": "ME-D1-TTG-3__ME-D1-SPL-3__24", "label": "7.1", "link": "EKSISTING", "path": "TUNTUNGAN_TO_SIMPANG LIMUN", "ring": "7.1", "stat_ring": "DONE", "title": "ME-D1-TTG-3_to_ME-D1-SPL-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-SPL-3", "width": 1}, {"color": "green", "from": "ME-D1-SPL-3", "id": "ME-D1-SPL-3__ME-D1-DLT-3__25", "label": "8.1", "link": "EKSISTING", "path": "SIMPANG LIMUN_TO_DELITUA", "ring": "8.1", "stat_ring": "DONE", "title": "ME-D1-SPL-3_to_ME-D1-DLT-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-DLT-3", "width": 1}, {"color": "green", "from": "ME-D1-SPL-3", "id": "ME-D1-SPL-3__ME9-D1-PUB-3__26", "label": "8", "link": "EKSISTING", "path": "SIMPANG LIMUN_TO_PULO BRAYAN", "ring": "8", "stat_ring": "DONE", "title": "ME-D1-SPL-3_to_ME9-D1-PUB-3\nEKSISTING -\u003e [DONE]", "to": "ME9-D1-PUB-3", "width": 1}, {"color": "green", "from": "ME-D1-SPL-3", "id": "ME-D1-SPL-3__ME-D1-TJR-3__27", "label": "8.2", "link": "EKSISTING", "path": "TANJUNG MORAWA_TO_SIMPANG LIMUN", "ring": "8.2", "stat_ring": "DONE", "title": "ME-D1-TJR-3_to_ME-D1-SPL-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-TJR-3", "width": 1}, {"color": "green", "from": "ME-D1-DLT-3", "id": "ME-D1-DLT-3__ME-D1-SKI-3__28", "label": "8.1", "link": "EXISTING", "path": "SUKARAMAI_TO_DELITUA", "ring": "8.1", "stat_ring": "DONE", "title": "ME-D1-SKI-3_to_ME-D1-DLT-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-SKI-3", "width": 1}, {"color": "green", "from": "ME-D1-GLG-3", "id": "ME-D1-GLG-3__ME-D1-LBP-3__29", "label": "10.1", "link": "EKSISTING", "path": "GALANG_TO_LUBUK PAKAM", "ring": "10.1", "stat_ring": "DONE", "title": "ME-D1-GLG-3_to_ME-D1-LBP-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-LBP-3", "width": 1}, {"color": "green", "from": "ME-D1-GLG-3", "id": "ME-D1-GLG-3__ME-D1-DMLA__30", "label": "10.1", "link": "EKSISTING", "path": "GALANG_TO_DOLOK MASIHUL (NON ZTE)", "ring": "10.1", "stat_ring": "DONE", "title": "ME-D1-GLG-3_to_ME-D1-DMLA\nEKSISTING -\u003e [DONE]", "to": "ME-D1-DMLA", "width": 1}, {"color": "green", "from": "ME-D1-LBP-3", "id": "ME-D1-LBP-3__ME-D1-TMU-SBB-3__31", "label": "10", "link": "EXISTING", "path": "LUBUK PAKAM_TO_TEMBUNG-SBB", "ring": "10", "stat_ring": "DONE", "title": "ME-D1-LBP-3_to_ME-D1-TMU-SBB-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-TMU-SBB-3", "width": 1}, {"color": "green", "from": "ME-D1-LBP-3", "id": "ME-D1-LBP-3__ME-D1-TMU-3__32", "label": "10", "link": "EKSISTING", "path": "LUBUK PAKAM_TO_TEMBUNG", "ring": "10", "stat_ring": "DONE", "title": "ME-D1-LBP-3_to_ME-D1-TMU-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-TMU-3", "width": 1}, {"color": "green", "from": "ME-D1-LBP-3", "id": "ME-D1-LBP-3__ME-D1-TJR-3__33", "label": "8.2", "link": "EKSISTING", "path": "LUBUK PAKAM_TO_TANJUNG MORAWA", "ring": "8.2", "stat_ring": "DONE", "title": "ME-D1-LBP-3_to_ME-D1-TJR-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-TJR-3", "width": 1}, {"color": "green", "from": "ME-D1-TMU-SBB-3", "id": "ME-D1-TMU-SBB-3__ME9-D1-PUB-3__34", "label": "10", "link": "EXISTING", "path": "TEMBUNG-SBB_TO_PULO BRAYAN", "ring": "10", "stat_ring": "DONE", "title": "ME-D1-TMU-SBB-3_to_ME9-D1-PUB-3\nEXISTING -\u003e [DONE]", "to": "ME9-D1-PUB-3", "width": 1}, {"color": "green", "from": "ME-D1-TMU-SBB-3", "id": "ME-D1-TMU-SBB-3__ME-D1-TMU-3__35", "label": "10.1", "link": "EKSISTING", "path": "TEMBUNG_TO_TEMBUNG-SBB", "ring": "10.1", "stat_ring": "DONE", "title": "ME-D1-TMU-3_to_ME-D1-TMU-SBB-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-TMU-3", "width": 1}, {"color": "green", "from": "ME-D1-TMU-SBB-3", "id": "ME-D1-TMU-SBB-3__ME-D1-SRA-3__36", "label": "10.2", "link": "EKSISTING", "path": "SEI RAMPAH_TO_TEMBUNG-SBB", "ring": "10.2", "stat_ring": "DONE", "title": "ME-D1-SRA-3_to_ME-D1-TMU-SBB-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-SRA-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME-D1-BST-3__37", "label": "5", "link": "NEW", "path": "BRASTAGI_TO_PULO BRAYAN", "ring": "5", "stat_ring": "DONE", "title": "ME-D1-BST-3_to_ME9-D1-PUB-3\nNEW -\u003e [DONE]", "to": "ME-D1-BST-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME-D1-TIB-3__38", "label": "11.1", "link": "NEW", "path": "PULO BRAYAN_TO_TIGA BINANGA", "ring": "11.1", "stat_ring": "DONE", "title": "ME9-D1-PUB-3_to_ME-D1-TIB-3\nNEW -\u003e [DONE]", "to": "ME-D1-TIB-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME3-D1-PUB-3__39", "label": "4", "link": "EXISTING", "path": "PULO BRAYAN_TO_PULO BRAYAN", "ring": "4", "stat_ring": "DONE", "title": "ME3-D1-PUB-3_to_ME9-D1-PUB-3\nEXISTING -\u003e [DONE]", "to": "ME3-D1-PUB-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME-D1-TJM-3__40", "label": "12", "link": "EXISTING", "path": "TANJUNG MULIA_TO_PULO BRAYAN", "ring": "12", "stat_ring": "DONE", "title": "ME-D1-TJM-3_to_ME9-D1-PUB-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-TJM-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME-D1-MDN-TSEL-3__41", "label": "14", "link": "EXISTING", "path": "TTC AMIR HAMZAH_TO_PULO BRAYAN", "ring": "14", "stat_ring": "DONE", "title": "ME-D1-MDN-TSEL-3_to_ME9-D1-PUB-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-MDN-TSEL-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME-D1-BJI-3__42", "label": "3", "link": "EXISTING", "path": "BINJAI_TO_PULO BRAYAN", "ring": "3", "stat_ring": "DONE", "title": "ME-D1-BJI-3_to_ME9-D1-PUB-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-BJI-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME9-D1-PMSC-3__43", "label": "0", "link": "PLAN REMOVE", "path": "PULO BRAYAN_TO_PEMATANG SIANTAR CENTRUM", "ring": "0", "stat_ring": "DONE", "title": "ME9-D1-PUB-3_to_ME9-D1-PMSC-3\nPLAN REMOVE -\u003e [DONE]", "to": "ME9-D1-PMSC-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME2-D1-MDC-3__44", "label": "1", "link": "EKSISTING", "path": "MEDAN CENTRUM_TO_PULO BRAYAN", "ring": "1", "stat_ring": "DONE", "title": "ME2-D1-MDC-3_to_ME9-D1-PUB-3\nEKSISTING -\u003e [DONE]", "to": "ME2-D1-MDC-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME-D1-STB-3__45", "label": "13", "link": "NEW", "path": "STABAT_TO_PULO BRAYAN", "ring": "13", "stat_ring": "DONE", "title": "ME-D1-STB-3_to_ME9-D1-PUB-3\nNEW -\u003e [DONE]", "to": "ME-D1-STB-3", "width": 1}, {"color": "green", "from": "ME9-D1-PUB-3", "id": "ME9-D1-PUB-3__ME-D1-SKI-3__46", "label": "9", "link": "EKSISTING", "path": "SUKARAMAI_TO_PULO BRAYAN", "ring": "9", "stat_ring": "DONE", "title": "ME-D1-SKI-3_to_ME9-D1-PUB-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-SKI-3", "width": 1}, {"color": "green", "from": "ME-D1-KSG-3", "id": "ME-D1-KSG-3__ME-D1-PBD-3__47", "label": "13", "link": "EXISTING", "path": "KUALA SIMPANG_TO_PANGKALAN BRANDAN", "ring": "13", "stat_ring": "DONE", "title": "ME-D1-KSG-3_to_ME-D1-PBD-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-PBD-3", "width": 1}, {"color": "green", "from": "ME-D1-TIB-3", "id": "ME-D1-TIB-3__ME-D1-KTN-3__48", "label": "11.1", "link": "EXISTING", "path": "TIGA BINANGA_TO_KUTACANE", "ring": "11.1", "stat_ring": "DONE", "title": "ME-D1-TIB-3_to_ME-D1-KTN-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-KTN-3", "width": 1}, {"color": "green", "from": "ME-D1-LGS-3", "id": "ME-D1-LGS-3__ME-D1-BJI-3__49", "label": "3", "link": "EXISTING", "path": "LANGSA_TO_BINJAI", "ring": "3", "stat_ring": "DONE", "title": "ME-D1-LGS-3_to_ME-D1-BJI-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-BJI-3", "width": 1}, {"color": "green", "from": "ME-D1-PBD-3", "id": "ME-D1-PBD-3__ME-D1-STB-3__50", "label": "13", "link": "EXISTING", "path": "PANGKALAN BRANDAN_TO_STABAT", "ring": "13", "stat_ring": "DONE", "title": "ME-D1-PBD-3_to_ME-D1-STB-3\nEXISTING -\u003e [DONE]", "to": "ME-D1-STB-3", "width": 1}, {"color": "green", "from": "ME-D1-BJI-3", "id": "ME-D1-BJI-3__ME-D1-KUL-3__51", "label": "2", "link": "EKSISTING", "path": "BINJAI_TO_KUALA", "ring": "2", "stat_ring": "DONE", "title": "ME-D1-BJI-3_to_ME-D1-KUL-3\nEKSISTING -\u003e [DONE]", "to": "ME-D1-KUL-3", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"layout": {"hierarchical": {"enabled": false, "direction": "UD", "sortMethod": "hubsize"}}, "edges": {"smooth": true, "color": {"inherit": false}}, "physics": {"enabled": false}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
+<style>
+  :root{--accent:#2563eb;--bg:#0f172a;--card:#111827;--text:#e5e7eb;}
+  body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  .container{max-width:1280px;margin:18px auto 48px;padding:0 16px;}
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+  .card select,.card input[type="text"]{font-size:12px!important;padding:4px 6px!important;height:28px!important;border-radius:8px!important;border:1px solid rgba(255,255,255,.12)!important;background:#0b1220!important;color:var(--text)!important;}
+  .card button{font-size:12px!important;padding:6px 10px!important;height:30px!important;border-radius:10px!important;border:1px solid rgba(37,99,235,.6)!important;background:rgba(37,99,235,.1)!important;color:#cbd5e1!important;cursor:pointer;}
+  #mynetwork{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.06);height:600px!important;}
+  table.dataTable thead th{background:#0b1220;color:#cbd5e1;border-bottom:1px solid rgba(255,255,255,.06);}
+  table.dataTable{border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;background:#0b1220;}
+  table.dataTable tbody tr.highlight{background:rgba(37,99,235,.25)!important;}
+  .dataTables_wrapper .dataTables_filter input,.dataTables_wrapper .dataTables_length select{background:#0b1220;color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:6px 8px;}
+</style>
+
+<div class="container">
+  <div class="card">
+    <table id="edgeTable" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>No</th> <!-- kolom nomor urut -->
+          <th>NEAREND</th><th>FAREND</th><th>PATH</th><th>LINK</th><th>STATUS</th><th>RING</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id='row_ME9-D1-MDC-3__ME-D1-MDC-3__0' data-eid='ME9-D1-MDC-3__ME-D1-MDC-3__0' data-src='ME9-D1-MDC-3' data-dst='ME-D1-MDC-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-MDC-3</td><td>MEDAN CENTRUM_TO_MEDAN CENTRUM</td><td>EXISTING</td><td>DONE</td><td>1</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-SUS-3__1' data-eid='ME9-D1-MDC-3__ME-D1-SUS-3__1' data-src='ME9-D1-MDC-3' data-dst='ME-D1-SUS-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-SUS-3</td><td>MEDAN CENTRUM_TO_SUBULUSSALAM</td><td>EKSISTING</td><td>DONE</td><td>11</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-CTD-3__2' data-eid='ME9-D1-MDC-3__ME-D1-CTD-3__2' data-src='ME9-D1-MDC-3' data-dst='ME-D1-CTD-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-CTD-3</td><td>MEDAN CENTRUM_TO_CINTA DAMAI</td><td>EKSISTING</td><td>DONE</td><td>6</td></tr><tr id='row_ME9-D1-MDC-3__ME3-D1-PUB-3__3' data-eid='ME9-D1-MDC-3__ME3-D1-PUB-3__3' data-src='ME9-D1-MDC-3' data-dst='ME3-D1-PUB-3'><td></td><td>ME9-D1-MDC-3</td><td>ME3-D1-PUB-3</td><td>MEDAN CENTRUM_TO_PULO BRAYAN</td><td>EKSISTING</td><td>DONE</td><td>4</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-BST-3__4' data-eid='ME9-D1-MDC-3__ME-D1-BST-3__4' data-src='ME9-D1-MDC-3' data-dst='ME-D1-BST-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-BST-3</td><td>MEDAN CENTRUM_TO_BRASTAGI</td><td>NEW</td><td>DONE</td><td>5</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-KSG-3__5' data-eid='ME9-D1-MDC-3__ME-D1-KSG-3__5' data-src='ME9-D1-MDC-3' data-dst='ME-D1-KSG-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-KSG-3</td><td>MEDAN CENTRUM_TO_KUALA SIMPANG</td><td>NEW</td><td>DONE</td><td>13</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-TJM-3__6' data-eid='ME9-D1-MDC-3__ME-D1-TJM-3__6' data-src='ME9-D1-MDC-3' data-dst='ME-D1-TJM-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-TJM-3</td><td>MEDAN CENTRUM_TO_TANJUNG MULIA</td><td>EXISTING</td><td>DONE</td><td>12</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-MDN-TSEL-3__7' data-eid='ME9-D1-MDC-3__ME-D1-MDN-TSEL-3__7' data-src='ME9-D1-MDC-3' data-dst='ME-D1-MDN-TSEL-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-MDN-TSEL-3</td><td>MEDAN CENTRUM_TO_TTC AMIR HAMZAH</td><td>EXISTING</td><td>DONE</td><td>14</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-LGS-3__8' data-eid='ME9-D1-MDC-3__ME-D1-LGS-3__8' data-src='ME9-D1-MDC-3' data-dst='ME-D1-LGS-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-LGS-3</td><td>MEDAN CENTRUM_TO_LANGSA</td><td>EXISTING</td><td>DONE</td><td>3</td></tr><tr id='row_ME9-D1-MDC-3__ME9-D1-PUB-3__9' data-eid='ME9-D1-MDC-3__ME9-D1-PUB-3__9' data-src='ME9-D1-MDC-3' data-dst='ME9-D1-PUB-3'><td></td><td>ME9-D1-MDC-3</td><td>ME9-D1-PUB-3</td><td>MEDAN CENTRUM_TO_PULO BRAYAN</td><td>EXISTING</td><td>DONE</td><td>0</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-SKI-3__10' data-eid='ME9-D1-MDC-3__ME-D1-SKI-3__10' data-src='ME9-D1-MDC-3' data-dst='ME-D1-SKI-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-SKI-3</td><td>MEDAN CENTRUM_TO_SUKARAMAI</td><td>EXISTING</td><td>DONE</td><td>9</td></tr><tr id='row_ME9-D1-MDC-3__ME9-D1-RAP-3__11' data-eid='ME9-D1-MDC-3__ME9-D1-RAP-3__11' data-src='ME9-D1-MDC-3' data-dst='ME9-D1-RAP-3'><td></td><td>ME9-D1-MDC-3</td><td>ME9-D1-RAP-3</td><td>MEDAN CENTRUM_TO_RANTAU PRAPAT</td><td>PLAN REMOVE</td><td>DONE</td><td>0</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-KTN-3__12' data-eid='ME9-D1-MDC-3__ME-D1-KTN-3__12' data-src='ME9-D1-MDC-3' data-dst='ME-D1-KTN-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-KTN-3</td><td>MEDAN CENTRUM_TO_KUTACANE</td><td>NEW</td><td>DONE</td><td>11.1</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-PDB-3__13' data-eid='ME9-D1-MDC-3__ME-D1-PDB-3__13' data-src='ME9-D1-MDC-3' data-dst='ME-D1-PDB-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-PDB-3</td><td>MEDAN CENTRUM_TO_PADANG BULAN</td><td>NEW</td><td>DONE</td><td>7</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-SPL-3__14' data-eid='ME9-D1-MDC-3__ME-D1-SPL-3__14' data-src='ME9-D1-MDC-3' data-dst='ME-D1-SPL-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-SPL-3</td><td>MEDAN CENTRUM_TO_SIMPANG LIMUN</td><td>NEW</td><td>DONE</td><td>8</td></tr><tr id='row_ME9-D1-MDC-3__ME-D1-LBP-3__15' data-eid='ME9-D1-MDC-3__ME-D1-LBP-3__15' data-src='ME9-D1-MDC-3' data-dst='ME-D1-LBP-3'><td></td><td>ME9-D1-MDC-3</td><td>ME-D1-LBP-3</td><td>MEDAN CENTRUM_TO_LUBUK PAKAM</td><td>NEW</td><td>DONE</td><td>10</td></tr><tr id='row_ME9-D1-MDC-3__ME2-D1-MDC-3__16' data-eid='ME9-D1-MDC-3__ME2-D1-MDC-3__16' data-src='ME9-D1-MDC-3' data-dst='ME2-D1-MDC-3'><td></td><td>ME9-D1-MDC-3</td><td>ME2-D1-MDC-3</td><td>MEDAN CENTRUM_TO_MEDAN CENTRUM</td><td>EKSISTING</td><td>DONE</td><td>1</td></tr><tr id='row_ME-D1-MDC-3__ME9-D1-PUB-3__17' data-eid='ME-D1-MDC-3__ME9-D1-PUB-3__17' data-src='ME-D1-MDC-3' data-dst='ME9-D1-PUB-3'><td></td><td>ME-D1-MDC-3</td><td>ME9-D1-PUB-3</td><td>MEDAN CENTRUM_TO_PULO BRAYAN</td><td>EXISTING</td><td>DONE</td><td>1</td></tr><tr id='row_ME-D1-MDC-3__ME-D1-KUL-3__18' data-eid='ME-D1-MDC-3__ME-D1-KUL-3__18' data-src='ME-D1-MDC-3' data-dst='ME-D1-KUL-3'><td></td><td>ME-D1-MDC-3</td><td>ME-D1-KUL-3</td><td>KUALA_TO_MEDAN CENTRUM</td><td>EKSISTING</td><td>DONE</td><td>2</td></tr><tr id='row_ME-D1-SUS-3__ME-D1-KBJ-3__19' data-eid='ME-D1-SUS-3__ME-D1-KBJ-3__19' data-src='ME-D1-SUS-3' data-dst='ME-D1-KBJ-3'><td></td><td>ME-D1-SUS-3</td><td>ME-D1-KBJ-3</td><td>SUBULUSSALAM_TO_KABANJAHE</td><td>EKSISTING</td><td>DONE</td><td>11</td></tr><tr id='row_ME-D1-KBJ-3__ME9-D1-PUB-3__20' data-eid='ME-D1-KBJ-3__ME9-D1-PUB-3__20' data-src='ME-D1-KBJ-3' data-dst='ME9-D1-PUB-3'><td></td><td>ME-D1-KBJ-3</td><td>ME9-D1-PUB-3</td><td>KABANJAHE_TO_PULO BRAYAN</td><td>EXISTING</td><td>DONE</td><td>11</td></tr><tr id='row_ME-D1-CTD-3__ME9-D1-PUB-3__21' data-eid='ME-D1-CTD-3__ME9-D1-PUB-3__21' data-src='ME-D1-CTD-3' data-dst='ME9-D1-PUB-3'><td></td><td>ME-D1-CTD-3</td><td>ME9-D1-PUB-3</td><td>CINTA DAMAI_TO_PULO BRAYAN</td><td>NEW</td><td>DONE</td><td>6</td></tr><tr id='row_ME-D1-PDB-3__ME-D1-TTG-3__22' data-eid='ME-D1-PDB-3__ME-D1-TTG-3__22' data-src='ME-D1-PDB-3' data-dst='ME-D1-TTG-3'><td></td><td>ME-D1-PDB-3</td><td>ME-D1-TTG-3</td><td>PADANG BULAN_TO_TUNTUNGAN</td><td>EKSISTING</td><td>DONE</td><td>7.1</td></tr><tr id='row_ME-D1-PDB-3__ME9-D1-PUB-3__23' data-eid='ME-D1-PDB-3__ME9-D1-PUB-3__23' data-src='ME-D1-PDB-3' data-dst='ME9-D1-PUB-3'><td></td><td>ME-D1-PDB-3</td><td>ME9-D1-PUB-3</td><td>PADANG BULAN_TO_PULO BRAYAN</td><td>NEW</td><td>DONE</td><td>7</td></tr><tr id='row_ME-D1-TTG-3__ME-D1-SPL-3__24' data-eid='ME-D1-TTG-3__ME-D1-SPL-3__24' data-src='ME-D1-TTG-3' data-dst='ME-D1-SPL-3'><td></td><td>ME-D1-TTG-3</td><td>ME-D1-SPL-3</td><td>TUNTUNGAN_TO_SIMPANG LIMUN</td><td>EKSISTING</td><td>DONE</td><td>7.1</td></tr><tr id='row_ME-D1-SPL-3__ME-D1-DLT-3__25' data-eid='ME-D1-SPL-3__ME-D1-DLT-3__25' data-src='ME-D1-SPL-3' data-dst='ME-D1-DLT-3'><td></td><td>ME-D1-SPL-3</td><td>ME-D1-DLT-3</td><td>SIMPANG LIMUN_TO_DELITUA</td><td>EKSISTING</td><td>DONE</td><td>8.1</td></tr><tr id='row_ME-D1-SPL-3__ME9-D1-PUB-3__26' data-eid='ME-D1-SPL-3__ME9-D1-PUB-3__26' data-src='ME-D1-SPL-3' data-dst='ME9-D1-PUB-3'><td></td><td>ME-D1-SPL-3</td><td>ME9-D1-PUB-3</td><td>SIMPANG LIMUN_TO_PULO BRAYAN</td><td>EKSISTING</td><td>DONE</td><td>8</td></tr><tr id='row_ME-D1-SPL-3__ME-D1-TJR-3__27' data-eid='ME-D1-SPL-3__ME-D1-TJR-3__27' data-src='ME-D1-SPL-3' data-dst='ME-D1-TJR-3'><td></td><td>ME-D1-SPL-3</td><td>ME-D1-TJR-3</td><td>TANJUNG MORAWA_TO_SIMPANG LIMUN</td><td>EKSISTING</td><td>DONE</td><td>8.2</td></tr><tr id='row_ME-D1-DLT-3__ME-D1-SKI-3__28' data-eid='ME-D1-DLT-3__ME-D1-SKI-3__28' data-src='ME-D1-DLT-3' data-dst='ME-D1-SKI-3'><td></td><td>ME-D1-DLT-3</td><td>ME-D1-SKI-3</td><td>SUKARAMAI_TO_DELITUA</td><td>EXISTING</td><td>DONE</td><td>8.1</td></tr><tr id='row_ME-D1-GLG-3__ME-D1-LBP-3__29' data-eid='ME-D1-GLG-3__ME-D1-LBP-3__29' data-src='ME-D1-GLG-3' data-dst='ME-D1-LBP-3'><td></td><td>ME-D1-GLG-3</td><td>ME-D1-LBP-3</td><td>GALANG_TO_LUBUK PAKAM</td><td>EKSISTING</td><td>DONE</td><td>10.1</td></tr><tr id='row_ME-D1-GLG-3__ME-D1-DMLA__30' data-eid='ME-D1-GLG-3__ME-D1-DMLA__30' data-src='ME-D1-GLG-3' data-dst='ME-D1-DMLA'><td></td><td>ME-D1-GLG-3</td><td>ME-D1-DMLA</td><td>GALANG_TO_DOLOK MASIHUL (NON ZTE)</td><td>EKSISTING</td><td>DONE</td><td>10.1</td></tr><tr id='row_ME-D1-LBP-3__ME-D1-TMU-SBB-3__31' data-eid='ME-D1-LBP-3__ME-D1-TMU-SBB-3__31' data-src='ME-D1-LBP-3' data-dst='ME-D1-TMU-SBB-3'><td></td><td>ME-D1-LBP-3</td><td>ME-D1-TMU-SBB-3</td><td>LUBUK PAKAM_TO_TEMBUNG-SBB</td><td>EXISTING</td><td>DONE</td><td>10</td></tr><tr id='row_ME-D1-LBP-3__ME-D1-TMU-3__32' data-eid='ME-D1-LBP-3__ME-D1-TMU-3__32' data-src='ME-D1-LBP-3' data-dst='ME-D1-TMU-3'><td></td><td>ME-D1-LBP-3</td><td>ME-D1-TMU-3</td><td>LUBUK PAKAM_TO_TEMBUNG</td><td>EKSISTING</td><td>DONE</td><td>10</td></tr><tr id='row_ME-D1-LBP-3__ME-D1-TJR-3__33' data-eid='ME-D1-LBP-3__ME-D1-TJR-3__33' data-src='ME-D1-LBP-3' data-dst='ME-D1-TJR-3'><td></td><td>ME-D1-LBP-3</td><td>ME-D1-TJR-3</td><td>LUBUK PAKAM_TO_TANJUNG MORAWA</td><td>EKSISTING</td><td>DONE</td><td>8.2</td></tr><tr id='row_ME-D1-TMU-SBB-3__ME9-D1-PUB-3__34' data-eid='ME-D1-TMU-SBB-3__ME9-D1-PUB-3__34' data-src='ME-D1-TMU-SBB-3' data-dst='ME9-D1-PUB-3'><td></td><td>ME-D1-TMU-SBB-3</td><td>ME9-D1-PUB-3</td><td>TEMBUNG-SBB_TO_PULO BRAYAN</td><td>EXISTING</td><td>DONE</td><td>10</td></tr><tr id='row_ME-D1-TMU-SBB-3__ME-D1-TMU-3__35' data-eid='ME-D1-TMU-SBB-3__ME-D1-TMU-3__35' data-src='ME-D1-TMU-SBB-3' data-dst='ME-D1-TMU-3'><td></td><td>ME-D1-TMU-SBB-3</td><td>ME-D1-TMU-3</td><td>TEMBUNG_TO_TEMBUNG-SBB</td><td>EKSISTING</td><td>DONE</td><td>10.1</td></tr><tr id='row_ME-D1-TMU-SBB-3__ME-D1-SRA-3__36' data-eid='ME-D1-TMU-SBB-3__ME-D1-SRA-3__36' data-src='ME-D1-TMU-SBB-3' data-dst='ME-D1-SRA-3'><td></td><td>ME-D1-TMU-SBB-3</td><td>ME-D1-SRA-3</td><td>SEI RAMPAH_TO_TEMBUNG-SBB</td><td>EKSISTING</td><td>DONE</td><td>10.2</td></tr><tr id='row_ME9-D1-PUB-3__ME-D1-BST-3__37' data-eid='ME9-D1-PUB-3__ME-D1-BST-3__37' data-src='ME9-D1-PUB-3' data-dst='ME-D1-BST-3'><td></td><td>ME9-D1-PUB-3</td><td>ME-D1-BST-3</td><td>BRASTAGI_TO_PULO BRAYAN</td><td>NEW</td><td>DONE</td><td>5</td></tr><tr id='row_ME9-D1-PUB-3__ME-D1-TIB-3__38' data-eid='ME9-D1-PUB-3__ME-D1-TIB-3__38' data-src='ME9-D1-PUB-3' data-dst='ME-D1-TIB-3'><td></td><td>ME9-D1-PUB-3</td><td>ME-D1-TIB-3</td><td>PULO BRAYAN_TO_TIGA BINANGA</td><td>NEW</td><td>DONE</td><td>11.1</td></tr><tr id='row_ME9-D1-PUB-3__ME3-D1-PUB-3__39' data-eid='ME9-D1-PUB-3__ME3-D1-PUB-3__39' data-src='ME9-D1-PUB-3' data-dst='ME3-D1-PUB-3'><td></td><td>ME9-D1-PUB-3</td><td>ME3-D1-PUB-3</td><td>PULO BRAYAN_TO_PULO BRAYAN</td><td>EXISTING</td><td>DONE</td><td>4</td></tr><tr id='row_ME9-D1-PUB-3__ME-D1-TJM-3__40' data-eid='ME9-D1-PUB-3__ME-D1-TJM-3__40' data-src='ME9-D1-PUB-3' data-dst='ME-D1-TJM-3'><td></td><td>ME9-D1-PUB-3</td><td>ME-D1-TJM-3</td><td>TANJUNG MULIA_TO_PULO BRAYAN</td><td>EXISTING</td><td>DONE</td><td>12</td></tr><tr id='row_ME9-D1-PUB-3__ME-D1-MDN-TSEL-3__41' data-eid='ME9-D1-PUB-3__ME-D1-MDN-TSEL-3__41' data-src='ME9-D1-PUB-3' data-dst='ME-D1-MDN-TSEL-3'><td></td><td>ME9-D1-PUB-3</td><td>ME-D1-MDN-TSEL-3</td><td>TTC AMIR HAMZAH_TO_PULO BRAYAN</td><td>EXISTING</td><td>DONE</td><td>14</td></tr><tr id='row_ME9-D1-PUB-3__ME-D1-BJI-3__42' data-eid='ME9-D1-PUB-3__ME-D1-BJI-3__42' data-src='ME9-D1-PUB-3' data-dst='ME-D1-BJI-3'><td></td><td>ME9-D1-PUB-3</td><td>ME-D1-BJI-3</td><td>BINJAI_TO_PULO BRAYAN</td><td>EXISTING</td><td>DONE</td><td>3</td></tr><tr id='row_ME9-D1-PUB-3__ME9-D1-PMSC-3__43' data-eid='ME9-D1-PUB-3__ME9-D1-PMSC-3__43' data-src='ME9-D1-PUB-3' data-dst='ME9-D1-PMSC-3'><td></td><td>ME9-D1-PUB-3</td><td>ME9-D1-PMSC-3</td><td>PULO BRAYAN_TO_PEMATANG SIANTAR CENTRUM</td><td>PLAN REMOVE</td><td>DONE</td><td>0</td></tr><tr id='row_ME9-D1-PUB-3__ME2-D1-MDC-3__44' data-eid='ME9-D1-PUB-3__ME2-D1-MDC-3__44' data-src='ME9-D1-PUB-3' data-dst='ME2-D1-MDC-3'><td></td><td>ME9-D1-PUB-3</td><td>ME2-D1-MDC-3</td><td>MEDAN CENTRUM_TO_PULO BRAYAN</td><td>EKSISTING</td><td>DONE</td><td>1</td></tr><tr id='row_ME9-D1-PUB-3__ME-D1-STB-3__45' data-eid='ME9-D1-PUB-3__ME-D1-STB-3__45' data-src='ME9-D1-PUB-3' data-dst='ME-D1-STB-3'><td></td><td>ME9-D1-PUB-3</td><td>ME-D1-STB-3</td><td>STABAT_TO_PULO BRAYAN</td><td>NEW</td><td>DONE</td><td>13</td></tr><tr id='row_ME9-D1-PUB-3__ME-D1-SKI-3__46' data-eid='ME9-D1-PUB-3__ME-D1-SKI-3__46' data-src='ME9-D1-PUB-3' data-dst='ME-D1-SKI-3'><td></td><td>ME9-D1-PUB-3</td><td>ME-D1-SKI-3</td><td>SUKARAMAI_TO_PULO BRAYAN</td><td>EKSISTING</td><td>DONE</td><td>9</td></tr><tr id='row_ME-D1-KSG-3__ME-D1-PBD-3__47' data-eid='ME-D1-KSG-3__ME-D1-PBD-3__47' data-src='ME-D1-KSG-3' data-dst='ME-D1-PBD-3'><td></td><td>ME-D1-KSG-3</td><td>ME-D1-PBD-3</td><td>KUALA SIMPANG_TO_PANGKALAN BRANDAN</td><td>EXISTING</td><td>DONE</td><td>13</td></tr><tr id='row_ME-D1-TIB-3__ME-D1-KTN-3__48' data-eid='ME-D1-TIB-3__ME-D1-KTN-3__48' data-src='ME-D1-TIB-3' data-dst='ME-D1-KTN-3'><td></td><td>ME-D1-TIB-3</td><td>ME-D1-KTN-3</td><td>TIGA BINANGA_TO_KUTACANE</td><td>EXISTING</td><td>DONE</td><td>11.1</td></tr><tr id='row_ME-D1-LGS-3__ME-D1-BJI-3__49' data-eid='ME-D1-LGS-3__ME-D1-BJI-3__49' data-src='ME-D1-LGS-3' data-dst='ME-D1-BJI-3'><td></td><td>ME-D1-LGS-3</td><td>ME-D1-BJI-3</td><td>LANGSA_TO_BINJAI</td><td>EXISTING</td><td>DONE</td><td>3</td></tr><tr id='row_ME-D1-PBD-3__ME-D1-STB-3__50' data-eid='ME-D1-PBD-3__ME-D1-STB-3__50' data-src='ME-D1-PBD-3' data-dst='ME-D1-STB-3'><td></td><td>ME-D1-PBD-3</td><td>ME-D1-STB-3</td><td>PANGKALAN BRANDAN_TO_STABAT</td><td>EXISTING</td><td>DONE</td><td>13</td></tr><tr id='row_ME-D1-BJI-3__ME-D1-KUL-3__51' data-eid='ME-D1-BJI-3__ME-D1-KUL-3__51' data-src='ME-D1-BJI-3' data-dst='ME-D1-KUL-3'><td></td><td>ME-D1-BJI-3</td><td>ME-D1-KUL-3</td><td>BINJAI_TO_KUALA</td><td>EKSISTING</td><td>DONE</td><td>2</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  var edgeTable;
+  $(document).ready(function(){
+     edgeTable = $('#edgeTable').DataTable({
+        pageLength: 10,
+        lengthMenu: [10,25,50,100],
+        dom: 'lBfrtip',
+        buttons: [
+          {extend:'csv', title:'edges', exportOptions:{columns: ':not(:first-child)'}},
+          {extend:'excel', title:'edges', exportOptions:{columns: ':not(:first-child)'}}
+        ],
+        columnDefs: [
+          { targets: 0, orderable: false, searchable: false } // kolom "No"
+        ],
+        order: [[1, 'asc']],
+        // isi nomor urut setiap selesai draw (initial draw, paging, sort, search)
+        fnDrawCallback: function(oSettings){
+          var api = this.api();
+          var info = api.page.info();
+          api.column(0, {page:'current'}).nodes().each(function(cell, i){
+            cell.innerHTML = info.start + i + 1;
+          });
+        }
+     });
+
+     $('#edgeTable tbody').on('click','tr',function(){
+        $('#edgeTable tbody tr').removeClass('highlight');
+        $(this).addClass('highlight');
+     });
+  });
+
+  function focusRowByDom(rowEl){
+     var row = $(rowEl);
+     var idx = edgeTable.row(row).index();
+     if (idx == null) return;
+     var pageLen = edgeTable.page.info().length;
+     var page = Math.floor(idx / pageLen);
+     edgeTable.page(page).draw(false);
+     $('#edgeTable tbody tr').removeClass('highlight');
+     row.addClass('highlight');
+     setTimeout(function(){ window.scrollTo({top: row.offset().top - 120, behavior:'smooth'}); }, 60);
+  }
+
+  // sinkronisasi klik edge → baris tabel (matching by from/to + title/label; indeks kolom disesuaikan karena ada "No")
+  (function wireAfterNetworkReady(){
+     if (typeof network === 'undefined' || !network?.body?.data?.edges) { setTimeout(wireAfterNetworkReady, 120); return; }
+     const dsEdges = network.body.data.edges.get();
+     const rows = Array.from(document.querySelectorAll('#edgeTable tbody tr'));
+     const rowMap = new Map();
+
+     function rowMatches(r, e){
+       const src = r.getAttribute('data-src');
+       const dst = r.getAttribute('data-dst');
+       const tds = r.querySelectorAll('td');
+       // karena ada kolom No, kolom lain bergeser +1:
+       // 0: No, 1: NEAREND, 2: FAREND, 3: PATH, 4: LINK, 5: STATUS, 6: RING
+       const titleTxt = (tds[5]?.textContent||'').trim(); // STATUS
+       const labelTxt = (tds[6]?.textContent||'').trim(); // RING
+       const s = x => (x==null?'':String(x)).trim();
+       return s(src)===s(e.from) && s(dst)===s(e.to) && (s(titleTxt)===s(e.title) || s(labelTxt)===s(e.label));
+     }
+
+     dsEdges.forEach(e=>{
+       const r = rows.find(tr => !tr.dataset.bound && rowMatches(tr, e));
+       if (r){ r.dataset.bound = "1"; r.dataset.eid = e.id; rowMap.set(e.id, r); }
+     });
+
+     network.on('selectEdge', function(params){
+       if (!params?.edges?.length) return;
+       const eid = params.edges[0];
+       let r = rowMap.get(eid);
+       if (!r){
+         try { const e = network.body.data.edges.get(eid); r = rows.find(tr => rowMatches(tr, e)); if (r) rowMap.set(eid, r); } catch(_){}
+       }
+       if (r) focusRowByDom(r);
+     });
+  })();
+</script>
