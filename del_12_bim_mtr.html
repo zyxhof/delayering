@@ -1,0 +1,681 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="ME9-D5-MTR">ME9-D5-MTR</option>
+                                
+                                    <option value="ME9-D5-BIM">ME9-D5-BIM</option>
+                                
+                                    <option value="ME-D5-MTR">ME-D5-MTR</option>
+                                
+                                    <option value="ME-D5-SBW">ME-D5-SBW</option>
+                                
+                                    <option value="ME-D5-END">ME-D5-END</option>
+                                
+                                    <option value="ME-D5-SEL">ME-D5-SEL</option>
+                                
+                                    <option value="ME-D5-BIM">ME-D5-BIM</option>
+                                
+                                    <option value="ME-D5-LBJ">ME-D5-LBJ</option>
+                                
+                                    <option value="ME-D5-SWE">ME-D5-SWE</option>
+                                
+                                    <option value="ME-D5-GRG">ME-D5-GRG</option>
+                                
+                                    <option value="ME-D5-MLK">ME-D5-MLK</option>
+                                
+                                    <option value="ME-D5-PRY">ME-D5-PRY</option>
+                                
+                                    <option value="ME-D5-TLW">ME-D5-TLW</option>
+                                
+                                    <option value="ME-D5-ALA">ME-D5-ALA</option>
+                                
+                                    <option value="ME-D5-EMP">ME-D5-EMP</option>
+                                
+                                    <option value="ME-D5-DMP">ME-D5-DMP</option>
+                                
+                                    <option value="ME-D5-WKB">ME-D5-WKB</option>
+                                
+                                    <option value="ME-D5-WGP">ME-D5-WGP</option>
+                                
+                                    <option value="ME-D5-BJW">ME-D5-BJW</option>
+                                
+                                    <option value="ME-D5-RTG">ME-D5-RTG</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+              <div id="filter-menu" class="card-header">
+                <div class="row no-gutters">
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'item')"
+                            id="select-item"
+                        >
+                        <option value="">Select a network item</option>
+                        <option value="edge">edge</option>
+                        <option value="node">node</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'property')"
+                            id="select-property"
+                        >
+                        <option value="">Select a property...</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="select-value"
+                        >
+                        <option value="">Select value(s)...</option>
+                    </select>
+                  </div>
+                  <div class="col-1 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="highlightFilter(filter);">Filter</button>
+                  </div>
+                  <div class="col-2 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="clearFilter(true)">Reset Selection</button>
+                  </div>
+                </div>
+              </div>
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+                  // explicitly using onItemAdd and this function as we need to save multiple values
+                  let updateValueFilter = function() {
+                      return function () {
+                      filter['value'].push(arguments[0])
+                      }
+                  }
+
+                  let valueControl = new TomSelect("#select-value",{
+                      maxItems: null,
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: updateValueFilter()
+                  });
+
+                  let addValues = function() {
+                      return function () {
+                          // clear the current value options and add the selected attribute values
+                          // tom-select handles duplicates
+                          let selectedProperty = arguments[0];
+                          valueControl.clear();
+                          valueControl.clearOptions();
+                          filter['value'] = []
+                          if (filter['item'] === 'node') {
+                              for (let each in allNodes) {
+                                  valueControl.addOption({
+                                      id:allNodes[each][selectedProperty],
+                                      title:allNodes[each][selectedProperty]
+                                  })
+                              }
+                          }
+                          else if (filter['item'] === 'edge') {
+                              for (let each in allEdges) {
+                                  valueControl.addOption({
+                                      id:allEdges[each][selectedProperty],
+                                      title:allEdges[each][selectedProperty]
+                                  })
+                              }
+                          }
+                      }
+                  };
+
+                  let propControl = new TomSelect("#select-property",{
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addValues()
+                  });
+
+                  let addProperties = function() {
+                      return function () {
+                          // loops through the selected network item and adds the attributes to dropdown
+                          // tom-select handles duplicates
+                          clearFilter(false)
+                          if (arguments[0] === 'edge') {
+                              for (let each in allEdges) {
+                                  if (allEdges.hasOwnProperty(each)) {
+                                      for (let eachProp in allEdges[each]) {
+                                          if (allEdges[each].hasOwnProperty(eachProp)) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                          else if (arguments[0] === 'node') {
+                              for (let each in allNodes) {
+                                  if (allNodes.hasOwnProperty(each)) {
+                                      for (let eachProp in allNodes[each]) {
+                                          if (allNodes[each].hasOwnProperty(eachProp)
+                                              && (eachProp !== 'hidden' && eachProp !== 'savedLabel'
+                                                  && eachProp !== 'hiddenLabel')) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  };
+
+                  let itemControl = new TomSelect("#select-item",{
+                      create: false,
+                      sortField:{
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addProperties()
+                  });
+
+                  function clearFilter(reset) {
+                      // utility function to clear all the selected filter options
+                      // if reset is set to true, the existing filter will be removed
+                      // else, only the dropdown options are cleared
+                      propControl.clear();
+                      propControl.clearOptions();
+                      valueControl.clear();
+                      valueControl.clearOptions();
+                      filter = {
+                          item : '',
+                          property : '',
+                          value : []
+                      }
+                      if (reset) {
+                          itemControl.clear();
+                          filterHighlight({nodes: []})
+                      }
+                  }
+
+                  function updateFilter(value, key) {
+                      // key could be 'item' or 'property' and value is as selected in dropdown
+                      filter[key] = value
+                  }
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "red", "id": "ME9-D5-MTR", "label": "ME9-D5-MTR", "level": 0, "shape": "dot", "size": 10}, {"color": "red", "id": "ME9-D5-BIM", "label": "ME9-D5-BIM", "level": 0, "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-MTR", "label": "ME-D5-MTR", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-SBW", "label": "ME-D5-SBW", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-END", "label": "ME-D5-END", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-SEL", "label": "ME-D5-SEL", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-BIM", "label": "ME-D5-BIM", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-LBJ", "label": "ME-D5-LBJ", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-SWE", "label": "ME-D5-SWE", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-GRG", "label": "ME-D5-GRG", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-MLK", "label": "ME-D5-MLK", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-PRY", "label": "ME-D5-PRY", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-TLW", "label": "ME-D5-TLW", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-ALA", "label": "ME-D5-ALA", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-EMP", "label": "ME-D5-EMP", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-DMP", "label": "ME-D5-DMP", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-WKB", "label": "ME-D5-WKB", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-WGP", "label": "ME-D5-WGP", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-BJW", "label": "ME-D5-BJW", "shape": "dot", "size": 10}, {"color": "silver", "id": "ME-D5-RTG", "label": "ME-D5-RTG", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"color": "green", "from": "ME9-D5-MTR", "id": "ME9-D5-MTR__ME9-D5-BIM__0", "label": "0", "link": "EXISTING", "path": "MATARAM_TO_BIMA", "ring": "0", "stat_ring": "Done", "title": "ME9-D5-MTR_to_ME9-D5-BIM\nEXISTING -\u003e [Done]", "to": "ME9-D5-BIM", "width": 1}, {"color": "green", "from": "ME9-D5-MTR", "id": "ME9-D5-MTR__ME-D5-MTR__1", "label": "1", "link": "EXISTING", "path": "MATARAM_TO_MATARAM", "ring": "1", "stat_ring": "Done", "title": "ME9-D5-MTR_to_ME-D5-MTR\nEXISTING -\u003e [Done]", "to": "ME-D5-MTR", "width": 1}, {"color": "green", "from": "ME9-D5-MTR", "id": "ME9-D5-MTR__ME-D5-SBW__2", "label": "2", "link": "EXISTING", "path": "MATARAM_TO_SUMBAWA", "ring": "2", "stat_ring": "Done", "title": "ME9-D5-MTR_to_ME-D5-SBW\nEXISTING -\u003e [Done]", "to": "ME-D5-SBW", "width": 1}, {"color": "green", "from": "ME9-D5-MTR", "id": "ME9-D5-MTR__ME-D5-END__3", "label": "3", "link": "EXISTING", "path": "MATARAM_TO_ENDE", "ring": "3", "stat_ring": "Done", "title": "ME9-D5-MTR_to_ME-D5-END\nEXISTING -\u003e [Done]", "to": "ME-D5-END", "width": 1}, {"color": "green", "from": "ME9-D5-BIM", "id": "ME9-D5-BIM__ME-D5-SEL__4", "label": "1", "link": "NEW LINK", "path": "SELONG_TO_BIMA", "ring": "1", "stat_ring": "Done", "title": "ME-D5-SEL_to_ME9-D5-BIM\nNEW LINK -\u003e [Done]", "to": "ME-D5-SEL", "width": 1}, {"color": "green", "from": "ME9-D5-BIM", "id": "ME9-D5-BIM__ME-D5-BIM__5", "label": "2", "link": "EXISTING", "path": "BIMA_TO_BIMA", "ring": "2", "stat_ring": "Done", "title": "ME-D5-BIM_to_ME9-D5-BIM\nEXISTING -\u003e [Done]", "to": "ME-D5-BIM", "width": 1}, {"color": "green", "from": "ME9-D5-BIM", "id": "ME9-D5-BIM__ME-D5-LBJ__6", "label": "3", "link": "EXISTING", "path": "LABUAN BAJO_TO_BIMA", "ring": "3", "stat_ring": "Done", "title": "ME-D5-LBJ_to_ME9-D5-BIM\nEXISTING -\u003e [Done]", "to": "ME-D5-LBJ", "width": 1}, {"color": "green", "from": "ME-D5-MTR", "id": "ME-D5-MTR__ME-D5-SEL__7", "label": "1", "link": "EXISTING", "path": "MATARAM_TO_SELONG", "ring": "1", "stat_ring": "Done", "title": "ME-D5-MTR_to_ME-D5-SEL\nEXISTING -\u003e [Done]", "to": "ME-D5-SEL", "width": 1}, {"color": "green", "from": "ME-D5-MTR", "id": "ME-D5-MTR__ME-D5-SWE__8", "label": "1.1", "link": "CHANGE LINK", "path": "MATARAM_TO_SWETA", "ring": "1.1", "stat_ring": "Done", "title": "ME-D5-MTR_to_ME-D5-SWE\nCHANGE LINK -\u003e [Done]", "to": "ME-D5-SWE", "width": 1}, {"color": "green", "from": "ME-D5-MTR", "id": "ME-D5-MTR__ME-D5-GRG__9", "label": "1.2", "link": "CHANGE LINK", "path": "MATARAM_TO_GERUNG", "ring": "1.2", "stat_ring": "Done", "title": "ME-D5-MTR_to_ME-D5-GRG\nCHANGE LINK -\u003e [Done]", "to": "ME-D5-GRG", "width": 1}, {"color": "green", "from": "ME-D5-MTR", "id": "ME-D5-MTR__ME-D5-MLK__10", "label": "1.3", "link": "EXISTING", "path": "MATARAM_TO_MALUK", "ring": "1.3", "stat_ring": "Done", "title": "ME-D5-MTR_to_ME-D5-MLK\nEXISTING -\u003e [Done]", "to": "ME-D5-MLK", "width": 1}, {"color": "green", "from": "ME-D5-SEL", "id": "ME-D5-SEL__ME-D5-SWE__11", "label": "1.1", "link": "EXISTING", "path": "SWETA_TO_SELONG", "ring": "1.1", "stat_ring": "Done", "title": "ME-D5-SWE_to_ME-D5-SEL\nEXISTING -\u003e [Done]", "to": "ME-D5-SWE", "width": 1}, {"color": "green", "from": "ME-D5-SEL", "id": "ME-D5-SEL__ME-D5-PRY__12", "label": "1.2", "link": "EXISTING", "path": "PRAYA_TO_SELONG", "ring": "1.2", "stat_ring": "Done", "title": "ME-D5-PRY_to_ME-D5-SEL\nEXISTING -\u003e [Done]", "to": "ME-D5-PRY", "width": 1}, {"color": "green", "from": "ME-D5-GRG", "id": "ME-D5-GRG__ME-D5-PRY__13", "label": "1.2", "link": "EXISTING", "path": "GERUNG_TO_PRAYA", "ring": "1.2", "stat_ring": "Done", "title": "ME-D5-GRG_to_ME-D5-PRY\nEXISTING -\u003e [Done]", "to": "ME-D5-PRY", "width": 1}, {"color": "green", "from": "ME-D5-MLK", "id": "ME-D5-MLK__ME-D5-TLW__14", "label": "1.3", "link": "EXISTING", "path": "MALUK_TO_TALIWANG", "ring": "1.3", "stat_ring": "Done", "title": "ME-D5-MLK_to_ME-D5-TLW\nEXISTING -\u003e [Done]", "to": "ME-D5-TLW", "width": 1}, {"color": "green", "from": "ME-D5-TLW", "id": "ME-D5-TLW__ME-D5-ALA__15", "label": "1.3", "link": "EXISTING", "path": "TALIWANG_TO_ALAS", "ring": "1.3", "stat_ring": "Done", "title": "ME-D5-TLW_to_ME-D5-ALA\nEXISTING -\u003e [Done]", "to": "ME-D5-ALA", "width": 1}, {"color": "green", "from": "ME-D5-ALA", "id": "ME-D5-ALA__ME-D5-SBW__16", "label": "1.3", "link": "EXISTING", "path": "ALAS_TO_SUMBAWA", "ring": "1.3", "stat_ring": "Done", "title": "ME-D5-ALA_to_ME-D5-SBW\nEXISTING -\u003e [Done]", "to": "ME-D5-SBW", "width": 1}, {"color": "green", "from": "ME-D5-SBW", "id": "ME-D5-SBW__ME-D5-BIM__17", "label": "2", "link": "NEW LINK", "path": "SUMBAWA_TO_BIMA", "ring": "2", "stat_ring": "Done", "title": "ME-D5-SBW_to_ME-D5-BIM\nNEW LINK -\u003e [Done]", "to": "ME-D5-BIM", "width": 1}, {"color": "green", "from": "ME-D5-SBW", "id": "ME-D5-SBW__ME-D5-EMP__18", "label": "2.1", "link": "EXISTING", "path": "SUMBAWA_TO_EMPANG", "ring": "2.1", "stat_ring": "Done", "title": "ME-D5-SBW_to_ME-D5-EMP\nEXISTING -\u003e [Done]", "to": "ME-D5-EMP", "width": 1}, {"color": "green", "from": "ME-D5-BIM", "id": "ME-D5-BIM__ME-D5-DMP__19", "label": "2.1", "link": "NEW LINK", "path": "DOMPU_TO_BIMA", "ring": "2.1", "stat_ring": "Done", "title": "ME-D5-DMP_to_ME-D5-BIM\nNEW LINK -\u003e [Done]", "to": "ME-D5-DMP", "width": 1}, {"color": "green", "from": "ME-D5-BIM", "id": "ME-D5-BIM__ME-D5-WKB__20", "label": "2.2", "link": "NEW LINK", "path": "WAIKABUBAK_TO_BIMA", "ring": "2.2", "stat_ring": "Done", "title": "ME-D5-WKB_to_ME-D5-BIM\nNEW LINK -\u003e [Done]", "to": "ME-D5-WKB", "width": 1}, {"color": "green", "from": "ME-D5-EMP", "id": "ME-D5-EMP__ME-D5-DMP__21", "label": "2.1", "link": "EXISTING", "path": "EMPANG_TO_DOMPU", "ring": "2.1", "stat_ring": "Done", "title": "ME-D5-EMP_to_ME-D5-DMP\nEXISTING -\u003e [Done]", "to": "ME-D5-DMP", "width": 1}, {"color": "green", "from": "ME-D5-END", "id": "ME-D5-END__ME-D5-WGP__22", "label": "2.2", "link": "EXISTING", "path": "ENDE_TO_WAINGAPU", "ring": "2.2", "stat_ring": "Done", "title": "ME-D5-END_to_ME-D5-WGP\nEXISTING -\u003e [Done]", "to": "ME-D5-WGP", "width": 1}, {"color": "green", "from": "ME-D5-END", "id": "ME-D5-END__ME-D5-LBJ__23", "label": "3", "link": "NEW LINK", "path": "ENDE_TO_LABUAN BAJO", "ring": "3", "stat_ring": "Done", "title": "ME-D5-END_to_ME-D5-LBJ\nNEW LINK -\u003e [Done]", "to": "ME-D5-LBJ", "width": 1}, {"color": "green", "from": "ME-D5-END", "id": "ME-D5-END__ME-D5-BJW__24", "label": "3.1", "link": "EXISTING", "path": "ENDE_TO_BAJAWA", "ring": "3.1", "stat_ring": "Done", "title": "ME-D5-END_to_ME-D5-BJW\nEXISTING -\u003e [Done]", "to": "ME-D5-BJW", "width": 1}, {"color": "green", "from": "ME-D5-WGP", "id": "ME-D5-WGP__ME-D5-WKB__25", "label": "2.2", "link": "EXISTING", "path": "WAINGAPU_TO_WAIKABUBAK", "ring": "2.2", "stat_ring": "Done", "title": "ME-D5-WGP_to_ME-D5-WKB\nEXISTING -\u003e [Done]", "to": "ME-D5-WKB", "width": 1}, {"color": "green", "from": "ME-D5-LBJ", "id": "ME-D5-LBJ__ME-D5-RTG__26", "label": "3.1", "link": "EXISTING", "path": "RUTENG_TO_LABUAN BAJO", "ring": "3.1", "stat_ring": "Done", "title": "ME-D5-RTG_to_ME-D5-LBJ\nEXISTING -\u003e [Done]", "to": "ME-D5-RTG", "width": 1}, {"color": "green", "from": "ME-D5-BJW", "id": "ME-D5-BJW__ME-D5-RTG__27", "label": "3.1", "link": "EXISTING", "path": "BAJAWA_TO_RUTENG", "ring": "3.1", "stat_ring": "Done", "title": "ME-D5-BJW_to_ME-D5-RTG\nEXISTING -\u003e [Done]", "to": "ME-D5-RTG", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"layout": {"hierarchical": {"enabled": false, "direction": "UD", "sortMethod": "hubsize"}}, "edges": {"smooth": true, "color": {"inherit": false}}, "physics": {"enabled": false}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
+<style>
+  :root{--accent:#2563eb;--bg:#0f172a;--card:#111827;--text:#e5e7eb;}
+  body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  .container{max-width:100%;margin:18px auto 48px;padding:0 16px;}
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+  .card select,.card input[type="text"]{font-size:12px!important;padding:4px 6px!important;height:28px!important;border-radius:8px!important;border:1px solid rgba(255,255,255,.12)!important;background:#0b1220!important;color:var(--text)!important;}
+  .card button{font-size:12px!important;padding:6px 10px!important;height:30px!important;border-radius:10px!important;border:1px solid rgba(37,99,235,.6)!important;background:rgba(37,99,235,.1)!important;color:#cbd5e1!important;cursor:pointer;}
+  #mynetwork{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.06);height:600px!important;}
+  table.dataTable thead th{background:#0b1220;color:#cbd5e1;border-bottom:1px solid rgba(255,255,255,.06);}
+  table.dataTable{border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;background:#0b1220;}
+  table.dataTable tbody tr.highlight{background:rgba(37,99,235,.25)!important;}
+  .dataTables_wrapper .dataTables_filter input,.dataTables_wrapper .dataTables_length select{background:#0b1220;color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:6px 8px;}
+</style>
+
+<div class="container">
+  <div class="card">
+    <table id="edgeTable" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>No</th> <!-- kolom nomor urut -->
+          <th>NEAREND</th><th>FAREND</th><th>PATH</th><th>LINK</th><th>STATUS</th><th>RING</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id='row_ME9-D5-MTR__ME9-D5-BIM__0' data-eid='ME9-D5-MTR__ME9-D5-BIM__0' data-src='ME9-D5-MTR' data-dst='ME9-D5-BIM'><td></td><td>ME9-D5-MTR</td><td>ME9-D5-BIM</td><td>MATARAM_TO_BIMA</td><td>EXISTING</td><td>Done</td><td>0</td></tr><tr id='row_ME9-D5-MTR__ME-D5-MTR__1' data-eid='ME9-D5-MTR__ME-D5-MTR__1' data-src='ME9-D5-MTR' data-dst='ME-D5-MTR'><td></td><td>ME9-D5-MTR</td><td>ME-D5-MTR</td><td>MATARAM_TO_MATARAM</td><td>EXISTING</td><td>Done</td><td>1</td></tr><tr id='row_ME9-D5-MTR__ME-D5-SBW__2' data-eid='ME9-D5-MTR__ME-D5-SBW__2' data-src='ME9-D5-MTR' data-dst='ME-D5-SBW'><td></td><td>ME9-D5-MTR</td><td>ME-D5-SBW</td><td>MATARAM_TO_SUMBAWA</td><td>EXISTING</td><td>Done</td><td>2</td></tr><tr id='row_ME9-D5-MTR__ME-D5-END__3' data-eid='ME9-D5-MTR__ME-D5-END__3' data-src='ME9-D5-MTR' data-dst='ME-D5-END'><td></td><td>ME9-D5-MTR</td><td>ME-D5-END</td><td>MATARAM_TO_ENDE</td><td>EXISTING</td><td>Done</td><td>3</td></tr><tr id='row_ME9-D5-BIM__ME-D5-SEL__4' data-eid='ME9-D5-BIM__ME-D5-SEL__4' data-src='ME9-D5-BIM' data-dst='ME-D5-SEL'><td></td><td>ME9-D5-BIM</td><td>ME-D5-SEL</td><td>SELONG_TO_BIMA</td><td>NEW LINK</td><td>Done</td><td>1</td></tr><tr id='row_ME9-D5-BIM__ME-D5-BIM__5' data-eid='ME9-D5-BIM__ME-D5-BIM__5' data-src='ME9-D5-BIM' data-dst='ME-D5-BIM'><td></td><td>ME9-D5-BIM</td><td>ME-D5-BIM</td><td>BIMA_TO_BIMA</td><td>EXISTING</td><td>Done</td><td>2</td></tr><tr id='row_ME9-D5-BIM__ME-D5-LBJ__6' data-eid='ME9-D5-BIM__ME-D5-LBJ__6' data-src='ME9-D5-BIM' data-dst='ME-D5-LBJ'><td></td><td>ME9-D5-BIM</td><td>ME-D5-LBJ</td><td>LABUAN BAJO_TO_BIMA</td><td>EXISTING</td><td>Done</td><td>3</td></tr><tr id='row_ME-D5-MTR__ME-D5-SEL__7' data-eid='ME-D5-MTR__ME-D5-SEL__7' data-src='ME-D5-MTR' data-dst='ME-D5-SEL'><td></td><td>ME-D5-MTR</td><td>ME-D5-SEL</td><td>MATARAM_TO_SELONG</td><td>EXISTING</td><td>Done</td><td>1</td></tr><tr id='row_ME-D5-MTR__ME-D5-SWE__8' data-eid='ME-D5-MTR__ME-D5-SWE__8' data-src='ME-D5-MTR' data-dst='ME-D5-SWE'><td></td><td>ME-D5-MTR</td><td>ME-D5-SWE</td><td>MATARAM_TO_SWETA</td><td>CHANGE LINK</td><td>Done</td><td>1.1</td></tr><tr id='row_ME-D5-MTR__ME-D5-GRG__9' data-eid='ME-D5-MTR__ME-D5-GRG__9' data-src='ME-D5-MTR' data-dst='ME-D5-GRG'><td></td><td>ME-D5-MTR</td><td>ME-D5-GRG</td><td>MATARAM_TO_GERUNG</td><td>CHANGE LINK</td><td>Done</td><td>1.2</td></tr><tr id='row_ME-D5-MTR__ME-D5-MLK__10' data-eid='ME-D5-MTR__ME-D5-MLK__10' data-src='ME-D5-MTR' data-dst='ME-D5-MLK'><td></td><td>ME-D5-MTR</td><td>ME-D5-MLK</td><td>MATARAM_TO_MALUK</td><td>EXISTING</td><td>Done</td><td>1.3</td></tr><tr id='row_ME-D5-SEL__ME-D5-SWE__11' data-eid='ME-D5-SEL__ME-D5-SWE__11' data-src='ME-D5-SEL' data-dst='ME-D5-SWE'><td></td><td>ME-D5-SEL</td><td>ME-D5-SWE</td><td>SWETA_TO_SELONG</td><td>EXISTING</td><td>Done</td><td>1.1</td></tr><tr id='row_ME-D5-SEL__ME-D5-PRY__12' data-eid='ME-D5-SEL__ME-D5-PRY__12' data-src='ME-D5-SEL' data-dst='ME-D5-PRY'><td></td><td>ME-D5-SEL</td><td>ME-D5-PRY</td><td>PRAYA_TO_SELONG</td><td>EXISTING</td><td>Done</td><td>1.2</td></tr><tr id='row_ME-D5-GRG__ME-D5-PRY__13' data-eid='ME-D5-GRG__ME-D5-PRY__13' data-src='ME-D5-GRG' data-dst='ME-D5-PRY'><td></td><td>ME-D5-GRG</td><td>ME-D5-PRY</td><td>GERUNG_TO_PRAYA</td><td>EXISTING</td><td>Done</td><td>1.2</td></tr><tr id='row_ME-D5-MLK__ME-D5-TLW__14' data-eid='ME-D5-MLK__ME-D5-TLW__14' data-src='ME-D5-MLK' data-dst='ME-D5-TLW'><td></td><td>ME-D5-MLK</td><td>ME-D5-TLW</td><td>MALUK_TO_TALIWANG</td><td>EXISTING</td><td>Done</td><td>1.3</td></tr><tr id='row_ME-D5-TLW__ME-D5-ALA__15' data-eid='ME-D5-TLW__ME-D5-ALA__15' data-src='ME-D5-TLW' data-dst='ME-D5-ALA'><td></td><td>ME-D5-TLW</td><td>ME-D5-ALA</td><td>TALIWANG_TO_ALAS</td><td>EXISTING</td><td>Done</td><td>1.3</td></tr><tr id='row_ME-D5-ALA__ME-D5-SBW__16' data-eid='ME-D5-ALA__ME-D5-SBW__16' data-src='ME-D5-ALA' data-dst='ME-D5-SBW'><td></td><td>ME-D5-ALA</td><td>ME-D5-SBW</td><td>ALAS_TO_SUMBAWA</td><td>EXISTING</td><td>Done</td><td>1.3</td></tr><tr id='row_ME-D5-SBW__ME-D5-BIM__17' data-eid='ME-D5-SBW__ME-D5-BIM__17' data-src='ME-D5-SBW' data-dst='ME-D5-BIM'><td></td><td>ME-D5-SBW</td><td>ME-D5-BIM</td><td>SUMBAWA_TO_BIMA</td><td>NEW LINK</td><td>Done</td><td>2</td></tr><tr id='row_ME-D5-SBW__ME-D5-EMP__18' data-eid='ME-D5-SBW__ME-D5-EMP__18' data-src='ME-D5-SBW' data-dst='ME-D5-EMP'><td></td><td>ME-D5-SBW</td><td>ME-D5-EMP</td><td>SUMBAWA_TO_EMPANG</td><td>EXISTING</td><td>Done</td><td>2.1</td></tr><tr id='row_ME-D5-BIM__ME-D5-DMP__19' data-eid='ME-D5-BIM__ME-D5-DMP__19' data-src='ME-D5-BIM' data-dst='ME-D5-DMP'><td></td><td>ME-D5-BIM</td><td>ME-D5-DMP</td><td>DOMPU_TO_BIMA</td><td>NEW LINK</td><td>Done</td><td>2.1</td></tr><tr id='row_ME-D5-BIM__ME-D5-WKB__20' data-eid='ME-D5-BIM__ME-D5-WKB__20' data-src='ME-D5-BIM' data-dst='ME-D5-WKB'><td></td><td>ME-D5-BIM</td><td>ME-D5-WKB</td><td>WAIKABUBAK_TO_BIMA</td><td>NEW LINK</td><td>Done</td><td>2.2</td></tr><tr id='row_ME-D5-EMP__ME-D5-DMP__21' data-eid='ME-D5-EMP__ME-D5-DMP__21' data-src='ME-D5-EMP' data-dst='ME-D5-DMP'><td></td><td>ME-D5-EMP</td><td>ME-D5-DMP</td><td>EMPANG_TO_DOMPU</td><td>EXISTING</td><td>Done</td><td>2.1</td></tr><tr id='row_ME-D5-END__ME-D5-WGP__22' data-eid='ME-D5-END__ME-D5-WGP__22' data-src='ME-D5-END' data-dst='ME-D5-WGP'><td></td><td>ME-D5-END</td><td>ME-D5-WGP</td><td>ENDE_TO_WAINGAPU</td><td>EXISTING</td><td>Done</td><td>2.2</td></tr><tr id='row_ME-D5-END__ME-D5-LBJ__23' data-eid='ME-D5-END__ME-D5-LBJ__23' data-src='ME-D5-END' data-dst='ME-D5-LBJ'><td></td><td>ME-D5-END</td><td>ME-D5-LBJ</td><td>ENDE_TO_LABUAN BAJO</td><td>NEW LINK</td><td>Done</td><td>3</td></tr><tr id='row_ME-D5-END__ME-D5-BJW__24' data-eid='ME-D5-END__ME-D5-BJW__24' data-src='ME-D5-END' data-dst='ME-D5-BJW'><td></td><td>ME-D5-END</td><td>ME-D5-BJW</td><td>ENDE_TO_BAJAWA</td><td>EXISTING</td><td>Done</td><td>3.1</td></tr><tr id='row_ME-D5-WGP__ME-D5-WKB__25' data-eid='ME-D5-WGP__ME-D5-WKB__25' data-src='ME-D5-WGP' data-dst='ME-D5-WKB'><td></td><td>ME-D5-WGP</td><td>ME-D5-WKB</td><td>WAINGAPU_TO_WAIKABUBAK</td><td>EXISTING</td><td>Done</td><td>2.2</td></tr><tr id='row_ME-D5-LBJ__ME-D5-RTG__26' data-eid='ME-D5-LBJ__ME-D5-RTG__26' data-src='ME-D5-LBJ' data-dst='ME-D5-RTG'><td></td><td>ME-D5-LBJ</td><td>ME-D5-RTG</td><td>RUTENG_TO_LABUAN BAJO</td><td>EXISTING</td><td>Done</td><td>3.1</td></tr><tr id='row_ME-D5-BJW__ME-D5-RTG__27' data-eid='ME-D5-BJW__ME-D5-RTG__27' data-src='ME-D5-BJW' data-dst='ME-D5-RTG'><td></td><td>ME-D5-BJW</td><td>ME-D5-RTG</td><td>BAJAWA_TO_RUTENG</td><td>EXISTING</td><td>Done</td><td>3.1</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  var edgeTable;
+  $(document).ready(function(){
+     edgeTable = $('#edgeTable').DataTable({
+        pageLength: 10,
+        lengthMenu: [10,25,50,100],
+        dom: 'lBfrtip',
+        buttons: [
+          {extend:'csv', title:'edges', exportOptions:{columns: ':not(:first-child)'}},
+          {extend:'excel', title:'edges', exportOptions:{columns: ':not(:first-child)'}}
+        ],
+        columnDefs: [
+          { targets: 0, orderable: false, searchable: false } // kolom "No"
+        ],
+        order: [[1, 'asc']],
+        // isi nomor urut setiap selesai draw (initial draw, paging, sort, search)
+        fnDrawCallback: function(oSettings){
+          var api = this.api();
+          var info = api.page.info();
+          api.column(0, {page:'current'}).nodes().each(function(cell, i){
+            cell.innerHTML = info.start + i + 1;
+          });
+        }
+     });
+
+     $('#edgeTable tbody').on('click','tr',function(){
+        $('#edgeTable tbody tr').removeClass('highlight');
+        $(this).addClass('highlight');
+     });
+  });
+
+  function focusRowByDom(rowEl){
+     var row = $(rowEl);
+     var idx = edgeTable.row(row).index();
+     if (idx == null) return;
+     var pageLen = edgeTable.page.info().length;
+     var page = Math.floor(idx / pageLen);
+     edgeTable.page(page).draw(false);
+     $('#edgeTable tbody tr').removeClass('highlight');
+     row.addClass('highlight');
+     setTimeout(function(){ window.scrollTo({top: row.offset().top - 120, behavior:'smooth'}); }, 60);
+  }
+
+  // sinkronisasi klik edge → baris tabel (matching by from/to + title/label; indeks kolom disesuaikan karena ada "No")
+  (function wireAfterNetworkReady(){
+     if (typeof network === 'undefined' || !network?.body?.data?.edges) { setTimeout(wireAfterNetworkReady, 120); return; }
+     const dsEdges = network.body.data.edges.get();
+     const rows = Array.from(document.querySelectorAll('#edgeTable tbody tr'));
+     const rowMap = new Map();
+
+     function rowMatches(r, e){
+       const src = r.getAttribute('data-src');
+       const dst = r.getAttribute('data-dst');
+       const tds = r.querySelectorAll('td');
+       // karena ada kolom No, kolom lain bergeser +1:
+       // 0: No, 1: NEAREND, 2: FAREND, 3: PATH, 4: LINK, 5: STATUS, 6: RING
+       const titleTxt = (tds[5]?.textContent||'').trim(); // STATUS
+       const labelTxt = (tds[6]?.textContent||'').trim(); // RING
+       const s = x => (x==null?'':String(x)).trim();
+       return s(src)===s(e.from) && s(dst)===s(e.to) && (s(titleTxt)===s(e.title) || s(labelTxt)===s(e.label));
+     }
+
+     dsEdges.forEach(e=>{
+       const r = rows.find(tr => !tr.dataset.bound && rowMatches(tr, e));
+       if (r){ r.dataset.bound = "1"; r.dataset.eid = e.id; rowMap.set(e.id, r); }
+     });
+
+     network.on('selectEdge', function(params){
+       if (!params?.edges?.length) return;
+       const eid = params.edges[0];
+       let r = rowMap.get(eid);
+       if (!r){
+         try { const e = network.body.data.edges.get(eid); r = rows.find(tr => rowMatches(tr, e)); if (r) rowMap.set(eid, r); } catch(_){}
+       }
+       if (r) focusRowByDom(r);
+     });
+  })();
+</script>

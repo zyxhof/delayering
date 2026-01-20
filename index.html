@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitoring Monitoring</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	
+	<style>
+		body {
+			margin: 0;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		header {
+			background: #005f73;
+			color: #fff;
+			padding: 0.6rem 1rem;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 50px;
+			box-sizing: border-box;
+		}
+
+		.logo {
+			font-size: 1.2rem;
+			font-weight: bold;
+		}
+
+		.menu {
+			display: flex;
+			gap: 1rem;
+		}
+
+		.menu a {
+			color: #fff;
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 0.95rem;
+			padding: 4px 8px;
+		}
+
+		.menu a:hover {
+			background-color: #0a9396;
+			border-radius: 4px;
+		}
+
+		.container {
+			display: flex;
+			height: calc(100vh - 50px);
+		}
+
+		nav {
+			width: 180px;
+			background: #94d2bd;
+			padding: 0.8rem;
+			box-sizing: border-box;
+			overflow-y: auto;
+		}
+
+		nav a {
+			display: block;
+			margin: 6px 0;
+			text-decoration: none;
+			color: #000;
+			font-weight: 600;
+			font-size: 0.95rem;
+		}
+
+		nav a:hover {
+			opacity: 0.8;
+		}
+
+		iframe {
+			flex: 1;
+			border: none;
+		}
+	</style>
+
+
+</head>
+<body>
+	<header>
+		<h2>
+			<a href="/" style="color:white; text-decoration:none;">
+				Monitoring Monitoring
+			</a>
+		</h2>
+	</header>
+
+    <div class="container">
+        <nav>
+            <h3>HOME</h3>
+            <h3>DELAYERING</h3>
+				<a href="del_01_pbr_dri.html" target="content-frame">01 PBR - DRI</a>
+				<a href="del_02_ptk_skk.html" target="content-frame">02 PTK - SKK</a>
+				<a href="del_03_bjm_uln.html" target="content-frame">03 BJM - ULN</a>
+				<a href="del_04_plk_psb.html" target="content-frame">04 PLK - SBB</a>
+				<a href="del_05_str_rpp.html" target="content-frame">05 STR - RPP</a>
+				<a href="del_06_bna_lsm.html" target="content-frame">06 BNA - LSM</a>
+				<a href="del_07_pl1_pl2.html" target="content-frame">07 PL1 - PL2</a>
+				<a href="del_08_amb_tnt.html" target="content-frame">08 ABO - TNT</a>
+				<a href="del_09_jap_srg.html" target="content-frame">09 JAP - SON</a>
+				<a href="del_10_tmk_mrk.html" target="content-frame">10 SMI - BIK</a>
+				<a href="del_11_tmk_ffa.html" target="content-frame">11 TIM - FAK</a>
+				<a href="del_12_bim_mtr.html" target="content-frame">12 BIM - MTR</a>
+				<a href="del_13_kup_mme.html" target="content-frame">13 KUP - MME</a>
+        </nav>
+
+        <!-- Iframe default menampilkan Page 1 -->
+        <iframe name="content-frame" src="{{ url_for('main.main_home') }}"></iframe>
+    </div>
+</body>
+</html>
