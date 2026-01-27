@@ -1,0 +1,1814 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Result Link – Progress Subring Delayering</title>
+
+  <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        font-size: 12px;
+    }
+
+    table.dataTable {
+        font-size: 11px;
+    }
+
+    table.dataTable thead th {
+        background: #f2f2f2;
+        font-weight: 600;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    table.dataTable tbody td {
+        padding: 4px 6px;
+        vertical-align: top;
+    }
+
+    h2 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    /* Kolom nomor */
+    th.dt-rownum, td.dt-rownum {
+        width: 40px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* Kolom Ring (center) */
+    th.dt-ring, td.dt-ring {
+        text-align: center;
+        white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Result Link – Progress Subring Delayering</h2>
+
+<table border="1" class="dataframe display compact" id="resultLinkTable">
+  <thead>
+    <tr style="text-align: right;">
+      <th>cluster</th>
+      <th>ring</th>
+      <th>path</th>
+      <th>alpro</th>
+      <th>status</th>
+      <th>link</th>
+      <th>done</th>
+      <th>dev</th>
+      <th>ach</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>2.1</td>
+      <td>PEKANBARU CENTRUM_TO_SIAK, DURI_TO_SUNGAI PAKNING, SIAK_TO_DURI, SUNGAI PAKNING_TO_SEI APIT</td>
+      <td>NEW LINK, NEW LINK, EXISTING, EXISTING</td>
+      <td>0, 0, 1, 1</td>
+      <td>4</td>
+      <td>2</td>
+      <td>2</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>3.1</td>
+      <td>RANTAU BAIS_TO_BAGAN API API, BAGANBATU_TO_BAGAN API API</td>
+      <td>NEW LINK, NEW LINK</td>
+      <td>1, 0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>8</td>
+      <td>PEKANBARU CENTRUM-9_TO_PANGKALAN KERINCI, DURI-9_TO_PANGKALAN KERINCI</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>9.4</td>
+      <td>RENGAT_TO_TEMBILAHAN, TEMBILAHAN_TO_TALUK KUANTAN</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>2.3</td>
+      <td>PEKANBARU CENTRUM_TO_MINAS, DURI_TO_PERAWANG, MINAS_TO_PERAWANG</td>
+      <td>NEW LINK, NEW LINK, EXISTING</td>
+      <td>1, 0, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>3</td>
+      <td>RANTAU BAIS_TO_BAGANBATU, PEKANBARU CENTRUM-9_TO_BAGANBATU, DURI-9_TO_RANTAU BAIS</td>
+      <td>NEW LINK, NEW LINK, EXISTING</td>
+      <td>0, 1, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>9</td>
+      <td>PEKANBARU CENTRUM-9_TO_RENGAT, DURI-9_TO_TALUK KUANTAN, RENGAT_TO_TALUK KUANTAN</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 0, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>0</td>
+      <td>PEKANBARU CENTRUM-9_TO_DURI-9</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>1</td>
+      <td>DURI-9_TO_PEKANBARU CENTRUM-2, PEKANBARU CENTRUM-9_TO_PEKANBARU CENTRUM-2</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>10</td>
+      <td>PEKANBARU CENTRUM-9_TO_BANGKINANG, DURI-9_TO_PASIR PENGARAIAN, BANGKINANG_TO_PASIR PENGARAIAN</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>10.1</td>
+      <td>BANGKINANG_TO_SUKARAMAI, UJUNG BATU_TO_SUKARAMAI, UJUNG BATU_TO_PASIR PENGARAIAN</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>10.2</td>
+      <td>PASIR PENGARAIAN_TO_DALU-DALU, BAGAN BATU_TO_DALU-DALU</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>11</td>
+      <td>PEKANBARU CENTRUM-9_TO_TSEL KANDIS, DURI-9_TO_TSEL KANDIS</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>2</td>
+      <td>DURI-9_TO_DURI, PEKANBARU CENTRUM_TO_DURI, PEKANBARU CENTRUM-9_TO_PEKANBARU CENTRUM</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>2.2</td>
+      <td>PEKANBARU CENTRUM_TO_BENGKALIS, DURI_TO_SELAT PANJANG, BENGKALIS_TO_SELAT PANJANG</td>
+      <td>NEW LINK, NEW LINK, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>3.2</td>
+      <td>BAGANBATU_TO_SUKAJADI, RANTAU BAIS_TO_SUKAJADI</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>3.3</td>
+      <td>RANTAU BAIS_TO_TSEL  BANJAR12, TSEL SIMPANG BALAM_TO_TSEL  BANJAR12, TSEL SIMPANG BALAM_TO_BAGANBATU</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>4</td>
+      <td>PEKANBARU CENTRUM-9_TO_DUMAI, DURI-9_TO_DUMAI</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>5</td>
+      <td>PEKANBARU CENTRUM-9_TO_RUMBAI, DURI-9_TO_RUMBAI</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>6</td>
+      <td>PEKANBARU CENTRUM-9_TO_BUKIT RAYA, DURI-9_TO_BUKIT RAYA</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>7</td>
+      <td>PEKANBARU CENTRUM-9_TO_ARENGKA, DURI-9_TO_ARENGKA</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>8.1</td>
+      <td>PANGKALAN KERINCI_TO_SOREK, TSEL UKUI_TO_SOREK, TSEL UKUI_TO_RENGAT</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>9.1</td>
+      <td>RENGAT_TO_PEMATANG REBA, TALUK KUANTAN_TO_PERANAP, PEMATANG REBA_TO_AIR MOLEK, PERANAP_TO_AIR MOLEK</td>
+      <td>EXISTING, EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>9.2</td>
+      <td>RENGAT_TO_TSEL PAUH, TSEL PAUH_TO_MUARA LEMBU, TALUK KUANTAN_TO_MUARA LEMBU</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>9.3</td>
+      <td>RENGAT_TO_TELUK KIAMBANG, TALUK KUANTAN_TO_TELUK KIAMBANG</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>9.5</td>
+      <td>RENGAT_TO_SIBERIDA, TALUK KUANTAN_TO_SLENSEN, SIBERIDA_TO_SLENSEN</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>7.1</td>
+      <td>SINGKAWANG_TO_ROBAN, ROBAN_TO_BENGKAYANG, BENGKAYANG_TO_BALAI KARANGAN, BALAI KARANGAN_TO_NGABANG</td>
+      <td>EXISTING, NEW LINK, NEW LINK, EXISTING</td>
+      <td>0, 0, 0, 0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>7</td>
+      <td>SINGKAWANG_TO_NGABANG, NGABANG_TO_SEI KAKAP, PONTIANAK_TO_SINGKAWANG</td>
+      <td>NEW LINK, NEW LINK, EXISTING</td>
+      <td>0, 0, 1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>33.33</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>8</td>
+      <td>TSEL-SOSOK_TO_SEI KAKAP, KETAPANG_TO_TSEL-SOSOK, PONTIANAK_TO_KETAPANG</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
+      <td>0, 0, 1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>33.33</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>8.1</td>
+      <td>KETAPANG_TO_SUKADANA, SUKADANA_TO_SIANTAN, SIANTAN_TO_TSEL-SOSOK</td>
+      <td>EXISTING, NEW LINK, NEW LINK</td>
+      <td>1, 0, 0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>33.33</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>9</td>
+      <td>PONTIANAK_TO_SANGGAU, SANGGAU_TO_SEI KAKAP, SANGGAU_TO_SINTANG, SANGGAU_TO_SEKADAU</td>
+      <td>NEW LINK, EXISTING, EXISTING, EXISTING</td>
+      <td>0, 1, 1, 0</td>
+      <td>4</td>
+      <td>2</td>
+      <td>2</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>10</td>
+      <td>SANGGAU_TO_NANGAPINOH, NANGAPINOH_TO_SANGGAU</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>0, 1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>6</td>
+      <td>MEMPAWAH_TO_SUNGAI PINYUH, SUNGAI PINYUH_TO_SEI KAKAP, PONTIANAK_TO_MEMPAWAH</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 0, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>7.2</td>
+      <td>SINGKAWANG_TO_PEMANGKAT, TEBAS_TO_SAMBAS, SAMBAS_TO_NGABANG, PEMANGKAT_TO_TEBAS</td>
+      <td>EXISTING, EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 1, 0, 1</td>
+      <td>4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>75.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>0</td>
+      <td>PONTIANAK_TO_SEI KAKAP</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>1</td>
+      <td>PONTIANAK_TO_PONTIANAK, PONTIANAK_TO_SEI KAKAP</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>2</td>
+      <td>SEI KAKAP_TO_SEI KAKAP, PONTIANAK_TO_SEI KAKAP</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>3</td>
+      <td>PONTIANAK_TO_SAIGON, SAIGON_TO_SUNGAI RAYA, SUNGAI RAYA_TO_SUNGAI RAYA DALAM, SUNGAI RAYA DALAM_TO_SEI KAKAP</td>
+      <td>EXISTING, EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>4</td>
+      <td>PONTIANAK_TO_SUNGAI JAWI, SUNGAI JAWI_TO_SEI KAKAP</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>5</td>
+      <td>SIANTAN_TO_SEI KAKAP, PONTIANAK_TO_SIANTAN</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>9.1</td>
+      <td>SEKADAU_TO_PUTUSIBAU, PUTUSIBAU_TO_SANGGAU</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>3</td>
+      <td>BANJARMASIN-9_TO_KAYUTANGI, KAYUTANGI_TO_ULIN-9</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>4</td>
+      <td>BANJARMASIN-9_TO_BANJARBARU, BANJARBARU_TO_ULIN-9</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>0, 1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>6</td>
+      <td>BANJARMASIN-9_TO_MARABAHAN, MARABAHAN_TO_ULIN-9</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>7.1</td>
+      <td>PLEIHARI_TO_KOTABARU, KOTABARU_TO_BATULICIN</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>0, 1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>8</td>
+      <td>BANJARMASIN-9_TO_BATI-BATI, BATI-BATI_TO_ULIN-9</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>2</td>
+      <td>MARTAPURA_TO_LANDASAN ULIN, BANJARMASIN-9_TO_MARTAPURA, LANDASAN ULIN_TO_ULIN-9</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 0, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>7</td>
+      <td>BANJARMASIN-9_TO_PLEIHARI, BATULICIN_TO_ULIN-9, PLEIHARI_TO_BATULICIN</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>5</td>
+      <td>BANJARMASIN-9_TO_TANJUNG TABALONG, RANTAU_TO_ULIN-9, TANJUNG TABALONG_TO_AMUNTAI, AMUNTAI_TO_RANTAU</td>
+      <td>EXISTING, NEW LINK, EXISTING, NEW LINK</td>
+      <td>1, 0, 1, 1</td>
+      <td>4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>75.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>0</td>
+      <td>BANJARMASIN-9_TO_ULIN-9</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>1</td>
+      <td>BANJARMASIN-3_TO_ULIN, ULIN_TO_ULIN-9, BANJARMASIN-3_TO_BANJARMASIN-9</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>5.1</td>
+      <td>AMUNTAI_TO_BARABAI, KANDANGAN_TO_RANTAU, BARABAI_TO_KANDANGAN</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>7.2</td>
+      <td>SATUI_TO_PAGATAN, PLEIHARI_TO_SATUI, PAGATAN_TO_BATULICIN</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>3</td>
+      <td>PULANG PISAU_TO_KUALA KAPUAS, KUALA KAPUAS_TO_CEMPAKA-9, PALANGKARAYA-9_TO_PILANG, PILANG_TO_PULANG PISAU</td>
+      <td>NEW LINK, NEW LINK, NEW LINK, NEW LINK</td>
+      <td>0, 0, 0, 0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>0</td>
+      <td>PALANGKARAYA-9_TO_BANJARMASIN-9, CEMPAKA-9_TO_ULIN-9, PALANGKARAYA-9_TO_CEMPAKA-9</td>
+      <td>NEW LINK, NEW LINK, NEW LINK</td>
+      <td>0, 0, 0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>4</td>
+      <td>PALANGKARAYA-9_TO_KASONGAN, KASONGAN_TO_KM5, KM5_TO_CEMPAKA-9</td>
+      <td>NEW LINK, NEW LINK, NEW LINK</td>
+      <td>0, 0, 0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>2</td>
+      <td>PALANGKARAYA-9_TO_KUALA KURUN, KUALA KURUN_TO_CEMPAKA-9</td>
+      <td>NEW LINK, NEW LINK</td>
+      <td>0, 0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>5.1</td>
+      <td>AMPAH_TO_TAMPARAK LAYUNG, TAMPARAK LAYUNG_TO_MUARA TEWEH, MUARA TEWEH_TO_PURUK CAHU, PURUK CAHU_TO_BUNTOK</td>
+      <td>EXISTING, NEW LINK, NEW LINK, NEW LINK</td>
+      <td>0, 0, 0, 1</td>
+      <td>4</td>
+      <td>1</td>
+      <td>3</td>
+      <td>25.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>5</td>
+      <td>PALANGKARAYA-9_TO_TAMIANG LAYANG, TAMIANG LAYANG_TO_AMPAH, AMPAH_TO_BUNTOK, BUNTOK_TO_CEMPAKA-9</td>
+      <td>NEW LINK, EXISTING, EXISTING, NEW LINK</td>
+      <td>0, 1, 1, 0</td>
+      <td>4</td>
+      <td>2</td>
+      <td>2</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>6</td>
+      <td>PALANGKARAYA-9_TO_PANGKALAN BUN, PANGKALAN BUN_TO_SAMPIT, SAMPIT_TO_PARIT, PARIT_TO_CEMPAKA-9</td>
+      <td>NEW LINK, EXISTING, NEW LINK, NEW LINK</td>
+      <td>1, 0, 1, 0</td>
+      <td>4</td>
+      <td>2</td>
+      <td>2</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>1</td>
+      <td>PALANGKARAYA-9_TO_PALANGKARAYA, PALANGKARAYA_TO_CEMPAKA, CEMPAKA_TO_CEMPAKA-9</td>
+      <td>NEW LINK, NEW LINK, NEW LINK</td>
+      <td>1, 0, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>4.1</td>
+      <td>KASONGAN_TO_KM46 TSEL, KM46 TSEL_TO_KM5</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>6.1</td>
+      <td>LEMANDAU_TO_KOTAWARINGIN LAMA, PANGKALAN BUN_TO_LEMANDAU, KOTAWARINGIN LAMA_TO_SUKAMARA, KOTAWARINGIN LAMA_TO_PANGKALAN BUN, SUKAMARA_TO_PANGKALAN BUN</td>
+      <td>EXISTING, EXISTING, EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1, 1, 1</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>6.2</td>
+      <td>PANGKALAN BUN_TO_HANAU, HANAU_TO_ASAM BARU, ASAM BARU_TO_SAMPIT</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>6.3</td>
+      <td>PANGKALAN BUN_TO_KUMAI</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>6.4</td>
+      <td>SAMPIT_TO_KUALA PEMBUANG</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>6.5</td>
+      <td>PARIT_TO_PARENGGEAN</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>5</td>
+      <td>PEMATANG SIANTAR CENTRUM_TO_TEBING TINGGI, TEBING TINGGI_TO_KISARAN, KISARAN_TO_RANTAU PRAPAT</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 0, 0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>33.33</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>1.2</td>
+      <td>SIDIKALANG_TO_SUMBUL, SUMBUL_TO_PEMATANG SIANTAR CENTRUM</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>1</td>
+      <td>PEMATANG SIANTAR CENTRUM_TO_PEMATANG SIANTAR CENTRUM, PEMATANG SIANTAR CENTRUM_TO_RANTAU PRAPAT, RANTAU PRAPAT_TO_RANTAU PRAPAT</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 0, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>11</td>
+      <td>PEMATANG SIANTAR CENTRUM_TO_PANYAMBUNGAN, PANYAMBUNGAN_TO_KOTANOPAN, KOTANOPAN_TO_RANTAU PRAPAT</td>
+      <td>NEW LINK, NEW LINK, NEW LINK</td>
+      <td>1, 1, 0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>2</td>
+      <td>PERDAGANGAN_TO_RANTAU PRAPAT, PEMATANG SIANTAR CENTRUM_TO_PEMATANG RAYA, PEMATANG RAYA_TO_PERDAGANGAN</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
+      <td>0, 1, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>4</td>
+      <td>PEMATANG SIANTAR CENTRUM_TO_SIBOLGA, SIBOLGA_TO_PADANG SIDEMPUAN, PADANG SIDEMPUAN_TO_RANTAU PRAPAT</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>0</td>
+      <td>PEMATANG SIANTAR CENTRUM_TO_RANTAU PRAPAT</td>
+      <td>NEW LINK</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>10</td>
+      <td>PEMATANG SIANTAR CENTRUM_TO_INDRAPURA, INDRAPURA_TO_RANTAU PRAPAT</td>
+      <td>NEW LINK, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>3</td>
+      <td>PEMATANG SIANTAR CENTRUM_TO_SIDIKALANG, SIDIKALANG_TO_BALIGE, BALIGE_TO_RANTAU PRAPAT</td>
+      <td>NEW LINK, NEW LINK, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>6</td>
+      <td>KOTA PINANG (EX BLANGKAJEREN)_TO_RANTAU PRAPAT, PEMATANG SIANTAR CENTRUM_TO_KOTA PINANG (EX BLANGKAJEREN)</td>
+      <td>NEW LINK, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>7</td>
+      <td>PEMATANG SIANTAR CENTRUM_TO_GUNUNG SITOLI (EX PANYAMBUNGAN), GUNUNG SITOLI (EX PANYAMBUNGAN)_TO_RANTAU PRAPAT</td>
+      <td>NEW LINK, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>8</td>
+      <td>TANJUNG BALAI (EX KOTANOPAN)_TO_RANTAU PRAPAT, PEMATANG SIANTAR CENTRUM_TO_TANJUNG BALAI (EX KOTANOPAN)</td>
+      <td>NEW LINK, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>9</td>
+      <td>PEMATANG SIANTAR CENTRUM_TO_TTC TSEL PEMATANG SIANTAR, TTC TSEL PEMATANG SIANTAR_TO_RANTAU PRAPAT</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>8</td>
+      <td>LHOKSEUMAWE-9_TO_LAMTEMEN, BANDA ACEH-9_TO_LAMTEMEN</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>0, 1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>10</td>
+      <td>LHOKSEUMAWE-9_TO_TEUNOM, LAMNO_TO_TEUNOM, LAMNO_TO_BANDA ACEH-9</td>
+      <td>NEW LINK, NEW LINK, NEW LINK</td>
+      <td>0, 1, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>2.2</td>
+      <td>SAMALANGA_TO_BIREUN, SAMALANGA_TO_BEUREUNEUN, BANDA ACEH_TO_BEUREUNEUN</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>4</td>
+      <td>LHOKSEUMAWE-9_TO_KRUENG GEUKUEH, MATANG GEULUMPANG_TO_KRUENG GEUKUEH, MATANG GEULUMPANG_TO_BANDA ACEH-9</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>0</td>
+      <td>BANDA ACEH-9_TO_LHOKSEUMAWE-9</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>1</td>
+      <td>BANDA ACEH-9_TO_SABANG, LHOKSEUMAWE-9_TO_SABANG</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>10.1</td>
+      <td>CALANG_TO_TEUNOM, CALANG_TO_LAMNO</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>11</td>
+      <td>LHOKSEUMAWE-9_TO_LHOKSEUMAWE, BANDA ACEH-9_TO_LHOKSEUMAWE</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>2</td>
+      <td>LHOKSEUMAWE-9_TO_BIREUN, BANDA ACEH_TO_BIREUN, BANDA ACEH_TO_BANDA ACEH-9</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>2.1</td>
+      <td>SIGLI_TO_BIREUN, SIGLI_TO_BANDA ACEH</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>3</td>
+      <td>LHOKSEUMAWE-9_TO_LAMBARO, DARUSSALAM_TO_LAMBARO, DARUSSALAM_TO_BANDA ACEH-9</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>3.1</td>
+      <td>SEULEUMEUM_TO_DARUSSALAM, SEULEUMEUM_TO_LAMBARO</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>5</td>
+      <td>LHOKSEUMAWE-9_TO_TAKENGON, TAKENGON_TO_BANDA ACEH-9</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>6</td>
+      <td>LHOKSEUMAWE-9_TO_GEUDONG, LHOKSUKON_TO_GEUDONG, LHOKSUKON_TO_BANDA ACEH-9 (PINDAH TO IDIA)</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>6.1</td>
+      <td>LHOKSUKON_TO_PANTONLABU, IDIREUYEUK_TO_PANTONLABU</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>7</td>
+      <td>PEUREULAK_TO_IDIREUYEUK, PEUREULAK_TO_BANDA ACEH-9, LHOKSEUMAWE-9_TO_IDIREUYEUK</td>
+      <td>EXISTING, NEW LINK, PLAN REMOVE</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>9</td>
+      <td>LHOKSEUMAWE-9_TO_BAKONGAN, MEULABOH_TO_BAKONGAN, MEULABOH_TO_BANDA ACEH-9</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>9.1</td>
+      <td>TAPAK TUAN_TO_BAKONGAN, TAPAK TUAN_TO_BLANG PIDIE, MEULABOH_TO_BLANG PIDIE, MEULABOH_TO_LAMIE, BLANG PIDIE_TO_LAMIE</td>
+      <td>EXISTING, EXISTING, EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1, 1, 1</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>0</td>
+      <td>PALU_TO_PALU</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>1</td>
+      <td>DONGGALA_TO_PASANGKAYU, PALU_TO_DONGGALA, PASANGKAYU_TO_SARUDU, SARUDU_TO_PALU</td>
+      <td>EXISTING, EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>1.1</td>
+      <td>TOPOYO_TO_SARUDU, PASANGKAYU_TO_TOPOYO</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>2</td>
+      <td>PARIGI_TO_POSO, PALU_TO_PARIGI, POSO_TO_PALU</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>2.1</td>
+      <td>PARIGI_TO_TOLAY, TOLAY_TO_POSO</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>2.2</td>
+      <td>TENTENA_TO_POSO, PARIGI_TO_TENTENA</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>2.3</td>
+      <td>PARIGI_TO_BUNTA, AMPANA_TO_POSO, BUNTA_TO_AMPANA</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>3</td>
+      <td>PALU_TO_SANTIGI, SANTIGI_TO_TAWAILI, TAWAILI_TO_PALU</td>
+      <td>EXISTING, NEW LINK, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>3.1</td>
+      <td>SANTIGI_TO_TOLITOLI, TOLITOLI_TO_BUOL, BUOL_TO_TAWAILI</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>0</td>
+      <td>AMBON_TO_TERNATE</td>
+      <td>CHANGE LINK</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>1</td>
+      <td>AMBON_TO_NAMLEA, NAMLEA_TO_TERNATE</td>
+      <td>CHANGE LINK, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>2</td>
+      <td>AMBON_TO_AMBON, AMBON_TO_PASSO, PASSO_TO_TERNATE</td>
+      <td>EXISTING, CHANGE LINK, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>2.1</td>
+      <td>AMBON_TO_MASOHI, MASOHI_TO_LABUHA, LABUHA_TO_PASSO</td>
+      <td>CHANGE LINK, NEW LINK, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>2.2</td>
+      <td>OBI_TO_OBI, LABUHA_TO_OBI, LABUHA_TO_OBI</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>2.3</td>
+      <td>MASOHI_TO_PIRU, PIRU_TO_BULA, BULA_TO_MASOHI</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>3</td>
+      <td>AMBON_TO_SOFIFI, SOFIFI_TO_TERNATE, TERNATE_TO_TERNATE</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>3.1</td>
+      <td>SOASIU_TO_TERNATE, SOFIFI_TO_SOASIU</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>3.2</td>
+      <td>MABA_TO_IWIP, SOFIFI_TO_MABA, IWIP_TO_WEDA, WEDA_TO_TERNATE</td>
+      <td>NEW LINK, EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>3.3</td>
+      <td>JAILOLO_TO_TOBELO, SOFIFI_TO_JAILOLO, TOBELO_TO_TERNATE</td>
+      <td>NEW LINK, EXISTING, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>3.4</td>
+      <td>SOFIFI_TO_MOROTAI, MOROTAI_TO_MELONG, TAHUNA_TO_HULUSIAU, MELONG_TO_TAHUNA, HULUSIAU_TO_TERNATE</td>
+      <td>NEW LINK, EXISTING, EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 1, 1, 1</td>
+      <td>5</td>
+      <td>5</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>2</td>
+      <td>JAYAPURA_TO_MANOKWARI, SORONG_TO_SORONG, MANOKWARI_TO_SORONG</td>
+      <td>EXISTING, EXISTING, CHANGE LINK</td>
+      <td>0, 1, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>0</td>
+      <td>JAYAPURA_TO_SORONG</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>1</td>
+      <td>JAYAPURA_TO_BIAK, BIAK_TO_SORONG</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>1.1</td>
+      <td>BIAK_TO_SERUI, SERUI_TO_BOTAWA, BOTAWA_TO_WASIOR, WASIOR_TO_MANOKWARI</td>
+      <td>EXISTING, EXISTING, NEW LINK, NEW LINK</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>1.2</td>
+      <td>BIAK_TO_SUPIORI, SUPIORI_TO_NUMFOR, NUMFOR_TO_MANOKWARI</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>2.1</td>
+      <td>MANOKWARI_TO_WAISAI, WAISAI_TO_SORONG</td>
+      <td>EXISTING, CHANGE LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>2.2</td>
+      <td>BINTUNI_TO_TEMINABUAN, RANSIKI_TO_BINTUNI, MANOKWARI_TO_RANSIKI, TEMINABUAN_TO_SORONG</td>
+      <td>EXISTING, EXISTING, EXISTING, CHANGE LINK</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>3</td>
+      <td>JAYAPURA_TO_ABEPURA, JAYAPURA_TO_JAYAPURA, ABEPURA_TO_SORONG</td>
+      <td>CHANGE LINK, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>3.1</td>
+      <td>SARMI_TO_SENTANI, JAYAPURA_TO_SARMI, SENTANI_TO_ABEPURA</td>
+      <td>EXISTING, CHANGE LINK, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>3.2</td>
+      <td>WAMENA_TO_ABEPURA, JAYAPURA_TO_WARIS, WAMENA_TO_WARIS</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>1</td>
+      <td>TIMIKA_TO_FAKFAK, FAKFAK_TO_FAKFAK</td>
+      <td>NEW LINK, NEW LINK</td>
+      <td>0, 0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>2</td>
+      <td>NABIRE_TO_FAKFAK, TIMIKA_TO_NABIRE</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>0, 1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>50.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>3</td>
+      <td>TIMIKA_TO_KUALA KENCANA, KUALA KENCANA_TO_FAKFAK, TIMIKA_TO_TIMIKA</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 0, 1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>3.1</td>
+      <td>TEMBAGAPURA_TO_LIGHT INDUSTRIAL PARK, LIGHT INDUSTRIAL PARK_TO_KUALA KENCANA, TIMIKA_TO_TEMBAGAPURA</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>0</td>
+      <td>TIMIKA_TO_FAKFAK</td>
+      <td>CHANGE LINK</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>2.1</td>
+      <td>ENAROTOLI_TO_NABIRE, ENAROTOLI_TO_TIMIKIA</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>3.2</td>
+      <td>TANAMERA_TO_MERAUKE, AGATS_TO_KEPI, TIMIKA_TO_AGATS, KEPI_TO_TANAMERA</td>
+      <td>EXISTING, EXISTING, CHANGE LINK, EXISTING</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>4</td>
+      <td>TIMIKA_TO_MERAUKE, MERAUKE_TO_FAKFAK</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>5</td>
+      <td>TIMIKA_TO_KAIMANA, KAIMANA_TO_FAKFAK</td>
+      <td>EXISTING, CHANGE LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>6</td>
+      <td>TIMIKA_TO_DOBO, DOBO_TO_TUAL, TUAL_TO_FAKFAK</td>
+      <td>EXISTING, EXISTING, CHANGE LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>0</td>
+      <td>MATARAM_TO_BIMA</td>
+      <td>EXISTING</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>1</td>
+      <td>MATARAM_TO_MATARAM, MATARAM_TO_SELONG, SELONG_TO_BIMA</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>1.1</td>
+      <td>MATARAM_TO_SWETA, SWETA_TO_SELONG</td>
+      <td>CHANGE LINK, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>1.2</td>
+      <td>MATARAM_TO_GERUNG, GERUNG_TO_PRAYA, PRAYA_TO_SELONG</td>
+      <td>CHANGE LINK, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>1.3</td>
+      <td>MALUK_TO_TALIWANG, MATARAM_TO_MALUK, TALIWANG_TO_ALAS, ALAS_TO_SUMBAWA</td>
+      <td>EXISTING, EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>2</td>
+      <td>SUMBAWA_TO_BIMA, BIMA_TO_BIMA, MATARAM_TO_SUMBAWA</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>2.1</td>
+      <td>SUMBAWA_TO_EMPANG, EMPANG_TO_DOMPU, DOMPU_TO_BIMA</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>2.2</td>
+      <td>ENDE_TO_WAINGAPU, WAIKABUBAK_TO_BIMA, WAINGAPU_TO_WAIKABUBAK</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>3</td>
+      <td>MATARAM_TO_ENDE, ENDE_TO_LABUAN BAJO, LABUAN BAJO_TO_BIMA</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>3.1</td>
+      <td>BAJAWA_TO_RUTENG, ENDE_TO_BAJAWA, RUTENG_TO_LABUAN BAJO</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>0</td>
+      <td>MAUMERE_TO_KUPANG</td>
+      <td>NEW LINK</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>1</td>
+      <td>MAUMERE_TO_KALABAHI, KALABAHI_TO_KUPANG, MAUMERE_TO_MAUMERE</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>1.1</td>
+      <td>MAUMERE_TO_LARANTUKA, LARANTUKA_TO_KALABAHI</td>
+      <td>NEW LINK, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>2</td>
+      <td>MAUMERE_TO_ATAMBUA, ATAMBUA_TO_KUPANG, KUPANG_TO_KUPANG</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>2.1</td>
+      <td>ATAMBUA_TO_KEFA, KEFA_TO_KUPANG, ATAMBUA_TO_SOE, SOE_TO_KUPANG</td>
+      <td>EXISTING, EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>3</td>
+      <td>MAUMERE_TO_SEBA, SEBA_TO_BAA, BAA_TO_KUPANG</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+  </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+$(document).ready(function () {
+
+  // === Tambah kolom No di awal ===
+  $('#resultLinkTable thead tr').prepend('<th class="dt-rownum">No</th>');
+  $('#resultLinkTable tbody tr').each(function() {
+    $(this).prepend('<td class="dt-rownum"></td>');
+  });
+
+  // === Tandai kolom Ring (berdasarkan header text) ===
+  $('#resultLinkTable thead th').each(function(index) {
+    if ($(this).text().toLowerCase() === 'ring') {
+        $(this).addClass('dt-ring');
+        $('#resultLinkTable tbody tr').each(function() {
+            $(this).find('td').eq(index).addClass('dt-ring');
+        });
+    }
+  });
+
+  var table = $('#resultLinkTable').DataTable({
+    paging: true,
+    searching: true,
+    ordering: true,
+    pageLength: 25,
+    columnDefs: [
+      { targets: 0, orderable: false, searchable: false } // No tidak bisa sort/search
+    ]
+  });
+
+  // === Auto re-number saat sort / filter ===
+  table.on('order.dt search.dt draw.dt', function () {
+    let i = 1;
+    table.rows({ search: 'applied', order: 'applied' }).every(function () {
+      var node = this.node();
+      $('td.dt-rownum', node).html(i++);
+    });
+  }).draw();
+
+});
+</script>
+
+</body>
+</html>
