@@ -15,8 +15,20 @@
         font-size: 12px;
     }
 
+    h2 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    h3 {
+        font-size: 14px;
+        margin: 14px 0 8px 0;
+    }
+
+    /* Biar DataTable rapi */
     table.dataTable {
         font-size: 11px;
+        width: 100%;
     }
 
     table.dataTable thead th {
@@ -31,11 +43,6 @@
         vertical-align: top;
     }
 
-    h2 {
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
-
     /* Kolom nomor */
     th.dt-rownum, td.dt-rownum {
         width: 40px;
@@ -43,10 +50,64 @@
         white-space: nowrap;
     }
 
-    /* Kolom Ring (center) */
+    /* Kolom Ring (center) - khusus detail */
     th.dt-ring, td.dt-ring {
         text-align: center;
         white-space: nowrap;
+    }
+
+    /* Footer tanggal pembuatan */
+    .table-footer {
+        margin-top: 8px;
+        font-size: 11px;
+        color: #555;
+        text-align: right;
+        font-style: italic;
+    }
+
+    .section {
+        margin-bottom: 18px;
+    }
+
+    /* =========================
+       RESUME: setengah lebar halaman
+       ========================= */
+    .resume-wrap {
+        width: 50%;
+        min-width: 420px;   /* biar tidak terlalu sempit */
+        max-width: 700px;   /* biar tidak melebar */
+    }
+
+    /* Info total di atas resume */
+    .resume-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin: 8px 0 10px 0;
+    }
+
+    .stat-card {
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 8px 10px;
+        background: #fafafa;
+    }
+
+    .stat-label {
+        font-size: 10px;
+        color: #666;
+        margin-bottom: 2px;
+    }
+
+    .stat-value {
+        font-size: 13px;
+        font-weight: 700;
+        color: #222;
+    }
+
+    /* Biar tabel resume tidak memaksa full width */
+    #resumeTable {
+        width: 100% !important;
     }
   </style>
 </head>
@@ -54,7 +115,117 @@
 
 <h2>Result Link – Progress Subring Delayering</h2>
 
-<table border="1" class="dataframe display compact" id="resultLinkTable">
+<div class="section resume-wrap">
+  <h3>Resume Progress per Cluster</h3>
+
+  <div class="resume-stats">
+    <div class="stat-card">
+      <div class="stat-label">Total Cluster</div>
+      <div class="stat-value">12</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Ring</div>
+      <div class="stat-value">154</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Done</div>
+      <div class="stat-value">71</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Overall Result (%)</div>
+      <div class="stat-value">46.1</div>
+    </div>
+  </div>
+
+  <table border="1" class="dataframe display compact" id="resumeTable">
+  <thead>
+    <tr style="text-align: right;">
+      <th>cluster</th>
+      <th>ring</th>
+      <th>done</th>
+      <th>result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BNA-LSM</td>
+      <td>18</td>
+      <td>14</td>
+      <td>77.78</td>
+    </tr>
+    <tr>
+      <td>PBR-DRI</td>
+      <td>26</td>
+      <td>19</td>
+      <td>73.08</td>
+    </tr>
+    <tr>
+      <td>STR-RPP</td>
+      <td>13</td>
+      <td>8</td>
+      <td>61.54</td>
+    </tr>
+    <tr>
+      <td>PTK-SKK</td>
+      <td>15</td>
+      <td>7</td>
+      <td>46.67</td>
+    </tr>
+    <tr>
+      <td>PLK-PSB</td>
+      <td>14</td>
+      <td>6</td>
+      <td>42.86</td>
+    </tr>
+    <tr>
+      <td>BJM-ULN</td>
+      <td>12</td>
+      <td>5</td>
+      <td>41.67</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>10</td>
+      <td>4</td>
+      <td>40.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
+      <td>10</td>
+      <td>4</td>
+      <td>40.00</td>
+    </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>6</td>
+      <td>1</td>
+      <td>16.67</td>
+    </tr>
+    <tr>
+      <td>PL1-PL2</td>
+      <td>9</td>
+      <td>1</td>
+      <td>11.11</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
+      <td>10</td>
+      <td>1</td>
+      <td>10.00</td>
+    </tr>
+    <tr>
+      <td>AMB-TNT</td>
+      <td>11</td>
+      <td>1</td>
+      <td>9.09</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="section">
+  <h3>Detail</h3>
+  <table border="1" class="dataframe display compact" id="resultLinkTable">
   <thead>
     <tr style="text-align: right;">
       <th>cluster</th>
@@ -380,9 +551,9 @@
     <tr>
       <td>PTK-SKK</td>
       <td>8</td>
-      <td>KETAPANG_TO_TSEL-SOSOK, PONTIANAK_TO_KETAPANG, TSEL-SOSOK_TO_SEI KAKAP</td>
-      <td>EXISTING, EXISTING, NEW LINK</td>
-      <td>0, 1, 0</td>
+      <td>PONTIANAK_TO_KETAPANG, TSEL-SOSOK_TO_SEI KAKAP, KETAPANG_TO_TSEL-SOSOK</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 0, 0</td>
       <td>3</td>
       <td>1</td>
       <td>2</td>
@@ -402,9 +573,9 @@
     <tr>
       <td>PTK-SKK</td>
       <td>9</td>
-      <td>SANGGAU_TO_SINTANG, SANGGAU_TO_SEKADAU, PONTIANAK_TO_SANGGAU, SANGGAU_TO_SEI KAKAP</td>
-      <td>EXISTING, EXISTING, NEW LINK, EXISTING</td>
-      <td>1, 0, 0, 1</td>
+      <td>PONTIANAK_TO_SANGGAU, SANGGAU_TO_SEI KAKAP, SANGGAU_TO_SINTANG, SANGGAU_TO_SEKADAU</td>
+      <td>NEW LINK, EXISTING, EXISTING, EXISTING</td>
+      <td>0, 1, 1, 0</td>
       <td>4</td>
       <td>2</td>
       <td>2</td>
@@ -501,7 +672,7 @@
     <tr>
       <td>PTK-SKK</td>
       <td>5</td>
-      <td>SIANTAN_TO_SEI KAKAP, PONTIANAK_TO_SIANTAN</td>
+      <td>PONTIANAK_TO_SIANTAN, SIANTAN_TO_SEI KAKAP</td>
       <td>EXISTING, EXISTING</td>
       <td>1, 1</td>
       <td>2</td>
@@ -611,8 +782,8 @@
     <tr>
       <td>BJM-ULN</td>
       <td>1</td>
-      <td>BANJARMASIN-3_TO_BANJARMASIN-9, BANJARMASIN-3_TO_ULIN, ULIN_TO_ULIN-9</td>
-      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>BANJARMASIN-3_TO_ULIN, ULIN_TO_ULIN-9, BANJARMASIN-3_TO_BANJARMASIN-9</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
       <td>1, 1, 1</td>
       <td>3</td>
       <td>3</td>
@@ -688,7 +859,7 @@
     <tr>
       <td>PLK-PSB</td>
       <td>2</td>
-      <td>PALANGKARAYA-9_TO_KUALA KURUN, KUALA KURUN_TO_CEMPAKA-9</td>
+      <td>KUALA KURUN_TO_CEMPAKA-9, PALANGKARAYA-9_TO_KUALA KURUN</td>
       <td>NEW LINK, NEW LINK</td>
       <td>0, 0</td>
       <td>2</td>
@@ -699,9 +870,9 @@
     <tr>
       <td>PLK-PSB</td>
       <td>5.1</td>
-      <td>MUARA TEWEH_TO_PURUK CAHU, PURUK CAHU_TO_BUNTOK, AMPAH_TO_TAMPARAK LAYUNG, TAMPARAK LAYUNG_TO_MUARA TEWEH</td>
-      <td>NEW LINK, NEW LINK, EXISTING, NEW LINK</td>
-      <td>0, 1, 0, 0</td>
+      <td>AMPAH_TO_TAMPARAK LAYUNG, TAMPARAK LAYUNG_TO_MUARA TEWEH, MUARA TEWEH_TO_PURUK CAHU, PURUK CAHU_TO_BUNTOK</td>
+      <td>EXISTING, NEW LINK, NEW LINK, NEW LINK</td>
+      <td>0, 0, 0, 1</td>
       <td>4</td>
       <td>1</td>
       <td>3</td>
@@ -820,9 +991,9 @@
     <tr>
       <td>STR-RPP</td>
       <td>1.2</td>
-      <td>SIDIKALANG_TO_SUMBUL, SUMBUL_TO_PEMATANG SIANTAR CENTRUM</td>
-      <td>EXISTING, NEW LINK</td>
-      <td>1, 0</td>
+      <td>SUMBUL_TO_PEMATANG SIANTAR CENTRUM, SIDIKALANG_TO_SUMBUL</td>
+      <td>NEW LINK, EXISTING</td>
+      <td>0, 1</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
@@ -1150,8 +1321,8 @@
     <tr>
       <td>PL1-PL2</td>
       <td>1</td>
-      <td>PALU_TO_DONGGALA, DONGGALA_TO_PASANGKAYU, PASANGKAYU_TO_SARUDU, SARUDU_TO_PALU</td>
-      <td>EXISTING, EXISTING, EXISTING, NEW LINK</td>
+      <td>PALU_TO_DONGGALA, DONGGALA_TO_PASANGKAYU, SARUDU_TO_PALU, PASANGKAYU_TO_SARUDU</td>
+      <td>EXISTING, EXISTING, NEW LINK, EXISTING</td>
       <td>1, 0, 0, 0</td>
       <td>4</td>
       <td>1</td>
@@ -1161,9 +1332,9 @@
     <tr>
       <td>PL1-PL2</td>
       <td>2</td>
-      <td>PALU_TO_PARIGI, PARIGI_TO_POSO, POSO_TO_PALU</td>
+      <td>POSO_TO_PALU, PALU_TO_PARIGI, PARIGI_TO_POSO</td>
       <td>EXISTING, EXISTING, EXISTING</td>
-      <td>0, 0, 1</td>
+      <td>1, 0, 0</td>
       <td>3</td>
       <td>1</td>
       <td>2</td>
@@ -1172,9 +1343,9 @@
     <tr>
       <td>PL1-PL2</td>
       <td>3</td>
-      <td>TAWAILI_TO_PALU, PALU_TO_SANTIGI, SANTIGI_TO_TAWAILI</td>
-      <td>NEW LINK, EXISTING, NEW LINK</td>
-      <td>0, 1, 0</td>
+      <td>SANTIGI_TO_TAWAILI, TAWAILI_TO_PALU, PALU_TO_SANTIGI</td>
+      <td>NEW LINK, NEW LINK, EXISTING</td>
+      <td>0, 0, 1</td>
       <td>3</td>
       <td>1</td>
       <td>2</td>
@@ -1183,9 +1354,9 @@
     <tr>
       <td>PL1-PL2</td>
       <td>3.1</td>
-      <td>TOLITOLI_TO_BUOL, BUOL_TO_TAWAILI, SANTIGI_TO_TOLITOLI</td>
-      <td>EXISTING, NEW LINK, EXISTING</td>
-      <td>0, 0, 1</td>
+      <td>TOLITOLI_TO_BUOL, SANTIGI_TO_TOLITOLI, BUOL_TO_TAWAILI</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>0, 1, 0</td>
       <td>3</td>
       <td>1</td>
       <td>2</td>
@@ -1194,9 +1365,9 @@
     <tr>
       <td>PL1-PL2</td>
       <td>1.1</td>
-      <td>PASANGKAYU_TO_TOPOYO, TOPOYO_TO_SARUDU</td>
-      <td>NEW LINK, EXISTING</td>
-      <td>0, 1</td>
+      <td>TOPOYO_TO_SARUDU, PASANGKAYU_TO_TOPOYO</td>
+      <td>EXISTING, NEW LINK</td>
+      <td>1, 0</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
@@ -1227,9 +1398,9 @@
     <tr>
       <td>PL1-PL2</td>
       <td>2.3</td>
-      <td>BUNTA_TO_AMPANA, PARIGI_TO_BUNTA, AMPANA_TO_POSO</td>
-      <td>EXISTING, NEW LINK, EXISTING</td>
-      <td>1, 0, 1</td>
+      <td>BUNTA_TO_AMPANA, AMPANA_TO_POSO, PARIGI_TO_BUNTA</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 0</td>
       <td>3</td>
       <td>2</td>
       <td>1</td>
@@ -1249,8 +1420,8 @@
     <tr>
       <td>AMB-TNT</td>
       <td>2.1</td>
-      <td>AMBON_TO_MASOHI, MASOHI_TO_LABUHA, LABUHA_TO_PASSO</td>
-      <td>CHANGE LINK, NEW LINK, NEW LINK</td>
+      <td>LABUHA_TO_PASSO, AMBON_TO_MASOHI, MASOHI_TO_LABUHA</td>
+      <td>NEW LINK, CHANGE LINK, NEW LINK</td>
       <td>0, 0, 0</td>
       <td>3</td>
       <td>0</td>
@@ -1260,7 +1431,7 @@
     <tr>
       <td>AMB-TNT</td>
       <td>3.1</td>
-      <td>SOFIFI_TO_SOASIU, SOASIU_TO_TERNATE</td>
+      <td>SOASIU_TO_TERNATE, SOFIFI_TO_SOASIU</td>
       <td>EXISTING, EXISTING</td>
       <td>0, 0</td>
       <td>2</td>
@@ -1282,8 +1453,8 @@
     <tr>
       <td>AMB-TNT</td>
       <td>3.4</td>
-      <td>MOROTAI_TO_MELONG, SOFIFI_TO_MOROTAI, TAHUNA_TO_HULUSIAU, MELONG_TO_TAHUNA, HULUSIAU_TO_TERNATE</td>
-      <td>EXISTING, NEW LINK, EXISTING, EXISTING, NEW LINK</td>
+      <td>MOROTAI_TO_MELONG, SOFIFI_TO_MOROTAI, MELONG_TO_TAHUNA, HULUSIAU_TO_TERNATE, TAHUNA_TO_HULUSIAU</td>
+      <td>EXISTING, NEW LINK, EXISTING, NEW LINK, EXISTING</td>
       <td>0, 1, 0, 0, 0</td>
       <td>5</td>
       <td>1</td>
@@ -1304,8 +1475,8 @@
     <tr>
       <td>AMB-TNT</td>
       <td>2.3</td>
-      <td>MASOHI_TO_PIRU, BULA_TO_MASOHI, PIRU_TO_BULA</td>
-      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>MASOHI_TO_PIRU, PIRU_TO_BULA, BULA_TO_MASOHI</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
       <td>1, 0, 0</td>
       <td>3</td>
       <td>1</td>
@@ -1315,7 +1486,7 @@
     <tr>
       <td>AMB-TNT</td>
       <td>3.3</td>
-      <td>TOBELO_TO_TERNATE, JAILOLO_TO_TOBELO, SOFIFI_TO_JAILOLO</td>
+      <td>JAILOLO_TO_TOBELO, TOBELO_TO_TERNATE, SOFIFI_TO_JAILOLO</td>
       <td>NEW LINK, NEW LINK, EXISTING</td>
       <td>0, 0, 1</td>
       <td>3</td>
@@ -1348,7 +1519,7 @@
     <tr>
       <td>AMB-TNT</td>
       <td>3</td>
-      <td>AMBON_TO_SOFIFI, TERNATE_TO_TERNATE, SOFIFI_TO_TERNATE</td>
+      <td>AMBON_TO_SOFIFI, SOFIFI_TO_TERNATE, TERNATE_TO_TERNATE</td>
       <td>NEW LINK, EXISTING, EXISTING</td>
       <td>0, 1, 1</td>
       <td>3</td>
@@ -1370,9 +1541,9 @@
     <tr>
       <td>JAP-SRG</td>
       <td>3.2</td>
-      <td>JAYAPURA_TO_WARIS, WAMENA_TO_WARIS, WAMENA_TO_ABEPURA</td>
+      <td>WAMENA_TO_WARIS, WAMENA_TO_ABEPURA, JAYAPURA_TO_WARIS</td>
       <td>EXISTING, EXISTING, EXISTING</td>
-      <td>0, 0, 1</td>
+      <td>0, 1, 0</td>
       <td>3</td>
       <td>1</td>
       <td>2</td>
@@ -1381,23 +1552,12 @@
     <tr>
       <td>JAP-SRG</td>
       <td>1.1</td>
-      <td>BIAK_TO_SERUI, SERUI_TO_BOTAWA, BOTAWA_TO_WASIOR, WASIOR_TO_MANOKWARI</td>
-      <td>EXISTING, EXISTING, NEW LINK, NEW LINK</td>
-      <td>1, 1, 0, 0</td>
+      <td>BOTAWA_TO_WASIOR, SERUI_TO_BOTAWA, BIAK_TO_SERUI, WASIOR_TO_MANOKWARI</td>
+      <td>NEW LINK, EXISTING, EXISTING, NEW LINK</td>
+      <td>0, 1, 1, 0</td>
       <td>4</td>
       <td>2</td>
       <td>2</td>
-      <td>50.00</td>
-    </tr>
-    <tr>
-      <td>JAP-SRG</td>
-      <td>1</td>
-      <td>JAYAPURA_TO_BIAK, BIAK_TO_SORONG</td>
-      <td>EXISTING, EXISTING</td>
-      <td>0, 1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
       <td>50.00</td>
     </tr>
     <tr>
@@ -1413,21 +1573,10 @@
     </tr>
     <tr>
       <td>JAP-SRG</td>
-      <td>2</td>
-      <td>JAYAPURA_TO_MANOKWARI, MANOKWARI_TO_SORONG, SORONG_TO_SORONG</td>
-      <td>EXISTING, CHANGE LINK, EXISTING</td>
-      <td>1, 0, 1</td>
       <td>3</td>
-      <td>2</td>
-      <td>1</td>
-      <td>66.67</td>
-    </tr>
-    <tr>
-      <td>JAP-SRG</td>
-      <td>3</td>
-      <td>JAYAPURA_TO_ABEPURA, ABEPURA_TO_SORONG, JAYAPURA_TO_JAYAPURA</td>
-      <td>CHANGE LINK, EXISTING, EXISTING</td>
-      <td>1, 0, 1</td>
+      <td>ABEPURA_TO_SORONG, JAYAPURA_TO_JAYAPURA, JAYAPURA_TO_ABEPURA</td>
+      <td>EXISTING, EXISTING, CHANGE LINK</td>
+      <td>0, 1, 1</td>
       <td>3</td>
       <td>2</td>
       <td>1</td>
@@ -1447,7 +1596,7 @@
     <tr>
       <td>JAP-SRG</td>
       <td>2.2</td>
-      <td>MANOKWARI_TO_RANSIKI, RANSIKI_TO_BINTUNI, BINTUNI_TO_TEMINABUAN, TEMINABUAN_TO_SORONG</td>
+      <td>BINTUNI_TO_TEMINABUAN, MANOKWARI_TO_RANSIKI, RANSIKI_TO_BINTUNI, TEMINABUAN_TO_SORONG</td>
       <td>EXISTING, EXISTING, EXISTING, CHANGE LINK</td>
       <td>1, 1, 1, 0</td>
       <td>4</td>
@@ -1468,8 +1617,19 @@
     </tr>
     <tr>
       <td>JAP-SRG</td>
+      <td>1</td>
+      <td>JAYAPURA_TO_BIAK, BIAK_TO_SORONG</td>
+      <td>EXISTING, EXISTING</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>JAP-SRG</td>
       <td>1.2</td>
-      <td>BIAK_TO_SUPIORI, SUPIORI_TO_NUMFOR, NUMFOR_TO_MANOKWARI</td>
+      <td>BIAK_TO_SUPIORI, NUMFOR_TO_MANOKWARI, SUPIORI_TO_NUMFOR</td>
       <td>EXISTING, EXISTING, EXISTING</td>
       <td>1, 1, 1</td>
       <td>3</td>
@@ -1478,26 +1638,15 @@
       <td>100.00</td>
     </tr>
     <tr>
-      <td>TMK-FFA</td>
-      <td>3</td>
-      <td>TIMIKA_TO_TIMIKA, TIMIKA_TO_KUALA KENCANA, KUALA KENCANA_TO_FAKFAK</td>
-      <td>EXISTING, EXISTING, NEW LINK</td>
-      <td>0, 1, 0</td>
-      <td>3</td>
-      <td>1</td>
+      <td>JAP-SRG</td>
       <td>2</td>
-      <td>33.33</td>
-    </tr>
-    <tr>
-      <td>TMK-FFA</td>
-      <td>1</td>
-      <td>TIMIKA_TO_FAKFAK, FAKFAK_TO_FAKFAK</td>
-      <td>NEW LINK, NEW LINK</td>
-      <td>1, 0</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>50.00</td>
+      <td>JAYAPURA_TO_MANOKWARI, SORONG_TO_SORONG, MANOKWARI_TO_SORONG</td>
+      <td>EXISTING, EXISTING, CHANGE LINK</td>
+      <td>1, 1, 1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>100.00</td>
     </tr>
     <tr>
       <td>TMK-FFA</td>
@@ -1534,10 +1683,21 @@
     </tr>
     <tr>
       <td>TMK-FFA</td>
+      <td>3</td>
+      <td>TIMIKA_TO_KUALA KENCANA, TIMIKA_TO_TIMIKA, KUALA KENCANA_TO_FAKFAK</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 1, 0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
       <td>3.1</td>
-      <td>TIMIKA_TO_TEMBAGAPURA, TEMBAGAPURA_TO_LIGHT INDUSTRIAL PARK, LIGHT INDUSTRIAL PARK_TO_KUALA KENCANA</td>
-      <td>NEW LINK, EXISTING, EXISTING</td>
-      <td>0, 1, 1</td>
+      <td>LIGHT INDUSTRIAL PARK_TO_KUALA KENCANA, TIMIKA_TO_TEMBAGAPURA, TEMBAGAPURA_TO_LIGHT INDUSTRIAL PARK</td>
+      <td>EXISTING, NEW LINK, EXISTING</td>
+      <td>1, 0, 1</td>
       <td>3</td>
       <td>2</td>
       <td>1</td>
@@ -1546,24 +1706,13 @@
     <tr>
       <td>TMK-FFA</td>
       <td>6</td>
-      <td>TIMIKA_TO_DOBO, DOBO_TO_TUAL, TUAL_TO_FAKFAK</td>
-      <td>EXISTING, EXISTING, CHANGE LINK</td>
-      <td>0, 1, 1</td>
+      <td>TUAL_TO_FAKFAK, TIMIKA_TO_DOBO, DOBO_TO_TUAL</td>
+      <td>CHANGE LINK, EXISTING, EXISTING</td>
+      <td>1, 0, 1</td>
       <td>3</td>
       <td>2</td>
       <td>1</td>
       <td>66.67</td>
-    </tr>
-    <tr>
-      <td>TMK-FFA</td>
-      <td>3.2</td>
-      <td>KEPI_TO_TANAMERA, TIMIKA_TO_AGATS, AGATS_TO_KEPI, TANAMERA_TO_MERAUKE</td>
-      <td>EXISTING, CHANGE LINK, EXISTING, EXISTING</td>
-      <td>1, 0, 1, 1</td>
-      <td>4</td>
-      <td>3</td>
-      <td>1</td>
-      <td>75.00</td>
     </tr>
     <tr>
       <td>TMK-FFA</td>
@@ -1578,12 +1727,34 @@
     </tr>
     <tr>
       <td>TMK-FFA</td>
+      <td>1</td>
+      <td>TIMIKA_TO_FAKFAK, FAKFAK_TO_FAKFAK</td>
+      <td>NEW LINK, NEW LINK</td>
+      <td>1, 1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
       <td>2.1</td>
-      <td>ENAROTOLI_TO_NABIRE, ENAROTOLI_TO_TIMIKIA</td>
+      <td>ENAROTOLI_TO_TIMIKIA, ENAROTOLI_TO_NABIRE</td>
       <td>EXISTING, EXISTING</td>
       <td>1, 1</td>
       <td>2</td>
       <td>2</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <td>TMK-FFA</td>
+      <td>3.2</td>
+      <td>KEPI_TO_TANAMERA, TIMIKA_TO_AGATS, AGATS_TO_KEPI, TANAMERA_TO_MERAUKE</td>
+      <td>EXISTING, CHANGE LINK, EXISTING, EXISTING</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
       <td>0</td>
       <td>100.00</td>
     </tr>
@@ -1623,7 +1794,7 @@
     <tr>
       <td>MTR-BIM</td>
       <td>2</td>
-      <td>BIMA_TO_BIMA, MATARAM_TO_SUMBAWA, SUMBAWA_TO_BIMA</td>
+      <td>MATARAM_TO_SUMBAWA, BIMA_TO_BIMA, SUMBAWA_TO_BIMA</td>
       <td>EXISTING, EXISTING, NEW LINK</td>
       <td>0, 0, 0</td>
       <td>3</td>
@@ -1635,17 +1806,6 @@
       <td>MTR-BIM</td>
       <td>2.1</td>
       <td>SUMBAWA_TO_EMPANG, EMPANG_TO_DOMPU, DOMPU_TO_BIMA</td>
-      <td>EXISTING, EXISTING, NEW LINK</td>
-      <td>0, 0, 0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <td>MTR-BIM</td>
-      <td>2.2</td>
-      <td>ENDE_TO_WAINGAPU, WAINGAPU_TO_WAIKABUBAK, WAIKABUBAK_TO_BIMA</td>
       <td>EXISTING, EXISTING, NEW LINK</td>
       <td>0, 0, 0</td>
       <td>3</td>
@@ -1667,7 +1827,7 @@
     <tr>
       <td>MTR-BIM</td>
       <td>3.1</td>
-      <td>BAJAWA_TO_RUTENG, RUTENG_TO_LABUAN BAJO, ENDE_TO_BAJAWA</td>
+      <td>ENDE_TO_BAJAWA, RUTENG_TO_LABUAN BAJO, BAJAWA_TO_RUTENG</td>
       <td>EXISTING, EXISTING, EXISTING</td>
       <td>0, 0, 0</td>
       <td>3</td>
@@ -1688,52 +1848,30 @@
     </tr>
     <tr>
       <td>MTR-BIM</td>
+      <td>2.2</td>
+      <td>ENDE_TO_WAINGAPU, WAINGAPU_TO_WAIKABUBAK, WAIKABUBAK_TO_BIMA</td>
+      <td>EXISTING, EXISTING, NEW LINK</td>
+      <td>1, 0, 0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>33.33</td>
+    </tr>
+    <tr>
+      <td>MTR-BIM</td>
       <td>0</td>
       <td>MATARAM_TO_BIMA</td>
       <td>EXISTING</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
-      <td>1</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <td>KUP-MME</td>
-      <td>2.1</td>
-      <td>ATAMBUA_TO_KEFA, KEFA_TO_KUPANG, SOE_TO_KUPANG, ATAMBUA_TO_SOE</td>
-      <td>EXISTING, EXISTING, EXISTING, EXISTING</td>
-      <td>0, 0, 0, 0</td>
-      <td>4</td>
-      <td>0</td>
-      <td>4</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <td>KUP-MME</td>
-      <td>1</td>
-      <td>MAUMERE_TO_KALABAHI, MAUMERE_TO_MAUMERE, KALABAHI_TO_KUPANG</td>
-      <td>EXISTING, EXISTING, NEW LINK</td>
-      <td>0, 0, 0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <td>KUP-MME</td>
-      <td>2</td>
-      <td>MAUMERE_TO_ATAMBUA, ATAMBUA_TO_KUPANG, KUPANG_TO_KUPANG</td>
-      <td>EXISTING, EXISTING, EXISTING</td>
-      <td>0, 0, 0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0.00</td>
+      <td>100.00</td>
     </tr>
     <tr>
       <td>KUP-MME</td>
       <td>3</td>
-      <td>MAUMERE_TO_SEBA, SEBA_TO_BAA, BAA_TO_KUPANG</td>
+      <td>MAUMERE_TO_SEBA, BAA_TO_KUPANG, SEBA_TO_BAA</td>
       <td>NEW LINK, EXISTING, EXISTING</td>
       <td>0, 0, 0</td>
       <td>3</td>
@@ -1763,8 +1901,46 @@
       <td>1</td>
       <td>0.00</td>
     </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>1</td>
+      <td>KALABAHI_TO_KUPANG, MAUMERE_TO_MAUMERE, MAUMERE_TO_KALABAHI</td>
+      <td>NEW LINK, EXISTING, EXISTING</td>
+      <td>0, 1, 0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>33.33</td>
+    </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>2</td>
+      <td>MAUMERE_TO_ATAMBUA, ATAMBUA_TO_KUPANG, KUPANG_TO_KUPANG</td>
+      <td>EXISTING, EXISTING, EXISTING</td>
+      <td>0, 0, 1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>33.33</td>
+    </tr>
+    <tr>
+      <td>KUP-MME</td>
+      <td>2.1</td>
+      <td>ATAMBUA_TO_KEFA, ATAMBUA_TO_SOE, KEFA_TO_KUPANG, SOE_TO_KUPANG</td>
+      <td>EXISTING, EXISTING, EXISTING, EXISTING</td>
+      <td>1, 1, 1, 1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>100.00</td>
+    </tr>
   </tbody>
 </table>
+</div>
+
+<div class="table-footer">
+  Tabel dibuat pada: <strong>04 February 2026 09:47:12</strong>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -1772,13 +1948,43 @@
 <script>
 $(document).ready(function () {
 
-  // === Tambah kolom No di awal ===
+  // =========================
+  // RESUME TABLE (setengah lebar)
+  // =========================
+  $('#resumeTable thead tr').prepend('<th class="dt-rownum">No</th>');
+  $('#resumeTable tbody tr').each(function() {
+    $(this).prepend('<td class="dt-rownum"></td>');
+  });
+
+  var resumeTable = $('#resumeTable').DataTable({
+    paging: false,
+    searching: false,
+    ordering: true,
+    info: false,
+    autoWidth: false,
+    columnDefs: [
+      { targets: 0, orderable: false, searchable: false }
+    ]
+  });
+
+  resumeTable.on('order.dt search.dt draw.dt', function () {
+    let i = 1;
+    resumeTable.rows({ search: 'applied', order: 'applied' }).every(function () {
+      var node = this.node();
+      $('td.dt-rownum', node).html(i++);
+    });
+  }).draw();
+
+
+  // =========================
+  // DETAIL TABLE (full width)
+  // =========================
   $('#resultLinkTable thead tr').prepend('<th class="dt-rownum">No</th>');
   $('#resultLinkTable tbody tr').each(function() {
     $(this).prepend('<td class="dt-rownum"></td>');
   });
 
-  // === Tandai kolom Ring (berdasarkan header text) ===
+  // Tandai kolom Ring (berdasarkan header text) di detail table
   $('#resultLinkTable thead th').each(function(index) {
     if ($(this).text().toLowerCase() === 'ring') {
         $(this).addClass('dt-ring');
@@ -1788,20 +1994,20 @@ $(document).ready(function () {
     }
   });
 
-  var table = $('#resultLinkTable').DataTable({
+  var detailTable = $('#resultLinkTable').DataTable({
     paging: true,
     searching: true,
     ordering: true,
-    pageLength: 25,
+    pageLength: 15,
+    autoWidth: false,
     columnDefs: [
-      { targets: 0, orderable: false, searchable: false } // No tidak bisa sort/search
+      { targets: 0, orderable: false, searchable: false }
     ]
   });
 
-  // === Auto re-number saat sort / filter ===
-  table.on('order.dt search.dt draw.dt', function () {
+  detailTable.on('order.dt search.dt draw.dt', function () {
     let i = 1;
-    table.rows({ search: 'applied', order: 'applied' }).every(function () {
+    detailTable.rows({ search: 'applied', order: 'applied' }).every(function () {
       var node = this.node();
       $('td.dt-rownum', node).html(i++);
     });
