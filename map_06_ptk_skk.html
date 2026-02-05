@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_97cf075aa22d843067cff1cc90bd0c53 {
+                #map_ac36ee2f9c69740368ee0531001ac8d2 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -81,14 +81,14 @@
   <div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:green;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">INTEGRASI</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:red;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">POWER ON</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:blue;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">INSTALL</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:purple;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">MOS</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:gray;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">NY MOS</span></div>
 </div>
     
-            <div class="folium-map" id="map_97cf075aa22d843067cff1cc90bd0c53" ></div>
+            <div class="folium-map" id="map_ac36ee2f9c69740368ee0531001ac8d2" ></div>
         
 </body>
 <script>
     
     
-            var map_97cf075aa22d843067cff1cc90bd0c53 = L.map(
-                "map_97cf075aa22d843067cff1cc90bd0c53",
+            var map_ac36ee2f9c69740368ee0531001ac8d2 = L.map(
+                "map_ac36ee2f9c69740368ee0531001ac8d2",
                 {
                     center: [-0.11494955865906804, 109.93316787131812],
                     crs: L.CRS.EPSG3857,
@@ -105,7 +105,7 @@
 
         
     
-            var tile_layer_1b5cda97d62ec3488e22bc7764c9ecac = L.tileLayer(
+            var tile_layer_3cd142a1410326db7ffe3852e1ebac3d = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -122,10 +122,10 @@
             );
         
     
-            tile_layer_1b5cda97d62ec3488e22bc7764c9ecac.addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            tile_layer_3cd142a1410326db7ffe3852e1ebac3d.addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-        function geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_styler(feature) {
+        function geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_styler(feature) {
             switch(feature.properties.working) {
                 case "JAWI": case "PONTIANAK": case "SEI KAKAP": case "SEI DURI": case "MEMAPAWAH": case "PAK MITRATEL- GUNUNG PAGAR": case "BENGKAYANG": case "SAMBAS": case "TSEL SUBAH SBS013": case "SUKADANA": case "TSEL SUNGAI LAUR KTP047": case "TSEL BALAIBEKUAK KTP048": case "TSEL MODANG SAG090": case "NANGA PINOH": case "TSEL BANCOH": case "SINTANG": case "SEKADAU": 
                     return {"color": "red", "fillColor": "red", "fillOpacity": 0.9, "opacity": 1, "weight": 2};
@@ -137,13 +137,13 @@
                     return {"color": "gray", "fillColor": "gray", "fillOpacity": 0.9, "opacity": 1, "weight": 2};
             }
         }
-        function geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_highlighter(feature) {
+        function geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_highlighter(feature) {
             switch(feature.properties.working) {
                 default:
                     return {"opacity": 1, "weight": 6};
             }
         }
-        function geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_pointToLayer(feature, latlng) {
+        function geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_pointToLayer(feature, latlng) {
             var opts = {
   "stroke": true,
   "color": "#3388ff",
@@ -161,46 +161,46 @@
   "radius": 7,
 };
             
-            let style = geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_styler(feature)
+            let style = geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_styler(feature)
             Object.assign(opts, style)
             
             return new L.CircleMarker(latlng, opts)
         }
 
-        function geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_onEachFeature(feature, layer) {
+        function geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_onEachFeature(feature, layer) {
 
             layer.on({
                 mouseout: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                            geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3.resetStyle(e.target);
+                            geo_json_7ac96c3ebc88a4c4b429ea75d140b9be.resetStyle(e.target);
                     }
                 },
                 mouseover: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_highlighter(e.target.feature)
+                        const highlightStyle = geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_highlighter(e.target.feature)
                         e.target.setStyle(highlightStyle);
                     }
                 },
             });
         };
-        var geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3 = L.geoJson(null, {
-                onEachFeature: geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_onEachFeature,
+        var geo_json_7ac96c3ebc88a4c4b429ea75d140b9be = L.geoJson(null, {
+                onEachFeature: geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_onEachFeature,
             
-                style: geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_styler,
-                pointToLayer: geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_pointToLayer,
+                style: geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_styler,
+                pointToLayer: geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_pointToLayer,
             ...{
 }
         });
 
-        function geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_add (data) {
-            geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3
+        function geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_add (data) {
+            geo_json_7ac96c3ebc88a4c4b429ea75d140b9be
                 .addData(data);
         }
-            geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3_add({"features": [{"geometry": {"coordinates": [109.31748209635606, -0.0069672016265225], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eJAWI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "JAWI"}, "type": "Feature"}, {"geometry": {"coordinates": [109.33341928233568, -0.0338634160682739], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePONTIANAK\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PONTIANAK"}, "type": "Feature"}, {"geometry": {"coordinates": [109.1646749122219, -0.0479314827882613], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSEI KAKAP\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SEI KAKAP"}, "type": "Feature"}, {"geometry": {"coordinates": [109.07654537199612, 0.2749838321909539], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSEI PINYUH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SEI PINYUH"}, "type": "Feature"}, {"geometry": {"coordinates": [109.32875173735842, -0.0039340846424309], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSIANTAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIANTAN"}, "type": "Feature"}, {"geometry": {"coordinates": [108.98116071505612, 0.9058479532709106], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSINGKAWANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SINGKAWANG"}, "type": "Feature"}, {"geometry": {"coordinates": [108.93180466804137, 0.5649405542695722], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSEI DURI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SEI DURI"}, "type": "Feature"}, {"geometry": {"coordinates": [108.96128098319926, 0.3642452386837918], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eMEMAPAWAH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "MEMAPAWAH"}, "type": "Feature"}, {"geometry": {"coordinates": [109.9308512, 0.1799346], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePAK MITRATEL- GUNUNG PAGAR\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PAK MITRATEL- GUNUNG PAGAR"}, "type": "Feature"}, {"geometry": {"coordinates": [109.95396689502807, 0.3855099568069939], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eNGABANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "NGABANG"}, "type": "Feature"}, {"geometry": {"coordinates": [109.00423325084826, 0.9049190265943656], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eROBAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "ROBAN"}, "type": "Feature"}, {"geometry": {"coordinates": [109.47263738153369, 0.8211780546490807], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eBENGKAYANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BENGKAYANG"}, "type": "Feature"}, {"geometry": {"coordinates": [109.73382, 0.5345], "type": "Point"}, "properties": {"clr": "gray", "result": "NY MOS", "tooltip": "\u003cb\u003eTSEL ANIK DINGIR NBA036\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eNY MOS\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL ANIK DINGIR NBA036"}, "type": "Feature"}, {"geometry": {"coordinates": [110.2304616, 0.285105], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSOSOK\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SOSOK"}, "type": "Feature"}, {"geometry": {"coordinates": [110.42801699317718, 0.8223057374157678], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eBALAI KARANGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BALAI KARANGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [109.3011251526966, 1.3608697728268175], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSAMBAS\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SAMBAS"}, "type": "Feature"}, {"geometry": {"coordinates": [109.54088, 1.1789], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL SUBAH SBS013\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SUBAH SBS013"}, "type": "Feature"}, {"geometry": {"coordinates": [110.11091, -0.03075], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL TAYAN SAG015\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL TAYAN SAG015"}, "type": "Feature"}, {"geometry": {"coordinates": [109.69551, -0.01379], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL PENEMPAT MPW072\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL PENEMPAT MPW072"}, "type": "Feature"}, {"geometry": {"coordinates": [109.37648932230437, -0.0856908112168963], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSUNGAI RAYA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "SUNGAI RAYA"}, "type": "Feature"}, {"geometry": {"coordinates": [109.3507547305812, -0.0871538088833194], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSUNGAI RAYA DALAM\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "SUNGAI RAYA DALAM"}, "type": "Feature"}, {"geometry": {"coordinates": [109.95163590821724, -1.23806105763009], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSUKADANA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SUKADANA"}, "type": "Feature"}, {"geometry": {"coordinates": [109.97755298008704, -1.8288227227813432], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eKETAPANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "KETAPANG"}, "type": "Feature"}, {"geometry": {"coordinates": [110.12194148602543, -2.1203427555048107], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePAK MITRATEL - PAGAR ANTIMUN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PAK MITRATEL - PAGAR ANTIMUN"}, "type": "Feature"}, {"geometry": {"coordinates": [110.20515522388057, -2.515924560464724], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eKENDAWANGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "KENDAWANGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [110.47711, -1.77623], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eTSEL SEI MELAYU KTP014\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "TSEL SEI MELAYU KTP014"}, "type": "Feature"}, {"geometry": {"coordinates": [110.565, -1.52065], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL NANGA KTP019\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL NANGA KTP019"}, "type": "Feature"}, {"geometry": {"coordinates": [110.52772, -1.24573], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL SANDAI KTP016\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SANDAI KTP016"}, "type": "Feature"}, {"geometry": {"coordinates": [110.49132, -0.95141], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL SUNGAI LAUR KTP047\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SUNGAI LAUR KTP047"}, "type": "Feature"}, {"geometry": {"coordinates": [110.36604, -0.52488], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL BALAIBEKUAK KTP048\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL BALAIBEKUAK KTP048"}, "type": "Feature"}, {"geometry": {"coordinates": [110.13017, -0.30335], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL MODANG SAG090\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL MODANG SAG090"}, "type": "Feature"}, {"geometry": {"coordinates": [111.74649205150808, -0.3369904560465154], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eNANGA PINOH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "NANGA PINOH"}, "type": "Feature"}, {"geometry": {"coordinates": [111.55871147968756, -0.1129396286907135], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL BANCOH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL BANCOH"}, "type": "Feature"}, {"geometry": {"coordinates": [111.49353383382694, 0.0708934051797562], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSINTANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SINTANG"}, "type": "Feature"}, {"geometry": {"coordinates": [111.23518637968706, 0.0102017441784291], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL LENGKENAT\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL LENGKENAT"}, "type": "Feature"}, {"geometry": {"coordinates": [110.8877501068076, 0.0245834454676016], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSEKADAU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SEKADAU"}, "type": "Feature"}, {"geometry": {"coordinates": [110.60392789502922, 0.1229905134526375], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSANGGAU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SANGGAU"}, "type": "Feature"}], "type": "FeatureCollection"});
+            geo_json_7ac96c3ebc88a4c4b429ea75d140b9be_add({"features": [{"geometry": {"coordinates": [109.31748209635606, -0.0069672016265225], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eJAWI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "JAWI"}, "type": "Feature"}, {"geometry": {"coordinates": [109.33341928233568, -0.0338634160682739], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePONTIANAK\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PONTIANAK"}, "type": "Feature"}, {"geometry": {"coordinates": [109.1646749122219, -0.0479314827882613], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSEI KAKAP\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SEI KAKAP"}, "type": "Feature"}, {"geometry": {"coordinates": [109.07654537199612, 0.2749838321909539], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSEI PINYUH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SEI PINYUH"}, "type": "Feature"}, {"geometry": {"coordinates": [109.32875173735842, -0.0039340846424309], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSIANTAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIANTAN"}, "type": "Feature"}, {"geometry": {"coordinates": [108.98116071505612, 0.9058479532709106], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSINGKAWANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SINGKAWANG"}, "type": "Feature"}, {"geometry": {"coordinates": [108.93180466804137, 0.5649405542695722], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSEI DURI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SEI DURI"}, "type": "Feature"}, {"geometry": {"coordinates": [108.96128098319926, 0.3642452386837918], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eMEMAPAWAH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "MEMAPAWAH"}, "type": "Feature"}, {"geometry": {"coordinates": [109.9308512, 0.1799346], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePAK MITRATEL- GUNUNG PAGAR\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PAK MITRATEL- GUNUNG PAGAR"}, "type": "Feature"}, {"geometry": {"coordinates": [109.95396689502807, 0.3855099568069939], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eNGABANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "NGABANG"}, "type": "Feature"}, {"geometry": {"coordinates": [109.00423325084826, 0.9049190265943656], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eROBAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "ROBAN"}, "type": "Feature"}, {"geometry": {"coordinates": [109.47263738153369, 0.8211780546490807], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eBENGKAYANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BENGKAYANG"}, "type": "Feature"}, {"geometry": {"coordinates": [109.73382, 0.5345], "type": "Point"}, "properties": {"clr": "gray", "result": "NY MOS", "tooltip": "\u003cb\u003eTSEL ANIK DINGIR NBA036\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eNY MOS\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL ANIK DINGIR NBA036"}, "type": "Feature"}, {"geometry": {"coordinates": [110.2304616, 0.285105], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSOSOK\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SOSOK"}, "type": "Feature"}, {"geometry": {"coordinates": [110.42801699317718, 0.8223057374157678], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eBALAI KARANGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BALAI KARANGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [109.3011251526966, 1.3608697728268175], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSAMBAS\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SAMBAS"}, "type": "Feature"}, {"geometry": {"coordinates": [109.54088, 1.1789], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL SUBAH SBS013\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SUBAH SBS013"}, "type": "Feature"}, {"geometry": {"coordinates": [110.11091, -0.03075], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL TAYAN SAG015\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL TAYAN SAG015"}, "type": "Feature"}, {"geometry": {"coordinates": [109.69551, -0.01379], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL PENEMPAT MPW072\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL PENEMPAT MPW072"}, "type": "Feature"}, {"geometry": {"coordinates": [109.37648932230437, -0.0856908112168963], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSUNGAI RAYA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "SUNGAI RAYA"}, "type": "Feature"}, {"geometry": {"coordinates": [109.3507547305812, -0.0871538088833194], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSUNGAI RAYA DALAM\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "SUNGAI RAYA DALAM"}, "type": "Feature"}, {"geometry": {"coordinates": [109.95163590821724, -1.23806105763009], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSUKADANA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SUKADANA"}, "type": "Feature"}, {"geometry": {"coordinates": [109.97755298008704, -1.8288227227813432], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eKETAPANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "KETAPANG"}, "type": "Feature"}, {"geometry": {"coordinates": [110.12194148602543, -2.1203427555048107], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePAK MITRATEL - PAGAR ANTIMUN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PAK MITRATEL - PAGAR ANTIMUN"}, "type": "Feature"}, {"geometry": {"coordinates": [110.20515522388057, -2.515924560464724], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eKENDAWANGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "KENDAWANGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [110.47711, -1.77623], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eTSEL SEI MELAYU KTP014\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "TSEL SEI MELAYU KTP014"}, "type": "Feature"}, {"geometry": {"coordinates": [110.565, -1.52065], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL NANGA KTP019\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL NANGA KTP019"}, "type": "Feature"}, {"geometry": {"coordinates": [110.52772, -1.24573], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL SANDAI KTP016\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SANDAI KTP016"}, "type": "Feature"}, {"geometry": {"coordinates": [110.49132, -0.95141], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL SUNGAI LAUR KTP047\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SUNGAI LAUR KTP047"}, "type": "Feature"}, {"geometry": {"coordinates": [110.36604, -0.52488], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL BALAIBEKUAK KTP048\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL BALAIBEKUAK KTP048"}, "type": "Feature"}, {"geometry": {"coordinates": [110.13017, -0.30335], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL MODANG SAG090\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL MODANG SAG090"}, "type": "Feature"}, {"geometry": {"coordinates": [111.74649205150808, -0.3369904560465154], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eNANGA PINOH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "NANGA PINOH"}, "type": "Feature"}, {"geometry": {"coordinates": [111.55871147968756, -0.1129396286907135], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL BANCOH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL BANCOH"}, "type": "Feature"}, {"geometry": {"coordinates": [111.49353383382694, 0.0708934051797562], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSINTANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SINTANG"}, "type": "Feature"}, {"geometry": {"coordinates": [111.23518637968706, 0.0102017441784291], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL LENGKENAT\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL LENGKENAT"}, "type": "Feature"}, {"geometry": {"coordinates": [110.8877501068076, 0.0245834454676016], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSEKADAU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SEKADAU"}, "type": "Feature"}, {"geometry": {"coordinates": [110.60392789502922, 0.1229905134526375], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSANGGAU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SANGGAU"}, "type": "Feature"}], "type": "FeatureCollection"});
 
         
     
-    geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3.bindTooltip(
+    geo_json_7ac96c3ebc88a4c4b429ea75d140b9be.bindTooltip(
     function(layer){
     let div = L.DomUtil.create('div');
     
@@ -235,11 +235,11 @@
 });
                      
     
-            geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3.addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            geo_json_7ac96c3ebc88a4c4b429ea75d140b9be.addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            var geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3searchControl = new L.Control.Search({
-                layer: geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3,
+            var geo_json_7ac96c3ebc88a4c4b429ea75d140b9besearchControl = new L.Control.Search({
+                layer: geo_json_7ac96c3ebc88a4c4b429ea75d140b9be,
                 
                 propertyName: 'working',
                 
@@ -252,8 +252,8 @@
                 hideMarkerOnCollapse: true
             
                 });
-                geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3searchControl.on('search:locationfound', function(e) {
-                    geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3.setStyle(function(feature){
+                geo_json_7ac96c3ebc88a4c4b429ea75d140b9besearchControl.on('search:locationfound', function(e) {
+                    geo_json_7ac96c3ebc88a4c4b429ea75d140b9be.setStyle(function(feature){
                         return feature.properties.style
                     })
                     
@@ -264,22 +264,22 @@
                     if(e.layer._popup)
                         e.layer.openPopup();
                 })
-                geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3searchControl.on('search:collapsed', function(e) {
-                        geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3.setStyle(function(feature){
+                geo_json_7ac96c3ebc88a4c4b429ea75d140b9besearchControl.on('search:collapsed', function(e) {
+                        geo_json_7ac96c3ebc88a4c4b429ea75d140b9be.setStyle(function(feature){
                             return feature.properties.style
                     });
                 });
-            map_97cf075aa22d843067cff1cc90bd0c53.addControl( geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3searchControl );
+            map_ac36ee2f9c69740368ee0531001ac8d2.addControl( geo_json_7ac96c3ebc88a4c4b429ea75d140b9besearchControl );
 
         
     
-            var poly_line_67ade2f99c2f4efd830bde50ce21cf37 = L.polyline(
+            var poly_line_d7b1a2a315ed50870ba7595a075b6376 = L.polyline(
                 [[-0.0069672016265225, 109.31748209635606], [-0.0338634160682739, 109.33341928233568]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_67ade2f99c2f4efd830bde50ce21cf37.bindTooltip(
+            poly_line_d7b1a2a315ed50870ba7595a075b6376.bindTooltip(
                 `<div>
                      JAWI ⇄ PONTIANAK<br><br>Jumlah Service (segmen): 1<br>- JAWI T2 - SEI KAKAP T1
                  </div>`,
@@ -289,13 +289,13 @@
             );
         
     
-            var poly_line_4ee257d1419c2d827011024e3a18854f = L.polyline(
+            var poly_line_448c0af252aea54cf993fa3d56eb990a = L.polyline(
                 [[-0.0338634160682739, 109.33341928233568], [-0.0479314827882613, 109.1646749122219]],
                 {"bubblingMouseEvents": true, "color": "#000000ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#000000ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_4ee257d1419c2d827011024e3a18854f.bindTooltip(
+            poly_line_448c0af252aea54cf993fa3d56eb990a.bindTooltip(
                 `<div>
                      PONTIANAK ⇄ SEI KAKAP<br><br>Jumlah Service (segmen): 3<br>- JAWI T2 - SEI KAKAP T1<br>- SEI PINYUH T2 - SEI KAKAP T1<br>- NGABANG T2 - SEI KAKAP T1
                  </div>`,
@@ -305,13 +305,13 @@
             );
         
     
-            var poly_line_3e20ceaf4cddfc786013323ba5486622 = L.polyline(
+            var poly_line_8ce7c803e7d56b2d9e201e6efa3f4107 = L.polyline(
                 [[0.2749838321909539, 109.07654537199612], [-0.0039340846424309, 109.32875173735842]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_3e20ceaf4cddfc786013323ba5486622.bindTooltip(
+            poly_line_8ce7c803e7d56b2d9e201e6efa3f4107.bindTooltip(
                 `<div>
                      SEI PINYUH ⇄ SIANTAN<br><br>Jumlah Service (segmen): 2<br>- SEI PINYUH T2 - SEI KAKAP T1<br>- NGABANG T2 - SEI KAKAP T1
                  </div>`,
@@ -321,13 +321,13 @@
             );
         
     
-            var poly_line_1bd943f6a08d2135af2fd7fb3a0da033 = L.polyline(
+            var poly_line_a9e8c6bae973d4986ff7496106618743 = L.polyline(
                 [[-0.0338634160682739, 109.33341928233568], [-0.0039340846424309, 109.32875173735842]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_1bd943f6a08d2135af2fd7fb3a0da033.bindTooltip(
+            poly_line_a9e8c6bae973d4986ff7496106618743.bindTooltip(
                 `<div>
                      PONTIANAK ⇄ SIANTAN<br><br>Jumlah Service (segmen): 2<br>- SEI PINYUH T2 - SEI KAKAP T1<br>- NGABANG T2 - SEI KAKAP T1
                  </div>`,
@@ -337,13 +337,13 @@
             );
         
     
-            var poly_line_42eaf07c15991e95a8e1aebb15b60fdc = L.polyline(
+            var poly_line_f02420a3b91f23c2bf7380ee124ac4bc = L.polyline(
                 [[0.5649405542695722, 108.93180466804137], [0.9058479532709106, 108.98116071505612]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_42eaf07c15991e95a8e1aebb15b60fdc.bindTooltip(
+            poly_line_f02420a3b91f23c2bf7380ee124ac4bc.bindTooltip(
                 `<div>
                      SEI DURI ⇄ SINGKAWANG<br><br>Jumlah Service (segmen): 1<br>- SINGKAWANG T2 - NGABANG T2
                  </div>`,
@@ -353,13 +353,13 @@
             );
         
     
-            var poly_line_d5e5cce783dc199603be3fe6551aefd1 = L.polyline(
+            var poly_line_3c3bb3bb973be1df5205805012cb6c10 = L.polyline(
                 [[0.3642452386837918, 108.96128098319926], [0.5649405542695722, 108.93180466804137]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_d5e5cce783dc199603be3fe6551aefd1.bindTooltip(
+            poly_line_3c3bb3bb973be1df5205805012cb6c10.bindTooltip(
                 `<div>
                      MEMAPAWAH ⇄ SEI DURI<br><br>Jumlah Service (segmen): 1<br>- SINGKAWANG T2 - NGABANG T2
                  </div>`,
@@ -369,13 +369,13 @@
             );
         
     
-            var poly_line_67dfecf86636f2ebd9589744a699faf2 = L.polyline(
+            var poly_line_99f56fadf0b664e45705967ddfcf373e = L.polyline(
                 [[0.3642452386837918, 108.96128098319926], [0.2749838321909539, 109.07654537199612]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_67dfecf86636f2ebd9589744a699faf2.bindTooltip(
+            poly_line_99f56fadf0b664e45705967ddfcf373e.bindTooltip(
                 `<div>
                      MEMAPAWAH ⇄ SEI PINYUH<br><br>Jumlah Service (segmen): 1<br>- SINGKAWANG T2 - NGABANG T2
                  </div>`,
@@ -385,13 +385,13 @@
             );
         
     
-            var poly_line_83be5716428b895efc726e9c1e8ef810 = L.polyline(
+            var poly_line_42d1c8be6baa0026fb53a98f5d6ae4d3 = L.polyline(
                 [[0.1799346, 109.9308512], [0.2749838321909539, 109.07654537199612]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_83be5716428b895efc726e9c1e8ef810.bindTooltip(
+            poly_line_42d1c8be6baa0026fb53a98f5d6ae4d3.bindTooltip(
                 `<div>
                      PAK MITRATEL- GUNUNG PAGAR ⇄ SEI PINYUH<br><br>Jumlah Service (segmen): 2<br>- SINGKAWANG T2 - NGABANG T2<br>- NGABANG T2 - SEI KAKAP T1
                  </div>`,
@@ -401,13 +401,13 @@
             );
         
     
-            var poly_line_3f4d7e742522b42ebd3e0f1b2b3dbd66 = L.polyline(
+            var poly_line_cbeb2625bad49aaac94f8eebfd9bf9c1 = L.polyline(
                 [[0.3855099568069939, 109.95396689502807], [0.1799346, 109.9308512]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_3f4d7e742522b42ebd3e0f1b2b3dbd66.bindTooltip(
+            poly_line_cbeb2625bad49aaac94f8eebfd9bf9c1.bindTooltip(
                 `<div>
                      NGABANG ⇄ PAK MITRATEL- GUNUNG PAGAR<br><br>Jumlah Service (segmen): 2<br>- SINGKAWANG T2 - NGABANG T2<br>- NGABANG T2 - SEI KAKAP T1
                  </div>`,
@@ -417,13 +417,13 @@
             );
         
     
-            var poly_line_052c806b71de11a4a960fbee75de12e3 = L.polyline(
+            var poly_line_023e0f58fab8f340c5a05833e1dba4c0 = L.polyline(
                 [[0.8211780546490807, 109.47263738153369], [0.9049190265943656, 109.00423325084826]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_052c806b71de11a4a960fbee75de12e3.bindTooltip(
+            poly_line_023e0f58fab8f340c5a05833e1dba4c0.bindTooltip(
                 `<div>
                      BENGKAYANG ⇄ ROBAN<br><br>Jumlah Service (segmen): 1<br>- ROBAN T3 - BENGKAYANG T3
                  </div>`,
@@ -433,13 +433,13 @@
             );
         
     
-            var poly_line_d4a1355dc9a0c95640d9928166693373 = L.polyline(
+            var poly_line_fa88f178b5a2ec05ac304df51acb7307 = L.polyline(
                 [[0.8211780546490807, 109.47263738153369], [0.5345, 109.73382]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_d4a1355dc9a0c95640d9928166693373.bindTooltip(
+            poly_line_fa88f178b5a2ec05ac304df51acb7307.bindTooltip(
                 `<div>
                      BENGKAYANG ⇄ TSEL ANIK DINGIR NBA036<br><br>Jumlah Service (segmen): 2<br>- BENGKAYANG T3 - BALAI KARANGAN T3<br>- SAMBAS T3 - NGABANG T2
                  </div>`,
@@ -449,13 +449,13 @@
             );
         
     
-            var poly_line_ac983a41803e4b859180061dac11fc93 = L.polyline(
+            var poly_line_b6809bf8a593d7f9a7877289e76f592e = L.polyline(
                 [[0.3855099568069939, 109.95396689502807], [0.5345, 109.73382]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_ac983a41803e4b859180061dac11fc93.bindTooltip(
+            poly_line_b6809bf8a593d7f9a7877289e76f592e.bindTooltip(
                 `<div>
                      NGABANG ⇄ TSEL ANIK DINGIR NBA036<br><br>Jumlah Service (segmen): 2<br>- BENGKAYANG T3 - BALAI KARANGAN T3<br>- SAMBAS T3 - NGABANG T2
                  </div>`,
@@ -465,13 +465,13 @@
             );
         
     
-            var poly_line_78a23dfd40615fe816695c89b0c69c25 = L.polyline(
+            var poly_line_9a0681279fe52d4b062f5d073473796d = L.polyline(
                 [[0.3855099568069939, 109.95396689502807], [0.285105, 110.2304616]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_78a23dfd40615fe816695c89b0c69c25.bindTooltip(
+            poly_line_9a0681279fe52d4b062f5d073473796d.bindTooltip(
                 `<div>
                      NGABANG ⇄ SOSOK<br><br>Jumlah Service (segmen): 1<br>- BENGKAYANG T3 - BALAI KARANGAN T3
                  </div>`,
@@ -481,13 +481,13 @@
             );
         
     
-            var poly_line_3acb388b461cf4b43cbc0833fe5574d3 = L.polyline(
+            var poly_line_0af1b1a7f1d7d99bfe70183050633122 = L.polyline(
                 [[0.8223057374157678, 110.42801699317718], [0.285105, 110.2304616]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_3acb388b461cf4b43cbc0833fe5574d3.bindTooltip(
+            poly_line_0af1b1a7f1d7d99bfe70183050633122.bindTooltip(
                 `<div>
                      BALAI KARANGAN ⇄ SOSOK<br><br>Jumlah Service (segmen): 1<br>- BENGKAYANG T3 - BALAI KARANGAN T3
                  </div>`,
@@ -497,13 +497,13 @@
             );
         
     
-            var poly_line_c7ffaf0b6a7b27eb19da6eb80c4b1897 = L.polyline(
+            var poly_line_e188a3bb2c44253e7f9e55c3d92d0704 = L.polyline(
                 [[1.3608697728268175, 109.3011251526966], [1.1789, 109.54088]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_c7ffaf0b6a7b27eb19da6eb80c4b1897.bindTooltip(
+            poly_line_e188a3bb2c44253e7f9e55c3d92d0704.bindTooltip(
                 `<div>
                      SAMBAS ⇄ TSEL SUBAH SBS013<br><br>Jumlah Service (segmen): 1<br>- SAMBAS T3 - NGABANG T2
                  </div>`,
@@ -513,13 +513,13 @@
             );
         
     
-            var poly_line_ec4af9fd7b65cee17b55aae86d31f8e9 = L.polyline(
+            var poly_line_a6fa87ecf4deec71d4de3359b362bfe7 = L.polyline(
                 [[0.8211780546490807, 109.47263738153369], [1.1789, 109.54088]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_ec4af9fd7b65cee17b55aae86d31f8e9.bindTooltip(
+            poly_line_a6fa87ecf4deec71d4de3359b362bfe7.bindTooltip(
                 `<div>
                      BENGKAYANG ⇄ TSEL SUBAH SBS013<br><br>Jumlah Service (segmen): 1<br>- SAMBAS T3 - NGABANG T2
                  </div>`,
@@ -529,13 +529,13 @@
             );
         
     
-            var poly_line_7f49efdcf24c7635a1484bffa12f1e00 = L.polyline(
+            var poly_line_089ceff2c5b249fb175a09a6de9196ae = L.polyline(
                 [[0.285105, 110.2304616], [-0.03075, 110.11091]],
                 {"bubblingMouseEvents": true, "color": "#000000ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#000000ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_7f49efdcf24c7635a1484bffa12f1e00.bindTooltip(
+            poly_line_089ceff2c5b249fb175a09a6de9196ae.bindTooltip(
                 `<div>
                      SOSOK ⇄ TSEL TAYAN SAG015<br><br>Jumlah Service (segmen): 3<br>- SOSOK T2 - SEI KAKAP T1<br>- KENDAWANGAN T3 - SOSOK T2<br>- PONTIANAK T1 - SINTANG T2
                  </div>`,
@@ -545,13 +545,13 @@
             );
         
     
-            var poly_line_83567b727b178d8f1218a38537d4ee0e = L.polyline(
+            var poly_line_379b7ec8dd3b63af7e1f3c98505204dc = L.polyline(
                 [[-0.01379, 109.69551], [-0.03075, 110.11091]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_83567b727b178d8f1218a38537d4ee0e.bindTooltip(
+            poly_line_379b7ec8dd3b63af7e1f3c98505204dc.bindTooltip(
                 `<div>
                      TSEL PENEMPAT MPW072 ⇄ TSEL TAYAN SAG015<br><br>Jumlah Service (segmen): 2<br>- SOSOK T2 - SEI KAKAP T1<br>- PONTIANAK T1 - SINTANG T2
                  </div>`,
@@ -561,13 +561,13 @@
             );
         
     
-            var poly_line_de8a6b36c88622b0bedc020a49cd049e = L.polyline(
+            var poly_line_d88f0db614d095806817650a302dd9dc = L.polyline(
                 [[-0.0856908112168963, 109.37648932230437], [-0.01379, 109.69551]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_de8a6b36c88622b0bedc020a49cd049e.bindTooltip(
+            poly_line_d88f0db614d095806817650a302dd9dc.bindTooltip(
                 `<div>
                      SUNGAI RAYA ⇄ TSEL PENEMPAT MPW072<br><br>Jumlah Service (segmen): 2<br>- SOSOK T2 - SEI KAKAP T1<br>- PONTIANAK T1 - SINTANG T2
                  </div>`,
@@ -577,13 +577,13 @@
             );
         
     
-            var poly_line_6ab163ac8963b63369c3b04b9c90c5c2 = L.polyline(
+            var poly_line_19e0d319bf04b049ccd6255de992484f = L.polyline(
                 [[-0.0856908112168963, 109.37648932230437], [-0.0871538088833194, 109.3507547305812]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_6ab163ac8963b63369c3b04b9c90c5c2.bindTooltip(
+            poly_line_19e0d319bf04b049ccd6255de992484f.bindTooltip(
                 `<div>
                      SUNGAI RAYA ⇄ SUNGAI RAYA DALAM<br><br>Jumlah Service (segmen): 1<br>- SOSOK T2 - SEI KAKAP T1
                  </div>`,
@@ -593,13 +593,13 @@
             );
         
     
-            var poly_line_db8bb1ae3a12a2cda39bf65c35bf6995 = L.polyline(
+            var poly_line_3eb741302dbb31c5a0476de05ce2cc9a = L.polyline(
                 [[-0.0479314827882613, 109.1646749122219], [-0.0871538088833194, 109.3507547305812]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_db8bb1ae3a12a2cda39bf65c35bf6995.bindTooltip(
+            poly_line_3eb741302dbb31c5a0476de05ce2cc9a.bindTooltip(
                 `<div>
                      SEI KAKAP ⇄ SUNGAI RAYA DALAM<br><br>Jumlah Service (segmen): 1<br>- SOSOK T2 - SEI KAKAP T1
                  </div>`,
@@ -609,13 +609,13 @@
             );
         
     
-            var poly_line_a9a843cb6b4c10adf0ac53a210e3364c = L.polyline(
+            var poly_line_a65574d2d5f4e677e860d2ee66211265 = L.polyline(
                 [[-1.8288227227813432, 109.97755298008704], [-1.23806105763009, 109.95163590821724]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_a9a843cb6b4c10adf0ac53a210e3364c.bindTooltip(
+            poly_line_a65574d2d5f4e677e860d2ee66211265.bindTooltip(
                 `<div>
                      KETAPANG ⇄ SUKADANA<br><br>Jumlah Service (segmen): 1<br>- SUKADANA T3 - KENDAWANGAN T3
                  </div>`,
@@ -625,13 +625,13 @@
             );
         
     
-            var poly_line_2954671a13ef54dd4cec6ab788bc9b96 = L.polyline(
+            var poly_line_6c0686e5c8c0bc0bd3fb791b80e45e37 = L.polyline(
                 [[-1.8288227227813432, 109.97755298008704], [-2.1203427555048107, 110.12194148602543]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_2954671a13ef54dd4cec6ab788bc9b96.bindTooltip(
+            poly_line_6c0686e5c8c0bc0bd3fb791b80e45e37.bindTooltip(
                 `<div>
                      KETAPANG ⇄ PAK MITRATEL - PAGAR ANTIMUN<br><br>Jumlah Service (segmen): 2<br>- SUKADANA T3 - KENDAWANGAN T3<br>- KENDAWANGAN T3 - SOSOK T2
                  </div>`,
@@ -641,13 +641,13 @@
             );
         
     
-            var poly_line_de56e19e607e5cb9274c959c840d3098 = L.polyline(
+            var poly_line_5684319481634141afb065abb41e8c5a = L.polyline(
                 [[-2.515924560464724, 110.20515522388057], [-2.1203427555048107, 110.12194148602543]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_de56e19e607e5cb9274c959c840d3098.bindTooltip(
+            poly_line_5684319481634141afb065abb41e8c5a.bindTooltip(
                 `<div>
                      KENDAWANGAN ⇄ PAK MITRATEL - PAGAR ANTIMUN<br><br>Jumlah Service (segmen): 2<br>- SUKADANA T3 - KENDAWANGAN T3<br>- KENDAWANGAN T3 - SOSOK T2
                  </div>`,
@@ -657,13 +657,13 @@
             );
         
     
-            var poly_line_a47cb71c8cfcdd8af6056bda1c5064b0 = L.polyline(
+            var poly_line_8f66df1528b458dafc691d7a79f27bdf = L.polyline(
                 [[-1.8288227227813432, 109.97755298008704], [-1.77623, 110.47711]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_a47cb71c8cfcdd8af6056bda1c5064b0.bindTooltip(
+            poly_line_8f66df1528b458dafc691d7a79f27bdf.bindTooltip(
                 `<div>
                      KETAPANG ⇄ TSEL SEI MELAYU KTP014<br><br>Jumlah Service (segmen): 1<br>- KENDAWANGAN T3 - SOSOK T2
                  </div>`,
@@ -673,13 +673,13 @@
             );
         
     
-            var poly_line_4504df155ead482323201629a1855935 = L.polyline(
+            var poly_line_0c287a9c3e772dd080e5aea1d90a5f4b = L.polyline(
                 [[-1.52065, 110.565], [-1.77623, 110.47711]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_4504df155ead482323201629a1855935.bindTooltip(
+            poly_line_0c287a9c3e772dd080e5aea1d90a5f4b.bindTooltip(
                 `<div>
                      TSEL NANGA KTP019 ⇄ TSEL SEI MELAYU KTP014<br><br>Jumlah Service (segmen): 1<br>- KENDAWANGAN T3 - SOSOK T2
                  </div>`,
@@ -689,13 +689,13 @@
             );
         
     
-            var poly_line_130672ad5c117b43d28e80bf739c6101 = L.polyline(
+            var poly_line_13b9735eb29073d4a9a825ae6c5e8c10 = L.polyline(
                 [[-1.52065, 110.565], [-1.24573, 110.52772]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_130672ad5c117b43d28e80bf739c6101.bindTooltip(
+            poly_line_13b9735eb29073d4a9a825ae6c5e8c10.bindTooltip(
                 `<div>
                      TSEL NANGA KTP019 ⇄ TSEL SANDAI KTP016<br><br>Jumlah Service (segmen): 1<br>- KENDAWANGAN T3 - SOSOK T2
                  </div>`,
@@ -705,13 +705,13 @@
             );
         
     
-            var poly_line_df6789f4f8ec6925ce6ac2b9b85f4e58 = L.polyline(
+            var poly_line_5ffce74616fe99f739674ad45f1f6958 = L.polyline(
                 [[-1.24573, 110.52772], [-0.95141, 110.49132]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_df6789f4f8ec6925ce6ac2b9b85f4e58.bindTooltip(
+            poly_line_5ffce74616fe99f739674ad45f1f6958.bindTooltip(
                 `<div>
                      TSEL SANDAI KTP016 ⇄ TSEL SUNGAI LAUR KTP047<br><br>Jumlah Service (segmen): 1<br>- KENDAWANGAN T3 - SOSOK T2
                  </div>`,
@@ -721,13 +721,13 @@
             );
         
     
-            var poly_line_b85a906d88927910af0254e584b04c76 = L.polyline(
+            var poly_line_a9106c78c609f653c3dcefbcf3a2a6f1 = L.polyline(
                 [[-0.52488, 110.36604], [-0.95141, 110.49132]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_b85a906d88927910af0254e584b04c76.bindTooltip(
+            poly_line_a9106c78c609f653c3dcefbcf3a2a6f1.bindTooltip(
                 `<div>
                      TSEL BALAIBEKUAK KTP048 ⇄ TSEL SUNGAI LAUR KTP047<br><br>Jumlah Service (segmen): 1<br>- KENDAWANGAN T3 - SOSOK T2
                  </div>`,
@@ -737,13 +737,13 @@
             );
         
     
-            var poly_line_7fff294108224d05025f2148c2e1d2d3 = L.polyline(
+            var poly_line_6cc57b9d0103ca939b709b69d316ddf5 = L.polyline(
                 [[-0.52488, 110.36604], [-0.30335, 110.13017]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_7fff294108224d05025f2148c2e1d2d3.bindTooltip(
+            poly_line_6cc57b9d0103ca939b709b69d316ddf5.bindTooltip(
                 `<div>
                      TSEL BALAIBEKUAK KTP048 ⇄ TSEL MODANG SAG090<br><br>Jumlah Service (segmen): 1<br>- KENDAWANGAN T3 - SOSOK T2
                  </div>`,
@@ -753,13 +753,13 @@
             );
         
     
-            var poly_line_bead84404563e80cb2b480769411186a = L.polyline(
+            var poly_line_fd9d3bb9f41fe245df0ad0e38bf1bf03 = L.polyline(
                 [[-0.30335, 110.13017], [-0.03075, 110.11091]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_bead84404563e80cb2b480769411186a.bindTooltip(
+            poly_line_fd9d3bb9f41fe245df0ad0e38bf1bf03.bindTooltip(
                 `<div>
                      TSEL MODANG SAG090 ⇄ TSEL TAYAN SAG015<br><br>Jumlah Service (segmen): 1<br>- KENDAWANGAN T3 - SOSOK T2
                  </div>`,
@@ -769,13 +769,13 @@
             );
         
     
-            var poly_line_cab9e4c71c219d220db56c709efb1184 = L.polyline(
+            var poly_line_17cac39714ff32a99661f60c64bc3007 = L.polyline(
                 [[-0.3369904560465154, 111.74649205150808], [-0.1129396286907135, 111.55871147968756]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_cab9e4c71c219d220db56c709efb1184.bindTooltip(
+            poly_line_17cac39714ff32a99661f60c64bc3007.bindTooltip(
                 `<div>
                      NANGA PINOH ⇄ TSEL BANCOH<br><br>Jumlah Service (segmen): 1<br>- NANGAPINOH T3 - SANGGAU T2
                  </div>`,
@@ -785,13 +785,13 @@
             );
         
     
-            var poly_line_59b8aeae221ca6c9020cb4199e83353b = L.polyline(
+            var poly_line_d7aecbcedf75cf0540b118aceeb4887c = L.polyline(
                 [[0.0708934051797562, 111.49353383382694], [-0.1129396286907135, 111.55871147968756]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_59b8aeae221ca6c9020cb4199e83353b.bindTooltip(
+            poly_line_d7aecbcedf75cf0540b118aceeb4887c.bindTooltip(
                 `<div>
                      SINTANG ⇄ TSEL BANCOH<br><br>Jumlah Service (segmen): 1<br>- NANGAPINOH T3 - SANGGAU T2
                  </div>`,
@@ -801,13 +801,13 @@
             );
         
     
-            var poly_line_2c939c7ce3812b50373e2f6667e9f238 = L.polyline(
+            var poly_line_f84c72fe561e6617b595cda23c057cae = L.polyline(
                 [[0.0708934051797562, 111.49353383382694], [0.0102017441784291, 111.23518637968706]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_2c939c7ce3812b50373e2f6667e9f238.bindTooltip(
+            poly_line_f84c72fe561e6617b595cda23c057cae.bindTooltip(
                 `<div>
                      SINTANG ⇄ TSEL LENGKENAT<br><br>Jumlah Service (segmen): 2<br>- NANGAPINOH T3 - SANGGAU T2<br>- PONTIANAK T1 - SINTANG T2
                  </div>`,
@@ -817,13 +817,13 @@
             );
         
     
-            var poly_line_a4ad7f8fa722e009f73daf551f2685da = L.polyline(
+            var poly_line_9043815b87dfdf362db0c88f0eea9474 = L.polyline(
                 [[0.0245834454676016, 110.8877501068076], [0.0102017441784291, 111.23518637968706]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_a4ad7f8fa722e009f73daf551f2685da.bindTooltip(
+            poly_line_9043815b87dfdf362db0c88f0eea9474.bindTooltip(
                 `<div>
                      SEKADAU ⇄ TSEL LENGKENAT<br><br>Jumlah Service (segmen): 2<br>- NANGAPINOH T3 - SANGGAU T2<br>- PONTIANAK T1 - SINTANG T2
                  </div>`,
@@ -833,13 +833,13 @@
             );
         
     
-            var poly_line_6e377365da77c1316e512f1b697ef051 = L.polyline(
+            var poly_line_27c3b300d5ef1e245444fcab87f9996b = L.polyline(
                 [[0.1229905134526375, 110.60392789502922], [0.0245834454676016, 110.8877501068076]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_6e377365da77c1316e512f1b697ef051.bindTooltip(
+            poly_line_27c3b300d5ef1e245444fcab87f9996b.bindTooltip(
                 `<div>
                      SANGGAU ⇄ SEKADAU<br><br>Jumlah Service (segmen): 2<br>- NANGAPINOH T3 - SANGGAU T2<br>- PONTIANAK T1 - SINTANG T2
                  </div>`,
@@ -849,13 +849,13 @@
             );
         
     
-            var poly_line_e225a5d52b07daded7eb641a7e22eb58 = L.polyline(
+            var poly_line_e148419c425307aec1b38a1b755f748c = L.polyline(
                 [[-0.0338634160682739, 109.33341928233568], [-0.0856908112168963, 109.37648932230437]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_e225a5d52b07daded7eb641a7e22eb58.bindTooltip(
+            poly_line_e148419c425307aec1b38a1b755f748c.bindTooltip(
                 `<div>
                      PONTIANAK ⇄ SUNGAI RAYA<br><br>Jumlah Service (segmen): 1<br>- PONTIANAK T1 - SINTANG T2
                  </div>`,
@@ -865,13 +865,13 @@
             );
         
     
-            var poly_line_96e8c235e40e1e50d3604572a4f04c0c = L.polyline(
+            var poly_line_8ec83feb6836f291ccef164ca59f2018 = L.polyline(
                 [[0.1229905134526375, 110.60392789502922], [0.285105, 110.2304616]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
         
     
-            poly_line_96e8c235e40e1e50d3604572a4f04c0c.bindTooltip(
+            poly_line_8ec83feb6836f291ccef164ca59f2018.bindTooltip(
                 `<div>
                      SANGGAU ⇄ SOSOK<br><br>Jumlah Service (segmen): 1<br>- PONTIANAK T1 - SINTANG T2
                  </div>`,
@@ -881,23 +881,23 @@
             );
         
     
-            var layer_control_6e88b25830db3b7caf105c838bc2a3ec_layers = {
+            var layer_control_10ef5527c0407206dcfc01a0040baf69_layers = {
                 base_layers : {
-                    "cartodbpositron" : tile_layer_1b5cda97d62ec3488e22bc7764c9ecac,
+                    "cartodbpositron" : tile_layer_3cd142a1410326db7ffe3852e1ebac3d,
                 },
                 overlays :  {
-                    "Nodes" : geo_json_eb4ba8d35247ad7eb36fa4257b6aa2f3,
+                    "Nodes" : geo_json_7ac96c3ebc88a4c4b429ea75d140b9be,
                 },
             };
-            let layer_control_6e88b25830db3b7caf105c838bc2a3ec = L.control.layers(
-                layer_control_6e88b25830db3b7caf105c838bc2a3ec_layers.base_layers,
-                layer_control_6e88b25830db3b7caf105c838bc2a3ec_layers.overlays,
+            let layer_control_10ef5527c0407206dcfc01a0040baf69 = L.control.layers(
+                layer_control_10ef5527c0407206dcfc01a0040baf69_layers.base_layers,
+                layer_control_10ef5527c0407206dcfc01a0040baf69_layers.overlays,
                 {
   "position": "topright",
   "collapsed": true,
   "autoZIndex": true,
 }
-            ).addTo(map_97cf075aa22d843067cff1cc90bd0c53);
+            ).addTo(map_ac36ee2f9c69740368ee0531001ac8d2);
 
         
 </script>
