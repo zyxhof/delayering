@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_9e8e13717fa7687bf6565d3332ebf305 {
+                #map_eb152677417294e1ae28564b79be1f0a {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -81,14 +81,14 @@
   <div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:green;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">INTEGRASI</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:red;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">POWER ON</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:blue;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">INSTALL</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:purple;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">MOS</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:gray;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">NY MOS</span></div>
 </div>
     
-            <div class="folium-map" id="map_9e8e13717fa7687bf6565d3332ebf305" ></div>
+            <div class="folium-map" id="map_eb152677417294e1ae28564b79be1f0a" ></div>
         
 </body>
 <script>
     
     
-            var map_9e8e13717fa7687bf6565d3332ebf305 = L.map(
-                "map_9e8e13717fa7687bf6565d3332ebf305",
+            var map_eb152677417294e1ae28564b79be1f0a = L.map(
+                "map_eb152677417294e1ae28564b79be1f0a",
                 {
                     center: [2.0631124184751832, 99.52588858187823],
                     crs: L.CRS.EPSG3857,
@@ -105,7 +105,7 @@
 
         
     
-            var tile_layer_8c5a8229a9978935a152b11d3ecd0c78 = L.tileLayer(
+            var tile_layer_c085b927647e1197a69bd245dcca56ce = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -122,10 +122,10 @@
             );
         
     
-            tile_layer_8c5a8229a9978935a152b11d3ecd0c78.addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            tile_layer_c085b927647e1197a69bd245dcca56ce.addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-        function geo_json_89356251b60a1d9dc547e00af17db16e_styler(feature) {
+        function geo_json_564da52707522fb838804ee55b3d0a2b_styler(feature) {
             switch(feature.properties.working) {
                 case "PEMATANG SIANTAR": case "REMBUNG MERAH": case "BALIGE": case "PARAPAT": case "PORSEA": 
                     return {"color": "green", "fillColor": "green", "fillOpacity": 0.9, "opacity": 1, "weight": 2};
@@ -135,13 +135,13 @@
                     return {"color": "red", "fillColor": "red", "fillOpacity": 0.9, "opacity": 1, "weight": 2};
             }
         }
-        function geo_json_89356251b60a1d9dc547e00af17db16e_highlighter(feature) {
+        function geo_json_564da52707522fb838804ee55b3d0a2b_highlighter(feature) {
             switch(feature.properties.working) {
                 default:
                     return {"opacity": 1, "weight": 6};
             }
         }
-        function geo_json_89356251b60a1d9dc547e00af17db16e_pointToLayer(feature, latlng) {
+        function geo_json_564da52707522fb838804ee55b3d0a2b_pointToLayer(feature, latlng) {
             var opts = {
   "stroke": true,
   "color": "#3388ff",
@@ -159,46 +159,46 @@
   "radius": 7,
 };
             
-            let style = geo_json_89356251b60a1d9dc547e00af17db16e_styler(feature)
+            let style = geo_json_564da52707522fb838804ee55b3d0a2b_styler(feature)
             Object.assign(opts, style)
             
             return new L.CircleMarker(latlng, opts)
         }
 
-        function geo_json_89356251b60a1d9dc547e00af17db16e_onEachFeature(feature, layer) {
+        function geo_json_564da52707522fb838804ee55b3d0a2b_onEachFeature(feature, layer) {
 
             layer.on({
                 mouseout: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                            geo_json_89356251b60a1d9dc547e00af17db16e.resetStyle(e.target);
+                            geo_json_564da52707522fb838804ee55b3d0a2b.resetStyle(e.target);
                     }
                 },
                 mouseover: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_89356251b60a1d9dc547e00af17db16e_highlighter(e.target.feature)
+                        const highlightStyle = geo_json_564da52707522fb838804ee55b3d0a2b_highlighter(e.target.feature)
                         e.target.setStyle(highlightStyle);
                     }
                 },
             });
         };
-        var geo_json_89356251b60a1d9dc547e00af17db16e = L.geoJson(null, {
-                onEachFeature: geo_json_89356251b60a1d9dc547e00af17db16e_onEachFeature,
+        var geo_json_564da52707522fb838804ee55b3d0a2b = L.geoJson(null, {
+                onEachFeature: geo_json_564da52707522fb838804ee55b3d0a2b_onEachFeature,
             
-                style: geo_json_89356251b60a1d9dc547e00af17db16e_styler,
-                pointToLayer: geo_json_89356251b60a1d9dc547e00af17db16e_pointToLayer,
+                style: geo_json_564da52707522fb838804ee55b3d0a2b_styler,
+                pointToLayer: geo_json_564da52707522fb838804ee55b3d0a2b_pointToLayer,
             ...{
 }
         });
 
-        function geo_json_89356251b60a1d9dc547e00af17db16e_add (data) {
-            geo_json_89356251b60a1d9dc547e00af17db16e
+        function geo_json_564da52707522fb838804ee55b3d0a2b_add (data) {
+            geo_json_564da52707522fb838804ee55b3d0a2b
                 .addData(data);
         }
-            geo_json_89356251b60a1d9dc547e00af17db16e_add({"features": [{"geometry": {"coordinates": [99.0616224339269, 2.958071482488008], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePEMATANG SIANTAR\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PEMATANG SIANTAR"}, "type": "Feature"}, {"geometry": {"coordinates": [99.0864345, 2.970225], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eREMBUNG MERAH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "REMBUNG MERAH"}, "type": "Feature"}, {"geometry": {"coordinates": [99.33172531221578, 3.1632315593552427], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePERDAGANGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PERDAGANGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.62100657712423, 2.985990443122322], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eKISARAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KISARAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.6539110232676, 2.5672204120004585], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eAEK KANOPAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "AEK KANOPAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.83165423801712, 2.0985696140998185], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eRANTAU PRAPAT\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "RANTAU PRAPAT"}, "type": "Feature"}, {"geometry": {"coordinates": [98.86310395775544, 2.967044844069962], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePEMATANG RAYA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PEMATANG RAYA"}, "type": "Feature"}, {"geometry": {"coordinates": [98.40538421485952, 2.742405754518828], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSUMBUL\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SUMBUL"}, "type": "Feature"}, {"geometry": {"coordinates": [98.31181876618808, 2.751058947824179], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSIDIKALANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIDIKALANG"}, "type": "Feature"}, {"geometry": {"coordinates": [98.70107157968114, 2.6069337151136125], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePANGURURAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PANGURURAN"}, "type": "Feature"}, {"geometry": {"coordinates": [98.74709358034808, 2.258901032879638], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eDOLOK SANGGUL\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "DOLOK SANGGUL"}, "type": "Feature"}, {"geometry": {"coordinates": [98.97596761300748, 2.2134222833916044], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSIBORONG-BORONG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIBORONG-BORONG"}, "type": "Feature"}, {"geometry": {"coordinates": [99.06935343302932, 2.331689045428264], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBALIGE\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "BALIGE"}, "type": "Feature"}, {"geometry": {"coordinates": [98.9643571850316, 2.0150046316698944], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTARUTUNG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TARUTUNG"}, "type": "Feature"}, {"geometry": {"coordinates": [98.78286314437118, 1.7377626879836832], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSIBOLGA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIBOLGA"}, "type": "Feature"}, {"geometry": {"coordinates": [98.82661847968212, 1.6800115647828782], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003ePANDAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PANDAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.0414013956823, 1.4877598198817092], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eBATANG TORU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BATANG TORU"}, "type": "Feature"}, {"geometry": {"coordinates": [99.27740020917462, 1.375387469323292], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePADANG SIDEMPUAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PADANG SIDEMPUAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.62420616221712, 1.5079366475270684], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eGUNUNG TUA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "GUNUNG TUA"}, "type": "Feature"}, {"geometry": {"coordinates": [100.09302952783231, 1.8925833360012587], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eKOTA PINANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KOTA PINANG"}, "type": "Feature"}, {"geometry": {"coordinates": [98.93821610288131, 2.66264813794572], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePARAPAT\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PARAPAT"}, "type": "Feature"}, {"geometry": {"coordinates": [99.15626135269514, 2.446359945083013], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePORSEA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PORSEA"}, "type": "Feature"}, {"geometry": {"coordinates": [97.6153340815324, 1.2885438770781157], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eGUNUNG SITOLI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "GUNUNG SITOLI"}, "type": "Feature"}, {"geometry": {"coordinates": [99.80608053735244, 2.9644481535862752], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTANJUNG BALAI ASAHAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TANJUNG BALAI ASAHAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.1707412950239, 3.33559685655829], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTEBING TINGGI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TEBING TINGGI"}, "type": "Feature"}, {"geometry": {"coordinates": [99.33424130851704, 3.318318164124815], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eINDRAPURA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "INDRAPURA"}, "type": "Feature"}, {"geometry": {"coordinates": [99.5645240085196, 0.866958999134897], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePENYABUNGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PENYABUNGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.70707023735592, 0.6684979679693324], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eKOTA NOPAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KOTA NOPAN"}, "type": "Feature"}, {"geometry": {"coordinates": [100.03966796619233, 0.4383475851332998], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTAPUS\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TAPUS"}, "type": "Feature"}, {"geometry": {"coordinates": [100.0584750056812, 0.3659716596628165], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003ePANTI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PANTI"}, "type": "Feature"}, {"geometry": {"coordinates": [100.1738229661935, 0.1201122591997009], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eLUBUK SIKAPING\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "LUBUK SIKAPING"}, "type": "Feature"}, {"geometry": {"coordinates": [100.030865, -0.317378], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eLUBUK BASUNG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "LUBUK BASUNG"}, "type": "Feature"}, {"geometry": {"coordinates": [100.37103483300052, -0.3086571055657152], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eBUKIT TINGGI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BUKIT TINGGI"}, "type": "Feature"}, {"geometry": {"coordinates": [101.02220258033836, 0.3374411274668739], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eBANGKINANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BANGKINANG"}, "type": "Feature"}, {"geometry": {"coordinates": [101.4470832, 0.525645], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSUKARAMAI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SUKARAMAI"}, "type": "Feature"}, {"geometry": {"coordinates": [100.53296921365477, 0.7116254635085894], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eUJUNG BATU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "UJUNG BATU"}, "type": "Feature"}, {"geometry": {"coordinates": [100.30097009570034, 0.8616841736820656], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePASIR PANGAIRAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PASIR PANGAIRAN"}, "type": "Feature"}, {"geometry": {"coordinates": [100.2813193, 0.8444632], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eDALU DALU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "DALU DALU"}, "type": "Feature"}, {"geometry": {"coordinates": [99.7431141177023, 1.0482799254432094], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSIBUHUAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIBUHUAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.7569549, 1.3778421], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL BINANGA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL BINANGA"}, "type": "Feature"}], "type": "FeatureCollection"});
+            geo_json_564da52707522fb838804ee55b3d0a2b_add({"features": [{"geometry": {"coordinates": [99.0616224339269, 2.958071482488008], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePEMATANG SIANTAR\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PEMATANG SIANTAR"}, "type": "Feature"}, {"geometry": {"coordinates": [99.0864345, 2.970225], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eREMBUNG MERAH\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "REMBUNG MERAH"}, "type": "Feature"}, {"geometry": {"coordinates": [99.33172531221578, 3.1632315593552427], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePERDAGANGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PERDAGANGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.62100657712423, 2.985990443122322], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eKISARAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KISARAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.6539110232676, 2.5672204120004585], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eAEK KANOPAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "AEK KANOPAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.83165423801712, 2.0985696140998185], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eRANTAU PRAPAT\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "RANTAU PRAPAT"}, "type": "Feature"}, {"geometry": {"coordinates": [98.86310395775544, 2.967044844069962], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePEMATANG RAYA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PEMATANG RAYA"}, "type": "Feature"}, {"geometry": {"coordinates": [98.40538421485952, 2.742405754518828], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSUMBUL\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SUMBUL"}, "type": "Feature"}, {"geometry": {"coordinates": [98.31181876618808, 2.751058947824179], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSIDIKALANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIDIKALANG"}, "type": "Feature"}, {"geometry": {"coordinates": [98.70107157968114, 2.6069337151136125], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePANGURURAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PANGURURAN"}, "type": "Feature"}, {"geometry": {"coordinates": [98.74709358034808, 2.258901032879638], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eDOLOK SANGGUL\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "DOLOK SANGGUL"}, "type": "Feature"}, {"geometry": {"coordinates": [98.97596761300748, 2.2134222833916044], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSIBORONG-BORONG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIBORONG-BORONG"}, "type": "Feature"}, {"geometry": {"coordinates": [99.06935343302932, 2.331689045428264], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBALIGE\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "BALIGE"}, "type": "Feature"}, {"geometry": {"coordinates": [98.9643571850316, 2.0150046316698944], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTARUTUNG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TARUTUNG"}, "type": "Feature"}, {"geometry": {"coordinates": [98.78286314437118, 1.7377626879836832], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eSIBOLGA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIBOLGA"}, "type": "Feature"}, {"geometry": {"coordinates": [98.82661847968212, 1.6800115647828782], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003ePANDAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PANDAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.0414013956823, 1.4877598198817092], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eBATANG TORU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BATANG TORU"}, "type": "Feature"}, {"geometry": {"coordinates": [99.27740020917462, 1.375387469323292], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePADANG SIDEMPUAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PADANG SIDEMPUAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.62420616221712, 1.5079366475270684], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eGUNUNG TUA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "GUNUNG TUA"}, "type": "Feature"}, {"geometry": {"coordinates": [100.09302952783231, 1.8925833360012587], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eKOTA PINANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KOTA PINANG"}, "type": "Feature"}, {"geometry": {"coordinates": [98.93821610288131, 2.66264813794572], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePARAPAT\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PARAPAT"}, "type": "Feature"}, {"geometry": {"coordinates": [99.15626135269514, 2.446359945083013], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePORSEA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PORSEA"}, "type": "Feature"}, {"geometry": {"coordinates": [97.6153340815324, 1.2885438770781157], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eGUNUNG SITOLI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "GUNUNG SITOLI"}, "type": "Feature"}, {"geometry": {"coordinates": [99.80608053735244, 2.9644481535862752], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTANJUNG BALAI ASAHAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TANJUNG BALAI ASAHAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.1707412950239, 3.33559685655829], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTEBING TINGGI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TEBING TINGGI"}, "type": "Feature"}, {"geometry": {"coordinates": [99.33424130851704, 3.318318164124815], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eINDRAPURA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "INDRAPURA"}, "type": "Feature"}, {"geometry": {"coordinates": [99.5645240085196, 0.866958999134897], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePENYABUNGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PENYABUNGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.70707023735592, 0.6684979679693324], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eKOTA NOPAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KOTA NOPAN"}, "type": "Feature"}, {"geometry": {"coordinates": [100.03966796619233, 0.4383475851332998], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTAPUS\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TAPUS"}, "type": "Feature"}, {"geometry": {"coordinates": [100.0584750056812, 0.3659716596628165], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003ePANTI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PANTI"}, "type": "Feature"}, {"geometry": {"coordinates": [100.1738229661935, 0.1201122591997009], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eLUBUK SIKAPING\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "LUBUK SIKAPING"}, "type": "Feature"}, {"geometry": {"coordinates": [100.030865, -0.317378], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eLUBUK BASUNG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "LUBUK BASUNG"}, "type": "Feature"}, {"geometry": {"coordinates": [100.37103483300052, -0.3086571055657152], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eBUKIT TINGGI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BUKIT TINGGI"}, "type": "Feature"}, {"geometry": {"coordinates": [101.02220258033836, 0.3374411274668739], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eBANGKINANG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BANGKINANG"}, "type": "Feature"}, {"geometry": {"coordinates": [101.4470832, 0.525645], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSUKARAMAI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SUKARAMAI"}, "type": "Feature"}, {"geometry": {"coordinates": [100.53296921365477, 0.7116254635085894], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eUJUNG BATU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "UJUNG BATU"}, "type": "Feature"}, {"geometry": {"coordinates": [100.30097009570034, 0.8616841736820656], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePASIR PANGAIRAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PASIR PANGAIRAN"}, "type": "Feature"}, {"geometry": {"coordinates": [100.2813193, 0.8444632], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eDALU DALU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "DALU DALU"}, "type": "Feature"}, {"geometry": {"coordinates": [99.7431141177023, 1.0482799254432094], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSIBUHUAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SIBUHUAN"}, "type": "Feature"}, {"geometry": {"coordinates": [99.7569549, 1.3778421], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL BINANGA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL BINANGA"}, "type": "Feature"}], "type": "FeatureCollection"});
 
         
     
-    geo_json_89356251b60a1d9dc547e00af17db16e.bindTooltip(
+    geo_json_564da52707522fb838804ee55b3d0a2b.bindTooltip(
     function(layer){
     let div = L.DomUtil.create('div');
     
@@ -233,11 +233,11 @@
 });
                      
     
-            geo_json_89356251b60a1d9dc547e00af17db16e.addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            geo_json_564da52707522fb838804ee55b3d0a2b.addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            var geo_json_89356251b60a1d9dc547e00af17db16esearchControl = new L.Control.Search({
-                layer: geo_json_89356251b60a1d9dc547e00af17db16e,
+            var geo_json_564da52707522fb838804ee55b3d0a2bsearchControl = new L.Control.Search({
+                layer: geo_json_564da52707522fb838804ee55b3d0a2b,
                 
                 propertyName: 'working',
                 
@@ -250,8 +250,8 @@
                 hideMarkerOnCollapse: true
             
                 });
-                geo_json_89356251b60a1d9dc547e00af17db16esearchControl.on('search:locationfound', function(e) {
-                    geo_json_89356251b60a1d9dc547e00af17db16e.setStyle(function(feature){
+                geo_json_564da52707522fb838804ee55b3d0a2bsearchControl.on('search:locationfound', function(e) {
+                    geo_json_564da52707522fb838804ee55b3d0a2b.setStyle(function(feature){
                         return feature.properties.style
                     })
                     
@@ -262,22 +262,22 @@
                     if(e.layer._popup)
                         e.layer.openPopup();
                 })
-                geo_json_89356251b60a1d9dc547e00af17db16esearchControl.on('search:collapsed', function(e) {
-                        geo_json_89356251b60a1d9dc547e00af17db16e.setStyle(function(feature){
+                geo_json_564da52707522fb838804ee55b3d0a2bsearchControl.on('search:collapsed', function(e) {
+                        geo_json_564da52707522fb838804ee55b3d0a2b.setStyle(function(feature){
                             return feature.properties.style
                     });
                 });
-            map_9e8e13717fa7687bf6565d3332ebf305.addControl( geo_json_89356251b60a1d9dc547e00af17db16esearchControl );
+            map_eb152677417294e1ae28564b79be1f0a.addControl( geo_json_564da52707522fb838804ee55b3d0a2bsearchControl );
 
         
     
-            var poly_line_3a0b804dbe7a5f849a7291bfb450bbea = L.polyline(
+            var poly_line_d60cc3461c9edd3b0b1192d96ed3984d = L.polyline(
                 [[2.958071482488008, 99.0616224339269], [2.970225, 99.0864345]],
                 {"bubblingMouseEvents": true, "color": "#737373ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#737373ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_3a0b804dbe7a5f849a7291bfb450bbea.bindTooltip(
+            poly_line_d60cc3461c9edd3b0b1192d96ed3984d.bindTooltip(
                 `<div>
                      PEMATANG SIANTAR ⇄ REMBUNG MERAH<br><br>Jumlah Service (segmen): 3<br>- PEMATANG SIANTAR - RANTAU PRAPAT <br>- PEMATANG SIANTAR - RANTAU PRAPAT<br>- PEMATANG SIANTAR - TANJUNG BALAI
                  </div>`,
@@ -287,13 +287,13 @@
             );
         
     
-            var poly_line_cb64298173c838c43d5dad6f574c7405 = L.polyline(
+            var poly_line_c5102daea39a257bd015bc1702a02f4b = L.polyline(
                 [[3.1632315593552427, 99.33172531221578], [2.970225, 99.0864345]],
                 {"bubblingMouseEvents": true, "color": "#737373ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#737373ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_cb64298173c838c43d5dad6f574c7405.bindTooltip(
+            poly_line_c5102daea39a257bd015bc1702a02f4b.bindTooltip(
                 `<div>
                      PERDAGANGAN ⇄ REMBUNG MERAH<br><br>Jumlah Service (segmen): 3<br>- PEMATANG SIANTAR - RANTAU PRAPAT <br>- PEMATANG SIANTAR - RANTAU PRAPAT<br>- PEMATANG SIANTAR - TANJUNG BALAI
                  </div>`,
@@ -303,13 +303,13 @@
             );
         
     
-            var poly_line_5460382306308509f466795f1d3dbcf1 = L.polyline(
+            var poly_line_a7ed85ef949466af45351f88cc6dfd25 = L.polyline(
                 [[2.985990443122322, 99.62100657712423], [3.1632315593552427, 99.33172531221578]],
                 {"bubblingMouseEvents": true, "color": "#525252ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#525252ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.8}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_5460382306308509f466795f1d3dbcf1.bindTooltip(
+            poly_line_a7ed85ef949466af45351f88cc6dfd25.bindTooltip(
                 `<div>
                      KISARAN ⇄ PERDAGANGAN<br><br>Jumlah Service (segmen): 4<br>- PEMATANG SIANTAR - RANTAU PRAPAT <br>- PEMATANG SIANTAR - RANTAU PRAPAT<br>- PERDAGANGAN - RANTAU PRAPAT<br>- PEMATANG SIANTAR - TANJUNG BALAI
                  </div>`,
@@ -319,13 +319,13 @@
             );
         
     
-            var poly_line_62199e08218f34b942624ef9329003d2 = L.polyline(
+            var poly_line_4335eb72d13265bc5e37d9b12a23b8c0 = L.polyline(
                 [[2.5672204120004585, 99.6539110232676], [2.985990443122322, 99.62100657712423]],
                 {"bubblingMouseEvents": true, "color": "#000000ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#000000ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 7.199999999999999}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_62199e08218f34b942624ef9329003d2.bindTooltip(
+            poly_line_4335eb72d13265bc5e37d9b12a23b8c0.bindTooltip(
                 `<div>
                      AEK KANOPAN ⇄ KISARAN<br><br>Jumlah Service (segmen): 6<br>- PEMATANG SIANTAR - RANTAU PRAPAT <br>- PEMATANG SIANTAR - RANTAU PRAPAT<br>- PERDAGANGAN - RANTAU PRAPAT<br>- KISARAN - RANTAU PRAPAT<br>- TANJUNG BALAI - RANTAU PRAPAT<br>- INDRAPURA - RANTAU PRAPAT
                  </div>`,
@@ -335,13 +335,13 @@
             );
         
     
-            var poly_line_f271a458dad3a1c341f92bf1f5461fae = L.polyline(
+            var poly_line_1827bac06a09e3a512b08b4b386ed894 = L.polyline(
                 [[2.5672204120004585, 99.6539110232676], [2.0985696140998185, 99.83165423801712]],
                 {"bubblingMouseEvents": true, "color": "#000000ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#000000ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 7.199999999999999}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_f271a458dad3a1c341f92bf1f5461fae.bindTooltip(
+            poly_line_1827bac06a09e3a512b08b4b386ed894.bindTooltip(
                 `<div>
                      AEK KANOPAN ⇄ RANTAU PRAPAT<br><br>Jumlah Service (segmen): 6<br>- PEMATANG SIANTAR - RANTAU PRAPAT <br>- PEMATANG SIANTAR - RANTAU PRAPAT<br>- PERDAGANGAN - RANTAU PRAPAT<br>- KISARAN - RANTAU PRAPAT<br>- TANJUNG BALAI - RANTAU PRAPAT<br>- INDRAPURA - RANTAU PRAPAT
                  </div>`,
@@ -351,13 +351,13 @@
             );
         
     
-            var poly_line_05b5157a56b6cf84dcde4ed584e34c34 = L.polyline(
+            var poly_line_0185f18031b111fe7ac1215675a2d4fa = L.polyline(
                 [[2.967044844069962, 98.86310395775544], [2.958071482488008, 99.0616224339269]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_05b5157a56b6cf84dcde4ed584e34c34.bindTooltip(
+            poly_line_0185f18031b111fe7ac1215675a2d4fa.bindTooltip(
                 `<div>
                      PEMATANG RAYA ⇄ PEMATANG SIANTAR<br><br>Jumlah Service (segmen): 1<br>- PEMATANG SIANTAR - SIDIKALANG
                  </div>`,
@@ -367,13 +367,13 @@
             );
         
     
-            var poly_line_0ba541046ce1a838d660c3d006a4c7b0 = L.polyline(
+            var poly_line_ece0c03940b4df5acf7d2f6729456a76 = L.polyline(
                 [[2.967044844069962, 98.86310395775544], [2.742405754518828, 98.40538421485952]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_0ba541046ce1a838d660c3d006a4c7b0.bindTooltip(
+            poly_line_ece0c03940b4df5acf7d2f6729456a76.bindTooltip(
                 `<div>
                      PEMATANG RAYA ⇄ SUMBUL<br><br>Jumlah Service (segmen): 1<br>- PEMATANG SIANTAR - SIDIKALANG
                  </div>`,
@@ -383,13 +383,13 @@
             );
         
     
-            var poly_line_6a35069b4c2ecd30515611f8e5275410 = L.polyline(
+            var poly_line_6a4ea1b94b333dbe20959bcb384bf487 = L.polyline(
                 [[2.751058947824179, 98.31181876618808], [2.742405754518828, 98.40538421485952]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_6a35069b4c2ecd30515611f8e5275410.bindTooltip(
+            poly_line_6a4ea1b94b333dbe20959bcb384bf487.bindTooltip(
                 `<div>
                      SIDIKALANG ⇄ SUMBUL<br><br>Jumlah Service (segmen): 1<br>- PEMATANG SIANTAR - SIDIKALANG
                  </div>`,
@@ -399,13 +399,13 @@
             );
         
     
-            var poly_line_8ee3b74df6e43906eae6c03896d4a23e = L.polyline(
+            var poly_line_595072f16e3b5a31252022af4a70764b = L.polyline(
                 [[2.6069337151136125, 98.70107157968114], [2.751058947824179, 98.31181876618808]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_8ee3b74df6e43906eae6c03896d4a23e.bindTooltip(
+            poly_line_595072f16e3b5a31252022af4a70764b.bindTooltip(
                 `<div>
                      PANGURURAN ⇄ SIDIKALANG<br><br>Jumlah Service (segmen): 1<br>- SIDIKALANG - BALIGE
                  </div>`,
@@ -415,13 +415,13 @@
             );
         
     
-            var poly_line_108cfee31c0cac9ee202a17317a488f0 = L.polyline(
+            var poly_line_2ba47a69a111a8962880c76685630461 = L.polyline(
                 [[2.258901032879638, 98.74709358034808], [2.6069337151136125, 98.70107157968114]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_108cfee31c0cac9ee202a17317a488f0.bindTooltip(
+            poly_line_2ba47a69a111a8962880c76685630461.bindTooltip(
                 `<div>
                      DOLOK SANGGUL ⇄ PANGURURAN<br><br>Jumlah Service (segmen): 1<br>- SIDIKALANG - BALIGE
                  </div>`,
@@ -431,13 +431,13 @@
             );
         
     
-            var poly_line_62d4b8e37743b414e80dfd089eb91828 = L.polyline(
+            var poly_line_904f4ed2ac3e5e6588d8e08017e89b8e = L.polyline(
                 [[2.258901032879638, 98.74709358034808], [2.2134222833916044, 98.97596761300748]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_62d4b8e37743b414e80dfd089eb91828.bindTooltip(
+            poly_line_904f4ed2ac3e5e6588d8e08017e89b8e.bindTooltip(
                 `<div>
                      DOLOK SANGGUL ⇄ SIBORONG-BORONG<br><br>Jumlah Service (segmen): 1<br>- SIDIKALANG - BALIGE
                  </div>`,
@@ -447,13 +447,13 @@
             );
         
     
-            var poly_line_28fdab420a039ecbe9731ba364a69f60 = L.polyline(
+            var poly_line_c38eda94aded397371f96cc6524149ae = L.polyline(
                 [[2.331689045428264, 99.06935343302932], [2.2134222833916044, 98.97596761300748]],
                 {"bubblingMouseEvents": true, "color": "#252525ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#252525ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 6.5}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_28fdab420a039ecbe9731ba364a69f60.bindTooltip(
+            poly_line_c38eda94aded397371f96cc6524149ae.bindTooltip(
                 `<div>
                      BALIGE ⇄ SIBORONG-BORONG<br><br>Jumlah Service (segmen): 5<br>- SIDIKALANG - BALIGE<br>- BALIGE - RANTAU PRAPAT<br>- PEMATANG SIANTAR - KOTAPINANG<br>- PEMATANG SIANTAR - GUNUNG SITOLI VIA BLG<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -463,13 +463,13 @@
             );
         
     
-            var poly_line_7e21e448df98763d418aa238d4dd4b1d = L.polyline(
+            var poly_line_8ba0faa318bfb67f90d8881d20ffff3b = L.polyline(
                 [[2.2134222833916044, 98.97596761300748], [2.0150046316698944, 98.9643571850316]],
                 {"bubblingMouseEvents": true, "color": "#525252ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#525252ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.8}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_7e21e448df98763d418aa238d4dd4b1d.bindTooltip(
+            poly_line_8ba0faa318bfb67f90d8881d20ffff3b.bindTooltip(
                 `<div>
                      SIBORONG-BORONG ⇄ TARUTUNG<br><br>Jumlah Service (segmen): 4<br>- BALIGE - RANTAU PRAPAT<br>- PEMATANG SIANTAR - KOTAPINANG<br>- PEMATANG SIANTAR - GUNUNG SITOLI VIA BLG<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -479,13 +479,13 @@
             );
         
     
-            var poly_line_5c065c4ae13fd5b77183e1f42fbc9f6c = L.polyline(
+            var poly_line_d9346f3c9c34c140bd5a662ce7a42563 = L.polyline(
                 [[1.7377626879836832, 98.78286314437118], [2.0150046316698944, 98.9643571850316]],
                 {"bubblingMouseEvents": true, "color": "#525252ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#525252ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.8}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_5c065c4ae13fd5b77183e1f42fbc9f6c.bindTooltip(
+            poly_line_d9346f3c9c34c140bd5a662ce7a42563.bindTooltip(
                 `<div>
                      SIBOLGA ⇄ TARUTUNG<br><br>Jumlah Service (segmen): 4<br>- BALIGE - RANTAU PRAPAT<br>- PEMATANG SIANTAR - KOTAPINANG<br>- PEMATANG SIANTAR - GUNUNG SITOLI VIA BLG<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -495,13 +495,13 @@
             );
         
     
-            var poly_line_3809c831bdcc0bd8eb76bad69117ee1c = L.polyline(
+            var poly_line_753dd7566dd736636908bddfa1099cbc = L.polyline(
                 [[1.6800115647828782, 98.82661847968212], [1.7377626879836832, 98.78286314437118]],
                 {"bubblingMouseEvents": true, "color": "#737373ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#737373ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_3809c831bdcc0bd8eb76bad69117ee1c.bindTooltip(
+            poly_line_753dd7566dd736636908bddfa1099cbc.bindTooltip(
                 `<div>
                      PANDAN ⇄ SIBOLGA<br><br>Jumlah Service (segmen): 3<br>- BALIGE - RANTAU PRAPAT<br>- PEMATANG SIANTAR - KOTAPINANG<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -511,13 +511,13 @@
             );
         
     
-            var poly_line_09c50f44d7cbf156d39f5b6cbbdb03b8 = L.polyline(
+            var poly_line_55786d0f5213fd6882efc806021424c6 = L.polyline(
                 [[1.4877598198817092, 99.0414013956823], [1.6800115647828782, 98.82661847968212]],
                 {"bubblingMouseEvents": true, "color": "#737373ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#737373ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_09c50f44d7cbf156d39f5b6cbbdb03b8.bindTooltip(
+            poly_line_55786d0f5213fd6882efc806021424c6.bindTooltip(
                 `<div>
                      BATANG TORU ⇄ PANDAN<br><br>Jumlah Service (segmen): 3<br>- BALIGE - RANTAU PRAPAT<br>- PEMATANG SIANTAR - KOTAPINANG<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -527,13 +527,13 @@
             );
         
     
-            var poly_line_4ca98f98beefef0c2544b1b16cd966c2 = L.polyline(
+            var poly_line_b915e87a4c526d8ffaa85e3119c8f296 = L.polyline(
                 [[1.4877598198817092, 99.0414013956823], [1.375387469323292, 99.27740020917462]],
                 {"bubblingMouseEvents": true, "color": "#737373ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#737373ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_4ca98f98beefef0c2544b1b16cd966c2.bindTooltip(
+            poly_line_b915e87a4c526d8ffaa85e3119c8f296.bindTooltip(
                 `<div>
                      BATANG TORU ⇄ PADANG SIDEMPUAN<br><br>Jumlah Service (segmen): 3<br>- BALIGE - RANTAU PRAPAT<br>- PEMATANG SIANTAR - KOTAPINANG<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -543,13 +543,13 @@
             );
         
     
-            var poly_line_c0f74622346c3c3a15ae9fc8921290db = L.polyline(
+            var poly_line_4fbccdc1baa5f24bff847a807b72e965 = L.polyline(
                 [[1.5079366475270684, 99.62420616221712], [1.375387469323292, 99.27740020917462]],
                 {"bubblingMouseEvents": true, "color": "#737373ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#737373ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_c0f74622346c3c3a15ae9fc8921290db.bindTooltip(
+            poly_line_4fbccdc1baa5f24bff847a807b72e965.bindTooltip(
                 `<div>
                      GUNUNG TUA ⇄ PADANG SIDEMPUAN<br><br>Jumlah Service (segmen): 3<br>- BALIGE - RANTAU PRAPAT<br>- PADANG SIDEMPUAN - RANTAU PRAPAT<br>- PEMATANG SIANTAR - KOTAPINANG
                  </div>`,
@@ -559,13 +559,13 @@
             );
         
     
-            var poly_line_caf0a3d05a17d9d1877a6218e4a4a7e1 = L.polyline(
+            var poly_line_a51215153daed5ac81b1a77b567c0f2d = L.polyline(
                 [[1.5079366475270684, 99.62420616221712], [1.8925833360012587, 100.09302952783231]],
                 {"bubblingMouseEvents": true, "color": "#525252ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#525252ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.8}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_caf0a3d05a17d9d1877a6218e4a4a7e1.bindTooltip(
+            poly_line_a51215153daed5ac81b1a77b567c0f2d.bindTooltip(
                 `<div>
                      GUNUNG TUA ⇄ KOTA PINANG<br><br>Jumlah Service (segmen): 4<br>- BALIGE - RANTAU PRAPAT<br>- PADANG SIDEMPUAN - RANTAU PRAPAT<br>- PEMATANG SIANTAR - KOTAPINANG<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -575,13 +575,13 @@
             );
         
     
-            var poly_line_8007588736632c62c3a78315f073b93a = L.polyline(
+            var poly_line_0d4df40927031176b6371dac5d96af59 = L.polyline(
                 [[1.8925833360012587, 100.09302952783231], [2.0985696140998185, 99.83165423801712]],
                 {"bubblingMouseEvents": true, "color": "#525252ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#525252ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.8}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_8007588736632c62c3a78315f073b93a.bindTooltip(
+            poly_line_0d4df40927031176b6371dac5d96af59.bindTooltip(
                 `<div>
                      KOTA PINANG ⇄ RANTAU PRAPAT<br><br>Jumlah Service (segmen): 4<br>- BALIGE - RANTAU PRAPAT<br>- PADANG SIDEMPUAN - RANTAU PRAPAT<br>- KOTAPINANG - RANTAU PRAPAT<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -591,13 +591,13 @@
             );
         
     
-            var poly_line_27882d7db9dee7cf59c017f1051eb10e = L.polyline(
+            var poly_line_52de1ce493cd88a42211316db4b3fc3b = L.polyline(
                 [[2.66264813794572, 98.93821610288131], [2.958071482488008, 99.0616224339269]],
                 {"bubblingMouseEvents": true, "color": "#737373ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#737373ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_27882d7db9dee7cf59c017f1051eb10e.bindTooltip(
+            poly_line_52de1ce493cd88a42211316db4b3fc3b.bindTooltip(
                 `<div>
                      PARAPAT ⇄ PEMATANG SIANTAR<br><br>Jumlah Service (segmen): 3<br>- PEMATANG SIANTAR - KOTAPINANG<br>- PEMATANG SIANTAR - GUNUNG SITOLI VIA BLG<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -607,13 +607,13 @@
             );
         
     
-            var poly_line_4ac6b9136bb2138f2b9721d9b7ab4d1c = L.polyline(
+            var poly_line_ab3392dddcc4607cdf35d978780a668c = L.polyline(
                 [[2.66264813794572, 98.93821610288131], [2.446359945083013, 99.15626135269514]],
                 {"bubblingMouseEvents": true, "color": "#737373ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#737373ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_4ac6b9136bb2138f2b9721d9b7ab4d1c.bindTooltip(
+            poly_line_ab3392dddcc4607cdf35d978780a668c.bindTooltip(
                 `<div>
                      PARAPAT ⇄ PORSEA<br><br>Jumlah Service (segmen): 3<br>- PEMATANG SIANTAR - KOTAPINANG<br>- PEMATANG SIANTAR - GUNUNG SITOLI VIA BLG<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -623,13 +623,13 @@
             );
         
     
-            var poly_line_ed76675cbc85d8a8acefb99af1b7cce9 = L.polyline(
+            var poly_line_3ef8c46107e0b7062376fa515b5cd531 = L.polyline(
                 [[2.331689045428264, 99.06935343302932], [2.446359945083013, 99.15626135269514]],
                 {"bubblingMouseEvents": true, "color": "#737373ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#737373ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_ed76675cbc85d8a8acefb99af1b7cce9.bindTooltip(
+            poly_line_3ef8c46107e0b7062376fa515b5cd531.bindTooltip(
                 `<div>
                      BALIGE ⇄ PORSEA<br><br>Jumlah Service (segmen): 3<br>- PEMATANG SIANTAR - KOTAPINANG<br>- PEMATANG SIANTAR - GUNUNG SITOLI VIA BLG<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -639,13 +639,13 @@
             );
         
     
-            var poly_line_c8d306cc3f19115523baf3395e4b3658 = L.polyline(
+            var poly_line_54eaa5bafd5bc42fea5beeef0fdeb015 = L.polyline(
                 [[1.2885438770781157, 97.6153340815324], [1.7377626879836832, 98.78286314437118]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_c8d306cc3f19115523baf3395e4b3658.bindTooltip(
+            poly_line_54eaa5bafd5bc42fea5beeef0fdeb015.bindTooltip(
                 `<div>
                      GUNUNG SITOLI ⇄ SIBOLGA<br><br>Jumlah Service (segmen): 1<br>- PEMATANG SIANTAR - GUNUNG SITOLI VIA BLG
                  </div>`,
@@ -655,13 +655,13 @@
             );
         
     
-            var poly_line_00fb29730e3417049324271715a38117 = L.polyline(
+            var poly_line_ed7969d1d2a4e81db687b845b3235bcf = L.polyline(
                 [[2.985990443122322, 99.62100657712423], [2.9644481535862752, 99.80608053735244]],
                 {"bubblingMouseEvents": true, "color": "#969696ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#969696ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_00fb29730e3417049324271715a38117.bindTooltip(
+            poly_line_ed7969d1d2a4e81db687b845b3235bcf.bindTooltip(
                 `<div>
                      KISARAN ⇄ TANJUNG BALAI ASAHAN<br><br>Jumlah Service (segmen): 2<br>- PEMATANG SIANTAR - TANJUNG BALAI<br>- TANJUNG BALAI - RANTAU PRAPAT
                  </div>`,
@@ -671,13 +671,13 @@
             );
         
     
-            var poly_line_cd0a4808eecc81fa98b6e8d8b928bae9 = L.polyline(
+            var poly_line_09be4f34f2ae45af307532b3d741d9d1 = L.polyline(
                 [[2.958071482488008, 99.0616224339269], [3.33559685655829, 99.1707412950239]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_cd0a4808eecc81fa98b6e8d8b928bae9.bindTooltip(
+            poly_line_09be4f34f2ae45af307532b3d741d9d1.bindTooltip(
                 `<div>
                      PEMATANG SIANTAR ⇄ TEBING TINGGI<br><br>Jumlah Service (segmen): 1<br>- PEMATANG SIANTAR - INDRAPURA
                  </div>`,
@@ -687,13 +687,13 @@
             );
         
     
-            var poly_line_455a848343c04b682a69b9dbe887d59f = L.polyline(
+            var poly_line_450f303bd01534a5adea1a8815912451 = L.polyline(
                 [[3.318318164124815, 99.33424130851704], [3.33559685655829, 99.1707412950239]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_455a848343c04b682a69b9dbe887d59f.bindTooltip(
+            poly_line_450f303bd01534a5adea1a8815912451.bindTooltip(
                 `<div>
                      INDRAPURA ⇄ TEBING TINGGI<br><br>Jumlah Service (segmen): 1<br>- PEMATANG SIANTAR - INDRAPURA
                  </div>`,
@@ -703,13 +703,13 @@
             );
         
     
-            var poly_line_3a0c02cea014adeb9b2638aa65b716fc = L.polyline(
+            var poly_line_c51cb43eda290937ce529190d96204f6 = L.polyline(
                 [[3.318318164124815, 99.33424130851704], [2.985990443122322, 99.62100657712423]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_3a0c02cea014adeb9b2638aa65b716fc.bindTooltip(
+            poly_line_c51cb43eda290937ce529190d96204f6.bindTooltip(
                 `<div>
                      INDRAPURA ⇄ KISARAN<br><br>Jumlah Service (segmen): 1<br>- INDRAPURA - RANTAU PRAPAT
                  </div>`,
@@ -719,13 +719,13 @@
             );
         
     
-            var poly_line_94b542f1cee4048b46f442950f961843 = L.polyline(
+            var poly_line_5700722c3f67cc73773a13cf992d3e12 = L.polyline(
                 [[1.375387469323292, 99.27740020917462], [0.866958999134897, 99.5645240085196]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_94b542f1cee4048b46f442950f961843.bindTooltip(
+            poly_line_5700722c3f67cc73773a13cf992d3e12.bindTooltip(
                 `<div>
                      PADANG SIDEMPUAN ⇄ PENYABUNGAN<br><br>Jumlah Service (segmen): 1<br>- PEMATANG SIANTAR - PENYABUNGAN (VIA BLG-SBG)
                  </div>`,
@@ -735,13 +735,13 @@
             );
         
     
-            var poly_line_c90d9a881d056d6fd8667f2abaef2a3b = L.polyline(
+            var poly_line_bed2071993fa4612efb9b8602520b556 = L.polyline(
                 [[0.6684979679693324, 99.70707023735592], [0.866958999134897, 99.5645240085196]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_c90d9a881d056d6fd8667f2abaef2a3b.bindTooltip(
+            poly_line_bed2071993fa4612efb9b8602520b556.bindTooltip(
                 `<div>
                      KOTA NOPAN ⇄ PENYABUNGAN<br><br>Jumlah Service (segmen): 1<br>- PENYABUNGAN - KOTANOPAN
                  </div>`,
@@ -751,13 +751,13 @@
             );
         
     
-            var poly_line_efbd4e7869da59ac482bfad8b7d201bc = L.polyline(
+            var poly_line_2f2efa10fbf988b28d501617668f55bc = L.polyline(
                 [[0.6684979679693324, 99.70707023735592], [0.4383475851332998, 100.03966796619233]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_efbd4e7869da59ac482bfad8b7d201bc.bindTooltip(
+            poly_line_2f2efa10fbf988b28d501617668f55bc.bindTooltip(
                 `<div>
                      KOTA NOPAN ⇄ TAPUS<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -767,13 +767,13 @@
             );
         
     
-            var poly_line_7d02967a779d27e6e3dbda0c7f16d4ba = L.polyline(
+            var poly_line_0ca0556523910c7c5e0b2e65978ef6fa = L.polyline(
                 [[0.3659716596628165, 100.0584750056812], [0.4383475851332998, 100.03966796619233]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_7d02967a779d27e6e3dbda0c7f16d4ba.bindTooltip(
+            poly_line_0ca0556523910c7c5e0b2e65978ef6fa.bindTooltip(
                 `<div>
                      PANTI ⇄ TAPUS<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -783,13 +783,13 @@
             );
         
     
-            var poly_line_8fe422808d0111f70681dd4d7ae9edcf = L.polyline(
+            var poly_line_a1e8f59bcfc1d033009f092ec23e214d = L.polyline(
                 [[0.1201122591997009, 100.1738229661935], [0.3659716596628165, 100.0584750056812]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_8fe422808d0111f70681dd4d7ae9edcf.bindTooltip(
+            poly_line_a1e8f59bcfc1d033009f092ec23e214d.bindTooltip(
                 `<div>
                      LUBUK SIKAPING ⇄ PANTI<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -799,13 +799,13 @@
             );
         
     
-            var poly_line_026b1841799665e2512bec814b6371f5 = L.polyline(
+            var poly_line_4406cc0b65f6687683dd46f4f7becf8c = L.polyline(
                 [[-0.317378, 100.030865], [0.1201122591997009, 100.1738229661935]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_026b1841799665e2512bec814b6371f5.bindTooltip(
+            poly_line_4406cc0b65f6687683dd46f4f7becf8c.bindTooltip(
                 `<div>
                      LUBUK BASUNG ⇄ LUBUK SIKAPING<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -815,13 +815,13 @@
             );
         
     
-            var poly_line_29f7ef582f9b4e18f229eeadbd48fe04 = L.polyline(
+            var poly_line_d2bc900a4f072755fc53beffcff74f51 = L.polyline(
                 [[-0.3086571055657152, 100.37103483300052], [-0.317378, 100.030865]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_29f7ef582f9b4e18f229eeadbd48fe04.bindTooltip(
+            poly_line_d2bc900a4f072755fc53beffcff74f51.bindTooltip(
                 `<div>
                      BUKIT TINGGI ⇄ LUBUK BASUNG<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -831,13 +831,13 @@
             );
         
     
-            var poly_line_90db0139eac9f64cae1a84456d18e8bf = L.polyline(
+            var poly_line_20b5d073963e03c4a267bb301df0834b = L.polyline(
                 [[0.3374411274668739, 101.02220258033836], [-0.3086571055657152, 100.37103483300052]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_90db0139eac9f64cae1a84456d18e8bf.bindTooltip(
+            poly_line_20b5d073963e03c4a267bb301df0834b.bindTooltip(
                 `<div>
                      BANGKINANG ⇄ BUKIT TINGGI<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -847,13 +847,13 @@
             );
         
     
-            var poly_line_b80e305857342fa0537122ee58bc655b = L.polyline(
+            var poly_line_931f878f4d085b9a6fa791841adf1c0b = L.polyline(
                 [[0.3374411274668739, 101.02220258033836], [0.525645, 101.4470832]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_b80e305857342fa0537122ee58bc655b.bindTooltip(
+            poly_line_931f878f4d085b9a6fa791841adf1c0b.bindTooltip(
                 `<div>
                      BANGKINANG ⇄ SUKARAMAI<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -863,13 +863,13 @@
             );
         
     
-            var poly_line_cc93afddd59324ba31f79b0167e4fc8f = L.polyline(
+            var poly_line_940491d59ebf29a8336327aeb5ba940e = L.polyline(
                 [[0.525645, 101.4470832], [0.7116254635085894, 100.53296921365477]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_cc93afddd59324ba31f79b0167e4fc8f.bindTooltip(
+            poly_line_940491d59ebf29a8336327aeb5ba940e.bindTooltip(
                 `<div>
                      SUKARAMAI ⇄ UJUNG BATU<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -879,13 +879,13 @@
             );
         
     
-            var poly_line_444ed72a3eb1e54b4a5365bfa617de00 = L.polyline(
+            var poly_line_4f36624baa2748a5682b11d167215b56 = L.polyline(
                 [[0.8616841736820656, 100.30097009570034], [0.7116254635085894, 100.53296921365477]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_444ed72a3eb1e54b4a5365bfa617de00.bindTooltip(
+            poly_line_4f36624baa2748a5682b11d167215b56.bindTooltip(
                 `<div>
                      PASIR PANGAIRAN ⇄ UJUNG BATU<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -895,13 +895,13 @@
             );
         
     
-            var poly_line_143c4620405cae80a1ea96a8e55c45d2 = L.polyline(
+            var poly_line_c74443428d3022b42f54d86150eeebb7 = L.polyline(
                 [[0.8444632, 100.2813193], [0.8616841736820656, 100.30097009570034]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_143c4620405cae80a1ea96a8e55c45d2.bindTooltip(
+            poly_line_c74443428d3022b42f54d86150eeebb7.bindTooltip(
                 `<div>
                      DALU DALU ⇄ PASIR PANGAIRAN<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -911,13 +911,13 @@
             );
         
     
-            var poly_line_11fa2c46f1503d55ae3f4cccd86d46f9 = L.polyline(
+            var poly_line_49ffa0f51ee6045bf0f2eff4bfda9fdf = L.polyline(
                 [[0.8444632, 100.2813193], [1.0482799254432094, 99.7431141177023]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_11fa2c46f1503d55ae3f4cccd86d46f9.bindTooltip(
+            poly_line_49ffa0f51ee6045bf0f2eff4bfda9fdf.bindTooltip(
                 `<div>
                      DALU DALU ⇄ SIBUHUAN<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -927,13 +927,13 @@
             );
         
     
-            var poly_line_86fef8756827650192c833980bd3f32b = L.polyline(
+            var poly_line_51f926079d466ee36623e2b5fdb8a8a9 = L.polyline(
                 [[1.0482799254432094, 99.7431141177023], [1.3778421, 99.7569549]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_86fef8756827650192c833980bd3f32b.bindTooltip(
+            poly_line_51f926079d466ee36623e2b5fdb8a8a9.bindTooltip(
                 `<div>
                      SIBUHUAN ⇄ TSEL BINANGA<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -943,13 +943,13 @@
             );
         
     
-            var poly_line_56a739ac616acb275ad9bb30ecab87ce = L.polyline(
+            var poly_line_aca81df54d27e7ad88db0544e9688798 = L.polyline(
                 [[1.5079366475270684, 99.62420616221712], [1.3778421, 99.7569549]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
         
     
-            poly_line_56a739ac616acb275ad9bb30ecab87ce.bindTooltip(
+            poly_line_aca81df54d27e7ad88db0544e9688798.bindTooltip(
                 `<div>
                      GUNUNG TUA ⇄ TSEL BINANGA<br><br>Jumlah Service (segmen): 1<br>- KOTANOPAN - RANTAU PRAPAT VIA BKT-BKN-DLU-GNT)
                  </div>`,
@@ -959,23 +959,23 @@
             );
         
     
-            var layer_control_6426e35ca4349619e36ad1b3fac389dd_layers = {
+            var layer_control_d013fbb152a70a00c58b5332f4c9deb7_layers = {
                 base_layers : {
-                    "cartodbpositron" : tile_layer_8c5a8229a9978935a152b11d3ecd0c78,
+                    "cartodbpositron" : tile_layer_c085b927647e1197a69bd245dcca56ce,
                 },
                 overlays :  {
-                    "Nodes" : geo_json_89356251b60a1d9dc547e00af17db16e,
+                    "Nodes" : geo_json_564da52707522fb838804ee55b3d0a2b,
                 },
             };
-            let layer_control_6426e35ca4349619e36ad1b3fac389dd = L.control.layers(
-                layer_control_6426e35ca4349619e36ad1b3fac389dd_layers.base_layers,
-                layer_control_6426e35ca4349619e36ad1b3fac389dd_layers.overlays,
+            let layer_control_d013fbb152a70a00c58b5332f4c9deb7 = L.control.layers(
+                layer_control_d013fbb152a70a00c58b5332f4c9deb7_layers.base_layers,
+                layer_control_d013fbb152a70a00c58b5332f4c9deb7_layers.overlays,
                 {
   "position": "topright",
   "collapsed": true,
   "autoZIndex": true,
 }
-            ).addTo(map_9e8e13717fa7687bf6565d3332ebf305);
+            ).addTo(map_eb152677417294e1ae28564b79be1f0a);
 
         
 </script>
