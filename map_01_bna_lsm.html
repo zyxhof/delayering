@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_5d6431a8ebe60f3e1c9908912a86b70a {
+                #map_6bc1d274f53e2a6e49ad0e950116503b {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -81,14 +81,14 @@
   <div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:green;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">INTEGRASI</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:red;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">POWER ON</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:blue;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">INSTALL</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:purple;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">MOS</span></div>
 </div>
     
-            <div class="folium-map" id="map_5d6431a8ebe60f3e1c9908912a86b70a" ></div>
+            <div class="folium-map" id="map_6bc1d274f53e2a6e49ad0e950116503b" ></div>
         
 </body>
 <script>
     
     
-            var map_5d6431a8ebe60f3e1c9908912a86b70a = L.map(
-                "map_5d6431a8ebe60f3e1c9908912a86b70a",
+            var map_6bc1d274f53e2a6e49ad0e950116503b = L.map(
+                "map_6bc1d274f53e2a6e49ad0e950116503b",
                 {
                     center: [5.103040270334056, 96.23961685217988],
                     crs: L.CRS.EPSG3857,
@@ -105,7 +105,7 @@
 
         
     
-            var tile_layer_7e1b6e70a4b591ca5a2bdeb50110a954 = L.tileLayer(
+            var tile_layer_52808c15cebe43ff852cf752b1157188 = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -122,10 +122,10 @@
             );
         
     
-            tile_layer_7e1b6e70a4b591ca5a2bdeb50110a954.addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            tile_layer_52808c15cebe43ff852cf752b1157188.addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-        function geo_json_16667346613f47a86855f742bb88b138_styler(feature) {
+        function geo_json_28def7023f2aa4457747ec33f03ecff2_styler(feature) {
             switch(feature.properties.working) {
                 case "BANDA ACEH CTR T1": case "LAMBARO T2": case "SEULEUMEUM T3": case "SIGLI T3": case "BEUREUNEUN T3": case "DARUSSALAM T2": case "MATANG GELUMPANG DUA T2": case "BIREUN T2": case "MEUREUDU T3": case "PEUREULAK T2": case "LANGSA T2": case "KUALA SIMPANG T2": case "PANGKALAN BRANDAN T3": case "TANJUNG PURA T3": case "STABAT T2": case "BINJAI T2": case "MEDAN CENTRUM T1": case "LHOKSEUMAWE T1": case "KRUENG GEKEUH T2": case "LAMTEMEUN T2": case "LHOKNGA": case "LAMNO T2": case "CALANG T2": case "TEUNOM T2": 
                     return {"color": "green", "fillColor": "green", "fillOpacity": 0.9, "opacity": 1, "weight": 2};
@@ -133,13 +133,13 @@
                     return {"color": "red", "fillColor": "red", "fillOpacity": 0.9, "opacity": 1, "weight": 2};
             }
         }
-        function geo_json_16667346613f47a86855f742bb88b138_highlighter(feature) {
+        function geo_json_28def7023f2aa4457747ec33f03ecff2_highlighter(feature) {
             switch(feature.properties.working) {
                 default:
                     return {"opacity": 1, "weight": 6};
             }
         }
-        function geo_json_16667346613f47a86855f742bb88b138_pointToLayer(feature, latlng) {
+        function geo_json_28def7023f2aa4457747ec33f03ecff2_pointToLayer(feature, latlng) {
             var opts = {
   "stroke": true,
   "color": "#3388ff",
@@ -157,46 +157,46 @@
   "radius": 7,
 };
             
-            let style = geo_json_16667346613f47a86855f742bb88b138_styler(feature)
+            let style = geo_json_28def7023f2aa4457747ec33f03ecff2_styler(feature)
             Object.assign(opts, style)
             
             return new L.CircleMarker(latlng, opts)
         }
 
-        function geo_json_16667346613f47a86855f742bb88b138_onEachFeature(feature, layer) {
+        function geo_json_28def7023f2aa4457747ec33f03ecff2_onEachFeature(feature, layer) {
 
             layer.on({
                 mouseout: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                            geo_json_16667346613f47a86855f742bb88b138.resetStyle(e.target);
+                            geo_json_28def7023f2aa4457747ec33f03ecff2.resetStyle(e.target);
                     }
                 },
                 mouseover: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_16667346613f47a86855f742bb88b138_highlighter(e.target.feature)
+                        const highlightStyle = geo_json_28def7023f2aa4457747ec33f03ecff2_highlighter(e.target.feature)
                         e.target.setStyle(highlightStyle);
                     }
                 },
             });
         };
-        var geo_json_16667346613f47a86855f742bb88b138 = L.geoJson(null, {
-                onEachFeature: geo_json_16667346613f47a86855f742bb88b138_onEachFeature,
+        var geo_json_28def7023f2aa4457747ec33f03ecff2 = L.geoJson(null, {
+                onEachFeature: geo_json_28def7023f2aa4457747ec33f03ecff2_onEachFeature,
             
-                style: geo_json_16667346613f47a86855f742bb88b138_styler,
-                pointToLayer: geo_json_16667346613f47a86855f742bb88b138_pointToLayer,
+                style: geo_json_28def7023f2aa4457747ec33f03ecff2_styler,
+                pointToLayer: geo_json_28def7023f2aa4457747ec33f03ecff2_pointToLayer,
             ...{
 }
         });
 
-        function geo_json_16667346613f47a86855f742bb88b138_add (data) {
-            geo_json_16667346613f47a86855f742bb88b138
+        function geo_json_28def7023f2aa4457747ec33f03ecff2_add (data) {
+            geo_json_28def7023f2aa4457747ec33f03ecff2
                 .addData(data);
         }
-            geo_json_16667346613f47a86855f742bb88b138_add({"features": [{"geometry": {"coordinates": [95.3201166196986, 5.55294288934709], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBANDA ACEH CTR T1\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "BANDA ACEH CTR T1"}, "type": "Feature"}, {"geometry": {"coordinates": [95.3548596342314, 5.51010116078224], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLAMBARO T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LAMBARO T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.578176623198, 5.35987910392513], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSEULEUMEUM T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "SEULEUMEUM T3"}, "type": "Feature"}, {"geometry": {"coordinates": [95.9582657568472, 5.3824890048799], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSIGLI T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "SIGLI T3"}, "type": "Feature"}, {"geometry": {"coordinates": [95.9872506923057, 5.27184182798058], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBEUREUNEUN T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "BEUREUNEUN T3"}, "type": "Feature"}, {"geometry": {"coordinates": [95.3189258, 5.5588398], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eDARUSSALAM T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "DARUSSALAM T2"}, "type": "Feature"}, {"geometry": {"coordinates": [96.7878773379897, 5.19639455372731], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eMATANG GELUMPANG DUA T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "MATANG GELUMPANG DUA T2"}, "type": "Feature"}, {"geometry": {"coordinates": [96.7048325257129, 5.20132325730175], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBIREUN T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "BIREUN T2"}, "type": "Feature"}, {"geometry": {"coordinates": [96.3684714454084, 5.20582550638859], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSAMALANGA T3\u003c/b\u003e\u003cbr\u003eResult: POWER ON\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: 0\u003cbr\u003eIDN: 0", "working": "SAMALANGA T3"}, "type": "Feature"}, {"geometry": {"coordinates": [96.247947888894, 5.25122407051664], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eMEUREUDU T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "MEUREUDU T3"}, "type": "Feature"}, {"geometry": {"coordinates": [97.8945745688469, 4.80902697003507], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePEUREULAK T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "PEUREULAK T2"}, "type": "Feature"}, {"geometry": {"coordinates": [97.9659336936624, 4.47358443910094], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLANGSA T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LANGSA T2"}, "type": "Feature"}, {"geometry": {"coordinates": [98.0580347649346, 4.28349148373182], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eKUALA SIMPANG T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "KUALA SIMPANG T2"}, "type": "Feature"}, {"geometry": {"coordinates": [98.2870657226614, 4.02047644308302], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePANGKALAN BRANDAN T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "PANGKALAN BRANDAN T3"}, "type": "Feature"}, {"geometry": {"coordinates": [98.4222670122166, 3.90920850070774], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eTANJUNG PURA T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "TANJUNG PURA T3"}, "type": "Feature"}, {"geometry": {"coordinates": [98.4443354758737, 3.74301838875764], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSTABAT T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "STABAT T2"}, "type": "Feature"}, {"geometry": {"coordinates": [98.4952150257092, 3.61038211707344], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBINJAI T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "BINJAI T2"}, "type": "Feature"}, {"geometry": {"coordinates": [98.6866455064764, 3.58808586430573], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eMEDAN CENTRUM T1\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "MEDAN CENTRUM T1"}, "type": "Feature"}, {"geometry": {"coordinates": [97.1459441177873, 5.17995281124451], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLHOKSEUMAWE T1\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LHOKSEUMAWE T1"}, "type": "Feature"}, {"geometry": {"coordinates": [97.026006777491, 5.23644912851165], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eKRUENG GEKEUH T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "KRUENG GEKEUH T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.2934084906713, 5.52805457982634], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLAMTEMEUN T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LAMTEMEUN T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.2414145600583, 5.47437823471493], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLHOKNGA\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LHOKNGA"}, "type": "Feature"}, {"geometry": {"coordinates": [95.3660432488147, 5.08973801887242], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLAMNO T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LAMNO T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.5777126950261, 4.63497192035921], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eCALANG T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "CALANG T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.8146419, 4.4424921], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eTEUNOM T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "TEUNOM T2"}, "type": "Feature"}], "type": "FeatureCollection"});
+            geo_json_28def7023f2aa4457747ec33f03ecff2_add({"features": [{"geometry": {"coordinates": [95.3201166196986, 5.55294288934709], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBANDA ACEH CTR T1\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "BANDA ACEH CTR T1"}, "type": "Feature"}, {"geometry": {"coordinates": [95.3548596342314, 5.51010116078224], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLAMBARO T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LAMBARO T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.578176623198, 5.35987910392513], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSEULEUMEUM T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "SEULEUMEUM T3"}, "type": "Feature"}, {"geometry": {"coordinates": [95.9582657568472, 5.3824890048799], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSIGLI T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "SIGLI T3"}, "type": "Feature"}, {"geometry": {"coordinates": [95.9872506923057, 5.27184182798058], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBEUREUNEUN T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "BEUREUNEUN T3"}, "type": "Feature"}, {"geometry": {"coordinates": [95.3189258, 5.5588398], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eDARUSSALAM T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "DARUSSALAM T2"}, "type": "Feature"}, {"geometry": {"coordinates": [96.7878773379897, 5.19639455372731], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eMATANG GELUMPANG DUA T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "MATANG GELUMPANG DUA T2"}, "type": "Feature"}, {"geometry": {"coordinates": [96.7048325257129, 5.20132325730175], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBIREUN T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "BIREUN T2"}, "type": "Feature"}, {"geometry": {"coordinates": [96.3684714454084, 5.20582550638859], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSAMALANGA T3\u003c/b\u003e\u003cbr\u003eResult: POWER ON\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: 0\u003cbr\u003eIDN: 0", "working": "SAMALANGA T3"}, "type": "Feature"}, {"geometry": {"coordinates": [96.247947888894, 5.25122407051664], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eMEUREUDU T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "MEUREUDU T3"}, "type": "Feature"}, {"geometry": {"coordinates": [97.8945745688469, 4.80902697003507], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePEUREULAK T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "PEUREULAK T2"}, "type": "Feature"}, {"geometry": {"coordinates": [97.9659336936624, 4.47358443910094], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLANGSA T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LANGSA T2"}, "type": "Feature"}, {"geometry": {"coordinates": [98.0580347649346, 4.28349148373182], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eKUALA SIMPANG T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "KUALA SIMPANG T2"}, "type": "Feature"}, {"geometry": {"coordinates": [98.2870657226614, 4.02047644308302], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePANGKALAN BRANDAN T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "PANGKALAN BRANDAN T3"}, "type": "Feature"}, {"geometry": {"coordinates": [98.4222670122166, 3.90920850070774], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eTANJUNG PURA T3\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "TANJUNG PURA T3"}, "type": "Feature"}, {"geometry": {"coordinates": [98.4443354758737, 3.74301838875764], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eSTABAT T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "STABAT T2"}, "type": "Feature"}, {"geometry": {"coordinates": [98.4952150257092, 3.61038211707344], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBINJAI T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "BINJAI T2"}, "type": "Feature"}, {"geometry": {"coordinates": [98.6866455064764, 3.58808586430573], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eMEDAN CENTRUM T1\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "MEDAN CENTRUM T1"}, "type": "Feature"}, {"geometry": {"coordinates": [97.1459441177873, 5.17995281124451], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLHOKSEUMAWE T1\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LHOKSEUMAWE T1"}, "type": "Feature"}, {"geometry": {"coordinates": [97.026006777491, 5.23644912851165], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eKRUENG GEKEUH T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "KRUENG GEKEUH T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.2934084906713, 5.52805457982634], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLAMTEMEUN T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LAMTEMEUN T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.2414145600583, 5.47437823471493], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLHOKNGA\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LHOKNGA"}, "type": "Feature"}, {"geometry": {"coordinates": [95.3660432488147, 5.08973801887242], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLAMNO T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "LAMNO T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.5777126950261, 4.63497192035921], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eCALANG T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "CALANG T2"}, "type": "Feature"}, {"geometry": {"coordinates": [95.8146419, 4.4424921], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eTEUNOM T2\u003c/b\u003e\u003cbr\u003eResult: INTEGRASI\u003cbr\u003eMOS: DONE\u003cbr\u003eINSTALL: DONE\u003cbr\u003ePOWER ON: DONE\u003cbr\u003eINTEGRASI: DONE\u003cbr\u003eIDN: 1", "working": "TEUNOM T2"}, "type": "Feature"}], "type": "FeatureCollection"});
 
         
     
-    geo_json_16667346613f47a86855f742bb88b138.bindTooltip(
+    geo_json_28def7023f2aa4457747ec33f03ecff2.bindTooltip(
     function(layer){
     let div = L.DomUtil.create('div');
     
@@ -231,11 +231,11 @@
 });
                      
     
-            geo_json_16667346613f47a86855f742bb88b138.addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            geo_json_28def7023f2aa4457747ec33f03ecff2.addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            var geo_json_16667346613f47a86855f742bb88b138searchControl = new L.Control.Search({
-                layer: geo_json_16667346613f47a86855f742bb88b138,
+            var geo_json_28def7023f2aa4457747ec33f03ecff2searchControl = new L.Control.Search({
+                layer: geo_json_28def7023f2aa4457747ec33f03ecff2,
                 
                 propertyName: 'working',
                 
@@ -248,8 +248,8 @@
                 hideMarkerOnCollapse: true
             
                 });
-                geo_json_16667346613f47a86855f742bb88b138searchControl.on('search:locationfound', function(e) {
-                    geo_json_16667346613f47a86855f742bb88b138.setStyle(function(feature){
+                geo_json_28def7023f2aa4457747ec33f03ecff2searchControl.on('search:locationfound', function(e) {
+                    geo_json_28def7023f2aa4457747ec33f03ecff2.setStyle(function(feature){
                         return feature.properties.style
                     })
                     
@@ -260,22 +260,22 @@
                     if(e.layer._popup)
                         e.layer.openPopup();
                 })
-                geo_json_16667346613f47a86855f742bb88b138searchControl.on('search:collapsed', function(e) {
-                        geo_json_16667346613f47a86855f742bb88b138.setStyle(function(feature){
+                geo_json_28def7023f2aa4457747ec33f03ecff2searchControl.on('search:collapsed', function(e) {
+                        geo_json_28def7023f2aa4457747ec33f03ecff2.setStyle(function(feature){
                             return feature.properties.style
                     });
                 });
-            map_5d6431a8ebe60f3e1c9908912a86b70a.addControl( geo_json_16667346613f47a86855f742bb88b138searchControl );
+            map_6bc1d274f53e2a6e49ad0e950116503b.addControl( geo_json_28def7023f2aa4457747ec33f03ecff2searchControl );
 
         
     
-            var poly_line_8dd510c4fe7fc461b99190c78015efb7 = L.polyline(
+            var poly_line_b387e12d32b18232f5e3ca5afac94096 = L.polyline(
                 [[5.55294288934709, 95.3201166196986], [5.51010116078224, 95.3548596342314]],
                 {"bubblingMouseEvents": true, "color": "#8d8d8dff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#8d8d8dff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_8dd510c4fe7fc461b99190c78015efb7.bindTooltip(
+            poly_line_b387e12d32b18232f5e3ca5afac94096.bindTooltip(
                 `<div>
                      BANDA ACEH CTR T1 ⇄ LAMBARO T2<br><br>Jumlah Service (segmen): 2<br>- BANDA ACEH-BEUREUNEUN<br>- MATANG GEULUMPANG DUA-BANDA ACEH
                  </div>`,
@@ -285,13 +285,13 @@
             );
         
     
-            var poly_line_15155af0a8216892b4738c9c60edc75e = L.polyline(
+            var poly_line_7f6341a0652ab553428ae880f43b831a = L.polyline(
                 [[5.51010116078224, 95.3548596342314], [5.35987910392513, 95.578176623198]],
                 {"bubblingMouseEvents": true, "color": "#000000ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#000000ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 6.5}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_15155af0a8216892b4738c9c60edc75e.bindTooltip(
+            poly_line_7f6341a0652ab553428ae880f43b831a.bindTooltip(
                 `<div>
                      LAMBARO T2 ⇄ SEULEUMEUM T3<br><br>Jumlah Service (segmen): 5<br>- BANDA ACEH-BEUREUNEUN<br>- SEULEUMEUM-DARUSSALAM<br>- MATANG GEULUMPANG DUA-BANDA ACEH<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -301,13 +301,13 @@
             );
         
     
-            var poly_line_bab90eb8b4a6842569ef722f297aef7d = L.polyline(
+            var poly_line_ab9c5e1939d1e981ef411603a109b21c = L.polyline(
                 [[5.35987910392513, 95.578176623198], [5.3824890048799, 95.9582657568472]],
                 {"bubblingMouseEvents": true, "color": "#303030ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#303030ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.8}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_bab90eb8b4a6842569ef722f297aef7d.bindTooltip(
+            poly_line_ab9c5e1939d1e981ef411603a109b21c.bindTooltip(
                 `<div>
                      SEULEUMEUM T3 ⇄ SIGLI T3<br><br>Jumlah Service (segmen): 4<br>- BANDA ACEH-BEUREUNEUN<br>- MATANG GEULUMPANG DUA-BANDA ACEH<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -317,13 +317,13 @@
             );
         
     
-            var poly_line_c48f6191f5ac9706ad721652ce19aa24 = L.polyline(
+            var poly_line_871dee7c892ba9373985c4afd461ee61 = L.polyline(
                 [[5.27184182798058, 95.9872506923057], [5.3824890048799, 95.9582657568472]],
                 {"bubblingMouseEvents": true, "color": "#303030ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#303030ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.8}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_c48f6191f5ac9706ad721652ce19aa24.bindTooltip(
+            poly_line_871dee7c892ba9373985c4afd461ee61.bindTooltip(
                 `<div>
                      BEUREUNEUN T3 ⇄ SIGLI T3<br><br>Jumlah Service (segmen): 4<br>- BANDA ACEH-BEUREUNEUN<br>- MATANG GEULUMPANG DUA-BANDA ACEH<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -333,13 +333,13 @@
             );
         
     
-            var poly_line_8c8a12f36544559f7dd8a8d6131d0176 = L.polyline(
+            var poly_line_b41c5455fa3c9b2820d8366620427794 = L.polyline(
                 [[5.5588398, 95.3189258], [5.51010116078224, 95.3548596342314]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_8c8a12f36544559f7dd8a8d6131d0176.bindTooltip(
+            poly_line_b41c5455fa3c9b2820d8366620427794.bindTooltip(
                 `<div>
                      DARUSSALAM T2 ⇄ LAMBARO T2<br><br>Jumlah Service (segmen): 1<br>- SEULEUMEUM-DARUSSALAM
                  </div>`,
@@ -349,13 +349,13 @@
             );
         
     
-            var poly_line_f689c1adcc9a87363893c8ca976ed94d = L.polyline(
+            var poly_line_13c55c882a221762e560f60f6295d0ae = L.polyline(
                 [[5.20132325730175, 96.7048325257129], [5.19639455372731, 96.7878773379897]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_f689c1adcc9a87363893c8ca976ed94d.bindTooltip(
+            poly_line_13c55c882a221762e560f60f6295d0ae.bindTooltip(
                 `<div>
                      BIREUN T2 ⇄ MATANG GELUMPANG DUA T2<br><br>Jumlah Service (segmen): 3<br>- MATANG GEULUMPANG DUA-BANDA ACEH<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -365,13 +365,13 @@
             );
         
     
-            var poly_line_b7d1fa1cf32b7eee25e0c64559379223 = L.polyline(
+            var poly_line_6467fd81767cff22716a9db7a19e811c = L.polyline(
                 [[5.20132325730175, 96.7048325257129], [5.20582550638859, 96.3684714454084]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_b7d1fa1cf32b7eee25e0c64559379223.bindTooltip(
+            poly_line_6467fd81767cff22716a9db7a19e811c.bindTooltip(
                 `<div>
                      BIREUN T2 ⇄ SAMALANGA T3<br><br>Jumlah Service (segmen): 3<br>- MATANG GEULUMPANG DUA-BANDA ACEH<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -381,13 +381,13 @@
             );
         
     
-            var poly_line_39e2da3b9ff37ceb0b97f742c58027cb = L.polyline(
+            var poly_line_600bbfc078e61728ac7eb98b47893da1 = L.polyline(
                 [[5.25122407051664, 96.247947888894], [5.20582550638859, 96.3684714454084]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_39e2da3b9ff37ceb0b97f742c58027cb.bindTooltip(
+            poly_line_600bbfc078e61728ac7eb98b47893da1.bindTooltip(
                 `<div>
                      MEUREUDU T3 ⇄ SAMALANGA T3<br><br>Jumlah Service (segmen): 3<br>- MATANG GEULUMPANG DUA-BANDA ACEH<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -397,13 +397,13 @@
             );
         
     
-            var poly_line_b46298ad7836a5594ec16fae0eee80e8 = L.polyline(
+            var poly_line_1c167b17d11092440c481f1d9609c114 = L.polyline(
                 [[5.27184182798058, 95.9872506923057], [5.25122407051664, 96.247947888894]],
                 {"bubblingMouseEvents": true, "color": "#626262ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#626262ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_b46298ad7836a5594ec16fae0eee80e8.bindTooltip(
+            poly_line_1c167b17d11092440c481f1d9609c114.bindTooltip(
                 `<div>
                      BEUREUNEUN T3 ⇄ MEUREUDU T3<br><br>Jumlah Service (segmen): 3<br>- MATANG GEULUMPANG DUA-BANDA ACEH<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -413,13 +413,13 @@
             );
         
     
-            var poly_line_2c2ff829a52e1b71cc809679daaae87d = L.polyline(
+            var poly_line_2a6d804b0cb53bef0ef18fa2e3818de9 = L.polyline(
                 [[4.47358443910094, 97.9659336936624], [4.80902697003507, 97.8945745688469]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_2c2ff829a52e1b71cc809679daaae87d.bindTooltip(
+            poly_line_2a6d804b0cb53bef0ef18fa2e3818de9.bindTooltip(
                 `<div>
                      LANGSA T2 ⇄ PEUREULAK T2<br><br>Jumlah Service (segmen): 1<br>- PEUREULAK-BANDA ACEH
                  </div>`,
@@ -429,13 +429,13 @@
             );
         
     
-            var poly_line_2067cf7c50652352355e317629458c89 = L.polyline(
+            var poly_line_5e7bf50f03d26760515ebc1f7dc1f564 = L.polyline(
                 [[4.28349148373182, 98.0580347649346], [4.47358443910094, 97.9659336936624]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_2067cf7c50652352355e317629458c89.bindTooltip(
+            poly_line_5e7bf50f03d26760515ebc1f7dc1f564.bindTooltip(
                 `<div>
                      KUALA SIMPANG T2 ⇄ LANGSA T2<br><br>Jumlah Service (segmen): 1<br>- PEUREULAK-BANDA ACEH
                  </div>`,
@@ -445,13 +445,13 @@
             );
         
     
-            var poly_line_1e9a678f185d5cf46a8b8a15a705ca5f = L.polyline(
+            var poly_line_b17c6c1363c610b3ebe1fddfb431fdc4 = L.polyline(
                 [[4.28349148373182, 98.0580347649346], [4.02047644308302, 98.2870657226614]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_1e9a678f185d5cf46a8b8a15a705ca5f.bindTooltip(
+            poly_line_b17c6c1363c610b3ebe1fddfb431fdc4.bindTooltip(
                 `<div>
                      KUALA SIMPANG T2 ⇄ PANGKALAN BRANDAN T3<br><br>Jumlah Service (segmen): 1<br>- PEUREULAK-BANDA ACEH
                  </div>`,
@@ -461,13 +461,13 @@
             );
         
     
-            var poly_line_41b0bb42108d17bdd5c823532b22a2fa = L.polyline(
+            var poly_line_82dab52d2735849694d8db45e3051c17 = L.polyline(
                 [[4.02047644308302, 98.2870657226614], [3.90920850070774, 98.4222670122166]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_41b0bb42108d17bdd5c823532b22a2fa.bindTooltip(
+            poly_line_82dab52d2735849694d8db45e3051c17.bindTooltip(
                 `<div>
                      PANGKALAN BRANDAN T3 ⇄ TANJUNG PURA T3<br><br>Jumlah Service (segmen): 1<br>- PEUREULAK-BANDA ACEH
                  </div>`,
@@ -477,13 +477,13 @@
             );
         
     
-            var poly_line_89cef5144e3242336484c4bf32f305c9 = L.polyline(
+            var poly_line_7f4231e3f35563bacd46699a3d844a95 = L.polyline(
                 [[3.74301838875764, 98.4443354758737], [3.90920850070774, 98.4222670122166]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_89cef5144e3242336484c4bf32f305c9.bindTooltip(
+            poly_line_7f4231e3f35563bacd46699a3d844a95.bindTooltip(
                 `<div>
                      STABAT T2 ⇄ TANJUNG PURA T3<br><br>Jumlah Service (segmen): 1<br>- PEUREULAK-BANDA ACEH
                  </div>`,
@@ -493,13 +493,13 @@
             );
         
     
-            var poly_line_584977e2f445e37ff68805d7c8039fe8 = L.polyline(
+            var poly_line_bc40205676a554327383efb88d1d76d3 = L.polyline(
                 [[3.61038211707344, 98.4952150257092], [3.74301838875764, 98.4443354758737]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_584977e2f445e37ff68805d7c8039fe8.bindTooltip(
+            poly_line_bc40205676a554327383efb88d1d76d3.bindTooltip(
                 `<div>
                      BINJAI T2 ⇄ STABAT T2<br><br>Jumlah Service (segmen): 1<br>- PEUREULAK-BANDA ACEH
                  </div>`,
@@ -509,13 +509,13 @@
             );
         
     
-            var poly_line_a8cc6f94c898b22ffb81a4e1b466d12e = L.polyline(
+            var poly_line_f343e53bd7bcf0f952db68972d6aa596 = L.polyline(
                 [[3.61038211707344, 98.4952150257092], [3.58808586430573, 98.6866455064764]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_a8cc6f94c898b22ffb81a4e1b466d12e.bindTooltip(
+            poly_line_f343e53bd7bcf0f952db68972d6aa596.bindTooltip(
                 `<div>
                      BINJAI T2 ⇄ MEDAN CENTRUM T1<br><br>Jumlah Service (segmen): 1<br>- PEUREULAK-BANDA ACEH
                  </div>`,
@@ -525,13 +525,13 @@
             );
         
     
-            var poly_line_86d7ed86527d518e9b52962cf80f7a81 = L.polyline(
+            var poly_line_eb16c48844aa5bafea421d2f43ab6d48 = L.polyline(
                 [[5.23644912851165, 97.026006777491], [5.17995281124451, 97.1459441177873]],
                 {"bubblingMouseEvents": true, "color": "#8d8d8dff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#8d8d8dff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_86d7ed86527d518e9b52962cf80f7a81.bindTooltip(
+            poly_line_eb16c48844aa5bafea421d2f43ab6d48.bindTooltip(
                 `<div>
                      KRUENG GEKEUH T2 ⇄ LHOKSEUMAWE T1<br><br>Jumlah Service (segmen): 2<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -541,13 +541,13 @@
             );
         
     
-            var poly_line_b7f67c6e163f5ca1759e64aaaa86cabc = L.polyline(
+            var poly_line_eaab5b0fa58f99ede05e7fd42c6d2c53 = L.polyline(
                 [[5.23644912851165, 97.026006777491], [5.19639455372731, 96.7878773379897]],
                 {"bubblingMouseEvents": true, "color": "#8d8d8dff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#8d8d8dff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_b7f67c6e163f5ca1759e64aaaa86cabc.bindTooltip(
+            poly_line_eaab5b0fa58f99ede05e7fd42c6d2c53.bindTooltip(
                 `<div>
                      KRUENG GEKEUH T2 ⇄ MATANG GELUMPANG DUA T2<br><br>Jumlah Service (segmen): 2<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -557,13 +557,13 @@
             );
         
     
-            var poly_line_d088c6da7d6b255343dccf6db1f226ad = L.polyline(
+            var poly_line_ff506866ebee1064fec185ec1a0b2ad6 = L.polyline(
                 [[5.51010116078224, 95.3548596342314], [5.52805457982634, 95.2934084906713]],
                 {"bubblingMouseEvents": true, "color": "#8d8d8dff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#8d8d8dff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_d088c6da7d6b255343dccf6db1f226ad.bindTooltip(
+            poly_line_ff506866ebee1064fec185ec1a0b2ad6.bindTooltip(
                 `<div>
                      LAMBARO T2 ⇄ LAMTEMEUN T2<br><br>Jumlah Service (segmen): 2<br>- LHOKSEUMAWE-LAMTEMEN<br>- LHOKSEUMAWE-TEUNOM
                  </div>`,
@@ -573,13 +573,13 @@
             );
         
     
-            var poly_line_5d88b5882b5b3db05269f941a7c42af0 = L.polyline(
+            var poly_line_e55d67966ff774d00ba2b945a51a1d08 = L.polyline(
                 [[5.52805457982634, 95.2934084906713], [5.47437823471493, 95.2414145600583]],
                 {"bubblingMouseEvents": true, "color": "#8d8d8dff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#8d8d8dff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_5d88b5882b5b3db05269f941a7c42af0.bindTooltip(
+            poly_line_e55d67966ff774d00ba2b945a51a1d08.bindTooltip(
                 `<div>
                      LAMTEMEUN T2 ⇄ LHOKNGA<br><br>Jumlah Service (segmen): 2<br>- LHOKSEUMAWE-TEUNOM<br>- LAMNO-BANDA ACEH
                  </div>`,
@@ -589,13 +589,13 @@
             );
         
     
-            var poly_line_f567f25ca9e84f7aa3dcc5f3de7a8dbe = L.polyline(
+            var poly_line_438c437a68416871a6ccd653bc1c984a = L.polyline(
                 [[5.08973801887242, 95.3660432488147], [5.47437823471493, 95.2414145600583]],
                 {"bubblingMouseEvents": true, "color": "#8d8d8dff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#8d8d8dff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_f567f25ca9e84f7aa3dcc5f3de7a8dbe.bindTooltip(
+            poly_line_438c437a68416871a6ccd653bc1c984a.bindTooltip(
                 `<div>
                      LAMNO T2 ⇄ LHOKNGA<br><br>Jumlah Service (segmen): 2<br>- LHOKSEUMAWE-TEUNOM<br>- LAMNO-BANDA ACEH
                  </div>`,
@@ -605,13 +605,13 @@
             );
         
     
-            var poly_line_a4a5131e9daa31a6b1adbc7dd69801c4 = L.polyline(
+            var poly_line_d3bc7a92d62147517584f86c0a60a8b3 = L.polyline(
                 [[4.63497192035921, 95.5777126950261], [5.08973801887242, 95.3660432488147]],
                 {"bubblingMouseEvents": true, "color": "#8d8d8dff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#8d8d8dff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_a4a5131e9daa31a6b1adbc7dd69801c4.bindTooltip(
+            poly_line_d3bc7a92d62147517584f86c0a60a8b3.bindTooltip(
                 `<div>
                      CALANG T2 ⇄ LAMNO T2<br><br>Jumlah Service (segmen): 2<br>- LHOKSEUMAWE-TEUNOM<br>- LAMNO-TEUNOM
                  </div>`,
@@ -621,13 +621,13 @@
             );
         
     
-            var poly_line_753952ebdc55a565e3eeaf66f174e820 = L.polyline(
+            var poly_line_2bef168087b31660ac6d3cd8c7102d75 = L.polyline(
                 [[4.63497192035921, 95.5777126950261], [4.4424921, 95.8146419]],
                 {"bubblingMouseEvents": true, "color": "#8d8d8dff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#8d8d8dff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_753952ebdc55a565e3eeaf66f174e820.bindTooltip(
+            poly_line_2bef168087b31660ac6d3cd8c7102d75.bindTooltip(
                 `<div>
                      CALANG T2 ⇄ TEUNOM T2<br><br>Jumlah Service (segmen): 2<br>- LHOKSEUMAWE-TEUNOM<br>- LAMNO-TEUNOM
                  </div>`,
@@ -637,13 +637,13 @@
             );
         
     
-            var poly_line_728e5f0f59decf4acefc94f0dbd38169 = L.polyline(
+            var poly_line_15a2772d1202b01516166b4d7911188c = L.polyline(
                 [[5.55294288934709, 95.3201166196986], [5.52805457982634, 95.2934084906713]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
         
     
-            poly_line_728e5f0f59decf4acefc94f0dbd38169.bindTooltip(
+            poly_line_15a2772d1202b01516166b4d7911188c.bindTooltip(
                 `<div>
                      BANDA ACEH CTR T1 ⇄ LAMTEMEUN T2<br><br>Jumlah Service (segmen): 1<br>- LAMNO-BANDA ACEH
                  </div>`,
@@ -653,23 +653,23 @@
             );
         
     
-            var layer_control_18d6651350ab5d7b13648a17f2794f74_layers = {
+            var layer_control_b16d3b31782a6b5264df5d39cba787d1_layers = {
                 base_layers : {
-                    "cartodbpositron" : tile_layer_7e1b6e70a4b591ca5a2bdeb50110a954,
+                    "cartodbpositron" : tile_layer_52808c15cebe43ff852cf752b1157188,
                 },
                 overlays :  {
-                    "Nodes" : geo_json_16667346613f47a86855f742bb88b138,
+                    "Nodes" : geo_json_28def7023f2aa4457747ec33f03ecff2,
                 },
             };
-            let layer_control_18d6651350ab5d7b13648a17f2794f74 = L.control.layers(
-                layer_control_18d6651350ab5d7b13648a17f2794f74_layers.base_layers,
-                layer_control_18d6651350ab5d7b13648a17f2794f74_layers.overlays,
+            let layer_control_b16d3b31782a6b5264df5d39cba787d1 = L.control.layers(
+                layer_control_b16d3b31782a6b5264df5d39cba787d1_layers.base_layers,
+                layer_control_b16d3b31782a6b5264df5d39cba787d1_layers.overlays,
                 {
   "position": "topright",
   "collapsed": true,
   "autoZIndex": true,
 }
-            ).addTo(map_5d6431a8ebe60f3e1c9908912a86b70a);
+            ).addTo(map_6bc1d274f53e2a6e49ad0e950116503b);
 
         
 </script>
