@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_cf63f9e1b22ece02a628c9995798994f {
+                #map_04e82aadee0f2d338aa9c4926e8fbed5 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -81,14 +81,14 @@
   <div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:green;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">INTEGRASI</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:red;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">POWER ON</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:blue;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">INSTALL</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:purple;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">MOS</span></div><div style="display:flex;align-items:center;margin:2px 0;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:gray;margin-right:6px;border:1px solid #999;"></span><span style="font-size:12px;">NY MOS</span></div>
 </div>
     
-            <div class="folium-map" id="map_cf63f9e1b22ece02a628c9995798994f" ></div>
+            <div class="folium-map" id="map_04e82aadee0f2d338aa9c4926e8fbed5" ></div>
         
 </body>
 <script>
     
     
-            var map_cf63f9e1b22ece02a628c9995798994f = L.map(
-                "map_cf63f9e1b22ece02a628c9995798994f",
+            var map_04e82aadee0f2d338aa9c4926e8fbed5 = L.map(
+                "map_04e82aadee0f2d338aa9c4926e8fbed5",
                 {
                     center: [-3.1830223598706793, 115.1020544135463],
                     crs: L.CRS.EPSG3857,
@@ -105,7 +105,7 @@
 
         
     
-            var tile_layer_0868e499d40bf3fdc730d90a84114cf7 = L.tileLayer(
+            var tile_layer_8247c6e48b9bf61afc7350b1daf8ed2c = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -122,10 +122,10 @@
             );
         
     
-            tile_layer_0868e499d40bf3fdc730d90a84114cf7.addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            tile_layer_8247c6e48b9bf61afc7350b1daf8ed2c.addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-        function geo_json_1f88a7b55e16a80cfdf33b8594423b31_styler(feature) {
+        function geo_json_e269ec0fd5ebe765321067b865fd8ef1_styler(feature) {
             switch(feature.properties.working) {
                 case "BANJARMASIN": case "ULIN": case "LANDASAN ULIN": case "BANJARBARU": case "MARTAPURA": case "PLIHARI": case "BATI BATI": 
                     return {"color": "green", "fillColor": "green", "fillOpacity": 0.9, "opacity": 1, "weight": 2};
@@ -137,13 +137,13 @@
                     return {"color": "red", "fillColor": "red", "fillOpacity": 0.9, "opacity": 1, "weight": 2};
             }
         }
-        function geo_json_1f88a7b55e16a80cfdf33b8594423b31_highlighter(feature) {
+        function geo_json_e269ec0fd5ebe765321067b865fd8ef1_highlighter(feature) {
             switch(feature.properties.working) {
                 default:
                     return {"opacity": 1, "weight": 6};
             }
         }
-        function geo_json_1f88a7b55e16a80cfdf33b8594423b31_pointToLayer(feature, latlng) {
+        function geo_json_e269ec0fd5ebe765321067b865fd8ef1_pointToLayer(feature, latlng) {
             var opts = {
   "stroke": true,
   "color": "#3388ff",
@@ -161,46 +161,46 @@
   "radius": 7,
 };
             
-            let style = geo_json_1f88a7b55e16a80cfdf33b8594423b31_styler(feature)
+            let style = geo_json_e269ec0fd5ebe765321067b865fd8ef1_styler(feature)
             Object.assign(opts, style)
             
             return new L.CircleMarker(latlng, opts)
         }
 
-        function geo_json_1f88a7b55e16a80cfdf33b8594423b31_onEachFeature(feature, layer) {
+        function geo_json_e269ec0fd5ebe765321067b865fd8ef1_onEachFeature(feature, layer) {
 
             layer.on({
                 mouseout: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                            geo_json_1f88a7b55e16a80cfdf33b8594423b31.resetStyle(e.target);
+                            geo_json_e269ec0fd5ebe765321067b865fd8ef1.resetStyle(e.target);
                     }
                 },
                 mouseover: function(e) {
                     if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_1f88a7b55e16a80cfdf33b8594423b31_highlighter(e.target.feature)
+                        const highlightStyle = geo_json_e269ec0fd5ebe765321067b865fd8ef1_highlighter(e.target.feature)
                         e.target.setStyle(highlightStyle);
                     }
                 },
             });
         };
-        var geo_json_1f88a7b55e16a80cfdf33b8594423b31 = L.geoJson(null, {
-                onEachFeature: geo_json_1f88a7b55e16a80cfdf33b8594423b31_onEachFeature,
+        var geo_json_e269ec0fd5ebe765321067b865fd8ef1 = L.geoJson(null, {
+                onEachFeature: geo_json_e269ec0fd5ebe765321067b865fd8ef1_onEachFeature,
             
-                style: geo_json_1f88a7b55e16a80cfdf33b8594423b31_styler,
-                pointToLayer: geo_json_1f88a7b55e16a80cfdf33b8594423b31_pointToLayer,
+                style: geo_json_e269ec0fd5ebe765321067b865fd8ef1_styler,
+                pointToLayer: geo_json_e269ec0fd5ebe765321067b865fd8ef1_pointToLayer,
             ...{
 }
         });
 
-        function geo_json_1f88a7b55e16a80cfdf33b8594423b31_add (data) {
-            geo_json_1f88a7b55e16a80cfdf33b8594423b31
+        function geo_json_e269ec0fd5ebe765321067b865fd8ef1_add (data) {
+            geo_json_e269ec0fd5ebe765321067b865fd8ef1
                 .addData(data);
         }
-            geo_json_1f88a7b55e16a80cfdf33b8594423b31_add({"features": [{"geometry": {"coordinates": [114.5918264988343, -3.3249489025456405], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBANJARMASIN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "BANJARMASIN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.73029768307518, -3.442701599355195], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eULIN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "ULIN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.73025205159172, -3.4426053117556137], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLANDASAN ULIN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "LANDASAN ULIN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.85168573007977, -3.442786544636289], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBANJARBARU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "BANJARBARU"}, "type": "Feature"}, {"geometry": {"coordinates": [114.8502761085458, -3.409225347313244], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eMARTAPURA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "MARTAPURA"}, "type": "Feature"}, {"geometry": {"coordinates": [115.155505106692, -2.9304432970356444], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eRANTAU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "RANTAU"}, "type": "Feature"}, {"geometry": {"coordinates": [114.59068942338064, -3.2884205346530595], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eKAYU TANGI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KAYU TANGI"}, "type": "Feature"}, {"geometry": {"coordinates": [114.76476253737742, -2.9810997683509703], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eMARABAHAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "MARABAHAN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.77444453738516, -3.8015697752483977], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePLIHARI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PLIHARI"}, "type": "Feature"}, {"geometry": {"coordinates": [115.08208763553635, -3.881897300302676], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL ASAM-ASAM PLI007\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL ASAM-ASAM PLI007"}, "type": "Feature"}, {"geometry": {"coordinates": [115.38938989981324, -3.7835436472740303], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSATUI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SATUI"}, "type": "Feature"}, {"geometry": {"coordinates": [115.64429190854835, -3.692421815964998], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL SEBAMBAN BLC006\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SEBAMBAN BLC006"}, "type": "Feature"}, {"geometry": {"coordinates": [115.93371195087632, -3.609594619010864], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePAGATAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PAGATAN"}, "type": "Feature"}, {"geometry": {"coordinates": [116.00185121039549, -3.447979658858505], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eBATU LICIN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BATU LICIN"}, "type": "Feature"}, {"geometry": {"coordinates": [115.64429190854835, -3.692421815964998], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eKOTA BARU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KOTA BARU"}, "type": "Feature"}, {"geometry": {"coordinates": [116.21621733436072, -3.2499796016401685], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL SERONGGA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SERONGGA"}, "type": "Feature"}, {"geometry": {"coordinates": [116.06446768040324, -2.830505342512561], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL PUMPUT KBA101\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL PUMPUT KBA101"}, "type": "Feature"}, {"geometry": {"coordinates": [115.98408, -2.59503], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL KELL KBA017\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL KELL KBA017"}, "type": "Feature"}, {"geometry": {"coordinates": [116.1920440238761, -1.906839043855285], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTANAH GROGOT\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TANAH GROGOT"}, "type": "Feature"}, {"geometry": {"coordinates": [115.808041, -1.676597], "type": "Point"}, "properties": {"clr": "gray", "result": "NY MOS", "tooltip": "\u003cb\u003eKUARO\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eNY MOS\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KUARO"}, "type": "Feature"}, {"geometry": {"coordinates": [115.80801023736754, -1.6766043225403853], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eMUARA KOMAM\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "MUARA KOMAM"}, "type": "Feature"}, {"geometry": {"coordinates": [115.64744, -1.77503], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL SOLAN TJL081\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SOLAN TJL081"}, "type": "Feature"}, {"geometry": {"coordinates": [115.3815856950422, -2.1641726825399874], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTANJUNG TABALONG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TANJUNG TABALONG"}, "type": "Feature"}, {"geometry": {"coordinates": [115.37194490858865, -2.5924536783085474], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eBARABAI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BARABAI"}, "type": "Feature"}, {"geometry": {"coordinates": [115.26293463935389, -2.7825891338855007], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eKANDANGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KANDANGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.70529232389003, -3.5958106655124054], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBATI BATI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "BATI BATI"}, "type": "Feature"}], "type": "FeatureCollection"});
+            geo_json_e269ec0fd5ebe765321067b865fd8ef1_add({"features": [{"geometry": {"coordinates": [114.5918264988343, -3.3249489025456405], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBANJARMASIN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "BANJARMASIN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.73029768307518, -3.442701599355195], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eULIN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "ULIN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.73025205159172, -3.4426053117556137], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eLANDASAN ULIN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "LANDASAN ULIN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.85168573007977, -3.442786544636289], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBANJARBARU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "BANJARBARU"}, "type": "Feature"}, {"geometry": {"coordinates": [114.8502761085458, -3.409225347313244], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eMARTAPURA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "MARTAPURA"}, "type": "Feature"}, {"geometry": {"coordinates": [115.155505106692, -2.9304432970356444], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eRANTAU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "RANTAU"}, "type": "Feature"}, {"geometry": {"coordinates": [114.59068942338064, -3.2884205346530595], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eKAYU TANGI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KAYU TANGI"}, "type": "Feature"}, {"geometry": {"coordinates": [114.76476253737742, -2.9810997683509703], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eMARABAHAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "MARABAHAN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.77444453738516, -3.8015697752483977], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003ePLIHARI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "PLIHARI"}, "type": "Feature"}, {"geometry": {"coordinates": [115.08208763553635, -3.881897300302676], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL ASAM-ASAM PLI007\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL ASAM-ASAM PLI007"}, "type": "Feature"}, {"geometry": {"coordinates": [115.38938989981324, -3.7835436472740303], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eSATUI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "SATUI"}, "type": "Feature"}, {"geometry": {"coordinates": [115.64429190854835, -3.692421815964998], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTSEL SEBAMBAN BLC006\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SEBAMBAN BLC006"}, "type": "Feature"}, {"geometry": {"coordinates": [115.93371195087632, -3.609594619010864], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003ePAGATAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "PAGATAN"}, "type": "Feature"}, {"geometry": {"coordinates": [116.00185121039549, -3.447979658858505], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eBATU LICIN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BATU LICIN"}, "type": "Feature"}, {"geometry": {"coordinates": [115.64429190854835, -3.692421815964998], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eKOTA BARU\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KOTA BARU"}, "type": "Feature"}, {"geometry": {"coordinates": [116.21621733436072, -3.2499796016401685], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL SERONGGA\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SERONGGA"}, "type": "Feature"}, {"geometry": {"coordinates": [116.06446768040324, -2.830505342512561], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL PUMPUT KBA101\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL PUMPUT KBA101"}, "type": "Feature"}, {"geometry": {"coordinates": [115.98408, -2.59503], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL KELL KBA017\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL KELL KBA017"}, "type": "Feature"}, {"geometry": {"coordinates": [116.1920440238761, -1.906839043855285], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTANAH GROGOT\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TANAH GROGOT"}, "type": "Feature"}, {"geometry": {"coordinates": [115.808041, -1.676597], "type": "Point"}, "properties": {"clr": "gray", "result": "NY MOS", "tooltip": "\u003cb\u003eKUARO\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eNY MOS\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KUARO"}, "type": "Feature"}, {"geometry": {"coordinates": [115.80801023736754, -1.6766043225403853], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eMUARA KOMAM\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "MUARA KOMAM"}, "type": "Feature"}, {"geometry": {"coordinates": [115.64744, -1.77503], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eTSEL SOLAN TJL081\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TSEL SOLAN TJL081"}, "type": "Feature"}, {"geometry": {"coordinates": [115.3815856950422, -2.1641726825399874], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eTANJUNG TABALONG\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "TANJUNG TABALONG"}, "type": "Feature"}, {"geometry": {"coordinates": [115.37194490858865, -2.5924536783085474], "type": "Point"}, "properties": {"clr": "red", "result": "POWER ON", "tooltip": "\u003cb\u003eBARABAI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003ePOWER ON\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "BARABAI"}, "type": "Feature"}, {"geometry": {"coordinates": [115.26293463935389, -2.7825891338855007], "type": "Point"}, "properties": {"clr": "blue", "result": "INSTALL", "tooltip": "\u003cb\u003eKANDANGAN\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINSTALL\u003c/b\u003e\u003cbr\u003eIDN: 0", "working": "KANDANGAN"}, "type": "Feature"}, {"geometry": {"coordinates": [114.70529232389003, -3.5958106655124054], "type": "Point"}, "properties": {"clr": "green", "result": "INTEGRASI", "tooltip": "\u003cb\u003eBATI BATI\u003c/b\u003e\u003cbr\u003eResult: \u003cb\u003eINTEGRASI\u003c/b\u003e\u003cbr\u003eIDN: 1", "working": "BATI BATI"}, "type": "Feature"}], "type": "FeatureCollection"});
 
         
     
-    geo_json_1f88a7b55e16a80cfdf33b8594423b31.bindTooltip(
+    geo_json_e269ec0fd5ebe765321067b865fd8ef1.bindTooltip(
     function(layer){
     let div = L.DomUtil.create('div');
     
@@ -235,11 +235,11 @@
 });
                      
     
-            geo_json_1f88a7b55e16a80cfdf33b8594423b31.addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            geo_json_e269ec0fd5ebe765321067b865fd8ef1.addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            var geo_json_1f88a7b55e16a80cfdf33b8594423b31searchControl = new L.Control.Search({
-                layer: geo_json_1f88a7b55e16a80cfdf33b8594423b31,
+            var geo_json_e269ec0fd5ebe765321067b865fd8ef1searchControl = new L.Control.Search({
+                layer: geo_json_e269ec0fd5ebe765321067b865fd8ef1,
                 
                 propertyName: 'working',
                 
@@ -252,8 +252,8 @@
                 hideMarkerOnCollapse: true
             
                 });
-                geo_json_1f88a7b55e16a80cfdf33b8594423b31searchControl.on('search:locationfound', function(e) {
-                    geo_json_1f88a7b55e16a80cfdf33b8594423b31.setStyle(function(feature){
+                geo_json_e269ec0fd5ebe765321067b865fd8ef1searchControl.on('search:locationfound', function(e) {
+                    geo_json_e269ec0fd5ebe765321067b865fd8ef1.setStyle(function(feature){
                         return feature.properties.style
                     })
                     
@@ -264,22 +264,22 @@
                     if(e.layer._popup)
                         e.layer.openPopup();
                 })
-                geo_json_1f88a7b55e16a80cfdf33b8594423b31searchControl.on('search:collapsed', function(e) {
-                        geo_json_1f88a7b55e16a80cfdf33b8594423b31.setStyle(function(feature){
+                geo_json_e269ec0fd5ebe765321067b865fd8ef1searchControl.on('search:collapsed', function(e) {
+                        geo_json_e269ec0fd5ebe765321067b865fd8ef1.setStyle(function(feature){
                             return feature.properties.style
                     });
                 });
-            map_cf63f9e1b22ece02a628c9995798994f.addControl( geo_json_1f88a7b55e16a80cfdf33b8594423b31searchControl );
+            map_04e82aadee0f2d338aa9c4926e8fbed5.addControl( geo_json_e269ec0fd5ebe765321067b865fd8ef1searchControl );
 
         
     
-            var poly_line_8edb5bd4926ea0e471d5434fd6c4d965 = L.polyline(
+            var poly_line_74e0f050c532a9bc4d900d6d2620a491 = L.polyline(
                 [[-3.3249489025456405, 114.5918264988343], [-3.442701599355195, 114.73029768307518]],
                 {"bubblingMouseEvents": true, "color": "#000000ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#000000ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.8}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_8edb5bd4926ea0e471d5434fd6c4d965.bindTooltip(
+            poly_line_74e0f050c532a9bc4d900d6d2620a491.bindTooltip(
                 `<div>
                      BANJARMASIN ⇄ ULIN<br><br>Jumlah Service (segmen): 4<br>- BANJARMASIN T1 - ULIN T1<br>- BANJARMASIN T1 - MARTAPURA T2<br>- MARABAHAN T2 - ULIN T1<br>- BANJARMASIN T1 - BANJARBARU T2
                  </div>`,
@@ -289,13 +289,13 @@
             );
         
     
-            var poly_line_5435f5772025c3a8e1265031f852be9d = L.polyline(
+            var poly_line_45c3d906ccd87b657e40b329a6ddcfe9 = L.polyline(
                 [[-3.4426053117556137, 114.73025205159172], [-3.442701599355195, 114.73029768307518]],
                 {"bubblingMouseEvents": true, "color": "#434343ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#434343ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_5435f5772025c3a8e1265031f852be9d.bindTooltip(
+            poly_line_45c3d906ccd87b657e40b329a6ddcfe9.bindTooltip(
                 `<div>
                      LANDASAN ULIN ⇄ ULIN<br><br>Jumlah Service (segmen): 3<br>- BANJARMASIN T1 - MARTAPURA T2<br>- RANTAU T2 - ULIN T1<br>- BANJARMASIN T1 - BANJARBARU T2
                  </div>`,
@@ -305,13 +305,13 @@
             );
         
     
-            var poly_line_4bda2481750974ca5baccee660b7f69c = L.polyline(
+            var poly_line_1e5e3ead5332fe54a3155bc405fb3c50 = L.polyline(
                 [[-3.442786544636289, 114.85168573007977], [-3.4426053117556137, 114.73025205159172]],
                 {"bubblingMouseEvents": true, "color": "#434343ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#434343ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 5.1}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_4bda2481750974ca5baccee660b7f69c.bindTooltip(
+            poly_line_1e5e3ead5332fe54a3155bc405fb3c50.bindTooltip(
                 `<div>
                      BANJARBARU ⇄ LANDASAN ULIN<br><br>Jumlah Service (segmen): 3<br>- BANJARMASIN T1 - MARTAPURA T2<br>- RANTAU T2 - ULIN T1<br>- BANJARMASIN T1 - BANJARBARU T2
                  </div>`,
@@ -321,13 +321,13 @@
             );
         
     
-            var poly_line_663b5b9a2becb52c681f546ae53ef6b4 = L.polyline(
+            var poly_line_8384abe8179f03b399653cd030584f03 = L.polyline(
                 [[-3.442786544636289, 114.85168573007977], [-3.409225347313244, 114.8502761085458]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_663b5b9a2becb52c681f546ae53ef6b4.bindTooltip(
+            poly_line_8384abe8179f03b399653cd030584f03.bindTooltip(
                 `<div>
                      BANJARBARU ⇄ MARTAPURA<br><br>Jumlah Service (segmen): 1<br>- BANJARMASIN T1 - MARTAPURA T2
                  </div>`,
@@ -337,13 +337,13 @@
             );
         
     
-            var poly_line_69ffa2316b825f0f921dcd2f7e852c38 = L.polyline(
+            var poly_line_e2e864deb2c9a0eb4d9f940727ab3221 = L.polyline(
                 [[-3.442786544636289, 114.85168573007977], [-2.9304432970356444, 115.155505106692]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_69ffa2316b825f0f921dcd2f7e852c38.bindTooltip(
+            poly_line_e2e864deb2c9a0eb4d9f940727ab3221.bindTooltip(
                 `<div>
                      BANJARBARU ⇄ RANTAU<br><br>Jumlah Service (segmen): 1<br>- RANTAU T2 - ULIN T1
                  </div>`,
@@ -353,13 +353,13 @@
             );
         
     
-            var poly_line_6955016cf78efb3dd2dfef55a1418579 = L.polyline(
+            var poly_line_64e84dbd2e17505a70db319a98af06cd = L.polyline(
                 [[-3.2884205346530595, 114.59068942338064], [-3.442701599355195, 114.73029768307518]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_6955016cf78efb3dd2dfef55a1418579.bindTooltip(
+            poly_line_64e84dbd2e17505a70db319a98af06cd.bindTooltip(
                 `<div>
                      KAYU TANGI ⇄ ULIN<br><br>Jumlah Service (segmen): 1<br>- KAYUTANGI T2 - ULIN T1
                  </div>`,
@@ -369,13 +369,13 @@
             );
         
     
-            var poly_line_0275e65572b02fee18845f97d327e8f4 = L.polyline(
+            var poly_line_3d3532f6bdb4175fd727f7fb4d126833 = L.polyline(
                 [[-3.3249489025456405, 114.5918264988343], [-2.9810997683509703, 114.76476253737742]],
                 {"bubblingMouseEvents": true, "color": "#7f7f7fff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7f7f7fff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 4.4}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_0275e65572b02fee18845f97d327e8f4.bindTooltip(
+            poly_line_3d3532f6bdb4175fd727f7fb4d126833.bindTooltip(
                 `<div>
                      BANJARMASIN ⇄ MARABAHAN<br><br>Jumlah Service (segmen): 2<br>- MARABAHAN T2 - ULIN T1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -385,13 +385,13 @@
             );
         
     
-            var poly_line_a4028f118e530934c15825f7a9ae3e7e = L.polyline(
+            var poly_line_1fbf355b2d6fe68818c1ed0b7374e4f3 = L.polyline(
                 [[-3.8015697752483977, 114.77444453738516], [-3.881897300302676, 115.08208763553635]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_a4028f118e530934c15825f7a9ae3e7e.bindTooltip(
+            poly_line_1fbf355b2d6fe68818c1ed0b7374e4f3.bindTooltip(
                 `<div>
                      PLIHARI ⇄ TSEL ASAM-ASAM PLI007<br><br>Jumlah Service (segmen): 1<br>- PLEIHARI T2 - BATULICIN T2
                  </div>`,
@@ -401,13 +401,13 @@
             );
         
     
-            var poly_line_31be3b572b25f0cc25ecad4f50ce28b5 = L.polyline(
+            var poly_line_2e125fcbf6f28bf30e42252c049519f1 = L.polyline(
                 [[-3.7835436472740303, 115.38938989981324], [-3.881897300302676, 115.08208763553635]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_31be3b572b25f0cc25ecad4f50ce28b5.bindTooltip(
+            poly_line_2e125fcbf6f28bf30e42252c049519f1.bindTooltip(
                 `<div>
                      SATUI ⇄ TSEL ASAM-ASAM PLI007<br><br>Jumlah Service (segmen): 1<br>- PLEIHARI T2 - BATULICIN T2
                  </div>`,
@@ -417,13 +417,13 @@
             );
         
     
-            var poly_line_2e08c0f935380db6cca4b1d6c80cb046 = L.polyline(
+            var poly_line_477913c003b086a493660861712e19e0 = L.polyline(
                 [[-3.7835436472740303, 115.38938989981324], [-3.692421815964998, 115.64429190854835]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_2e08c0f935380db6cca4b1d6c80cb046.bindTooltip(
+            poly_line_477913c003b086a493660861712e19e0.bindTooltip(
                 `<div>
                      SATUI ⇄ TSEL SEBAMBAN BLC006<br><br>Jumlah Service (segmen): 1<br>- PLEIHARI T2 - BATULICIN T2
                  </div>`,
@@ -433,13 +433,13 @@
             );
         
     
-            var poly_line_8f6dd0d3598bfde285c67c40b41f9bec = L.polyline(
+            var poly_line_d8e9dbb3f37389d2a1a6363252fe1b99 = L.polyline(
                 [[-3.609594619010864, 115.93371195087632], [-3.692421815964998, 115.64429190854835]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_8f6dd0d3598bfde285c67c40b41f9bec.bindTooltip(
+            poly_line_d8e9dbb3f37389d2a1a6363252fe1b99.bindTooltip(
                 `<div>
                      PAGATAN ⇄ TSEL SEBAMBAN BLC006<br><br>Jumlah Service (segmen): 1<br>- PLEIHARI T2 - BATULICIN T2
                  </div>`,
@@ -449,13 +449,13 @@
             );
         
     
-            var poly_line_578dbd1cf41263046bc0267b93a63265 = L.polyline(
+            var poly_line_f02cd23d9c9c479d758299ec7ee0df9e = L.polyline(
                 [[-3.447979658858505, 116.00185121039549], [-3.609594619010864, 115.93371195087632]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_578dbd1cf41263046bc0267b93a63265.bindTooltip(
+            poly_line_f02cd23d9c9c479d758299ec7ee0df9e.bindTooltip(
                 `<div>
                      BATU LICIN ⇄ PAGATAN<br><br>Jumlah Service (segmen): 1<br>- PLEIHARI T2 - BATULICIN T2
                  </div>`,
@@ -465,13 +465,13 @@
             );
         
     
-            var poly_line_7c5056755cd737f3b9293804ddabdf84 = L.polyline(
+            var poly_line_43bfd476ca511117280b2277ce665ffe = L.polyline(
                 [[-3.692421815964998, 115.64429190854835], [-3.2499796016401685, 116.21621733436072]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_7c5056755cd737f3b9293804ddabdf84.bindTooltip(
+            poly_line_43bfd476ca511117280b2277ce665ffe.bindTooltip(
                 `<div>
                      KOTA BARU ⇄ TSEL SERONGGA<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -481,13 +481,13 @@
             );
         
     
-            var poly_line_9f372d318818d8a9aeee2d4c4bfb047b = L.polyline(
+            var poly_line_667203db9ee2a602c13dd64681072b7d = L.polyline(
                 [[-2.830505342512561, 116.06446768040324], [-3.2499796016401685, 116.21621733436072]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_9f372d318818d8a9aeee2d4c4bfb047b.bindTooltip(
+            poly_line_667203db9ee2a602c13dd64681072b7d.bindTooltip(
                 `<div>
                      TSEL PUMPUT KBA101 ⇄ TSEL SERONGGA<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -497,13 +497,13 @@
             );
         
     
-            var poly_line_ac70a4ace43240a3d2b5240392b4a5de = L.polyline(
+            var poly_line_956f1cba5c662dcebaf1d7fc9c226a93 = L.polyline(
                 [[-2.59503, 115.98408], [-2.830505342512561, 116.06446768040324]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_ac70a4ace43240a3d2b5240392b4a5de.bindTooltip(
+            poly_line_956f1cba5c662dcebaf1d7fc9c226a93.bindTooltip(
                 `<div>
                      TSEL KELL KBA017 ⇄ TSEL PUMPUT KBA101<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -513,13 +513,13 @@
             );
         
     
-            var poly_line_54c6262f2769085992ff1cece73e2c4c = L.polyline(
+            var poly_line_49a5fcadb45da5fbbc43451b2f8d7213 = L.polyline(
                 [[-1.906839043855285, 116.1920440238761], [-2.59503, 115.98408]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_54c6262f2769085992ff1cece73e2c4c.bindTooltip(
+            poly_line_49a5fcadb45da5fbbc43451b2f8d7213.bindTooltip(
                 `<div>
                      TANAH GROGOT ⇄ TSEL KELL KBA017<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -529,13 +529,13 @@
             );
         
     
-            var poly_line_62ab687967080d6c6e4625eeaba4a665 = L.polyline(
+            var poly_line_38c2c00ed6404b16418cd18b7fdba16c = L.polyline(
                 [[-1.676597, 115.808041], [-1.906839043855285, 116.1920440238761]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_62ab687967080d6c6e4625eeaba4a665.bindTooltip(
+            poly_line_38c2c00ed6404b16418cd18b7fdba16c.bindTooltip(
                 `<div>
                      KUARO ⇄ TANAH GROGOT<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -545,13 +545,13 @@
             );
         
     
-            var poly_line_08704073742659a7612f21bd3ec989c6 = L.polyline(
+            var poly_line_ace442d777811102cfcc1f625dbf140b = L.polyline(
                 [[-1.676597, 115.808041], [-1.6766043225403853, 115.80801023736754]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_08704073742659a7612f21bd3ec989c6.bindTooltip(
+            poly_line_ace442d777811102cfcc1f625dbf140b.bindTooltip(
                 `<div>
                      KUARO ⇄ MUARA KOMAM<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -561,13 +561,13 @@
             );
         
     
-            var poly_line_5a67fd3c99f926d90bad8ab23a21d1bc = L.polyline(
+            var poly_line_cfff2250e1cb26c934cae0b43bd560bc = L.polyline(
                 [[-1.6766043225403853, 115.80801023736754], [-1.77503, 115.64744]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_5a67fd3c99f926d90bad8ab23a21d1bc.bindTooltip(
+            poly_line_cfff2250e1cb26c934cae0b43bd560bc.bindTooltip(
                 `<div>
                      MUARA KOMAM ⇄ TSEL SOLAN TJL081<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -577,13 +577,13 @@
             );
         
     
-            var poly_line_fa91c39becfbd46fa2f9f24442afbc05 = L.polyline(
+            var poly_line_6675ec9300b778e3fe987588b8822d8f = L.polyline(
                 [[-2.1641726825399874, 115.3815856950422], [-1.77503, 115.64744]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_fa91c39becfbd46fa2f9f24442afbc05.bindTooltip(
+            poly_line_6675ec9300b778e3fe987588b8822d8f.bindTooltip(
                 `<div>
                      TANJUNG TABALONG ⇄ TSEL SOLAN TJL081<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -593,13 +593,13 @@
             );
         
     
-            var poly_line_0418f72bb93f09a03d2c0cde586bf5ec = L.polyline(
+            var poly_line_c2b131980120ef740074dbe4cc2bb202 = L.polyline(
                 [[-2.5924536783085474, 115.37194490858865], [-2.1641726825399874, 115.3815856950422]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_0418f72bb93f09a03d2c0cde586bf5ec.bindTooltip(
+            poly_line_c2b131980120ef740074dbe4cc2bb202.bindTooltip(
                 `<div>
                      BARABAI ⇄ TANJUNG TABALONG<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -609,13 +609,13 @@
             );
         
     
-            var poly_line_b3a22a4e1f3a6b0752026a12903018a0 = L.polyline(
+            var poly_line_485bf1df3078d04931ca7b498b080d3a = L.polyline(
                 [[-2.5924536783085474, 115.37194490858865], [-2.7825891338855007, 115.26293463935389]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_b3a22a4e1f3a6b0752026a12903018a0.bindTooltip(
+            poly_line_485bf1df3078d04931ca7b498b080d3a.bindTooltip(
                 `<div>
                      BARABAI ⇄ KANDANGAN<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -625,13 +625,13 @@
             );
         
     
-            var poly_line_34befb040cca29674ec5cc1ad3ffb3ef = L.polyline(
+            var poly_line_de136f1dafd4960a70968209dbd804d7 = L.polyline(
                 [[-2.7825891338855007, 115.26293463935389], [-2.9304432970356444, 115.155505106692]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_34befb040cca29674ec5cc1ad3ffb3ef.bindTooltip(
+            poly_line_de136f1dafd4960a70968209dbd804d7.bindTooltip(
                 `<div>
                      KANDANGAN ⇄ RANTAU<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -641,13 +641,13 @@
             );
         
     
-            var poly_line_d764d347f4ffb1cc59e8e0bcdeb25465 = L.polyline(
+            var poly_line_50b7e20df0d23ae710dce3a04b19dab6 = L.polyline(
                 [[-2.9810997683509703, 114.76476253737742], [-2.9304432970356444, 115.155505106692]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_d764d347f4ffb1cc59e8e0bcdeb25465.bindTooltip(
+            poly_line_50b7e20df0d23ae710dce3a04b19dab6.bindTooltip(
                 `<div>
                      MARABAHAN ⇄ RANTAU<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -657,13 +657,13 @@
             );
         
     
-            var poly_line_701f13266b8c7e9bbc64cdf2bdfdecf4 = L.polyline(
+            var poly_line_7378749ea4353afbbcdb70eda5b5632b = L.polyline(
                 [[-3.3249489025456405, 114.5918264988343], [-3.5958106655124054, 114.70529232389003]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_701f13266b8c7e9bbc64cdf2bdfdecf4.bindTooltip(
+            poly_line_7378749ea4353afbbcdb70eda5b5632b.bindTooltip(
                 `<div>
                      BANJARMASIN ⇄ BATI BATI<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -673,13 +673,13 @@
             );
         
     
-            var poly_line_fceb92a2aff1c3eb144490b21fec8df5 = L.polyline(
+            var poly_line_d3141d8f4d69fa4dbc13a35ad7997602 = L.polyline(
                 [[-3.5958106655124054, 114.70529232389003], [-3.8015697752483977, 114.77444453738516]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_fceb92a2aff1c3eb144490b21fec8df5.bindTooltip(
+            poly_line_d3141d8f4d69fa4dbc13a35ad7997602.bindTooltip(
                 `<div>
                      BATI BATI ⇄ PLIHARI<br><br>Jumlah Service (segmen): 1<br>- KOTABARU T3 - PLIHARI T2
                  </div>`,
@@ -689,13 +689,13 @@
             );
         
     
-            var poly_line_c8eb36e655007c62bfae27d9febba8e6 = L.polyline(
+            var poly_line_f52f3a7dd19be192738bfa414590fbb3 = L.polyline(
                 [[-3.5958106655124054, 114.70529232389003], [-3.442701599355195, 114.73029768307518]],
                 {"bubblingMouseEvents": true, "color": "#bdbdbdff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#bdbdbdff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
         
     
-            poly_line_c8eb36e655007c62bfae27d9febba8e6.bindTooltip(
+            poly_line_f52f3a7dd19be192738bfa414590fbb3.bindTooltip(
                 `<div>
                      BATI BATI ⇄ ULIN<br><br>Jumlah Service (segmen): 1<br>- BATI BATI T2 - ULIN T1
                  </div>`,
@@ -705,23 +705,23 @@
             );
         
     
-            var layer_control_aa2a686c93523514a18c839b848699db_layers = {
+            var layer_control_b22b01c4d50fecce5f619be86b41a779_layers = {
                 base_layers : {
-                    "cartodbpositron" : tile_layer_0868e499d40bf3fdc730d90a84114cf7,
+                    "cartodbpositron" : tile_layer_8247c6e48b9bf61afc7350b1daf8ed2c,
                 },
                 overlays :  {
-                    "Nodes" : geo_json_1f88a7b55e16a80cfdf33b8594423b31,
+                    "Nodes" : geo_json_e269ec0fd5ebe765321067b865fd8ef1,
                 },
             };
-            let layer_control_aa2a686c93523514a18c839b848699db = L.control.layers(
-                layer_control_aa2a686c93523514a18c839b848699db_layers.base_layers,
-                layer_control_aa2a686c93523514a18c839b848699db_layers.overlays,
+            let layer_control_b22b01c4d50fecce5f619be86b41a779 = L.control.layers(
+                layer_control_b22b01c4d50fecce5f619be86b41a779_layers.base_layers,
+                layer_control_b22b01c4d50fecce5f619be86b41a779_layers.overlays,
                 {
   "position": "topright",
   "collapsed": true,
   "autoZIndex": true,
 }
-            ).addTo(map_cf63f9e1b22ece02a628c9995798994f);
+            ).addTo(map_04e82aadee0f2d338aa9c4926e8fbed5);
 
         
 </script>
