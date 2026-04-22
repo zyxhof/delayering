@@ -1,28 +1,33 @@
 // auth.js
 function checkPassword() {
-    // Password yang Anda tentukan
-    const correctPassword = "telkom123";
+    const correctPassword = "telkom123"; // Password sesuai permintaan Anda
     
-    // Mengambil status login dari session storage agar tidak terus meminta input saat refresh
+    // Cek apakah sudah login sebelumnya di sesi ini
     if (sessionStorage.getItem("isLoggedIn") === "true") {
-        document.getElementById('main-content').style.display = 'flex';
-        document.getElementById('header-content').style.display = 'flex';
+        showContent();
         return;
     }
 
-    const passwordInput = prompt("Masukkan Password Akses Monitoring:");
+    // Fungsi untuk meminta password
+    const passwordInput = prompt("Silahkan masukkan password untuk akses Monitoring:");
 
     if (passwordInput === correctPassword) {
-        // Simpan status login selama tab browser masih terbuka
         sessionStorage.setItem("isLoggedIn", "true");
-        document.getElementById('main-content').style.display = 'flex';
-        document.getElementById('header-content').style.display = 'flex';
+        showContent();
     } else {
-        alert("Password salah! Akses ditolak.");
-        // Redirect ke halaman lain atau biarkan kosong
-        window.location.reload(); 
+        alert("Password salah atau kosong!");
+        window.location.reload(); // Refresh untuk minta lagi
     }
 }
 
-// Jalankan fungsi saat halaman dimuat
-window.onload = checkPassword;
+function showContent() {
+    // Menampilkan kembali elemen yang disembunyikan
+    const header = document.getElementById('header-content');
+    const main = document.getElementById('main-content');
+    
+    if(header) header.style.display = 'flex';
+    if(main) main.style.display = 'flex';
+}
+
+// Jalankan fungsi
+checkPassword();
